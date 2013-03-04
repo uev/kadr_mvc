@@ -9,9 +9,18 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
-	
+	<appender name="File" class="org.apache.log4j.RollingFileAppender"> 
+    	<param name="file" value="log/logger.log"/>
+    	<param name="MaxFileSize" value="1024KB"/>
+    <!-- Keep one backup file -->
+    	<param name="MaxBackupIndex" value="1"/>
+    	<layout class="org.apache.log4j.PatternLayout"> 
+      		<param name="ConversionPattern" value="%d %-5p %c::%M (%F:%L) - %m%n"/> 
+    	</layout> 
+  	</appender> 
+  	
 	<!-- Application Loggers -->
-	<logger name="com.rhcloud.uev61">
+	<logger name="com.spring.mti">
 		<level value="info" />
 	</logger>
 	
@@ -34,8 +43,9 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="warn" />
+		<priority value="info" />
 		<appender-ref ref="console" />
+		<appender-ref ref="File" />
 	</root>
 	
 </log4j:configuration>
