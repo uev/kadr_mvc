@@ -34,7 +34,32 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-				
+		<!-- for JPA -->
+		<dependency>
+             <groupId>org.springframework.data</groupId>
+             <artifactId>spring-data-jpa</artifactId>
+             <version>1.0.2.RELEASE</version>
+        </dependency>
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>3.1.1.RELEASE</version>
+		</dependency>
+        <dependency>
+        	 <groupId>org.hibernate.javax.persistence</groupId>
+        	 <artifactId>hibernate-jpa-2.0-api</artifactId>
+        	 <version>1.0.1.Final</version>
+		</dependency>
+		<dependency>
+        	 <groupId>org.hibernate</groupId>
+        	 <artifactId>hibernate-entitymanager</artifactId>
+        	 <version>4.1.9.Final</version>
+	 	</dependency>
+        <dependency>
+        	<groupId>postgresql</groupId>
+        	<artifactId>postgresql</artifactId>
+        	<version>8.3-606.jdbc4</version>
+		</dependency>
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -157,4 +182,14 @@
             </plugin>
         </plugins>
     </build>
+    <repositories>
+    	<repository>
+        	<id>repo1</id>
+        	<url>http://repo1.maven.org/maven2</url>
+      	</repository>
+    	<repository>
+        	<id>downloadJava</id>
+        	<url>http://download.java.net/maven/2</url>
+        </repository>
+ 	</repositories>
 </project>
