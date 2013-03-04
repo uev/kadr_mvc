@@ -49,4 +49,15 @@ public class PersonServiceImpl implements PersonService {
 		return null;
 	}
 
+	@Override
+	public List<Person> findAllPerson() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Person findPerson(String name) {
+		// TODO Auto-generated method stub
+		return repo.findByName(name).get(0);
+	}
 }

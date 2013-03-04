@@ -3,7 +3,10 @@ package com.spring.mti;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -19,10 +22,21 @@ public class PersonTest {
 	}
 
 	@Test
+	@Ignore
 	public void testAddRecord() {
 		PersonService service = (PersonService)context.getBean("servicePerson"); 
 		Person person = new Person();
 		person.setName("Testic");
 		service.savePerson(person);
 	}
+	
+	@Test
+	public void testCustomUserQuery() {
+		PersonService service = (PersonService)context.getBean("servicePerson"); 
+		Person person= service.findPerson("Testic");
+		System.out.println(person.getName());
+	}
+	
+	
+	
 }

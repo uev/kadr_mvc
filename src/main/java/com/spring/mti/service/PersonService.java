@@ -13,8 +13,10 @@ public interface PersonService {
 
     public Person findPerson(final Long id);
 
-    public List<Person> findAlPerson();
-
+    public List<Person> findAllPerson();
+    
+    public Person findPerson(final String name);
+    
     //public List<Person> findEmployeeEntries(final int firstResult, final int maxResults);
 
     public void savePerson(final Person person);
