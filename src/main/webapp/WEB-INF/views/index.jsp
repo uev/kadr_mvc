@@ -15,5 +15,7 @@
 	</form>
 	<center>${error}</center>
 </div>
+<center>${countM}</center>
+<br>
 </body>
 <jsp:include page="footer.jsp" />
