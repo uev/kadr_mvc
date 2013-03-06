@@ -4,6 +4,7 @@
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 						http://www.springframework.org/schema/context 
@@ -12,11 +13,15 @@
 						http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 						http://www.springframework.org/schema/tx
 						http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+						http://www.springframework.org/schema/mvc
+ 						http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 						">
 
 	<description>Example configuration to get you started.</description>
 
 	<context:component-scan base-package="com.spring.mti" />
+	
+	 <mvc:resources mapping="/resources/**" location="/resources/" />
 	
 	 <bean id="persistenceUnitManager" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
      	<property name="persistenceXmlLocations">

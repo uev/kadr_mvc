@@ -2,6 +2,7 @@ package com.spring.mti.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
@@ -19,9 +20,14 @@ public class IndexController implements Controller, BeanFactoryAware {
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		System.out.println("Calling IndexController.handleRequest()");
-		ModelAndView view = new ModelAndView("index");
-		long count = personService.countAllPersons();
-		view.addObject("countM", count);
+		HttpSession session = request.getSession();
+		ModelAndView view = new ModelAndView();
+		if (session.getAttribute("loginSuccess") != null) {
+			view.setViewName("index");
+		} else {
+			view.setViewName("login");
+		}//long count = personService.countAllPersons();
+		//view.addObject("countM", count);
 /*
 		HttpSession session = request.getSession();
 		if (session.getAttribute("chkErrorPin") != null) {
