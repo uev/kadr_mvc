@@ -9,7 +9,7 @@
       <div class="row">
         <div class="login-form">
           <h2>Вход в систему</h2>
-          <form action="">
+          <form action="/login.html" method="post">
             <fieldset>
               <div class="clearfix">
                 <input type="text" placeholder="Имя пользователя">
