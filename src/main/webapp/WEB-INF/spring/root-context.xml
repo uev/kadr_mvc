@@ -21,7 +21,7 @@
 
 	<context:component-scan base-package="com.spring.mti" />
 	
-	 <mvc:resources mapping="/resources/**" location="/resources/" />
+	
 	
 	 <bean id="persistenceUnitManager" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
      	<property name="persistenceXmlLocations">
@@ -40,24 +40,5 @@
         <property name="entityManagerFactory" ref="emf" />
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager"/>
-    <jpa:repositories base-package="com.spring.mti.repository" entity-manager-factory-ref="emf" transaction-manager-ref="transactionManager" />
-    
-		<bean id="indexController" class="com.spring.mti.web.IndexController" />
-		
-		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-			<property name="prefix" value="/WEB-INF/views/" />
-			<property name="suffix" value=".jsp" />
-		</bean>
-		<bean id="urlMapping"
-                class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-                <property name="mappings">
-                          <props>
-                                <prop key="/">indexController</prop>
-                        </props>
-                </property>
-        </bean>
-    
-    
-    
-    
+    <jpa:repositories base-package="com.spring.mti.repository" entity-manager-factory-ref="emf" transaction-manager-ref="transactionManager" />    
 </beans>
