@@ -2,13 +2,17 @@ package com.spring.mti;
 
 import static org.junit.Assert.*;
 
+import javax.persistence.EntityManager;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.spring.mti.dao.UsersDao;
 import com.spring.mti.domain.Person;
+import com.spring.mti.domain.Users;
 import com.spring.mti.service.PersonService;
 
 public class PersonTest {
@@ -24,17 +28,31 @@ public class PersonTest {
 	public void testAddRecord() {
 		PersonService service = (PersonService)context.getBean("servicePerson"); 
 		Person person = new Person();
-		person.setName("Testic");
+		person.setName("fffdsfsdTesticDrwerweref2");
+		//person.setAge(12);
 		service.savePerson(person);
+		
 	}
 	
 	@Test
+	@Ignore
 	public void testCustomUserQuery() {
 		PersonService service = (PersonService)context.getBean("servicePerson"); 
 		Person person= service.findPerson("Testic");
 		System.out.println(person.getName());
 	}
 	
+	@Test
+	/* Тестирование работы DAO */
+	public void testUsersDAOCreate() {
+		UsersDao dao = (UsersDao)context.getBean("userDao");
+		EntityManager emf = (EntityManager)context.getBean("emf");
+		dao.setEntityManager(emf);
+		Users user = new Users();
+		user.setName("alice");
+		user.setPassword("lol");
+		dao.createUser(user);
+	}
 	
 	
 }
