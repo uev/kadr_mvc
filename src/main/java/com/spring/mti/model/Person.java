@@ -1,4 +1,4 @@
-package com.spring.mti.domain;
+package com.spring.mti.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

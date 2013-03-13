@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.spring.mti.domain.Person;
+import com.spring.mti.model.Person;
 import com.spring.mti.repository.PersonRep;
 @Service("servicePerson")
 @Repository

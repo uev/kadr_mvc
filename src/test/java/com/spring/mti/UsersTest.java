@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.spring.mti.dao.UsersDao;
-import com.spring.mti.domain.Users;
+import com.spring.mti.security.Users;
 
 public class UsersTest {
 	private static ApplicationContext context;

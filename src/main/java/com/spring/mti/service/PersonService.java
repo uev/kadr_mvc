@@ -2,7 +2,7 @@ package com.spring.mti.service;
 
 import java.util.List;
 
-import com.spring.mti.domain.Person;
+import com.spring.mti.model.Person;
 
 public interface PersonService {
     public long countAllPersons();

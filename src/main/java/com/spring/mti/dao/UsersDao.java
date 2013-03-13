@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import com.spring.mti.domain.Users;
+import com.spring.mti.security.Users;
 
 public interface UsersDao{
 	void createUser(Users userDetail);
