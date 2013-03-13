@@ -23,8 +23,8 @@ public class UsersTest {
 	public void testUsersDAOCreate() {
 		UsersDao dao = (UsersDao)context.getBean("userDao");
 		Users user = new Users();
-		user.setName("alicedssd");
-		user.setPassword("lol");
+		user.setUsermame("uev");
+		user.setPassword("123");
 		dao.createUser(user);
 	}
 }

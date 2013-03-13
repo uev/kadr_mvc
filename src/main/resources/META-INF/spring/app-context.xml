@@ -50,14 +50,14 @@
     <jpa:repositories base-package="com.spring.mti.repository" entity-manager-factory-ref="emf" transaction-manager-ref="transactionManager" />
     
     <!-- Security -->   
-   <bean id="userDetailsService" class="com.spring.mti.service.UserDetailsServiceImpl" />
+   <!--  <bean id="userDetailsService" class="com.spring.mti.service.UserDetailsServiceImpl" /> -->
    <bean id="userDao" class="com.spring.mti.dao.UsersDaoImpl" />
    
-   <!-- 
+   
    <bean id="userDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
   		<property name="dataSource" ref="dataSource"/>
 	</bean>
-     -->
+   
     
     <bean id="daoAuthenticationProvider"
   		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">

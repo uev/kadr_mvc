@@ -15,16 +15,16 @@ public class Users {
     
     @SuppressWarnings("restriction")
 	@NotNull
-    String name;
+    String username;
     String password;
     Integer enabled;
     
-	public void setName(String name){
-		this.name = name;
+	public void setUsermame(String name){
+		this.username = name;
 	}
 	
-	public String getName(){
-		return this.name;
+	public String getUsername(){
+		return this.username;
 	}
 	
 	public void setPassword(String password){

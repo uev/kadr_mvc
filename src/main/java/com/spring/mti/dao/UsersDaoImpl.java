@@ -41,4 +41,10 @@ public class UsersDaoImpl implements UsersDao {
 		// TODO Auto-generated method stub
 		this.entityManager.remove(userDetail);
 	}
+
+	@Override
+	public Users getUserByLoginName(String userName) {
+		// TODO Auto-generated method stub
+		return (Users)this.entityManager.createQuery("select s.name from Users s").getSingleResult();
+	}
 }

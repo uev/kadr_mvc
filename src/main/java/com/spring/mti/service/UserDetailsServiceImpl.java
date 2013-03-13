@@ -6,6 +6,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.spring.mti.dao.UsersDao;
+import com.spring.mti.security.Users;
+import com.spring.mti.security.UsersDetailImpl;
+
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 	UsersDao dao;
@@ -13,7 +16,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
+		Users user = dao.getUserByLoginName(username);
+		System.out.println(user.getPassword());
+		
+		
+		UserDetails userDetail = new UsersDetailImpl(user);
 		return null;
 	}
 }
