@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.spring.mti.dao.UsersDao;
+import com.spring.mti.dao.UsersDaoImpl;
 import com.spring.mti.domain.Person;
 import com.spring.mti.domain.Users;
 import com.spring.mti.service.PersonService;
@@ -30,29 +31,13 @@ public class PersonTest {
 		Person person = new Person();
 		person.setName("fffdsfsdTesticDrwerweref2");
 		//person.setAge(12);
-		service.savePerson(person);
-		
+		service.savePerson(person);	
 	}
 	
 	@Test
-	@Ignore
 	public void testCustomUserQuery() {
 		PersonService service = (PersonService)context.getBean("servicePerson"); 
 		Person person= service.findPerson("Testic");
 		System.out.println(person.getName());
 	}
-	
-	@Test
-	/* Тестирование работы DAO */
-	public void testUsersDAOCreate() {
-		UsersDao dao = (UsersDao)context.getBean("userDao");
-		EntityManager emf = (EntityManager)context.getBean("emf");
-		dao.setEntityManager(emf);
-		Users user = new Users();
-		user.setName("alice");
-		user.setPassword("lol");
-		dao.createUser(user);
-	}
-	
-	
 }

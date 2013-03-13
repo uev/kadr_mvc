@@ -27,9 +27,7 @@
 		<property name="username" value="postgres"/>
 		<property name="password" value="postgres"/>
 	</bean>
-	
-	
- 
+
 	 <bean id="persistenceUnitManager" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
      	<property name="persistenceXmlLocations">
    			<list value-type="java.lang.String">
@@ -39,9 +37,9 @@
 	</bean>
 	
 	<bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="persistenceUnitManager" ref="persistenceUnitManager" />
-		<property name="persistenceUnitName" value="JPA_POSTGRES" />
-		<property name="dataSource" ref="dataSource"/>
+		  <property name="persistenceUnitManager" ref="persistenceUnitManager" /> 
+		      <property name="persistenceUnitName" value="JPA_POSTGRES" /> 
+			  <property name="dataSource" ref="dataSource"/>
 	</bean>
     
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

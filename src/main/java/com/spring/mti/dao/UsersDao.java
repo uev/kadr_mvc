@@ -10,5 +10,4 @@ public interface UsersDao{
 	void createUser(Users userDetail);
 	List<String> getAllUserNames();
 	void deleteUser(Users userDetail);
-	public void setEntityManager(EntityManager entityManager);
 }

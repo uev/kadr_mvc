@@ -5,33 +5,40 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.spring.mti.domain.Users;
 
+@Repository("usersDAO")
 public class UsersDaoImpl implements UsersDao {
-	@PersistenceContext
+	//(unitName = "JPA_POSTGRES")
 	private EntityManager entityManager;
 
-	@Override
+	@PersistenceContext
 	public void setEntityManager(EntityManager entityManager)
 	{
 		this.entityManager = entityManager;
 	}
 	
 	@Override
+	@Transactional
 	public void createUser(Users userDetail) {
 		// TODO Auto-generated method stub
-		entityManager.persist(userDetail);
+		this.entityManager.persist(userDetail);
 	}
 
 	@Override
+	@Transactional
 	public List<String> getAllUserNames() {
 		// TODO Auto-generated method stub
-		return entityManager.createQuery("select s.name from Users s").getResultList();
+		return this.entityManager.createQuery("select s.name from Users s").getResultList();
 	}
 
 	@Override
+	@Transactional
 	public void deleteUser(Users userDetail) {
 		// TODO Auto-generated method stub
-		entityManager.remove(userDetail);
+		this.entityManager.remove(userDetail);
 	}
 }
