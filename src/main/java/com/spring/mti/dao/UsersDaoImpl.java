@@ -49,6 +49,11 @@ public class UsersDaoImpl implements UsersDao {
 	public Users getUserByLoginName(String userName) {
 		// TODO Auto-generated method stub
 		//return (Users)this.entityManager.createQuery("select s from Users s where s.username =='".concat(userName).concat("'")).getSingleResult();
-		return  (Users)this.entityManager.createQuery("select s from Users s where s.username = :username").setParameter("username", userName).getResultList().get(0);
+		try {
+			return  (Users)this.entityManager.createQuery("select s from Users s where s.username = :username").setParameter("username", userName).getResultList().get(0);
+		}
+		catch (Exception indexOutOfBoundsException) {
+			return new Users();
+		}
 	}
 }

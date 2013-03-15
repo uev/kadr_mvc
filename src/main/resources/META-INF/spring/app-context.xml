@@ -52,7 +52,7 @@
     <!-- Security -->   
    <!--  <bean id="userDetailsService" class="com.spring.mti.service.UserDetailsServiceImpl" /> -->
    <bean id="userDao" class="com.spring.mti.dao.UsersDaoImpl" />
-   
+   <bean id="authoritiesDao" class="com.spring.mti.dao.AuthoritiesDaoImpl" />
    
    <bean id="userDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
   		<property name="dataSource" ref="dataSource"/>
