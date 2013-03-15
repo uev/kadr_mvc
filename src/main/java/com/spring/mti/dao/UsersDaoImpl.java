@@ -32,7 +32,7 @@ public class UsersDaoImpl implements UsersDao {
 	@Transactional
 	public List<String> getAllUserNames() {
 		// TODO Auto-generated method stub
-		return this.entityManager.createQuery("select s.name from Users s").getResultList();
+		return this.entityManager.createQuery("select s.username from Users s").getResultList();
 	}
 
 	@Override
@@ -45,6 +45,7 @@ public class UsersDaoImpl implements UsersDao {
 	@Override
 	public Users getUserByLoginName(String userName) {
 		// TODO Auto-generated method stub
-		return (Users)this.entityManager.createQuery("select s.name from Users s").getSingleResult();
+		//return (Users)this.entityManager.createQuery("select s from Users s where s.username =='".concat(userName).concat("'")).getSingleResult();
+		return (Users)this.entityManager.createQuery("select s from Users s where s.username = :username").setParameter("username", userName).getResultList().get(0);
 	}
 }
