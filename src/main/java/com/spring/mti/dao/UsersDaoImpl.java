@@ -39,13 +39,16 @@ public class UsersDaoImpl implements UsersDao {
 	@Transactional
 	public void deleteUser(Users userDetail) {
 		// TODO Auto-generated method stub
-		this.entityManager.remove(userDetail);
+		//this.entityManager.remove(userDetail);
+		this.entityManager.createQuery("delete from Users s where s = :user").setParameter("user", userDetail).executeUpdate();
+		this.entityManager.flush();
 	}
 
 	@Override
+	@Transactional
 	public Users getUserByLoginName(String userName) {
 		// TODO Auto-generated method stub
 		//return (Users)this.entityManager.createQuery("select s from Users s where s.username =='".concat(userName).concat("'")).getSingleResult();
-		return (Users)this.entityManager.createQuery("select s from Users s where s.username = :username").setParameter("username", userName).getResultList().get(0);
+		return  (Users)this.entityManager.createQuery("select s from Users s where s.username = :username").setParameter("username", userName).getResultList().get(0);
 	}
 }

@@ -25,20 +25,16 @@ public class UsersTest {
 	@Test
 	/* Тестирование работы DAO */
 	public void testUsersDAOCreate() {
-		
 		UsersDao dao = (UsersDao)context.getBean("userDao");
-		/*
 		Users user = new Users();
-		user.setUsermame("uev");
-		user.setPassword("123");
+		user.setUsermame("bob");
+		user.setPassword("1235432");
 		dao.createUser(user);
-		*/
+		Users user_temp = dao.getUserByLoginName("bob");
+		dao.deleteUser(user_temp);
 		//AuthoritiesDao daoauth = (AuthoritiesDao)context.getBean("authoritiesDao");
-		Users a = dao.getUserByLoginName("uev");
-		System.out.println(a.getPassword());
-		
-		
-
+		//Users a = dao.getUserByLoginName("uev");
+		//dao.deleteUser(a);
 		//System.out.println(user.getPassword());
 	}
 }
