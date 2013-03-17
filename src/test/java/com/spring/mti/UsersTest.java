@@ -26,6 +26,7 @@ public class UsersTest {
 	}
 
 	@Test
+	@Ignore
 	public void testUsersDAOCreateUser() {
 		Users user = new Users();
 		user.setUsermame("bob");
@@ -37,14 +38,14 @@ public class UsersTest {
 		 */
 		
 		
-		//AuthoritiesDao daoauth = (AuthoritiesDao)context.getBean("authoritiesDao");
+		AuthoritiesDao daoauth = (AuthoritiesDao)context.getBean("authoritiesDao");
 		//Users a = dao.getUserByLoginName("uev");
 		//dao.deleteUser(a);
 		//System.out.println(user.getPassword());
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void testUsersDAORemoveUser() {
 		Users user = dao.getUserByLoginName("bob");
 		try {
