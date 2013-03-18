@@ -22,9 +22,9 @@ public class Authorities {
 	private String authority;
 	
 	@Transient
-	private static String urole="ROLE_USER";
+	private static String user_role="ROLE_USER";
 	@Transient
-	private static String arole="ROLE_ADMIN";
+	private static String admin_arole="ROLE_ADMIN";
 	
 	public String getAuthority() {
 	    return authority;
@@ -32,7 +32,7 @@ public class Authorities {
 	
 	public void setAuthorityUser(Users user) {
 		setUser(user);
-		setAuthority(this.urole);
+		setAuthority(this.user_role);
 	}
 	
 	public void setAuthorityAdmin(Users user) {
@@ -59,5 +59,13 @@ public class Authorities {
 		this.username = username;
 	}
 	*/
+
+	public static String getUser_role() {
+		return user_role;
+	}
+
+	public static String getAdmin_arole() {
+		return admin_arole;
+	}
 	
 }

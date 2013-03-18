@@ -1,6 +1,8 @@
 package com.spring.mti.security;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,11 +15,10 @@ public class UsersDetailImpl implements UserDetails {
 		this.users = users;
 	}
 
-	
-
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
+	public Collection<GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		return null;
 	}
 
@@ -53,8 +54,10 @@ public class UsersDetailImpl implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+		if (users.getEnabled() > 0){
+			return true;
+		} else {
+			return false;
+		}
 	}
-
 }

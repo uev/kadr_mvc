@@ -12,8 +12,8 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	long id;
-    
-    @SuppressWarnings("restriction")
+
+	@SuppressWarnings("restriction")
 	@NotNull
     String username;
     String password;
@@ -41,5 +41,9 @@ public class Users {
 
 	public void setEnabled(Integer enabled) {
 		this.enabled = enabled;
+	}
+	
+	public long getId() {
+		return id;
 	}
 }
