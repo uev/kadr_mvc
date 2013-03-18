@@ -11,13 +11,13 @@ import com.sun.istack.internal.NotNull;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	long id;
+	private long id;
 
 	@SuppressWarnings("restriction")
 	@NotNull
-    String username;
-    String password;
-    Integer enabled;
+    private String username;
+	private String password;
+	private Integer enabled;
     
 	public void setUsermame(String name){
 		this.username = name;

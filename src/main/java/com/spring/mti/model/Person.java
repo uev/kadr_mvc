@@ -12,23 +12,11 @@ import com.sun.istack.internal.NotNull;
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	long id;
+	private long id;
     
     @NotNull
-    String name;
+    private String name;
 
-    /*
-    @NotNull
-    Integer age;
-	
-	public Integer getAge() {
-		return this.age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-*/
 	public void setName(String name){
 		this.name = name;
 	}
