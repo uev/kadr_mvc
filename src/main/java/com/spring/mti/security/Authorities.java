@@ -14,7 +14,7 @@ import javax.persistence.Transient;
 public class Authorities {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	long id;
+	private long id;
 	
 	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
 	@JoinColumn(name="username")
@@ -37,7 +37,6 @@ public class Authorities {
 	
 	public void setAuthorityAdmin(Users user) {
 	    this.user = user;
-		//this.authority = this.arole;
 	}
 	
 	public void setAuthority(String authority) {
@@ -51,14 +50,6 @@ public class Authorities {
 	public void setUser(Users user) {
 		this.user = user;
 	}
-	/*
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	*/
 
 	public static String getUser_role() {
 		return user_role;

@@ -11,7 +11,7 @@ import com.spring.mti.security.UsersDetailImpl;
 
 
 public class UserDetailsServiceImpl implements UserDetailsService {
-	UsersDao dao;
+	private UsersDao dao;
 
 	@Override
 	public UserDetails loadUserByUsername(String username)

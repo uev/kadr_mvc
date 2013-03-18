@@ -19,7 +19,7 @@ import com.spring.mti.security.Users;
 public class AuthorityServiceImpl implements AuthorityService {
 	@Autowired
 	//@Resource
-	AuthoritiesDao authDao;
+	private AuthoritiesDao authDao;
 	
 	/*
 	public void setAuthDao(AuthoritiesDaoImpl authDao) {
