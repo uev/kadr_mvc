@@ -21,8 +21,8 @@
 
 	<context:component-scan base-package="com.spring.mti" />
 	
-	
-	
+	<bean id="persistenceAnnotation"  
+	  class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 	 <bean id="persistenceUnitManager" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
      	<property name="persistenceXmlLocations">
    			<list value-type="java.lang.String">
@@ -32,13 +32,45 @@
 	</bean>
 	
 	<bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="persistenceUnitManager" ref="persistenceUnitManager" />
-		<property name="persistenceUnitName" value="JPA_POSTGRES" />
+		  <property name="persistenceUnitManager" ref="persistenceUnitManager" /> 
+		      <property name="persistenceUnitName" value="JPA_POSTGRES" /> 
 	</bean>
     
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="emf" />
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager"/>
-    <jpa:repositories base-package="com.spring.mti.repository" entity-manager-factory-ref="emf" transaction-manager-ref="transactionManager" />    
+    <jpa:repositories base-package="com.spring.mti.repository" entity-manager-factory-ref="emf" transaction-manager-ref="transactionManager" />
+    
+   <!-- Beans -->
+   <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean"/>
+   <bean id="userDao" class="com.spring.mti.dao.UsersDaoImpl" />
+   <bean id="users" class="com.spring.mti.security.Users" />
+    <!-- Security -->   
+   
+   <bean id="saltSource"     class="org.springframework.security.authentication.dao.ReflectionSaltSource"> 
+   		<property name="userPropertyToUse" value="username"/>
+   	</bean>
+   
+   <bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+   <bean id="userDetailsService" class="com.spring.mti.service.UserDetailsServiceImpl"> 
+  		<property name="dao" ref="userDao" />	
+	</bean>
+   
+    <bean id="daoAuthenticationProvider"
+  		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+  		<!-- <property name="userDetailsService" ref="inMemoryDaoImpl" />  -->
+  		<property name="userDetailsService" ref="userDetailsService"/> 
+  		<property name="saltSource" ref="saltSource"/>  
+  		<property name="passwordEncoder" ref="passwordEncoder"/>
+	</bean>
+    <bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
+ 		 <property name="providers">
+    		<list>
+      			<ref local="daoAuthenticationProvider"/>
+    		</list>
+  		</property>
+	</bean> 
+	
+    
 </beans>
