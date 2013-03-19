@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +11,6 @@ import com.spring.mti.security.Users;
 
 @Repository("usersDAO")
 public class UsersDaoImpl implements UsersDao {
-	//(unitName = "JPA_POSTGRES")
 	private EntityManager entityManager;
 
 	@PersistenceContext
@@ -54,5 +52,11 @@ public class UsersDaoImpl implements UsersDao {
 		catch (Exception indexOutOfBoundsException) {
 			return new Users();
 		}
+	}
+	
+	@Override
+	@Transactional
+	public int getEnabled(Users userDetail){
+		return userDetail.getEnabled();
 	}
 }

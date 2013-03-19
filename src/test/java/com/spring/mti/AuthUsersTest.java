@@ -9,26 +9,27 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import com.spring.mti.dao.UsersDao;
 import com.spring.mti.security.Users;
 import com.spring.mti.service.AuthorityService;
+import com.spring.mti.service.CustomUserDetailsService;
 
 public class AuthUsersTest {
 	private static ApplicationContext context;
-	private static UsersDao dao;
+	private static CustomUserDetailsService dao;
 
 	@Before
 	public void setUp() throws Exception {
 		context = new ClassPathXmlApplicationContext("META-INF/spring/app-context.xml");
-		dao = (UsersDao)context.getBean("userDao");
+		dao = (CustomUserDetailsService)context.getBean("userDetailsService");
 	}
 
 	@Test
 	public void testUsersDAOCreateUser() {
 		Users user = new Users();
 		user.setUsermame("testic");
-		user.setPassword("1235432");
+		user.setPassword("testic");
 		user.setEnabled(1);
+		dao.setSalt(user);
 		dao.createUser(user);
 		assertEquals(dao.getUserByLoginName("testic").getUsername(), "testic");
 	}
@@ -46,7 +47,7 @@ public class AuthUsersTest {
 	
 	@Test
 	public void testAuthManager(){
-		Authentication arequest = new UsernamePasswordAuthenticationToken("testic", "1235432");
+		Authentication arequest = new UsernamePasswordAuthenticationToken("testic", "testic");
         AuthenticationManager am = (AuthenticationManager) context.getBean("authenticationManager");
         am.authenticate(arequest);
 	}

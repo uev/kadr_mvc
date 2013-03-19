@@ -13,4 +13,5 @@ public interface UsersDao{
 	List<String> getAllUserNames();
 	void deleteUser(Users userDetail);
 	Users getUserByLoginName(String userName);
+	int getEnabled(Users userDetail);
 }

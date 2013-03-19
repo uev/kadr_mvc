@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class UsersDetailImpl implements UserDetails {
+	private static Logger logger = Logger.getLogger(UsersDetailImpl.class);
+	private static final long serialVersionUID = 1L;
 	private Users users;
 
-	
-	public UsersDetailImpl(Users user) {
+	public UsersDetailImpl(Users users) {
 		this.users = users;
 	}
 
@@ -27,7 +30,7 @@ public class UsersDetailImpl implements UserDetails {
 		// TODO Auto-generated method stub
 		return users.getPassword();
 	}
-
+	
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
@@ -43,21 +46,33 @@ public class UsersDetailImpl implements UserDetails {
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
+	
 	@Override
 	public boolean isEnabled() {
-		if (users.getEnabled() > 0){
+		this.users.getEnabled();
+		int r = users.getEnabled();
+		if (r > 0){
 			return true;
 		} else {
 			return false;
 		}
+	}
+	
+
+	public Users getUsers() {
+		return users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
 	}
 }
