@@ -17,5 +17,6 @@
 </div>
 <center>${countM}</center>
 <br>
+<center><a href="login.html?logout=1">Logout</a></center>
 </body>
 <jsp:include page="footer.jsp" />

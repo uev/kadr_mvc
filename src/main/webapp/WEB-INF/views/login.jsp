@@ -9,13 +9,13 @@
       <div class="row">
         <div class="login-form">
           <h2>Вход в систему</h2>
-          <form action="/login.html" method="post">
+          <form action="login.html" method="post">
             <fieldset>
               <div class="clearfix">
-                <input type="text" placeholder="Имя пользователя">
+                <input type="text" placeholder="Имя пользователя" name="login">
               </div>
               <div class="clearfix">
-                <input type="password" placeholder="Пароль">
+                <input type="password" placeholder="Пароль" name="password">
               </div>
               <button class="btn btn-large btn-primary" type="submit">Войти</button>
             </fieldset>
