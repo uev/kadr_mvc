@@ -40,10 +40,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 		return authDao.getAllPermissionsBuUsername(user_id);
 	}
 	
-	@Override
-	public boolean isUserRoleSet(Users user){
-		return authDao.isUserRoleSet(user);
-	}
+
 	
 	
 	

@@ -37,7 +37,8 @@ public class Authorities {
 	}
 	
 	public void setAuthorityAdmin(Users user) {
-	    this.user = user;
+		setUser(user);
+		setAuthority(this.admin_arole);
 	}
 	
 	public void setAuthority(String authority) {

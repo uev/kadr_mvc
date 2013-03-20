@@ -38,6 +38,14 @@ public class AuthoritiesDaoImpl implements AuthoritiesDao {
 		a.setAuthorityUser(user);
 		this.entityManager.persist(a);
 	}
+	
+	@Transactional
+	@Override
+	public void setPermissionAdmin(Users user) {
+		Authorities a = new Authorities();
+		a.setAuthorityAdmin(user);
+		this.entityManager.persist(a);
+	}
 
 
 	
@@ -61,6 +69,15 @@ public class AuthoritiesDaoImpl implements AuthoritiesDao {
 		return false;
 	}
 	
+	@Override
+	public boolean isAdminRoleSet(Users user) {
+		List query_userrules =  this.entityManager.createQuery("select s.id from Authorities s where s.user.id = :user_id and s.authority = :role_id ").setParameter("user_id", user.getId()).setParameter("role_id", new Authorities().getAdmin_arole()).getResultList();
+		if (query_userrules.size()>0){ 
+			return true;
+		}
+		return false;
+	}
+
 	@Override
 	@Transactional
 	public List<String> getAllPermissionsBuUsername(long user_id) {

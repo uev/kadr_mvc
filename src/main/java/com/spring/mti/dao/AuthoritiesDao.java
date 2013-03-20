@@ -11,5 +11,7 @@ public interface AuthoritiesDao {
 	public List<String> getAllPermissionsBuUsername(long user_id);
 	//public void setPermissionUser(Authorities auser);
 	public void setPermissionUser(Users user);
+	public void setPermissionAdmin(Users user);
 	public boolean isUserRoleSet(Users user);
+	public boolean isAdminRoleSet(Users user);
 }

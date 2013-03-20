@@ -36,6 +36,7 @@ public class LoginController implements Controller, BeanFactoryAware{
 		HttpSession session = request.getSession();
 		if (request.getParameter("logout") != null) {
 			session.removeAttribute("loginSuccess");
+			session.removeAttribute("login");
 			return new ModelAndView("redirect:/");
 		}
 		String login = request.getParameter("login");
@@ -44,6 +45,7 @@ public class LoginController implements Controller, BeanFactoryAware{
 		try {
 			am.authenticate(arequest);
 			session.setAttribute("loginSuccess", 1);
+			session.setAttribute("login", login);
         } catch(Exception e){
         	if (e instanceof BadCredentialsException){
         		log.error("Error auth!!!");

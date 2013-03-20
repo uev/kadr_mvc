@@ -10,4 +10,6 @@ public interface CustomUserDetailsService{
 	public void deleteUser(Users userDetail);
 	public Users getUserByLoginName(String userName);
 	public void setSalt(Users userDetail);
+	public boolean isUserRoleSet(String userName);
+	public boolean isAdminRoleSet(String userName);
 }

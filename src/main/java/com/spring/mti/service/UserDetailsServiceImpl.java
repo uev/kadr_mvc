@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.spring.mti.dao.AuthoritiesDao;
 import com.spring.mti.dao.UsersDao;
 import com.spring.mti.model.security.Users;
 import com.spring.mti.model.security.UsersDetailImpl;
@@ -16,7 +17,7 @@ import com.spring.mti.model.security.UsersDetailImpl;
 public class UserDetailsServiceImpl implements UserDetailsService, CustomUserDetailsService {
 	@Autowired private PasswordEncoder passwordEncoder;
 	@Autowired private SaltSource saltSource;
-	
+	@Autowired private AuthoritiesDao authDao;
 	
 	private UsersDao dao;
 
@@ -59,5 +60,15 @@ public class UserDetailsServiceImpl implements UserDetailsService, CustomUserDet
 	@Override
 	public void setSalt(Users user){
 		user.setPassword(passwordEncoder.encodePassword(user.getPassword(), saltSource.getSalt(new UsersDetailImpl(user))));
+	}
+	
+	@Override
+	public boolean isUserRoleSet(String username){
+		return authDao.isUserRoleSet(getUserByLoginName(username));
+	}
+
+	@Override
+	public boolean isAdminRoleSet(String username) {
+		return authDao.isAdminRoleSet(getUserByLoginName(username));
 	}
 }

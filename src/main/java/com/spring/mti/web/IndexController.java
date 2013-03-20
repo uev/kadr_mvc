@@ -7,14 +7,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
+import com.spring.mti.service.AuthorityService;
+import com.spring.mti.service.CustomUserDetailsService;
 import com.spring.mti.service.PersonService;
 
 
 public class IndexController implements Controller, BeanFactoryAware {
 	private PersonService personService;
+	private CustomUserDetailsService authStorage; 
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
@@ -23,6 +27,9 @@ public class IndexController implements Controller, BeanFactoryAware {
 		HttpSession session = request.getSession();
 		ModelAndView view = new ModelAndView();
 		if (session.getAttribute("loginSuccess") != null) {
+			if (authStorage.isUserRoleSet((String)session.getAttribute("login"))){
+				System.out.println("RoleInUser");
+			}
 			view.setViewName("index");
 		} else {
 			view.setViewName("login");
@@ -46,5 +53,6 @@ public class IndexController implements Controller, BeanFactoryAware {
 	public void setBeanFactory(BeanFactory context) throws BeansException {
 		// TODO Auto-generated method stub
 		personService = (PersonService)context.getBean("servicePerson");
+		authStorage = (CustomUserDetailsService)context.getBean("userDetailsService");
 	}
 }
