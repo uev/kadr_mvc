@@ -38,12 +38,13 @@ public class AuthUsersTest {
 	@Test
 	public void testSetPermissionsUser(){
 		Users user = dao.getUserByLoginName("testic");
+		CustomUserDetailsService authStorage = (CustomUserDetailsService)context.getBean("userDetailsService");
 		AuthorityService aservice = (AuthorityService) context.getBean("serviceAuth");
-		if (!aservice.isUserRoleSet(user)){
+		if (!authStorage.isUserRoleSet(user.getUsername())){
 			aservice.setPermissionsUser(user);
 			System.out.println("Add user permission");
 		}
-		assertTrue(aservice.isUserRoleSet(user));
+		assertTrue(authStorage.isUserRoleSet(user.getUsername()));
 	}
 	
 	@Test
