@@ -50,8 +50,7 @@ public class LoginController implements Controller, BeanFactoryAware{
         	if (e instanceof BadCredentialsException){
         		log.error("Error auth!!!");
         	} 
-        	return new ModelAndView("redirect:/");
         }
-		return null;
+		return new ModelAndView("redirect:/");
 	}
 }

@@ -25,12 +25,12 @@ public class IndexController implements Controller, BeanFactoryAware {
 			HttpServletResponse response)  throws Exception {
 		System.out.println("Calling IndexController.handleRequest()");
 		HttpSession session = request.getSession();
-		ModelAndView view = new ModelAndView();
+		ModelAndView view = new ModelAndView("index");
 		if (session.getAttribute("loginSuccess") != null) {
 			if (authStorage.isUserRoleSet((String)session.getAttribute("login"))){
-				System.out.println("RoleInUser");
+				//Личный кабинет аттестуемого
+				view.setViewName("ui_candidate");
 			}
-			view.setViewName("index");
 		} else {
 			view.setViewName("login");
 		}//long count = personService.countAllPersons();
