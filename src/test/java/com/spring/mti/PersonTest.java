@@ -13,7 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.spring.mti.dao.UsersDao;
 import com.spring.mti.dao.UsersDaoImpl;
 import com.spring.mti.model.Person;
-import com.spring.mti.security.Users;
+import com.spring.mti.model.security.Users;
 import com.spring.mti.service.PersonService;
 
 public class PersonTest {

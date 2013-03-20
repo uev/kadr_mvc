@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.spring.mti.dao.UsersDao;
-import com.spring.mti.security.Users;
-import com.spring.mti.security.UsersDetailImpl;
+import com.spring.mti.model.security.Users;
+import com.spring.mti.model.security.UsersDetailImpl;
 
 public class UserDetailsServiceImpl implements UserDetailsService, CustomUserDetailsService {
 	@Autowired private PasswordEncoder passwordEncoder;

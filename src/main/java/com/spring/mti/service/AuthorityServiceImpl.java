@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.mti.dao.AuthoritiesDao;
 import com.spring.mti.dao.AuthoritiesDaoImpl;
-import com.spring.mti.security.Authorities;
-import com.spring.mti.security.Users;
+import com.spring.mti.model.security.Authorities;
+import com.spring.mti.model.security.Users;
 @Service("serviceAuth")
 @Repository
 public class AuthorityServiceImpl implements AuthorityService {

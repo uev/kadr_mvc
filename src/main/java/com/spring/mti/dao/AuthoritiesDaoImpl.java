@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.spring.mti.security.Authorities;
-import com.spring.mti.security.Users;
+import com.spring.mti.model.security.Authorities;
+import com.spring.mti.model.security.Users;
 
 @Repository("authDAO")
 public class AuthoritiesDaoImpl implements AuthoritiesDao {

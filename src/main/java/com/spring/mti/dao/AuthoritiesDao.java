@@ -2,8 +2,8 @@ package com.spring.mti.dao;
 
 import java.util.List;
 
-import com.spring.mti.security.Authorities;
-import com.spring.mti.security.Users;
+import com.spring.mti.model.security.Authorities;
+import com.spring.mti.model.security.Users;
 
 
 public interface AuthoritiesDao {

@@ -45,7 +45,7 @@
    <!-- Beans -->
    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean"/>
    <bean id="userDao" class="com.spring.mti.dao.UsersDaoImpl" />
-   <bean id="users" class="com.spring.mti.security.Users" />
+   <bean id="users" class="com.spring.mti.model.security.Users" />
     <!-- Security -->   
    
    <bean id="saltSource"     class="org.springframework.security.authentication.dao.ReflectionSaltSource"> 

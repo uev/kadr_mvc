@@ -2,7 +2,7 @@ package com.spring.mti.service;
 
 import java.util.List;
 
-import com.spring.mti.security.Users;
+import com.spring.mti.model.security.Users;
 
 public interface AuthorityService {
 	public void setPermissionsUser(Users user);

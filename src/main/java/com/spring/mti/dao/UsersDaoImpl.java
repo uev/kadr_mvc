@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.spring.mti.security.Users;
+import com.spring.mti.model.security.Users;
 
 @Repository("usersDAO")
 public class UsersDaoImpl implements UsersDao {

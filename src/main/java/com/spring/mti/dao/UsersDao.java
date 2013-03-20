@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 
 import org.springframework.security.core.userdetails.User;
 
-import com.spring.mti.security.Users;
+import com.spring.mti.model.security.Users;
 
 public interface UsersDao{
 	void createUser(Users userDetail);
