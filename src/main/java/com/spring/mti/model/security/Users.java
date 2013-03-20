@@ -1,15 +1,15 @@
-package com.spring.mti.security;
+package com.spring.mti.model.security;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import com.sun.istack.internal.NotNull;
 
 @Entity
 public class Users {
-    @Id
+    
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 

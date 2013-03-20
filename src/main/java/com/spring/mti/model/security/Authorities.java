@@ -1,4 +1,4 @@
-package com.spring.mti.security;
+package com.spring.mti.model.security;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,6 +12,7 @@ import javax.persistence.Transient;
 
 @Entity
 public class Authorities {
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -58,5 +59,4 @@ public class Authorities {
 	public static String getAdmin_arole() {
 		return admin_arole;
 	}
-	
 }

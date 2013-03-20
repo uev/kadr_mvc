@@ -1,4 +1,4 @@
-package com.spring.mti.security;
+package com.spring.mti.model.security;
 
 import java.util.ArrayList;
 import java.util.Collection;
