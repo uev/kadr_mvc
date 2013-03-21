@@ -31,6 +31,11 @@ public class IndexController implements Controller, BeanFactoryAware {
 				//Личный кабинет аттестуемого
 				view.setViewName("ui_candidate");
 			}
+			if (authStorage.isAdminRoleSet((String)session.getAttribute("login"))){
+				//админка
+				return new ModelAndView("redirect:/admin.html");
+				//view.setViewName("ui_admin");
+			}
 		} else {
 			view.setViewName("login");
 		}//long count = personService.countAllPersons();
