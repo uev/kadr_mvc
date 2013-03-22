@@ -21,20 +21,14 @@ import com.spring.mti.service.CustomUserDetailsService;
 public class AuthUsersTest {
 	private static ApplicationContext context;
 	private static CustomUserDetailsService dao;
-	private static AuthorityService sauth;
+    private static AuthorityService sauth;
+
 
 	@Before
 	public void setUp() throws Exception {
 		context = new ClassPathXmlApplicationContext("META-INF/spring/app-context.xml");
 		dao = (CustomUserDetailsService)context.getBean("userDetailsService");
 		sauth = (AuthorityService)context.getBean("serviceRole");
-	}
-
-	@Test 
-	public void testAddRole(){
-		Role r = new Role();
-		r.setRname("ROLE_USER");
-		sauth.createRole(r);
 	}
 
 	@Test
@@ -78,15 +72,17 @@ public class AuthUsersTest {
 			System.out.println("User is epsent");
 		}
 	}
-
-
-	@Test 
+	
+	@Test
+	public void testAllPermissionUsers() {
+		dao.getAllUsersPermissions();
+	}
+	
+	@Test
 	public void testGetAllRoles(){
-		List<Object[]> m = sauth.getAllRoles();
-		for (Object[] res : m) {
-			System.out.println(res[0] + " / " + res[1]);
-		}
-	}	
-
-
+	    List<Object[]> m = sauth.getAllRoles();
+	    for (Object[] res : m) {
+		System.out.println(res[0] + " / " + res[1]);
+	    }
+	}
 }

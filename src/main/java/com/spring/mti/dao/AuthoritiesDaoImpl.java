@@ -109,13 +109,14 @@ public class AuthoritiesDaoImpl implements AuthoritiesDao {
 	@Transactional
 	public List<String> getAllPermissionsBuUsername(long user_id) {
 		// TODO Auto-generated method stub
-		return this.entityManager.createQuery("select s.authority from Authorities s where s.user.id = :user_id").setParameter("user_id", user_id).getResultList();
+		return this.entityManager.createQuery("select m.rname from Authorities s, Role m where s.user.id = :user_id").setParameter("user_id", user_id).getResultList();
 	}
 
 	@Override
 	@Transactional
+	//"select m.rname from Authorities s, Role m where s.user.id = :user_id and s.role.id = m.id ").setParameter("user_id", user.getId())
 	public HashMap<String,List> getAllUsersPermissions() {
-		List<Object[]> res = this.entityManager.createQuery("select u.username, s.authority from Authorities s, Users u where s.user.id = u.id").getResultList();
+		List<Object[]> res = this.entityManager.createQuery("select u.username, m.rname from Authorities s, Users u, Role m where s.user.id = u.id").getResultList();
 		HashMap<String,List> map = new HashMap<String, List>();
 		for (Object[] result : res) {
 		      	List<String> t = new ArrayList<String>();
