@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.mti.model.security.Role;
+import com.spring.mti.model.security.Users;
 
 public class RoleDaoImpl implements RoleDao {
 
@@ -39,5 +40,16 @@ public class RoleDaoImpl implements RoleDao {
 	public void deleteRole(Role role) {
 		this.entityManager.createQuery("delete from Role s where id = :role_id").setParameter("role_id", role.getId()).executeUpdate();
 		this.entityManager.flush();
+	}
+	
+	@Override
+	@Transactional
+	public Role getRoleByName(String role) {
+		try {
+			return (Role)this.entityManager.createQuery("select s from Role s where rname = :role").setParameter("role", role).getResultList().get(0);
+		}
+		catch (Exception indexOutOfBoundsException) {
+			return new Role();
+		}
 	}
 }

@@ -31,7 +31,7 @@ public class AuthUsersTest {
 	}
 
 	@Test 
-	public void testAddRules(){
+	public void testAddRole(){
 		Role r = new Role();
 		r.setRname("ROLE_USER");
 		sauth.createRole(r);
@@ -54,7 +54,8 @@ public class AuthUsersTest {
 		CustomUserDetailsService authStorage = (CustomUserDetailsService)context.getBean("userDetailsService");
 //		AuthorityService aservice = (AuthorityService) context.getBean("serviceAuth");
 		if (!authStorage.isUserRoleSet(user.getUsername())){
-			sauth.setPermissionsUser(user);
+			Role role = sauth.getRoleByName("ROLE_USER");
+			sauth.setPermissions(user,role);
 			System.out.println("Add user permission");
 		}
 		assertTrue(authStorage.isUserRoleSet(user.getUsername()));

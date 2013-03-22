@@ -20,6 +20,10 @@ public class Authorities {
 	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
 	@JoinColumn(name="username")
 	private Users user;
+	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
+	@JoinColumn(name="rname")
+	private Role role;
+	@Transient
 	private String authority;
 	
 	@Transient
@@ -33,18 +37,29 @@ public class Authorities {
 	
 	public void setAuthorityUser(Users user) {
 		setUser(user);
-		setAuthority(this.user_role);
+		//setAuthority(this.user_role);
 	}
 	
 	public void setAuthorityAdmin(Users user) {
 		setUser(user);
-		setAuthority(this.admin_arole);
+		//setAuthority(this.admin_arole);
 	}
 	
-	public void setAuthority(String authority) {
-	    this.authority = authority;
+	public void setAuthority(Users user, Role role) {
+	    //this.authority = authority;
+		setUser(user);
+		setRole(role);
+		
 	}
 
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	
 	public Users getUser() {
 		return user;
 	}
@@ -59,5 +74,5 @@ public class Authorities {
 
 	public static String getAdmin_arole() {
 		return admin_arole;
-	}
+	}	
 }

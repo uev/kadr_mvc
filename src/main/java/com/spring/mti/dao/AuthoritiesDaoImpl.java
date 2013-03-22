@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.mti.model.security.Authorities;
+import com.spring.mti.model.security.Role;
 import com.spring.mti.model.security.Users;
 
 @Repository("authDAO")
@@ -34,6 +35,7 @@ public class AuthoritiesDaoImpl implements AuthoritiesDao {
 		return "";
 	}
 
+/*
 	@Override
 	@Transactional
 	public void setPermissionUser(Users user){
@@ -49,9 +51,15 @@ public class AuthoritiesDaoImpl implements AuthoritiesDao {
 		a.setAuthorityAdmin(user);
 		this.entityManager.persist(a);
 	}
+*/
 
-
-	
+	@Transactional
+	@Override
+	public void setPermission(Users user, Role role) {
+		Authorities a = new Authorities();
+		a.setAuthority(user,role);
+		this.entityManager.persist(a);
+	}
 	
 	public Users getUser() {
 		return user;
@@ -65,11 +73,15 @@ public class AuthoritiesDaoImpl implements AuthoritiesDao {
 	@Override
 	@Transactional
 	public boolean isUserRoleSet(Users user){
-		List query_userrules =  this.entityManager.createQuery("select s.id from Authorities s where s.user.id = :user_id and s.authority = :role_id ").setParameter("user_id", user.getId()).setParameter("role_id", new Authorities().getUser_role()).getResultList();
-		if (query_userrules.size()>0){ 
-			return true;
+		List<Object> query_userrules =  this.entityManager.createQuery("select m.rname from Authorities s, Role m where s.user.id = :user_id and s.role.id = m.id ").setParameter("user_id", user.getId()).getResultList();
+		try {
+			if ("ROLE_USER".equals((String)query_userrules.get(0)) == true) {
+				return true;
+			}
+		} catch(Exception e) {
+			return false;
 		}
-		return false;
+		return false; 
 	}
 	
 	@Override

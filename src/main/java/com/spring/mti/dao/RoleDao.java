@@ -8,4 +8,5 @@ public interface RoleDao {
 	void createRole(Role role);
 	List<Object[]> getAllRoles();
 	void deleteRole(Role role);
+	Role getRoleByName(String role);
 }

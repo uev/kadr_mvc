@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 import com.spring.mti.dao.AuthoritiesDao;
 import com.spring.mti.dao.RoleDao;
 import com.spring.mti.model.security.Role;
@@ -22,7 +21,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 		this.authDao = authDao;
 	}
 	 */
-
+/*
 	@Override
 	public void setPermissionsUser(Users user) {
 		authDao.setPermissionUser(user);
@@ -31,6 +30,14 @@ public class AuthorityServiceImpl implements AuthorityService {
 	public void setPermissionsAdmin(Users user) {
 		authDao.setPermissionAdmin(user);
 	}
+*/	
+	
+	@Override
+	public void setPermissions(Users user, Role role) {
+		authDao.setPermission(user,role);
+	}
+	
+	
 	
 	@Override
 	public List<String> getAllPermissionsByUserId(long user_id) {
@@ -46,8 +53,17 @@ public class AuthorityServiceImpl implements AuthorityService {
 	public void deleteRole(Role role) {
 		rolesDao.deleteRole(role);	
 	}
+	
 	@Override
 	public List<Object[]> getAllRoles() {
 		return rolesDao.getAllRoles();
 	}
+	
+	@Override
+	public Role getRoleByName(String role) {
+		return rolesDao.getRoleByName(role);
+	}
+	
+	
+	
 }
