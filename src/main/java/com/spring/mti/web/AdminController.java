@@ -41,9 +41,17 @@ public class AdminController implements Controller, BeanFactoryAware {
 				if (request.getParameter("listacc") != null) {
 					//return JsonView.Render(authStorage.getAllUserNames(), response);
 					Map<String, List> testMap = new HashMap<String, List>();
-					testMap.put("users", authStorage.getAllUserNames());
-					JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(testMap);  
-					return new ModelAndView("jsonpattern").addObject("json", jsonObject);
+					//testMap.put("users", authStorage.getAllUsersPermissions());
+					JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(authStorage.getAllUsersPermissions());  
+					//view.addObject("json", jsonObject);
+					//return new ModelAndView("jsonpattern").addObject("json", jsonObject);
+					view.addObject("json", authStorage.getAllUsersPermissions());
+				}
+				/*
+				 * Создание пользователя
+				 */
+				if (request.getParameter("createuser") != null) {
+					view.addObject("createuser", "1");
 				}
 				view.setViewName("ui_admin_accounting");
 			}

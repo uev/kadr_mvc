@@ -41,5 +41,5 @@
                                 <prop key="/admin.html">adminController</prop>
                         </props>
                 </property>
-        </bean>
+        </bean> 
 </beans>

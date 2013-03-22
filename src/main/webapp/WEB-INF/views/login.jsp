@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 
 <jsp:include page="header.jsp" />
+</head>
 <body>
 	<div class="container" align = "center">
     <div class="content">

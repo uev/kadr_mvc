@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 
 <jsp:include page="header.jsp" />
-
+</head>
 <body>
 <center><h1>Личный кабинет участника аттестации</h1></center>
     

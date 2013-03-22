@@ -1,5 +1,7 @@
 package com.spring.mti;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,60 +12,31 @@ import org.springframework.security.core.Authentication;
 import com.spring.mti.dao.AuthoritiesDao;
 import com.spring.mti.dao.AuthoritiesDaoImpl;
 import com.spring.mti.dao.UsersDao;
-import com.spring.mti.security.Authorities;
-import com.spring.mti.security.Users;
+import com.spring.mti.model.security.Authorities;
+import com.spring.mti.model.security.Users;
+import com.spring.mti.service.AuthorityService;
+import com.spring.mti.service.CustomUserDetailsService;
 
 public class Application {
 
 	/**
 	 * @param args
 	 */
+	private static CustomUserDetailsService dao;
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/app-context.xml");
+		dao = (CustomUserDetailsService)context.getBean("userDetailsService");
+		dao.getAllUsersPermissions();
 		/*
-		Authentication arequest = new UsernamePasswordAuthenticationToken("uev", "123");
+		Authentication arequest = new UsernamePasswordAuthenticationToken("gogol", "bordello");
         AuthenticationManager am = (AuthenticationManager) context.getBean("authenticationManager");
         am.authenticate(arequest);
-        */
-		UsersDao dao = (UsersDao)context.getBean("userDao");
-		/*
-		Users user = new Users();
-		user.setUsermame("bazooka");
-		user.setPassword("122");
-		user.setEnabled(1);
-		dao.createUser(user);
-		*/
-		//Users user_temp = dao.getUserByLoginName("bob");
-		//dao.deleteUser(user_temp);
-
-		//Users a = new Users();
-        //a.setUsermame("dssd");
-        //a.setPassword("dsdsds2");
-        //dao.deleteUser(a);
+		
 		Users user = dao.getUserByLoginName("bazooka");
-		Authorities a = new Authorities();
-		a.setAuthorityUser(user);
-		AuthoritiesDao role = (AuthoritiesDao)context.getBean("authoritiesDao");
-		role.setPermissionUser(a);
-		
-		
-		
-		//AuthoritiesDao role = (AuthoritiesDao)context.getBean("authoritiesDao");
-		//AuthoritiesDaoImpl role = new AuthoritiesDaoImpl();
-		//role.setPermissionUser(a);
-        
-		
-		
-		/*
-		Authentication arequest = new UsernamePasswordAuthenticationToken("bazooka", "122");
-        AuthenticationManager am = (AuthenticationManager) context.getBean("authenticationManager");
-        try{
-        	am.authenticate(arequest);
-        }	catch(BadCredentialsException e){
-        	System.out.println("Error auth!");
-        }
-        */
-        
-	}
+		AuthorityService aservice = (AuthorityService) context.getBean("serviceAuth");
+		System.out.println(user.getPassword());
+		*/
+		}
 }
