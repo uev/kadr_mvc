@@ -1,5 +1,6 @@
 package com.spring.mti.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,5 +71,10 @@ public class UserDetailsServiceImpl implements UserDetailsService, CustomUserDet
 	@Override
 	public boolean isAdminRoleSet(String username) {
 		return authDao.isAdminRoleSet(getUserByLoginName(username));
+	}
+	
+	@Override
+	public HashMap<String,List> getAllUsersPermissions(){
+		return authDao.getAllUsersPermissions();
 	}
 }

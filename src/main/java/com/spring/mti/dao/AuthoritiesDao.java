@@ -1,5 +1,6 @@
 package com.spring.mti.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.spring.mti.model.security.Authorities;
@@ -14,4 +15,5 @@ public interface AuthoritiesDao {
 	public void setPermissionAdmin(Users user);
 	public boolean isUserRoleSet(Users user);
 	public boolean isAdminRoleSet(Users user);
+	HashMap<String, List> getAllUsersPermissions();
 }

@@ -1,9 +1,12 @@
 package com.spring.mti.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -83,5 +86,18 @@ public class AuthoritiesDaoImpl implements AuthoritiesDao {
 	public List<String> getAllPermissionsBuUsername(long user_id) {
 		// TODO Auto-generated method stub
 		return this.entityManager.createQuery("select s.authority from Authorities s where s.user.id = :user_id").setParameter("user_id", user_id).getResultList();
+	}
+
+	@Override
+	@Transactional
+	public HashMap<String,List> getAllUsersPermissions() {
+		List<Object[]> res = this.entityManager.createQuery("select u.username, s.authority from Authorities s, Users u where s.user.id = u.id").getResultList();
+		HashMap<String,List> map = new HashMap<String, List>();
+		for (Object[] result : res) {
+		      	List<String> t = new ArrayList<String>();
+				t.add((String)result[1]);
+		      	map.put((String)result[0], t);
+		  }
+		return map;
 	}
 }
