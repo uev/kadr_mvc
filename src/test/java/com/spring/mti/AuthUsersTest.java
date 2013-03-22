@@ -79,6 +79,7 @@ public class AuthUsersTest {
 		}
 	}
 
+
 	@Test 
 	public void testGetAllRoles(){
 		List<Object[]> m = sauth.getAllRoles();
@@ -86,4 +87,11 @@ public class AuthUsersTest {
 			System.out.println(res[0] + " / " + res[1]);
 		}
 	}	
+
+	
+	@Test
+	public void testAllPermissionUsers() {
+		dao.getAllUsersPermissions();
+	}
+
 }
