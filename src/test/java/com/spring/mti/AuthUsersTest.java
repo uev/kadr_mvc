@@ -86,9 +86,4 @@ public class AuthUsersTest {
 			System.out.println(res[0] + " / " + res[1]);
 		}
 	}	
-
-	@Test
-	public void testAllPermissionUsers() {
-		dao.getAllUsersPermissions();
-	}
 }
