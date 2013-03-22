@@ -70,20 +70,31 @@ public class AuthoritiesDaoImpl implements AuthoritiesDao {
 		this.user = user;
 	}
 	
-	@Override
-	@Transactional
-	public boolean isUserRoleSet(Users user){
+	
+	private boolean payloadRoleSet(Users user, String rolename){
 		List<Object> query_userrules =  this.entityManager.createQuery("select m.rname from Authorities s, Role m where s.user.id = :user_id and s.role.id = m.id ").setParameter("user_id", user.getId()).getResultList();
 		try {
-			if ("ROLE_USER".equals((String)query_userrules.get(0)) == true) {
+			if (rolename.equals((String)query_userrules.get(0)) == true) {
 				return true;
 			}
 		} catch(Exception e) {
 			return false;
 		}
-		return false; 
+		return false; 		
 	}
 	
+	@Override
+	@Transactional
+	public boolean isUserRoleSet(Users user){
+		return payloadRoleSet(user, "ROLE_USER");
+	}
+	
+	@Override
+	@Transactional
+	public boolean isAdminRoleSet(Users user){
+		return payloadRoleSet(user, "ROLE_ADMIN"); 
+	}
+	/*
 	@Override
 	public boolean isAdminRoleSet(Users user) {
 		List query_userrules =  this.entityManager.createQuery("select s.id from Authorities s where s.user.id = :user_id and s.authority = :role_id ").setParameter("user_id", user.getId()).setParameter("role_id", new Authorities().getAdmin_arole()).getResultList();
@@ -92,6 +103,7 @@ public class AuthoritiesDaoImpl implements AuthoritiesDao {
 		}
 		return false;
 	}
+	*/
 
 	@Override
 	@Transactional
