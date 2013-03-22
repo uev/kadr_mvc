@@ -1,6 +1,9 @@
 package com.spring.mti;
 
 import static org.junit.Assert.*;
+
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -10,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 
+import com.spring.mti.model.security.Role;
 import com.spring.mti.model.security.Users;
 import com.spring.mti.service.AuthorityService;
 import com.spring.mti.service.CustomUserDetailsService;
@@ -17,11 +21,20 @@ import com.spring.mti.service.CustomUserDetailsService;
 public class AuthUsersTest {
 	private static ApplicationContext context;
 	private static CustomUserDetailsService dao;
+	private static AuthorityService sauth;
 
 	@Before
 	public void setUp() throws Exception {
 		context = new ClassPathXmlApplicationContext("META-INF/spring/app-context.xml");
 		dao = (CustomUserDetailsService)context.getBean("userDetailsService");
+		sauth = (AuthorityService)context.getBean("serviceRole");
+	}
+
+	@Test 
+	public void testAddRules(){
+		Role r = new Role();
+		r.setRname("ROLE_USER");
+		sauth.createRole(r);
 	}
 
 	@Test
@@ -39,9 +52,9 @@ public class AuthUsersTest {
 	public void testSetPermissionsUser(){
 		Users user = dao.getUserByLoginName("testic");
 		CustomUserDetailsService authStorage = (CustomUserDetailsService)context.getBean("userDetailsService");
-		AuthorityService aservice = (AuthorityService) context.getBean("serviceAuth");
+//		AuthorityService aservice = (AuthorityService) context.getBean("serviceAuth");
 		if (!authStorage.isUserRoleSet(user.getUsername())){
-			aservice.setPermissionsUser(user);
+			sauth.setPermissionsUser(user);
 			System.out.println("Add user permission");
 		}
 		assertTrue(authStorage.isUserRoleSet(user.getUsername()));
@@ -64,4 +77,12 @@ public class AuthUsersTest {
 			System.out.println("User is epsent");
 		}
 	}
+		
+	@Test 
+	public void testGetAllRoles(){
+		List<Object[]> m = sauth.getAllRoles();
+		for (Object[] res : m) {
+			System.out.println(res[0] + " / " + res[1]);
+		}
+	}	
 }

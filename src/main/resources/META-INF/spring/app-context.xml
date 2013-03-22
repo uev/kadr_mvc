@@ -59,6 +59,7 @@
    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean"/>
    <bean id="userDao" class="com.spring.mti.dao.UsersDaoImpl" />
    <bean id="users" class="com.spring.mti.model.security.Users" />
+   <bean id="roleDao" class="com.spring.mti.dao.RoleDaoImpl" />
    <!-- <bean id="authoritiesDao" class="com.spring.mti.dao.AuthoritiesDaoImpl" />  -->
     
    <!-- 
@@ -82,6 +83,10 @@
   		<property name="usersByUsernameQuery" value = "select username,password, enabled from users where username=?"/>
   		<property name="authoritiesByUsernameQuery" value ="select u.username, ur.authority from users u, authorities ur where u.id = ur.username and u.username =?" />
 		-->
+	</bean>
+	
+	<bean id="serviceRole" class="com.spring.mti.service.AuthorityServiceImpl"> 
+		
 	</bean>
    
     <bean id="daoAuthenticationProvider"
