@@ -88,10 +88,5 @@ public class AuthUsersTest {
 		}
 	}	
 
-	
-	@Test
-	public void testAllPermissionUsers() {
-		dao.getAllUsersPermissions();
-	}
 
 }
