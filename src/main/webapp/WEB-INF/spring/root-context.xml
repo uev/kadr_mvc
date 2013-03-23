@@ -47,6 +47,7 @@
    <bean id="userDao" class="com.spring.mti.dao.UsersDaoImpl" />
    <bean id="users" class="com.spring.mti.model.security.Users" />
    <bean id="roleDao" class="com.spring.mti.dao.RoleDaoImpl" />
+   <bean id="serviceRole" class="com.spring.mti.service.AuthorityServiceImpl"/>
     <!-- Security -->   
    
    <bean id="saltSource"     class="org.springframework.security.authentication.dao.ReflectionSaltSource"> 

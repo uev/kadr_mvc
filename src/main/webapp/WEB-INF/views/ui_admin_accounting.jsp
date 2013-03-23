@@ -8,7 +8,6 @@
 </head>
 <body>
 <center><h1>Админзона</h1></center>
-    
 <div class="container-fluid">
 
 	<div class="row-fluid" >
@@ -20,7 +19,7 @@
     <ul class="breadcrumb">
     <li><a href="admin.html?accounting&listacc">Просмотр пользователей</a> <span class="divider">/</span></li>
     <li><a href="admin.html?accounting&createuser">Создание пользователя</a> <span class="divider">/</span></li>
-    <li><a href="#">Удаление пользователя</a> <span class="divider">/</span></li>
+    <li><a href="admin.html?accounting&deleteuser">Удаление пользователя</a> <span class="divider">/</span></li>
     </ul>
 
     <!-- List users  -->
@@ -37,9 +36,11 @@
 	    	</tbody>
 	    </table>
 	</c:if>
-	<c:if test="${createuser != null}">
-    	 <center>
-    	 <form action="login.html" method="post">
+	<center>
+	<!-- Append users  -->
+	<c:if test="${roles != null}">
+    	 
+    	 <form action="admin.html?accounting&createuser" method="post">
             <fieldset>
               <div class="clearfix">
                 <input type="text" placeholder="Имя пользователя" name="login">
@@ -48,20 +49,49 @@
                 <input type="password" placeholder="Пароль" name="password">
               </div>
              <div class="clearfix">
-              <select>
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
+              <select  placeholder="Роль" name="role">
+				<option></option>
+				<c:forEach var="i" items="${roles}">
+					<option>${i[1]}</option>
+				</c:forEach>
 			</select>
             </div>
               <button class="btn btn-large btn-primary" type="submit">Создать</button>
             </fieldset>
           </form>
-          </center>
+          <c:choose>
+  			<c:when test="${error == 1}">
+  			    <div class="alert alert-error">Пользователь существует или на сервере проблемы</div>
+  			</c:when>
+  			<c:when test="${error == 0}">
+    			<div class="alert alert-success">Пользователь успешно добавлен</div>
+  			</c:when>
+		  </c:choose>
+          
 	</c:if>
+    <!-- Delete users  -->
+    
+    <c:if test="${rmusers != null}">
+    	<form action="admin.html?accounting&deleteuser" method="post">
+            <fieldset>
+              <div class="clearfix">
+                <input type="text" placeholder="Имя пользователя" name="login">
+              </div>
+              <button class="btn btn-large btn-primary" type="submit">Удалить</button>
+            </fieldset>
+          </form>
+          <c:choose>
+  			<c:when test="${error == 1}">
+  			    <div class="alert alert-error">Ошибка. Возиожно пользователь не существует</div>
+  			</c:when>
+  			<c:when test="${error == 0}">
+    			<div class="alert alert-success">Пользователь успешно удалён</div>
+  			</c:when>
+		  </c:choose>
+    </c:if>
+    </center>
     </div>
+    
     </div>
 </div>
 <script src="resources/bootstrap/js/bootstrap.js"></script>

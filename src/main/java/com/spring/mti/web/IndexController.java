@@ -1,5 +1,7 @@
 package com.spring.mti.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,8 +20,8 @@ import com.spring.mti.service.PersonService;
 
 public class IndexController implements Controller, BeanFactoryAware {
 	private PersonService personService;
-	private CustomUserDetailsService authStorage; 
-
+	private CustomUserDetailsService authStorage;
+	
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
@@ -33,26 +35,13 @@ public class IndexController implements Controller, BeanFactoryAware {
 			}
 			if (authStorage.isAdminRoleSet((String)session.getAttribute("login"))){
 				//админка
-				return new ModelAndView("redirect:/admin.html");
-				//view.setViewName("ui_admin");
+				view.setViewName("ui_admin");	
 			}
 		} else {
 			view.setViewName("login");
-		}//long count = personService.countAllPersons();
-		//view.addObject("countM", count);
-/*
-		HttpSession session = request.getSession();
-		if (session.getAttribute("chkErrorPin") != null) {
-			Integer chkErrorPin = (Integer)session.getAttribute("chkErrorPin");
-			if (chkErrorPin > 0 && chkErrorPin > 3) {
-				view.addObject("error", "Карта заблокирована. Обратитесь в техподдержку");
-			} else {
-				view.addObject("error", "Не верный пинкод" + session.getAttribute("chkErrorPin").toString());
-			}
 		}
-*/
 		return view;
-	}
+}
 
 	@Override
 	public void setBeanFactory(BeanFactory context) throws BeansException {

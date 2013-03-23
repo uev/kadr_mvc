@@ -18,14 +18,18 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
+import com.spring.mti.model.security.Users;
+import com.spring.mti.service.AuthorityService;
 import com.spring.mti.service.CustomUserDetailsService;
 
 public class AdminController implements Controller, BeanFactoryAware {
 	private CustomUserDetailsService authStorage;
+	private AuthorityService sauth;
 	
 	@Override
 	public void setBeanFactory(BeanFactory context) throws BeansException {
 		authStorage = (CustomUserDetailsService)context.getBean("userDetailsService");
+		sauth = (AuthorityService)context.getBean("serviceRole");
 	}
 
 	@Override
@@ -38,22 +42,61 @@ public class AdminController implements Controller, BeanFactoryAware {
 			 * Маршрутизация в админзоне
 			 */
 			if (request.getParameter("accounting") != null) {
+				view.setViewName("ui_admin_accounting");
 				if (request.getParameter("listacc") != null) {
 					//return JsonView.Render(authStorage.getAllUserNames(), response);
 					Map<String, List> testMap = new HashMap<String, List>();
 					//testMap.put("users", authStorage.getAllUsersPermissions());
-					JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(authStorage.getAllUsersPermissions());  
+					//JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(authStorage.getAllUsersPermissions());  
 					//view.addObject("json", jsonObject);
 					//return new ModelAndView("jsonpattern").addObject("json", jsonObject);
 					view.addObject("json", authStorage.getAllUsersPermissions());
 				}
+	
+				/*
+				 * Удаление пользователя
+				 */
+				if (request.getParameter("deleteuser") != null) {
+					view.addObject("rmusers", 1);
+					String login = request.getParameter("login");
+					if (login != null) {
+						try {
+							authStorage.deleteUser(authStorage.getUserByLoginName(login));
+							view.addObject("error", 0);
+							} catch (Exception e){
+								view.addObject("error", 1);
+							}
+						}
+					}	
 				/*
 				 * Создание пользователя
 				 */
 				if (request.getParameter("createuser") != null) {
-					view.addObject("createuser", "1");
+					String login = request.getParameter("login");
+					String role = request.getParameter("role");
+					if (login != null) {
+						if ( authStorage.getUserByLoginName(login).getUsername() == null){
+							try {
+								Users user = new Users();
+								user.setUsermame(request.getParameter("login"));
+								user.setPassword(request.getParameter("password"));
+								user.setEnabled(1);
+								authStorage.setSalt(user);
+								authStorage.createUser(user);
+								sauth.setPermissions(user, sauth.getRoleByName(role));
+								view.addObject("error", 0);
+							}
+							catch(Exception e) {
+								view.addObject("error", 1);
+								System.out.println("Exeption");
+							}
+						} else {
+							view.addObject("error", 1);
+						}
+					}
+					view.addObject("roles", sauth.getAllRoles());
 				}
-				view.setViewName("ui_admin_accounting");
+				
 			}
 			return view;
 		}
