@@ -10,7 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.spring.mti.model.security.Role;
 import com.spring.mti.model.security.Users;
 
-public class RoleDaoImpl implements RoleDao {
+public class RoleDaoImpl extends GenericDaoImpl<Role, Long> implements RoleDao {
+	/*
 
 	private EntityManager entityManager;
 
@@ -52,4 +53,5 @@ public class RoleDaoImpl implements RoleDao {
 			return new Role();
 		}
 	}
+	*/
 }

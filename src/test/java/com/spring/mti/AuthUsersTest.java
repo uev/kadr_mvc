@@ -2,6 +2,8 @@ package com.spring.mti;
 
 import static org.junit.Assert.*;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
 import org.junit.Before;
@@ -13,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 
+import com.spring.mti.model.Category;
 import com.spring.mti.model.security.Role;
 import com.spring.mti.model.security.Users;
 import com.spring.mti.service.AuthorityService;
@@ -78,11 +81,20 @@ public class AuthUsersTest {
 		dao.getAllUsersPermissions();
 	}
 	
+	
 	@Test
 	public void testGetAllRoles(){
 	    List<Object[]> m = sauth.getAllRoles();
 	    for (Object[] res : m) {
-		System.out.println(res[0] + " / " + res[1]);
+	    	System.out.println(res[0] + " / " + res[1]);
 	    }
 	}
+
+	@Test
+	@Ignore
+	public void testAddCategory(){
+	    Category c = new Category();
+	    c.setCname("Testic");
+	    dao.appendCategory(c);
+	}	
 }
