@@ -60,6 +60,7 @@
    <bean id="userDao" class="com.spring.mti.dao.UsersDaoImpl" />
    <bean id="users" class="com.spring.mti.model.security.Users" />
    <bean id="roleDao" class="com.spring.mti.dao.RoleDaoImpl" />
+   <bean id="categoryDao" class="com.spring.mti.dao.CategoryDaoImpl" />
    <!-- <bean id="authoritiesDao" class="com.spring.mti.dao.AuthoritiesDaoImpl" />  -->
     
    <!-- 
