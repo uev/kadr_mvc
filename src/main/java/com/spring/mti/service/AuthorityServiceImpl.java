@@ -1,5 +1,6 @@
 package com.spring.mti.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,34 +37,30 @@ public class AuthorityServiceImpl implements AuthorityService {
 	public void setPermissions(Users user, Role role) {
 		authDao.setPermission(user,role);
 	}
-	
-	
-	
+
 	@Override
 	public List<String> getAllPermissionsByUserId(long user_id) {
-		// TODO Auto-generated method stub
 		return authDao.getAllPermissionsBuUsername(user_id);
 	}
 	@Override
 	public void createRole(Role role) {
-		rolesDao.createRole(role);
+		rolesDao.create(role);
 	}
 	
 	@Override
 	public void deleteRole(Role role) {
-		rolesDao.deleteRole(role);	
+		rolesDao.delete(role);
 	}
 	
 	@Override
 	public List<Object[]> getAllRoles() {
-		return rolesDao.getAllRoles();
+		return rolesDao.findAll_toArray(new Role());
 	}
 	
 	@Override
 	public Role getRoleByName(String role) {
-		return rolesDao.getRoleByName(role);
+		List<String> r = new ArrayList<String>();
+		r.add(role);
+		return rolesDao.findByNamedQuery("select s from Role s where s.rname=?1",r.toArray()).get(0); 	
 	}
-	
-	
-	
 }
