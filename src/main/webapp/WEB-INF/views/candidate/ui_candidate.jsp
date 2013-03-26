@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<jsp:include page="header.jsp" />
+<jsp:include page="default/header.jsp" />
 </head>
 <body>
 <center><h1>Личный кабинет участника аттестации</h1></center>
@@ -30,4 +30,4 @@
 <script src="resources/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
-<jsp:include page="footer.jsp" />
+<jsp:include page="default/footer.jsp" />

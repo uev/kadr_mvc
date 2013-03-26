@@ -61,6 +61,10 @@
    <bean id="users" class="com.spring.mti.model.security.Users" />
    <bean id="roleDao" class="com.spring.mti.dao.RoleDaoImpl" />
    <bean id="categoryDao" class="com.spring.mti.dao.CategoryDaoImpl" />
+   <bean id="cityDao" class="com.spring.mti.dao.address.CityDaoImpl" />
+   <bean id="countryDao" class="com.spring.mti.dao.address.CountryDaoImpl" />
+   <bean id="regionDao" class="com.spring.mti.dao.address.RegionDaoImpl" />
+   
    <!-- <bean id="authoritiesDao" class="com.spring.mti.dao.AuthoritiesDaoImpl" />  -->
     
    <!-- 
@@ -86,9 +90,8 @@
 		-->
 	</bean>
 	
-	<bean id="serviceRole" class="com.spring.mti.service.AuthorityServiceImpl"> 
-		
-	</bean>
+	<bean id="serviceRole" class="com.spring.mti.service.AuthorityServiceImpl" />
+	<bean id="serviceAddress" class="com.spring.mti.service.AddressServiceImpl" />
    
     <bean id="daoAuthenticationProvider"
   		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">

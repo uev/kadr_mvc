@@ -31,11 +31,11 @@ public class IndexController implements Controller, BeanFactoryAware {
 		if (session.getAttribute("loginSuccess") != null) {
 			if (authStorage.isUserRoleSet((String)session.getAttribute("login"))){
 				//Личный кабинет аттестуемого
-				view.setViewName("ui_candidate");
+				view.setViewName("candidate/index");
 			}
 			if (authStorage.isAdminRoleSet((String)session.getAttribute("login"))){
 				//админка
-				view.setViewName("ui_admin");	
+				view.setViewName("admin/index");	
 			}
 		} else {
 			view.setViewName("login");

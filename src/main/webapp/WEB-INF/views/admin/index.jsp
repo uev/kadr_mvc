@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<jsp:include page="header.jsp" />
+<jsp:include page="../default/header.jsp" />
 
 <body>
 <center><h1>Админзона</h1></center>
@@ -10,7 +10,7 @@
 <div class="container-fluid">
 	<div class="row-fluid" >
     	<div class="span2">
-    		<jsp:include page="menu_admin.jsp" />
+    		<jsp:include page="menu.jsp" />
     	</div>
     <div class="span10" style="margin: 5 auto;background-color:#FFDDDD;">
     
@@ -23,4 +23,4 @@
 
 </body>
 
-<jsp:include page="footer.jsp" />
+<jsp:include page="../default/footer.jsp" />

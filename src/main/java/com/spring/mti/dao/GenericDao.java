@@ -10,4 +10,5 @@ public interface GenericDao<T, PK extends Serializable> {
 	List<T> findAll(T t);
 	List<Object[]> findAll_toArray(T t);
 	Object[] toArray(T t);
+	List<Object[]> listToArray(List<T> t);
 }

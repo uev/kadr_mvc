@@ -27,6 +27,7 @@
 	    <bean id="indexController" class="com.spring.mti.web.IndexController" />
 	    <bean id="loginController" class="com.spring.mti.web.LoginController" />
 	    <bean id="adminController" class="com.spring.mti.web.AdminController" />
+	   	<bean id="dictionaryController" class="com.spring.mti.web.DictionaryController" />
 		
 		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 			<property name="prefix" value="/WEB-INF/views/" />
@@ -39,6 +40,7 @@
                                 <prop key="/index.html">indexController</prop>
                                 <prop key="/login.html">loginController</prop>
                                 <prop key="/admin.html">adminController</prop>
+                                
                         </props>
                 </property>
         </bean> 

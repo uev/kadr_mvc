@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" 
            uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="header.jsp" />
+<jsp:include page="/WEB-INF/views/default/header.jsp" />
 </head>
 <body>
 <center><h1>Админзона</h1></center>
@@ -12,13 +12,13 @@
 
 	<div class="row-fluid" >
     	<div class="span2">
-    		<jsp:include page="menu_admin.jsp" />
+    		<jsp:include page="../menu.jsp" />
     	</div>
     <div class="span10" style="margin: 5 auto;">
 <!-- UserManagment menu -->
     <ul class="breadcrumb">
-    <li><a href="admin.html?accounting&createuser">Создание пользователя</a> <span class="divider">/</span></li>
-    <li><a href="admin.html?accounting&deleteuser">Удаление пользователя</a> <span class="divider">/</span></li>
+    <li><a href="addemploye.html">Создание пользователя</a> <span class="divider">/</span></li>
+    <li><a href="rmemploye.html">Удаление пользователя</a> <span class="divider">/</span></li>
     </ul>
     
     <!-- List users  -->
@@ -65,4 +65,4 @@
 <script src="resources/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
-<jsp:include page="footer.jsp" />
+<jsp:include page="/WEB-INF/views/default/header.jsp" />

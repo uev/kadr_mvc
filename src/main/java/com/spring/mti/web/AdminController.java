@@ -36,13 +36,13 @@ public class AdminController implements Controller, BeanFactoryAware {
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		ModelAndView view = new ModelAndView("ui_admin");
+		ModelAndView view = new ModelAndView("admin/index");
 		if (authStorage.isAdminRoleSet((String)session.getAttribute("login"))){
 			/*
 			 * Маршрутизация в админзоне
 			 */
 			if (request.getParameter("accounting") != null) {
-				view.setViewName("ui_admin_accounting");
+				view.setViewName("admin/accounting");
 				if (request.getParameter("listacc") != null) {
 					//return JsonView.Render(authStorage.getAllUserNames(), response);
 					Map<String, List> testMap = new HashMap<String, List>();
@@ -54,9 +54,9 @@ public class AdminController implements Controller, BeanFactoryAware {
 				}
 	
 				/*
-				 * Удаление пользователя
+				 * Удаление аккаунта
 				 */
-				if (request.getParameter("deleteuser") != null) {
+				if (request.getParameter("unbindlogin") != null) {
 					view.addObject("rmusers", 1);
 					String login = request.getParameter("login");
 					if (login != null) {
@@ -69,9 +69,9 @@ public class AdminController implements Controller, BeanFactoryAware {
 						}
 					}	
 				/*
-				 * Создание пользователя
+				 * Создание аккаунта
 				 */
-				if (request.getParameter("createuser") != null) {
+				if (request.getParameter("bindlogin") != null) {
 					String login = request.getParameter("login");
 					String role = request.getParameter("role");
 					if (login != null) {

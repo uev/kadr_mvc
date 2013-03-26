@@ -4,8 +4,9 @@
 <div class="well sidebar-nav">
 	<ul class="nav nav-list">
     	<li class="nav-header">Меню</li>
-        <li><a href="admin.html?accounting">Управление пользователями</a></li>
+        <li><a href="admin.html?accounting">Управление логинами</a></li>
         <li><a href="report_patterns.html">Управление шаблонами</a></li>
+        <li><a href="admin/dictionary/index.html">Справочники</a></li>
         <li><a href="login.html?logout=1">Выход</a></li>
     </ul>
 </div>

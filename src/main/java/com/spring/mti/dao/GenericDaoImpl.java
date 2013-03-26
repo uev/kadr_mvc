@@ -71,7 +71,18 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
     	return l;
     }
 
-	@Override
+    @SuppressWarnings("unchecked")
+    @Override
+    @Transactional
+    public List<Object[]> listToArray(List<T> t) {
+    	List<Object[]> l = new ArrayList<Object[]>();
+    	for (T item : t){
+    		l.add(this.toArray(item));
+    	}
+    	return l;
+    }
+    
+    @Override
 	public Object[] toArray(T t) {
 		Class cl = t.getClass();
 		Method[] met = cl.getDeclaredMethods();
