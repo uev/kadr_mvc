@@ -102,4 +102,18 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
 	    }		
 		return l.toArray();
 	}   
+    
+    @Override
+    @Transactional
+    public void update(T t) {
+    	this.entityManager.merge(t);
+    }
+    
+    @SuppressWarnings("unchecked")
+	@Override
+    @Transactional
+    public T getByid(T t,long id) {
+    	return (T)this.entityManager.find(t.getClass(), id);
+    }
+    
 }

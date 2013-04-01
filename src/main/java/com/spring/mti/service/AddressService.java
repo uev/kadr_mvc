@@ -10,4 +10,6 @@ public interface AddressService {
 	public List<Country> getCountries();
 	public List<Region> getRegions(long countryid);
 	public List<City> getCities(long regionid);
+	public City getCitiyByName(String name);
+	City getCitiyById(long id);
 }

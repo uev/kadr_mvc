@@ -1,9 +1,15 @@
 package com.spring.mti.model.security;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.spring.mti.model.Employe;
 import com.sun.istack.internal.NotNull;
 
 @Entity
@@ -19,6 +25,14 @@ public class Users {
 	private String password;
 	private Integer enabled;
     
+	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
+	@JoinColumn(name="fio")
+	private Employe fk_employe;
+	
+	public long getId() {
+		return id;
+	}	
+	
 	public void setUsermame(String name){
 		this.username = name;
 	}
@@ -42,8 +56,12 @@ public class Users {
 	public void setEnabled(Integer enabled) {
 		this.enabled = enabled;
 	}
-	
-	public long getId() {
-		return id;
+
+	public Employe getFk_employe() {
+		return fk_employe;
+	}
+
+	public void setFk_employe(Employe fk_employe) {
+		this.fk_employe = fk_employe;
 	}
 }

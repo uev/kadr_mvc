@@ -47,10 +47,15 @@
    <bean id="userDao" class="com.spring.mti.dao.UsersDaoImpl" />
    <bean id="users" class="com.spring.mti.model.security.Users" />
    <bean id="roleDao" class="com.spring.mti.dao.RoleDaoImpl" />
-   <bean id="serviceRole" class="com.spring.mti.service.AuthorityServiceImpl"/>
-      <bean id="cityDao" class="com.spring.mti.dao.address.CityDaoImpl" />
+   <bean id="serviceRole" class="com.spring.mti.service.AuthorityServiceImpl"/> 
+   <bean id="cityDao" class="com.spring.mti.dao.address.CityDaoImpl" />
    <bean id="countryDao" class="com.spring.mti.dao.address.CountryDaoImpl" />
    <bean id="regionDao" class="com.spring.mti.dao.address.RegionDaoImpl" />
+   <bean id="departmentDao" class="com.spring.mti.dao.DepartmentDaoImpl" />
+   <bean id="employeDao" class="com.spring.mti.dao.EmployeDaoImpl" />
+   <bean id="categoryDao" class="com.spring.mti.dao.CategoryDaoImpl" />
+   <bean id="serviceSictionary" class="com.spring.mti.service.DictionaryServiceImpl" />
+    
     <!-- Security -->   
    
    <bean id="saltSource"     class="org.springframework.security.authentication.dao.ReflectionSaltSource"> 

@@ -11,7 +11,7 @@ import com.sun.istack.internal.NotNull;
 
 @Entity
 public class Department implements Serializable {
-		@Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	

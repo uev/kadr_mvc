@@ -16,29 +16,26 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 
 import com.spring.mti.model.Category;
-import com.spring.mti.model.address.City;
-import com.spring.mti.model.address.Region;
 import com.spring.mti.model.security.Role;
 import com.spring.mti.model.security.Users;
 import com.spring.mti.service.AddressService;
 import com.spring.mti.service.AuthorityService;
 import com.spring.mti.service.CustomUserDetailsService;
+import com.spring.mti.service.DictionaryService;
 
-public class AddressTest {
+public class DictionaryTest {
 	private static ApplicationContext context;
 	private static AddressService asrv;
+	private static DictionaryService dsrv;
 
 	@Before
 	public void setUp() throws Exception {
 		context = new ClassPathXmlApplicationContext("META-INF/spring/app-context.xml");
 		asrv = (AddressService)context.getBean("serviceAddress");
+		dsrv = (DictionaryService)context.getBean("serviceDictionary");
 	}
-
 	
 	@Test
-	public void testRelationsheeps(){
-		City c = asrv.getCitiyByName("Барнаул");
-		Region r = c.getFk_region();
-		assertTrue("Алтайский край".equals(r.getName()));
-	}
+	public void testCreateRmEmploye(){
+	    }
 }
