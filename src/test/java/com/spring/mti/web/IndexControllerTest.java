@@ -6,7 +6,9 @@ import org.junit.Test;
 
 import org.springframework.web.servlet.ModelAndView;
 
-public class IndexControllerTest extends AbstractTestController {
+import com.spring.mti.AbstractTest;
+
+public class IndexControllerTest extends AbstractTest {
 
 	@Test
 	public void testLoginView() throws Exception {

@@ -21,15 +21,14 @@ import com.spring.mti.model.security.Users;
 import com.spring.mti.service.AuthorityService;
 import com.spring.mti.service.CustomUserDetailsService;
 
-public class AuthUsersTest {
-	private static ApplicationContext context;
+public class AuthUsersTest extends AbstractTest {
 	private static CustomUserDetailsService dao;
     private static AuthorityService sauth;
 
 
 	@Before
 	public void setUp() throws Exception {
-		context = new ClassPathXmlApplicationContext("META-INF/spring/app-context.xml");
+		super.setUp();
 		dao = (CustomUserDetailsService)context.getBean("userDetailsService");
 		sauth = (AuthorityService)context.getBean("serviceRole");
 	}

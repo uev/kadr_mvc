@@ -6,7 +6,9 @@ import static org.mockito.Mockito.when;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
-public class LoginControllerTest extends AbstractTestController {
+import com.spring.mti.AbstractTest;
+
+public class LoginControllerTest extends AbstractTest {
 
 	@Test
 	public void testLogout() {

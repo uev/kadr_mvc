@@ -22,15 +22,15 @@ import com.spring.mti.service.AddressService;
 import com.spring.mti.service.AuthorityService;
 import com.spring.mti.service.CustomUserDetailsService;
 import com.spring.mti.service.DictionaryService;
+import com.sun.org.apache.bcel.internal.generic.SIPUSH;
 
-public class DictionaryTest {
-	private static ApplicationContext context;
+public class DictionaryTest extends AbstractTest {
 	private static AddressService asrv;
 	private static DictionaryService dsrv;
 
 	@Before
 	public void setUp() throws Exception {
-		context = new ClassPathXmlApplicationContext("META-INF/spring/app-context.xml");
+		super.setUp();
 		asrv = (AddressService)context.getBean("serviceAddress");
 		dsrv = (DictionaryService)context.getBean("serviceDictionary");
 	}
