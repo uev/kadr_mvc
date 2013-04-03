@@ -9,7 +9,8 @@
 <script>
 //Загрузка адресного словаря
 function getDict(arg){
-	var hname = "http://localhost:8080/uev61/json/";
+	//var hname = "http://localhost:8080/uev61/json/";
+	var hname = "json/";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
 	var json={};
 	var cur =  $(arg.concat(' :selected')).val();
@@ -61,7 +62,8 @@ function json2td(t){
 
 
 function lookDb() {
-	var hname = "http://localhost:8080/uev61/json/recbykey.html";
+	//var hname = "http://localhost:8080/uev61/json/recbykey.html";
+	var hname = "json/recbykey.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
 	var json={'hash' : hash, 'key' : $("input[name='person']").val()};
 	var jqxhr = $.post(hname,json, function() {
@@ -110,7 +112,7 @@ return 0;
 <div class="container-fluid">
 	<div class="row-fluid" >
     	<div class="span2">
-    		<jsp:include page="../menu.jsp" />
+    		<jsp:include page="/WEB-INF/views/admin/menu.jsp" />
     	</div>
     <div class="span10" style="margin: 5 auto;">
 <!-- UserManagment menu -->
@@ -187,4 +189,4 @@ return 0;
 
 </body>
 
-<jsp:include page="/WEB-INF/views/default/header.jsp" />
+<jsp:include page="/WEB-INF/views/default/footer.jsp" />

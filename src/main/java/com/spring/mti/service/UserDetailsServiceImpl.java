@@ -83,6 +83,8 @@ public class UserDetailsServiceImpl implements UserDetailsService, CustomUserDet
 
 	@Override
 	public boolean isAdminRoleSet(String username) {
+		System.out.println("Verify");
+		System.out.println(username);
 		return authDao.isAdminRoleSet(getUserByLoginName(username));
 	}
 	

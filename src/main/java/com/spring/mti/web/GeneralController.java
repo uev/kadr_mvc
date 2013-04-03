@@ -5,18 +5,26 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.servlet.ModelAndView;
 import com.spring.mti.service.CustomUserDetailsService;
 
 public class GeneralController implements BeanFactoryAware {
 	protected CustomUserDetailsService authStorage;
+	protected AuthenticationManager am;
 
 	public ModelAndView verifyPermission(HttpSession session) {
 		ModelAndView view = new ModelAndView();
-		if (!authStorage.isAdminRoleSet((String)session.getAttribute("login"))){
+		try{
+			if (!authStorage.isAdminRoleSet((String)session.getAttribute("login"))){
+				view.setViewName("redirect:/");
+			}
+		} catch (Exception e) {
 			view.setViewName("redirect:/");
-		}
-		return view;
+			System.out.println("Exeption");
+			e.printStackTrace();
+		}		
+		return view;	
 	}
 
 	@Override

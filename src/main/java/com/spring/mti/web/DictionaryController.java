@@ -76,7 +76,8 @@ public class DictionaryController extends GeneralController implements BeanFacto
 		return view;
 	}
 		
-	@RequestMapping(value = "/json/getcountry.html", method = RequestMethod.POST)
+	//@RequestMapping(value = "/json/getcountry.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/dictionary/json/getcountry.html", method = RequestMethod.POST)
 	public  @ResponseBody List<Country> getCountries(HttpServletRequest request, HttpServletResponse response){
 		String key = request.getParameter("hash");
 		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
@@ -85,7 +86,7 @@ public class DictionaryController extends GeneralController implements BeanFacto
 		return null;
 	}
 	
-	@RequestMapping(value = "/json/getregion.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/dictionary/json/getregion.html", method = RequestMethod.POST)
 	public  @ResponseBody List<Region> getRegions(HttpServletRequest request, HttpServletResponse response){
 		String key = request.getParameter("hash");
 		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
@@ -97,7 +98,7 @@ public class DictionaryController extends GeneralController implements BeanFacto
 		return null;
 	}
 	
-	@RequestMapping(value = "/json/getcity.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/dictionary/json/getcity.html", method = RequestMethod.POST)
 	public  @ResponseBody List<City> getCities(HttpServletRequest request, HttpServletResponse response){
 		String key = request.getParameter("hash");
 		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
@@ -112,7 +113,7 @@ public class DictionaryController extends GeneralController implements BeanFacto
 		return null;
 	}
 	
-	@RequestMapping(value = "/json/recbykey.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/dictionary/json/recbykey.html", method = RequestMethod.POST)
 	public  @ResponseBody List<Object> getRecordsByKeyPerson(HttpServletRequest request, HttpServletResponse response){
 		String key = request.getParameter("hash");
 		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){

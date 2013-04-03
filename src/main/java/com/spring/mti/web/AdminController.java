@@ -7,22 +7,19 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
-import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
-
 import com.spring.mti.model.security.Users;
 import com.spring.mti.service.AuthorityService;
 import com.spring.mti.service.CustomUserDetailsService;
 
-public class AdminController implements Controller, BeanFactoryAware {
+@Controller
+public class AdminController extends GeneralController implements BeanFactoryAware {
 	private CustomUserDetailsService authStorage;
 	private AuthorityService sauth;
 	
@@ -32,7 +29,7 @@ public class AdminController implements Controller, BeanFactoryAware {
 		sauth = (AuthorityService)context.getBean("serviceRole");
 	}
 
-	@Override
+	
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
@@ -102,4 +99,35 @@ public class AdminController implements Controller, BeanFactoryAware {
 		}
 		return new ModelAndView("redirect:/");
 	}
+
+
+	@RequestMapping(value = "/admin/index.html", method = RequestMethod.GET)
+	public ModelAndView indexAction(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		ModelAndView view = verifyPermission(request.getSession());
+		if (view.getViewName() == null){
+			view.setViewName("admin/index");
+		}
+		return view;	
+	}
+	
+	@RequestMapping(value = "/admin/accounting.html", method = RequestMethod.GET)
+	public ModelAndView accountingAction(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		HttpSession s = request.getSession();
+		ModelAndView view = verifyPermission(s);
+		if (view.getViewName() == null){
+			System.out.println("Set view");
+			view.setViewName("admin/accounting");
+			System.out.println("Tooke json");
+			view.addObject("json", authStorage.getAllUsersPermissions()); //listacc
+		}
+		return view;	
+	}
+	
+	
+	
+	
+	
+	
 }
