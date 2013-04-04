@@ -8,9 +8,10 @@
 <div class="well sidebar-nav">
 	<ul class="nav nav-list">
     	<li class="nav-header">Меню</li>
-        <li><a href="admin/accounting.html">Управление логинами</a></li>
-        <li><a href="report_patterns.html">Управление шаблонами</a></li>
-        <li><a href="admin/dictionary/index.html">Справочники</a></li>
-        <li><a href="<c:url value="logout.html"/>">Выход</a></li>
+        <li><a href="${pageContext.request.contextPath}/admin/accounting.html">Управление логинами</a></li>
+        <li><a href="${pageContext.request.contextPath}/report_patterns.html">Управление шаблонами</a></li>
+        <li><a href="${pageContext.request.contextPath}/admin/dictionary/index.html">Справочники</a></li>
+        <li><a href="${pageContext.request.contextPath}/logout.html">Выход</a></li>
+        <!--<li><a href="<c:url value="logout.html"/>">Выход</a></li>  -->
     </ul>
 </div>
