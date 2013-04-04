@@ -21,7 +21,6 @@ public class GeneralController implements BeanFactoryAware {
 			}
 		} catch (Exception e) {
 			view.setViewName("redirect:/");
-			System.out.println("Exeption");
 			e.printStackTrace();
 		}		
 		return view;	
@@ -30,5 +29,6 @@ public class GeneralController implements BeanFactoryAware {
 	@Override
 	public void setBeanFactory(BeanFactory context) throws BeansException {
 		authStorage = (CustomUserDetailsService)context.getBean("userDetailsService");
+		am = (AuthenticationManager) context.getBean("authenticationManager");
 	}
 }

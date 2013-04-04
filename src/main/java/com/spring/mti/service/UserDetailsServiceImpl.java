@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
@@ -17,6 +18,7 @@ import com.spring.mti.dao.UsersDao;
 import com.spring.mti.model.Category;
 import com.spring.mti.model.security.Users;
 import com.spring.mti.model.security.UsersDetailImpl;
+import com.spring.mti.web.LoginController;
 
 public class UserDetailsServiceImpl implements UserDetailsService, CustomUserDetailsService {
 	@Autowired private PasswordEncoder passwordEncoder;
@@ -26,6 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, CustomUserDet
 	private CategoryDao categoryDao;
 	
 	private UsersDao dao;
+	static Logger log = Logger.getLogger(LoginController.class.getName());
 
 	public UsersDao getDao() {
 		return dao;
@@ -83,8 +86,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, CustomUserDet
 
 	@Override
 	public boolean isAdminRoleSet(String username) {
-		System.out.println("Verify");
-		System.out.println(username);
+		log.info("Verify admin permission. Username - ".concat(username));
 		return authDao.isAdminRoleSet(getUserByLoginName(username));
 	}
 	

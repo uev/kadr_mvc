@@ -17,9 +17,9 @@
     <div class="span10" style="margin: 5 auto;">
 <!-- UserManagment menu -->
     <ul class="breadcrumb">
-    <li><a href="admin.html?accounting&listacc">Просмотр пользователей</a> <span class="divider">/</span></li>
-    <li><a href="admin.html?accounting&bindlogin">Привязка пользователя к аккаунту</a> <span class="divider">/</span></li>
-    <li><a href="admin.html?accounting&unbindlogin">Удаление аккаунта</a> <span class="divider">/</span></li>
+    <!--  <li><a href="admin.html?accounting&listacc">Просмотр пользователей</a> <span class="divider">/</span></li> -->
+    <li><a href="bindlogin.html">Привязка пользователя к аккаунту</a> <span class="divider">/</span></li>
+    <li><a href="unbindlogin.html">Удаление аккаунта</a> <span class="divider">/</span></li>
     </ul>
 
     <!-- List users  -->

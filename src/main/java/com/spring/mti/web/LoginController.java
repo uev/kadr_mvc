@@ -71,6 +71,7 @@ public class LoginController extends GeneralController {
 		String password = request.getParameter("password");
 		Authentication arequest = new UsernamePasswordAuthenticationToken(login, password);
 		try {
+			
 			log.debug("Try auth login ".concat(login));
 			am.authenticate(arequest);
 			log.debug("Set session attribute");
@@ -93,6 +94,7 @@ public class LoginController extends GeneralController {
 			try {
 				session.removeAttribute("loginSuccess");
 				session.removeAttribute("login");
+				log.info("Set session attribute");
 			} catch (Exception e) {
 			}
 		}
