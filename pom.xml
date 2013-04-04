@@ -16,6 +16,8 @@
 		<sonar.sources>src</sonar.sources>
 		<java.home>/usr/java/latest/bin</java.home>
                 <cxf.version>2.2.3</cxf.version>
+                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 	
 	<dependencies>
