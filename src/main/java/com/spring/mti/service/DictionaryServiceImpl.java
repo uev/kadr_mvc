@@ -136,6 +136,11 @@ public class DictionaryServiceImpl implements DictionaryService {
 		r.add(emp);
 		return employeDao.findByNamedQuery("select s from Employe s where s.fio=?1",r.toArray()); 	
 	}
+	
+	@Override
+	public List<Employe> getEmployeAll() {
+		return employeDao.findAll(new Employe()); 	
+	}
 
 	@Override
 	public void deleteEmploye(Employe e) {

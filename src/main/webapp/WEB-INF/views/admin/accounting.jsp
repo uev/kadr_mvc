@@ -5,9 +5,16 @@
            uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="../default/header.jsp" />
+    <c:if test="${allemp != null}">
+    	<script>
+    	
+    	
+    	</script>
+    </c:if>
+
 </head>
-<body>
-<center><h1>Админзона</h1></center>
+<body onLoad="init();">
+<center><h1>${title}</h1></center>
 <div class="container-fluid">
 
 	<div class="row-fluid" >
@@ -41,7 +48,7 @@
 	<!-- Binding login  -->
 	<c:if test="${roles != null}">
     	 
-    	 <form action="${pageContext.request.contextPath}/admin/bindlogin.html" method="post">
+    	 <form action="${form_bind}" method="post">
             <fieldset>
               <div class="clearfix">
                 <input type="text" placeholder="Логин" name="login">
@@ -58,8 +65,8 @@
 			</select>
             </div>
               <button class="btn btn-large btn-primary" type="submit">Создать</button>
-            </fieldset>
-          </form>
+            
+            
           <c:choose>
   			<c:when test="${error == 1}">
   			    <div class="alert alert-error">Пользователь существует или на сервере проблемы</div>
@@ -68,11 +75,29 @@
     			<div class="alert alert-success">Пользователь успешно добавлен</div>
   			</c:when>
 		  </c:choose>
+		  <table class="table table-striped">
+    		<tbody>
+	    		<tr><td> </td><td>id</td><td>ФИО</td><td>Подразделение</td><td>Страна</td><td>Регион</td><td>Населённый пункт</td></tr>
+	    		<c:forEach var="record" items='${allemp}'>
+        			<tr>
+        				<td><input type="radio" value=${record.id} name="radiogroup"></td>
+        				<td><c:out value="${record.id}"></c:out></td>
+        				<td><c:out value="${record.fio}"></c:out></td>
+        				<td><c:out value="${record.department}"></c:out></td>
+        				<td><c:out value="${record.country}"></c:out></td>
+        				<td><c:out value="${record.region}"></c:out></td>
+        				<td><c:out value="${record.city}"></c:out></td>
+					</tr>
+				</c:forEach>
+	    	</tbody>
+	    </table>
+	    </fieldset>
+          </form>
 	</c:if>
     <!-- Unbinding login  -->
     
     <c:if test="${rmusers != null}">
-    	<form action="${pageContext.request.contextPath}/admin/unbindlogin.html" method="post">
+    	<form action="${form_unbind}" method="post">
             <fieldset>
               <div class="clearfix">
                 <input type="text" placeholder="Имя пользователя" name="login">

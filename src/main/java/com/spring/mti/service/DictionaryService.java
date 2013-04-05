@@ -29,4 +29,5 @@ public interface DictionaryService {
 	public Department getDepartmentByName(String dep);
 	void updateEmployeRelation(Employe e);
 	void updateLoginRelation(Users u);
+	List<Employe> getEmployeAll();
 }

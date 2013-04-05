@@ -29,6 +29,7 @@ import com.spring.mti.model.security.Users;
 import com.spring.mti.service.AddressService;
 import com.spring.mti.service.AuthorityService;
 import com.spring.mti.service.DictionaryService;
+import com.spring.mti.service.LayoutService;
 
 @Controller
 public class DictionaryController extends GeneralController implements BeanFactoryAware {
@@ -36,6 +37,7 @@ public class DictionaryController extends GeneralController implements BeanFacto
 	private AuthorityService sauth;
 	private AddressService saddr;
 	private DictionaryService sdict;
+	private LayoutService slayout;
 	
 	@Override
 	public void setBeanFactory(BeanFactory context) throws BeansException {
@@ -43,9 +45,9 @@ public class DictionaryController extends GeneralController implements BeanFacto
 		sauth = (AuthorityService)context.getBean("serviceRole");
 		saddr = (AddressService)context.getBean("serviceAddress");
 		sdict = (DictionaryService)context.getBean("serviceDictionary");
+		slayout = (LayoutService)context.getBean("serviceLayout");
 	}
 
-	
 	@RequestMapping(value = "/admin/dictionary/index.html", method = RequestMethod.GET)
 	public final ModelAndView mainViewDictionary(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
@@ -119,27 +121,11 @@ public class DictionaryController extends GeneralController implements BeanFacto
 		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
 			String name = request.getParameter("key");
 			if (name != null){
-				List<Object> answer = new ArrayList<Object>();
 				List<Employe> e = sdict.getEmployeByName(name);
-				for (Employe item : e){
-					City c = item.getFk_city(); 
-					Map<String, Object> map = new HashMap<String, Object>();
-					map.put("city", c.getName());
-					map.put("region", c.getFk_region().getName());
-					map.put("country", c.getFk_country().getName());
-					Department d = item.getFk_department();
-					if (d != null) {
-						map.put("department", d.getDep_name());
-					} else {
-						map.put("department", "Не указан"); 
-					}	
-					map.put("fio", item.getFio());
-					map.put("id", item.getId());
-					answer.add(map);
-				}
-					return answer;
+				List<Object> answer = slayout.employeToMapJson(e);
+				return answer;
 			}
 		}
 		return null;
-	}
+	}	
 }

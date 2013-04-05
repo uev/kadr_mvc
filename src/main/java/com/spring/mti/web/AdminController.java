@@ -16,14 +16,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.spring.mti.model.Employe;
 import com.spring.mti.model.security.Users;
 import com.spring.mti.service.AuthorityService;
 import com.spring.mti.service.CustomUserDetailsService;
+import com.spring.mti.service.DictionaryService;
+import com.spring.mti.service.LayoutService;
 
 @Controller
 public class AdminController extends GeneralController implements BeanFactoryAware {
 	//private CustomUserDetailsService authStorage;
 	private AuthorityService sauth;
+	private LayoutService slayout;
+	private DictionaryService sdict;
 	static Logger log = Logger.getLogger(LoginController.class.getName());
 
 	
@@ -32,6 +38,8 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 	//	authStorage = (CustomUserDetailsService)context.getBean("userDetailsService");
 		super.setBeanFactory(context);
 		sauth = (AuthorityService)context.getBean("serviceRole");
+		slayout = (LayoutService)context.getBean("serviceLayout");
+		sdict = (DictionaryService)context.getBean("serviceDictionary");
 	}
 	
 	public ModelAndView handleRequest(HttpServletRequest request,
@@ -127,6 +135,7 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 			view.setViewName("admin/accounting");
 			System.out.println("Tooke json");
 			view.addObject("json", authStorage.getAllUsersPermissions());
+			view.addObject("title", "Админзона / управление логинами");
 		}
 		return view;	
 	}
@@ -144,6 +153,8 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 			log.debug("Set view admin/accounting");
 			view.setViewName("admin/accounting");
 			view.addObject("rmusers", 1);
+			view.addObject("title", "Админзона / удаление логина");
+			view.addObject("form_unbind", request.getRequestURL());
 			String username = request.getParameter("login");
 			if  (username != null) { 
 				try {
@@ -171,6 +182,11 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 			view.setViewName("admin/accounting");
 			String login = request.getParameter("login");
 			String role = request.getParameter("role");
+			view.addObject("title", "Админзона / добавление логина");
+			view.addObject("form_bind", request.getRequestURL());
+			view.addObject("form_bind", request.getRequestURL());
+			List<Object> sss= slayout.employeToMapJson(sdict.getEmployeAll());
+			view.addObject("allemp", sss);
 			if (login != null) {
 				if ( authStorage.getUserByLoginName(login).getUsername() == null){
 					try {
