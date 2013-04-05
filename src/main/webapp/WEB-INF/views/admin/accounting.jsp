@@ -41,10 +41,10 @@
 	<!-- Binding login  -->
 	<c:if test="${roles != null}">
     	 
-    	 <form action="admin.html?accounting&bindlogin" method="post">
+    	 <form action="${pageContext.request.contextPath}/admin/bindlogin.html" method="post">
             <fieldset>
               <div class="clearfix">
-                <input type="text" placeholder="Имя пользователя" name="login">
+                <input type="text" placeholder="Логин" name="login">
               </div>
               <div class="clearfix">
                 <input type="password" placeholder="Пароль" name="password">
@@ -68,12 +68,11 @@
     			<div class="alert alert-success">Пользователь успешно добавлен</div>
   			</c:when>
 		  </c:choose>
-          
 	</c:if>
     <!-- Unbinding login  -->
     
     <c:if test="${rmusers != null}">
-    	<form action="admin.html?accounting&unbindlogin" method="post">
+    	<form action="${pageContext.request.contextPath}/admin/unbindlogin.html" method="post">
             <fieldset>
               <div class="clearfix">
                 <input type="text" placeholder="Имя пользователя" name="login">

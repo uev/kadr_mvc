@@ -135,7 +135,7 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 	/*
 	 * Удаление  логина. Разрушение связи Пользователь <=> Логин 
 	 */
-	@RequestMapping(value = "/admin/unbindlogin.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/unbindlogin.html", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView unbindloginAction(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		ModelAndView view = verifyPermission(request.getSession());
@@ -160,9 +160,9 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 	}
 	
 	/*
-	 *  Привязка пользователя к логину 
+	 *  Привязка пользователя к логину (представление) 
 	 */
-	@RequestMapping(value = "/admin/bindlogin.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/bindlogin.html", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView bindloginAction(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		ModelAndView view = verifyPermission(request.getSession());
