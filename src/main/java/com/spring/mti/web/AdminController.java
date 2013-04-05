@@ -173,7 +173,7 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 	/*
 	 *  Привязка пользователя к логину (представление) 
 	 */
-	@RequestMapping(value = "/admin/bindlogin.html", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/admin/bindlogin.html", method = RequestMethod.GET)
 	public ModelAndView bindloginAction(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		ModelAndView view = verifyPermission(request.getSession());
@@ -187,7 +187,9 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 			view.addObject("form_bind", request.getRequestURL());
 			List<Object> sss= slayout.employeToMapJson(sdict.getEmployeAll());
 			view.addObject("allemp", sss);
+			
 			if (login != null) {
+				/*
 				if ( authStorage.getUserByLoginName(login).getUsername() == null){
 					try {
 						Users user = new Users();
@@ -206,9 +208,48 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 				} else {
 					view.addObject("error", 1);
 				}
+				*/
 			}
 			view.addObject("roles", sauth.getAllRoles());
 		}
 		return view;	
+	}
+	
+	
+	/*
+	 *  Привязка пользователя к логину (Вебсервис) 
+	 */
+	@RequestMapping(value = "/admin/json/bindlogin.html", method = {RequestMethod.GET,RequestMethod.POST})
+	public Map<String, Object> bindloginJson(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		String key = request.getParameter("hash");
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+			String login = request.getParameter("login");
+			String passwd = request.getParameter("password");
+			String role = request.getParameter("role");
+			Map<String, Object> answ = new HashMap<String, Object>();
+			if (login != null){
+				if ( authStorage.getUserByLoginName(login).getUsername() == null){
+					try {
+						Users user = new Users();
+						user.setUsermame(login);
+						user.setPassword(passwd);
+						user.setEnabled(1);
+						authStorage.setSalt(user);
+						authStorage.createUser(user);
+						sauth.setPermissions(user, sauth.getRoleByName(role));
+						answ.put("error", 0);
+					}
+					catch(Exception e) {
+						answ.put("error", 1);
+						System.out.println("Exeption");
+					}
+				} else {
+					answ.put("error", 1);
+				}
+			return answ;	
+			}
+		}
+		return null;
 	}
 }

@@ -5,15 +5,21 @@
            uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="../default/header.jsp" />
-    <c:if test="${allemp != null}">
-    	<script>
+    <script>
+    function bindlogin(){
+    	//alert($("input[name='radiogroup']:checked").val());
+    	var url = "${pageContext.request.contextPath}/admin/json/bindlogin.html";
+    	var json={'hash' : hash, 'login' : $("input[name='login']").val(),
+    			'password' : $("input[name='password']").val(),
+    			'role' : $("input[name='role']").val(),
+    			'box' : $("input[name='radiogroup']:checked").val()
+    			};
     	
-    	
-    	</script>
-    </c:if>
-
+    	return 0;
+    }
+    </script>
 </head>
-<body onLoad="init();">
+<body>
 <center><h1>${title}</h1></center>
 <div class="container-fluid">
 
@@ -48,7 +54,7 @@
 	<!-- Binding login  -->
 	<c:if test="${roles != null}">
     	 
-    	 <form action="${form_bind}" method="post">
+    	 <form>
             <fieldset>
               <div class="clearfix">
                 <input type="text" placeholder="Логин" name="login">
@@ -64,9 +70,7 @@
 				</c:forEach>
 			</select>
             </div>
-              <button class="btn btn-large btn-primary" type="submit">Создать</button>
-            
-            
+              <button class="btn btn-large btn-primary" type="button" onClick="bindlogin()">Создать</button>
           <c:choose>
   			<c:when test="${error == 1}">
   			    <div class="alert alert-error">Пользователь существует или на сервере проблемы</div>
@@ -116,7 +120,6 @@
     </c:if>
     </center>
     </div>
-    
     </div>
 </div>
 <script src="resources/bootstrap/js/bootstrap.js"></script>
