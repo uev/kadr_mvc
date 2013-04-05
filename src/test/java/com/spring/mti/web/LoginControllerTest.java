@@ -13,7 +13,6 @@ import com.spring.mti.AbstractTest;
 public class LoginControllerTest extends AbstractTest {
 
 	@Test
-	@Ignore
 	public void testLogout() {
 		when(request.getSession()).thenReturn(session);
 		when(request.getParameter("logout")).thenReturn("1");
@@ -21,7 +20,7 @@ public class LoginControllerTest extends AbstractTest {
         controller.setBeanFactory(context);
 		ModelAndView modelAndView =new ModelAndView();
 		try {
-			//modelAndView = controller.handleRequest(request, response);
+			modelAndView = controller.logoutAction(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
