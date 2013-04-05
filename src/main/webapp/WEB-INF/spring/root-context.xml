@@ -54,7 +54,8 @@
    <bean id="departmentDao" class="com.spring.mti.dao.DepartmentDaoImpl" />
    <bean id="employeDao" class="com.spring.mti.dao.EmployeDaoImpl" />
    <bean id="categoryDao" class="com.spring.mti.dao.CategoryDaoImpl" />
-   <bean id="serviceSictionary" class="com.spring.mti.service.DictionaryServiceImpl" />
+   <bean id="serviceDictionary" class="com.spring.mti.service.DictionaryServiceImpl" />
+   <bean id="serviceLayout" class="com.spring.mti.service.LayoutServiceImpl" />
     
     <!-- Security -->   
    
