@@ -15,6 +15,7 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.mti.model.Employe;
@@ -219,22 +220,27 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 	/*
 	 *  Привязка пользователя к логину (Вебсервис) 
 	 */
-	@RequestMapping(value = "/admin/json/bindlogin.html", method = {RequestMethod.GET,RequestMethod.POST})
-	public Map<String, Object> bindloginJson(HttpServletRequest request,
+	@RequestMapping(value = "/admin/json/bindlogin.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> bindloginJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
 		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
 			String login = request.getParameter("login");
 			String passwd = request.getParameter("password");
 			String role = request.getParameter("role");
+			String idemp = request.getParameter("idemp");
 			Map<String, Object> answ = new HashMap<String, Object>();
 			if (login != null){
 				if ( authStorage.getUserByLoginName(login).getUsername() == null){
+					log.info("User not founded. Tty reg. Id: ");
+					log.info(idemp);
 					try {
 						Users user = new Users();
 						user.setUsermame(login);
 						user.setPassword(passwd);
 						user.setEnabled(1);
+						user.setFk_employe(sdict.getEmployeById(Long.parseLong(idemp)));
+						log.info("Bind login");
 						authStorage.setSalt(user);
 						authStorage.createUser(user);
 						sauth.setPermissions(user, sauth.getRoleByName(role));
@@ -242,7 +248,8 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 					}
 					catch(Exception e) {
 						answ.put("error", 1);
-						System.out.println("Exeption");
+						log.error("Error login binding");
+						e.printStackTrace();
 					}
 				} else {
 					answ.put("error", 1);

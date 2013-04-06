@@ -141,6 +141,11 @@ public class DictionaryServiceImpl implements DictionaryService {
 	public List<Employe> getEmployeAll() {
 		return employeDao.findAll(new Employe()); 	
 	}
+	
+	@Override
+	public Employe getEmployeById(long id) {
+		return employeDao.getByid(new Employe(), id); 	
+	}
 
 	@Override
 	public void deleteEmploye(Employe e) {

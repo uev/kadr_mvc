@@ -20,7 +20,7 @@
 	<!--  <link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen"> -->
 	<link href="<s:url value="/resources/bootstrap" /> /css/bootstrap-responsive.css" rel="stylesheet">
 	<!-- JQuery -->
-<script src="<s:url value="/resources/scripts" />/jquery/jquery-1.9.1.min.js"></script>
-<script src="<s:url value="/resources/bootstrap" />/js/bootstrap.js"></script>
 <script src="<s:url value="/resources/bootstrap" />/js/bootstrap.min.js"></script>
+<script src="<s:url value="/resources/bootstrap" />/js/bootstrap.js"></script>
+<script src="<s:url value="/resources/scripts" />/jquery/jquery-1.9.1.min.js"></script>
 <title>Справочно-аттестационный комплекс "Кадры для делопроизводственных служб"</title>

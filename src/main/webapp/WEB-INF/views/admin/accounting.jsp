@@ -7,13 +7,24 @@
 <jsp:include page="../default/header.jsp" />
     <script>
     function bindlogin(){
-    	//alert($("input[name='radiogroup']:checked").val());
+    	var hash = "dcd95bcb84b09897b2b66d4684c040da";
     	var url = "${pageContext.request.contextPath}/admin/json/bindlogin.html";
     	var json={'hash' : hash, 'login' : $("input[name='login']").val(),
     			'password' : $("input[name='password']").val(),
-    			'role' : $("input[name='role']").val(),
-    			'box' : $("input[name='radiogroup']:checked").val()
+    			'role' : $("#selectRole :selected").val(),
+    			'idemp' : $("input[name='radiogroup']:checked").val()
     			};
+    	var jqxhr = $.post(url,json, function() {
+		})
+			.done(function(data) { 
+				if (data['error'] == 1) {
+					alert("Пользователь существует или на сервере проблемы");
+				}
+				if(data['error'] == 0) {
+					alert("Логин успешно привязан к пользователю");
+				}
+				//$(this).prop('checked', false);
+			});
     	
     	return 0;
     }
@@ -63,7 +74,7 @@
                 <input type="password" placeholder="Пароль" name="password">
               </div>
              <div class="clearfix">
-              <select  placeholder="Роль" name="role">
+              <select  placeholder="Роль" name="role" id="selectRole">
 				<option></option>
 				<c:forEach var="i" items="${roles}">
 					<option>${i[1]}</option>
@@ -71,14 +82,6 @@
 			</select>
             </div>
               <button class="btn btn-large btn-primary" type="button" onClick="bindlogin()">Создать</button>
-          <c:choose>
-  			<c:when test="${error == 1}">
-  			    <div class="alert alert-error">Пользователь существует или на сервере проблемы</div>
-  			</c:when>
-  			<c:when test="${error == 0}">
-    			<div class="alert alert-success">Пользователь успешно добавлен</div>
-  			</c:when>
-		  </c:choose>
 		  <table class="table table-striped">
     		<tbody>
 	    		<tr><td> </td><td>id</td><td>ФИО</td><td>Подразделение</td><td>Страна</td><td>Регион</td><td>Населённый пункт</td></tr>
