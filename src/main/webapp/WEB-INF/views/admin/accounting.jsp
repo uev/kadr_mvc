@@ -18,14 +18,17 @@
 		})
 			.done(function(data) { 
 				if (data['error'] == 1) {
-					alert("Пользователь существует или на сервере проблемы");
+					alert("Логин уже связан с одним из пользователей или на сервере проблемы");
 				}
 				if(data['error'] == 0) {
 					alert("Логин успешно привязан к пользователю");
 				}
-				//$(this).prop('checked', false);
+				//cleaning components
+				$("input[name='radiogroup']").prop('checked', false);
+				$("#selectRole").prop('selectedIndex', -1);
+				$("input[name='password']").val('');
+				$("input[name='login']").val('');
 			});
-    	
     	return 0;
     }
     </script>
@@ -50,12 +53,18 @@
     <c:if test="${json != null}">
     	<table class="table table-striped">
     		<tbody>
-    			<c:forEach var="i" items="${json}">
+    			<tr><td></td><td>Логин</td><td>ФИО</td><td>Подразделение</td><td>Роль</td><td>Страна</td><td>Регион</td><td>Населённый пункт</td></tr>
+    			<c:forEach var="record" items="${json}">
     		    	<tr>
-    					<td>${i.key}</td>
-    					<td>${i.value[0]}</td>
-    		   		</tr>
-    		   		<!-- <c:out value="${json.get(i)}"/> -->      
+    						<td></td>
+    						<td><c:out value="${record.username}"></c:out></td>
+        					<td><c:out value="${record.fio}"></c:out></td>
+        					<td><c:out value="${record.department}"></c:out></td>
+        					<td><c:out value="${record.role}"></c:out></td>
+        					<td><c:out value="${record.country}"></c:out></td>
+        					<td><c:out value="${record.region}"></c:out></td>
+        					<td><c:out value="${record.city}"></c:out></td>
+    		   		</tr>      
     			</c:forEach>
 	    	</tbody>
 	    </table>
@@ -84,7 +93,7 @@
               <button class="btn btn-large btn-primary" type="button" onClick="bindlogin()">Создать</button>
 		  <table class="table table-striped">
     		<tbody>
-	    		<tr><td> </td><td>id</td><td>ФИО</td><td>Подразделение</td><td>Страна</td><td>Регион</td><td>Населённый пункт</td></tr>
+	    		<tr><td></td><td>id</td><td>ФИО</td><td>Подразделение</td><td>Страна</td><td>Регион</td><td>Населённый пункт</td></tr>
 	    		<c:forEach var="record" items='${allemp}'>
         			<tr>
         				<td><input type="radio" value=${record.id} name="radiogroup"></td>

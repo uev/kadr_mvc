@@ -17,12 +17,12 @@ public class Authorities {
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.EAGER)
 	@JoinColumn(name="username")
-	private Users user;
-	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
+	private Users fk_user;
+	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.EAGER)
 	@JoinColumn(name="rname")
-	private Role role;
+	private Role fk_role;
 	@Transient
 	private String authority;
 	
@@ -53,19 +53,19 @@ public class Authorities {
 	}
 
 	public Role getRole() {
-		return role;
+		return fk_role;
 	}
 
 	public void setRole(Role role) {
-		this.role = role;
+		this.fk_role = role;
 	}
 	
 	public Users getUser() {
-		return user;
+		return fk_user;
 	}
 
 	public void setUser(Users user) {
-		this.user = user;
+		this.fk_user = user;
 	}
 
 	public static String getUser_role() {
@@ -74,5 +74,21 @@ public class Authorities {
 
 	public static String getAdmin_arole() {
 		return admin_arole;
-	}	
+	}
+
+	public Users getFk_user() {
+		return fk_user;
+	}
+
+	public void setFk_user(Users fk_user) {
+		this.fk_user = fk_user;
+	}
+
+	public Role getFk_role() {
+		return fk_role;
+	}
+
+	public void setFk_role(Role fk_role) {
+		this.fk_role = fk_role;
+	}
 }

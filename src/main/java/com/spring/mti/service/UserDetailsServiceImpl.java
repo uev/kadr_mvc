@@ -109,4 +109,9 @@ public class UserDetailsServiceImpl implements UserDetailsService, CustomUserDet
 			categoryDao.create(c);
 		}
 	}
+	
+	@Override
+	public List<Users> getAllUsers(){
+		return dao.findAll(new Users());
+	}
 }

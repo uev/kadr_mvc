@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.mti.model.Employe;
+import com.spring.mti.model.security.Authorities;
 import com.spring.mti.model.security.Users;
 import com.spring.mti.service.AuthorityService;
 import com.spring.mti.service.CustomUserDetailsService;
@@ -134,8 +135,9 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 		if (view.getViewName() == null){
 			System.out.println("Set view");
 			view.setViewName("admin/accounting");
-			System.out.println("Tooke json");
-			view.addObject("json", authStorage.getAllUsersPermissions());
+			//view.addObject("json", authStorage.getAllUsersPermissions());
+			List<Authorities> la = sauth.getAllPermissions();
+			view.addObject("json", slayout.authorityToMapJson(la));
 			view.addObject("title", "Админзона / управление логинами");
 		}
 		return view;	

@@ -8,7 +8,7 @@ import com.spring.mti.model.security.Role;
 import com.spring.mti.model.security.Users;
 
 
-public interface AuthoritiesDao {
+public interface AuthoritiesDao extends GenericDao<Authorities, Long> {
 	public String getAuthority();
 	public List<String> getAllPermissionsBuUsername(long user_id);
 	//public void setPermissionUser(Authorities auser);

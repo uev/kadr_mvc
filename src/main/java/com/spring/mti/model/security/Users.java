@@ -25,7 +25,7 @@ public class Users {
 	private String password;
 	private Integer enabled;
     
-	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.EAGER)
 	@JoinColumn(name="fio")
 	private Employe fk_employe;
 	

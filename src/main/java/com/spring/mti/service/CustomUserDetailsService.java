@@ -16,4 +16,5 @@ public interface CustomUserDetailsService{
 	public boolean isAdminRoleSet(String userName);
 	HashMap<String, List> getAllUsersPermissions();
 	void appendCategory(Category c);
+	List<Users> getAllUsers();
 }

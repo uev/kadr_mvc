@@ -13,12 +13,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.spring.mti.model.Employe;
 import com.spring.mti.model.security.Authorities;
 import com.spring.mti.model.security.Role;
 import com.spring.mti.model.security.Users;
 
 @Repository("authDAO")
-public class AuthoritiesDaoImpl implements AuthoritiesDao {
+public class AuthoritiesDaoImpl  extends GenericDaoImpl<Authorities, Long> implements AuthoritiesDao {
 	private Users user;
 	
 	private EntityManager entityManager;
@@ -72,7 +73,7 @@ public class AuthoritiesDaoImpl implements AuthoritiesDao {
 	
 	
 	private boolean payloadRoleSet(Users user, String rolename){
-		List<Object> query_userrules =  this.entityManager.createQuery("select m.rname from Authorities s, Role m where s.user.id = :user_id and s.role.id = m.id ").setParameter("user_id", user.getId()).getResultList();
+		List<Object> query_userrules =  this.entityManager.createQuery("select m.rname from Authorities s, Role m where s.fk_user.id = :user_id and s.fk_role.id = m.id ").setParameter("user_id", user.getId()).getResultList();
 		try {
 			if (rolename.equals((String)query_userrules.get(0)) == true) {
 				return true;
@@ -109,14 +110,14 @@ public class AuthoritiesDaoImpl implements AuthoritiesDao {
 	@Transactional
 	public List<String> getAllPermissionsBuUsername(long user_id) {
 		// TODO Auto-generated method stub
-		return this.entityManager.createQuery("select m.rname from Authorities s, Role m where s.user.id = :user_id").setParameter("user_id", user_id).getResultList();
+		return this.entityManager.createQuery("select m.rname from Authorities s, Role m where s.fk_user.id = :user_id").setParameter("user_id", user_id).getResultList();
 	}
 
 	@Override
 	@Transactional
 	//"select m.rname from Authorities s, Role m where s.user.id = :user_id and s.role.id = m.id ").setParameter("user_id", user.getId())
 	public HashMap<String,List> getAllUsersPermissions() {
-		List<Object[]> res = this.entityManager.createQuery("select u.username, m.rname from Authorities s, Users u, Role m where s.user.id = u.id").getResultList();
+		List<Object[]> res = this.entityManager.createQuery("select u.username, m.rname from Authorities s, Users u, Role m where s.fk_user.id = u.id").getResultList();
 		HashMap<String,List> map = new HashMap<String, List>();
 		for (Object[] result : res) {
 		      	List<String> t = new ArrayList<String>();

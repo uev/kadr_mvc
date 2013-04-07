@@ -8,26 +8,56 @@ import java.util.Map;
 import com.spring.mti.model.Department;
 import com.spring.mti.model.Employe;
 import com.spring.mti.model.address.City;
+import com.spring.mti.model.security.Authorities;
 
 public class LayoutServiceImpl implements LayoutService {
 
+	private Map<String, Object> decorateMapEmploye(Employe item){
+		City c = item.getFk_city();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("city", c.getName());
+		map.put("region", c.getFk_region().getName());
+		map.put("country", c.getFk_country().getName());
+		Department d = item.getFk_department();
+		if (d != null) {
+			map.put("department", d.getDep_name());
+		} else {
+			map.put("department", "Не указан"); 
+		}	
+		map.put("fio", item.getFio());
+		map.put("id", item.getId());
+		return map;
+	}
+	
 	@Override
 	public List<Object> employeToMapJson(List<Employe> e){
 		List<Object> answer = new ArrayList<Object>();
 		for (Employe item : e){
-			City c = item.getFk_city(); 
+			Map<String, Object> map = decorateMapEmploye(item);
+			answer.add(map);
+		}
+			return answer;
+	}
+	
+	@Override
+	public List<Object> authorityToMapJson(List<Authorities> e){
+		List<Object> answer = new ArrayList<Object>();
+		for (Authorities item : e){
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("city", c.getName());
-			map.put("region", c.getFk_region().getName());
-			map.put("country", c.getFk_country().getName());
-			Department d = item.getFk_department();
-			if (d != null) {
-				map.put("department", d.getDep_name());
+			Employe em = item.getFk_user().getFk_employe(); 
+			if (em != null){
+				map = decorateMapEmploye(em);
 			} else {
-				map.put("department", "Не указан"); 
+				String non = "Поле не задано";
+				map.put("city", non);
+				map.put("region", non);
+				map.put("country", non);
+				map.put("department", non);
+				map.put("fio", non);
+				map.put("id", non);
 			}	
-			map.put("fio", item.getFio());
-			map.put("id", item.getId());
+			map.put("role", item.getFk_role().getRname());
+			map.put("username", item.getFk_user().getUsername());
 			answer.add(map);
 		}
 			return answer;

@@ -9,6 +9,7 @@ import com.spring.mti.dao.AuthoritiesDao;
 import com.spring.mti.dao.RoleDao;
 import com.spring.mti.model.security.Role;
 import com.spring.mti.model.security.Users;
+import com.spring.mti.model.security.Authorities;
 @Repository
 public class AuthorityServiceImpl implements AuthorityService {
 	@Autowired
@@ -42,6 +43,12 @@ public class AuthorityServiceImpl implements AuthorityService {
 	public List<String> getAllPermissionsByUserId(long user_id) {
 		return authDao.getAllPermissionsBuUsername(user_id);
 	}
+	
+	@Override
+	public List<Authorities> getAllPermissions() {
+		return authDao.findAll(new Authorities());
+	}
+	
 	@Override
 	public void createRole(Role role) {
 		rolesDao.create(role);
