@@ -53,15 +53,17 @@ public class DictionaryController extends GeneralController implements BeanFacto
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
 			view.setViewName("admin/dictionary/index");
+			view.addObject("title", "Админзона / cправочники");
 		}
 		return view;
 	}
 	
-	@RequestMapping(value = "/admin/dictionary/addemploye.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/dictionary/persons/add.html", method = RequestMethod.GET)
 	public final ModelAndView addEmploye(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
 		ModelAndView view = verifyPermission(request.getSession());
 		System.out.println(request.getCharacterEncoding());
 		if (view.getViewName() == null){
+			view.addObject("title", "Админзона / Создание пользователя");
 			request.setCharacterEncoding("utf-8");
 			String person = request.getParameter("person");
 			if (person != null){
@@ -73,13 +75,13 @@ public class DictionaryController extends GeneralController implements BeanFacto
 				last.setFk_city(c);
 				sdict.updateEmployeRelation(last);
 			}
-			view.setViewName("admin/dictionary/addemploye");
+			view.setViewName("admin/dictionary/persons/add");
 		}
 		return view;
 	}
 		
 	//@RequestMapping(value = "/json/getcountry.html", method = RequestMethod.POST)
-	@RequestMapping(value = "/admin/dictionary/json/getcountry.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/dictionary/persons/json/getcountry.html", method = RequestMethod.POST)
 	public  @ResponseBody List<Country> getCountries(HttpServletRequest request, HttpServletResponse response){
 		String key = request.getParameter("hash");
 		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
@@ -88,7 +90,7 @@ public class DictionaryController extends GeneralController implements BeanFacto
 		return null;
 	}
 	
-	@RequestMapping(value = "/admin/dictionary/json/getregion.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/dictionary/persons/json/getregion.html", method = RequestMethod.POST)
 	public  @ResponseBody List<Region> getRegions(HttpServletRequest request, HttpServletResponse response){
 		String key = request.getParameter("hash");
 		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
@@ -100,7 +102,7 @@ public class DictionaryController extends GeneralController implements BeanFacto
 		return null;
 	}
 	
-	@RequestMapping(value = "/admin/dictionary/json/getcity.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/dictionary/persons/json/getcity.html", method = RequestMethod.POST)
 	public  @ResponseBody List<City> getCities(HttpServletRequest request, HttpServletResponse response){
 		String key = request.getParameter("hash");
 		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
@@ -115,7 +117,7 @@ public class DictionaryController extends GeneralController implements BeanFacto
 		return null;
 	}
 	
-	@RequestMapping(value = "/admin/dictionary/json/recbykey.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/dictionary/persons/json/recbykey.html", method = RequestMethod.POST)
 	public  @ResponseBody List<Object> getRecordsByKeyPerson(HttpServletRequest request, HttpServletResponse response){
 		String key = request.getParameter("hash");
 		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){

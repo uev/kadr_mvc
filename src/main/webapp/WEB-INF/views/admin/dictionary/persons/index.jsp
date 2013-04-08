@@ -11,7 +11,7 @@
 <div class="container-fluid">
 	<div class="row-fluid" >
     	<div class="span2">
-    		<jsp:include page="../menu.jsp" />
+    		<jsp:include page="../../menu.jsp" />
     	</div>
     	<div class="span10" style="margin: 5 auto;">
 			<!-- UserManagment menu -->
