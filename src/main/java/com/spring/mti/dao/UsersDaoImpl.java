@@ -15,7 +15,7 @@ public class UsersDaoImpl extends GenericDaoImpl<Users, Long> implements UsersDa
 	@Override
 	@Transactional
 	public void delete(Users userDetail) {
-		this.entityManager.createQuery("delete from Authorities s where s.user.id = :user_id").setParameter("user_id", userDetail.getId()).executeUpdate();
+		this.entityManager.createQuery("delete from Authorities s where s.fk_user.id = :user_id").setParameter("user_id", userDetail.getId()).executeUpdate();
 		this.entityManager.createQuery("delete from Users s where s = :user").setParameter("user", userDetail).executeUpdate();
 		this.entityManager.flush();
 	}

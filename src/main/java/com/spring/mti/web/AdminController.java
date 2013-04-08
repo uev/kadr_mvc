@@ -167,6 +167,7 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 				} catch (Exception e){
 					log.error("Error removing login");
 					view.addObject("error", 1);
+					e.printStackTrace();
 				}
 			}
 		}
