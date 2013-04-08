@@ -17,46 +17,15 @@
     <div class="span10" style="margin: 5 auto;">
 <!-- UserManagment menu -->
     <ul class="breadcrumb">
+    <li><a href="employers/index.html">Пользователи</a> <span class="divider">/</span></li>
+    <li><a href="departments/index.html">Подразделения</a> <span class="divider">/</span></li>
+    <li><a href="banswers/index.html">База вопросов</a> <span class="divider">/</span></li>
+    
+    
     <li><a href="addemploye.html">Создание пользователя</a> <span class="divider">/</span></li>
     <li><a href="rmemploye.html">Удаление пользователя</a> <span class="divider">/</span></li>
     </ul>
     
-    <!-- List users  -->
-    <c:if test="${json != null}">
-    	<table class="table table-striped">
-    		<tbody>
-    			<c:forEach var="i" items="${json}">
-    		    	<tr>
-    					<td>${i.key}</td>
-    					<td>${i.value[0]}</td>
-    		   		</tr>
-    		   		<!-- <c:out value="${json.get(i)}"/> -->      
-    			</c:forEach>
-	    	</tbody>
-	    </table>
-	</c:if>
-	<center>
-	
-	<c:if test="${employe != null}">
-		<form action="admin.html?accounting&createuser" method="post">
-		      <div class="clearfix">
-                <input type="text" placeholder="Имя пользователя" name="person">
-              </div>
-              <div class="clearfix">
-              <select  placeholder="Роль" name="role">
-				<option></option>
-				<c:forEach var="i" items="${roles}">
-					<option>${i[1]}</option>
-				</c:forEach>
-			</select>
-            </div>
-             <button class="btn btn-large btn-primary" type="submit">Создать</button>
-    
-		</form>
-	</c:if>
-
-
-    </center>
     </div>
     
     </div>
