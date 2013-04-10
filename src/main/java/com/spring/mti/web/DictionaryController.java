@@ -58,27 +58,7 @@ public class DictionaryController extends GeneralController implements BeanFacto
 		return view;
 	}
 	
-	@RequestMapping(value = "/admin/dictionary/persons/add.html", method = RequestMethod.GET)
-	public final ModelAndView addEmploye(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
-		ModelAndView view = verifyPermission(request.getSession());
-		System.out.println(request.getCharacterEncoding());
-		if (view.getViewName() == null){
-			view.addObject("title", "Админзона / Создание пользователя");
-			request.setCharacterEncoding("utf-8");
-			String person = request.getParameter("person");
-			if (person != null){
-				sdict.createEmploye(person);
-				List<Employe> e = sdict.getEmployeByName(person);
-				Employe last = e.get(e.size()-1);
-				System.out.println(request.getParameter("city"));
-				City c = saddr.getCitiyById(Long.parseLong(request.getParameter("city")));
-				last.setFk_city(c);
-				sdict.updateEmployeRelation(last);
-			}
-			view.setViewName("admin/dictionary/persons/add");
-		}
-		return view;
-	}
+	
 		
 	//@RequestMapping(value = "/json/getcountry.html", method = RequestMethod.POST)
 	@RequestMapping(value = "/admin/dictionary/persons/json/getcountry.html", method = RequestMethod.POST)
