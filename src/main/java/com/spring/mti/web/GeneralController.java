@@ -12,6 +12,7 @@ import com.spring.mti.service.CustomUserDetailsService;
 public class GeneralController implements BeanFactoryAware {
 	protected CustomUserDetailsService authStorage;
 	protected AuthenticationManager am;
+	protected String viewPrefix = "/WEB-INF/views/";
 
 	public ModelAndView verifyPermission(HttpSession session) {
 		ModelAndView view = new ModelAndView();

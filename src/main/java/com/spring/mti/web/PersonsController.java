@@ -23,8 +23,11 @@ public class PersonsController extends GeneralController implements BeanFactoryA
 	public final ModelAndView indexAction(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
-			view.setViewName("admin/dictionary/persons/index");
+			//view.setViewName("admin/dictionary/persons/index");
+			view.setViewName("default/index");
 			view.addObject("title", "Админзона / пользователи");
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/persons/menu.jsp"));
 		}
 		return view;
 	}
