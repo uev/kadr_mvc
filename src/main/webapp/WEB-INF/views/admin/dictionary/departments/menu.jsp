@@ -6,7 +6,6 @@
 <jsp:include page="/WEB-INF/views/default/header.jsp" />
     
 	<ul class="breadcrumb">
-        <li><a href="${pageContext.request.contextPath}/persons/index.html">Персонал</a><span class="divider">/</span><</li>
-        <li><a href="${pageContext.request.contextPath}/departments/index.html">Депертаменты</a><span class="divider">/</span><</li>
-        <li><a href="${pageContext.request.contextPath}/banswers/index.html">База вопросов</a></li>
+        <li><a href="${pageContext.request.contextPath}/departments/add.html">Добавление подразделения</a><span class="divider">/</span></li>
+        <li><a href="${pageContext.request.contextPath}/departments/rm.html">Удаление подразделения</a><span class="divider">/</span></li>
     </ul>
