@@ -23,4 +23,7 @@
 <script src="<s:url value="/resources/bootstrap" />/js/bootstrap.min.js"></script>
 <script src="<s:url value="/resources/bootstrap" />/js/bootstrap.js"></script>
 <script src="<s:url value="/resources/scripts" />/jquery/jquery-1.9.1.min.js"></script>
+<c:if test="${hscript != null}">
+	<jsp:include page="${hscript}" />
+</c:if>
 <title>Справочно-аттестационный комплекс "Кадры для делопроизводственных служб"</title>

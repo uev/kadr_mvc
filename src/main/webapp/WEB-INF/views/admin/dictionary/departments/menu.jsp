@@ -6,6 +6,6 @@
 <jsp:include page="/WEB-INF/views/default/header.jsp" />
     
 	<ul class="breadcrumb">
-        <li><a href="${pageContext.request.contextPath}/departments/add.html">Добавление подразделения</a><span class="divider">/</span></li>
-        <li><a href="${pageContext.request.contextPath}/departments/rm.html">Удаление подразделения</a><span class="divider">/</span></li>
+        <li><a href="${pageContext.request.contextPath}/admin/dictionary/departments/add.html">Добавление подразделения</a><span class="divider">/</span></li>
+        <li><a href="${pageContext.request.contextPath}/admin/dictionary/departments/rm.html">Удаление подразделения</a><span class="divider">/</span></li>
     </ul>
