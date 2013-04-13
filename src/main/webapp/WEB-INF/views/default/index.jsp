@@ -14,7 +14,9 @@
     		<jsp:include page="${menu}" />
     	</div>
     <div class="span10" style="margin: 5 auto;">
-    	<jsp:include page="${body}" />	
+    	
+    		<jsp:include page="${body}" />
+    	
     </div>
     </div>
 </div>

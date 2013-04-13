@@ -17,18 +17,18 @@ public class Department implements Serializable {
 	
 	@SuppressWarnings("restriction")
 	@NotNull
-	private String dep_name;
+	private String name;
 
 	public long getId() {
 		return id;
 	}
 
-	public String getDep_name() {
-		return dep_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setDep_name(String dep_name) {
-		this.dep_name = dep_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

@@ -95,7 +95,7 @@ public class DepartmentsController extends GeneralController implements BeanFact
 			view.addObject("title", "Админзона / удаление полразделения");
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
 			view.addObject("body", viewPrefix.concat("/admin/dictionary/departments/rm.jsp"));
-			view.addObject("departments", sdict.getAddDepartments());
+			view.addObject("departments", sdict.getAllDepartments());
 		}
 		return view;
 	}
@@ -130,7 +130,7 @@ public class DepartmentsController extends GeneralController implements BeanFact
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
 		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
-			return sdict.getAddDepartments();
+			return sdict.getAllDepartments();
 		}
 		return null;	
 	}	

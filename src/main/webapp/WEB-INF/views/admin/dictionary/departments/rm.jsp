@@ -15,9 +15,9 @@
 	    		<tr><td></td><td>id</td><td>Название департамента</td></tr>
 	    		<c:forEach var="record" items='${departments}'>
         			<tr>
-        				<td><input type="radio" value=${record.dep_name} name="radiogroup" onClick="getDepartmentItem()"></td>
+        				<td><input type="radio" value=${record.name} name="radiogroup" onClick="getDepartmentItem()"></td>
         				<td><c:out value="${record.id}"></c:out></td>
-        				<td><c:out value="${record.dep_name}"></c:out></td>
+        				<td><c:out value="${record.name}"></c:out></td>
 					</tr>
 				</c:forEach>
 	    	</tbody>

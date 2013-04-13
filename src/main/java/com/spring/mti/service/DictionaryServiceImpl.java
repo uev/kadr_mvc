@@ -78,10 +78,10 @@ public class DictionaryServiceImpl implements DictionaryService {
 	public void createDepartment(String depname) {
 		List<String> ls = new ArrayList<String>();
 		ls.add(depname);
-		List<Department>res = departmentDao.findByNamedQuery("select s from Department s where s.dep_name=?1",ls.toArray());
+		List<Department>res = departmentDao.findByNamedQuery("select s from Department s where s.name=?1",ls.toArray());
 		if ( res != null && res.size()<1) {
 			Department d = new Department();
-			d.setDep_name(depname);
+			d.setName(depname);
 			departmentDao.create(d);
 		}
 	}
@@ -90,7 +90,11 @@ public class DictionaryServiceImpl implements DictionaryService {
 	public Department getDepartmentByName(String dep) {
 		List<String> r = new ArrayList<String>();
 		r.add(dep);
-		return departmentDao.findByNamedQuery("select s from Department s where s.dep_name=?1",r.toArray()).get(0); 	
+		try{
+			return departmentDao.findByNamedQuery("select s from Department s where s.name=?1",r.toArray()).get(0);
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
 	}
 
 	@Override
@@ -163,7 +167,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 	}
 	
 	@Override
-	public List<Department> getAddDepartments(){
+	public List<Department> getAllDepartments(){
 		return departmentDao.findAll(new Department());
 	}
 	

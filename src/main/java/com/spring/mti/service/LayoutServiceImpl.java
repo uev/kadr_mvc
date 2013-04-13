@@ -20,7 +20,7 @@ public class LayoutServiceImpl implements LayoutService {
 		map.put("country", c.getFk_country().getName());
 		Department d = item.getFk_department();
 		if (d != null) {
-			map.put("department", d.getDep_name());
+			map.put("department", d.getName());
 		} else {
 			map.put("department", "Не указан"); 
 		}	

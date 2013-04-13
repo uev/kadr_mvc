@@ -120,7 +120,7 @@ return 0;
     	</div>
     		<div class="span10" style="margin: 5 auto;">
     			<jsp:include page="menu.jsp" />
-  					<form action="${pageContext.request.contextPath}/dictionary/addemploye.html" method="get"
+  					<form action="${pageContext.request.contextPath}/admin/dictionary/persons/add.html" method="get"
   					 class="form-horizontal span10 offset3">
     					<div class="control-group">
     	 					<label class="control-label" for="inputPerson">Имя пользователя</label>
@@ -152,14 +152,7 @@ return 0;
 			  						</select>
            	 					</div>      	
     					</div>
-    					<div class="control-group">
-    	 						<label class="control-label" for="selectDepartment">Подразделение</label>
-         							<div class="clearfix controls">
-              							<select  placeholder="Подразделение" name="city" id="selectDepartment" onClick="getDict('#selectDepartment');">
-											<option></option>
-			  							</select>
-           	 						</div>      	
-    					</div>        
+    					
              			<button class="btn btn-large btn-primary offset3" type="submit">Создать</button>
 					</form>
 					<table class="table table-striped">

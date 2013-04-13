@@ -16,6 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 
 import com.spring.mti.model.Category;
+import com.spring.mti.model.Department;
 import com.spring.mti.model.security.Role;
 import com.spring.mti.model.security.Users;
 import com.spring.mti.service.AddressService;
@@ -34,6 +35,20 @@ public class DictionaryTest extends AbstractTest {
 		asrv = (AddressService)context.getBean("serviceAddress");
 		dsrv = (DictionaryService)context.getBean("serviceDictionary");
 	}
+	
+	@Test
+	public void testCreateDepartment(){
+		dsrv.createDepartment("Тестовый");
+		Department d = dsrv.getDepartmentByName("Тестовый");
+		assertTrue("Тестовый".equals(d.getName()));
+	    }
+	
+	@Test
+	public void testRmDepartment(){
+		Department d = dsrv.getDepartmentByName("Тестовый");
+		dsrv.deleteDepartment(d);
+		assertTrue(null ==  dsrv.getDepartmentByName("Тестовый"));
+	    }
 	
 	@Test
 	public void testCreateRmEmploye(){

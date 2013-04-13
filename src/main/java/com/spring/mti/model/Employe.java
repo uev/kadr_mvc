@@ -23,7 +23,7 @@ public class Employe {
 	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.EAGER)
 	@JoinColumn(name="fk_city")
 	private City fk_city;
-	@OneToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.REFRESH,fetch=FetchType.EAGER)
 	@JoinColumn(name="fk_department")
 	private Department fk_department;
 	
