@@ -161,4 +161,10 @@ public class DictionaryServiceImpl implements DictionaryService {
 	public void updateLoginRelation(Users u){
 		userDao.update(u);
 	}
+	
+	@Override
+	public List<Department> getAddDepartments(){
+		return departmentDao.findAll(new Department());
+	}
+	
 }

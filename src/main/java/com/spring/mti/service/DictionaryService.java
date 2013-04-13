@@ -31,4 +31,5 @@ public interface DictionaryService {
 	void updateLoginRelation(Users u);
 	List<Employe> getEmployeAll();
 	Employe getEmployeById(long id);
+	List<Department> getAddDepartments();
 }

@@ -65,11 +65,4 @@ public class PersonsController extends GeneralController implements BeanFactoryA
 		}
 		return view;
 	}
-	
-	
-	
-	
-	
-	
-	
 }

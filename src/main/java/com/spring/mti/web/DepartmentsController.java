@@ -1,6 +1,7 @@
 package com.spring.mti.web;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -82,5 +83,55 @@ public class DepartmentsController extends GeneralController implements BeanFact
 			}
 		}	
 		return null;
-	}					
+	}
+	
+	@RequestMapping(value = "/admin/dictionary/departments/rm.html", method = RequestMethod.GET)
+	public final ModelAndView popDepartmentAction(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView view = verifyPermission(request.getSession());
+		if (view.getViewName() == null){
+			//view.setViewName("admin/dictionary/persons/index");
+			view.setViewName("default/index");
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/departments/scripts.jsp"));
+			view.addObject("title", "Админзона / удаление полразделения");
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/departments/rm.jsp"));
+			view.addObject("departments", sdict.getAddDepartments());
+		}
+		return view;
+	}
+	
+	@RequestMapping(value = "/admin/dictionary/departments/rm.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> popDepartmentJson(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		System.out.println("Entering removing...");
+		String key = request.getParameter("hash");
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+			String department = request.getParameter("department");
+			Map<String, Object> answ = new HashMap<String, Object>();
+			if (department != null){
+				try {
+					log.info("Try removing department");
+					sdict.deleteDepartment(sdict.getDepartmentByName(department));
+					answ.put("error", 0);
+					} catch(Exception e){
+						answ.put("error", 1);
+						log.error("Error pop department. Input value:");
+						log.info(department);
+						e.printStackTrace();
+				}		
+				return answ;
+			}
+		}	
+		return null;
+	}
+	
+	@RequestMapping(value = "/admin/dictionary/departments/list.html", method = RequestMethod.GET)
+	public @ResponseBody List<Department> listDepartmentJson(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		String key = request.getParameter("hash");
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+			return sdict.getAddDepartments();
+		}
+		return null;	
+	}	
 }
