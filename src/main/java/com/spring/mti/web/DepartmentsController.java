@@ -125,7 +125,7 @@ public class DepartmentsController extends GeneralController implements BeanFact
 		return null;
 	}
 	
-	@RequestMapping(value = "/admin/dictionary/departments/list.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/dictionary/departments/list.html", method = RequestMethod.POST)
 	public @ResponseBody List<Department> listDepartmentJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");

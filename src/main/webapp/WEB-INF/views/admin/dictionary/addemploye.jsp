@@ -34,6 +34,10 @@ function getDict(arg){
 			hname = hname.concat("getcity.html");
 			json = {"hash":hash, "id": $('#selectRegion :selected').val()};
 			break;
+		case "#selectDeaprtment":
+			hname = "${pageContext.request.contextPath}/admin/dictionary/departments/list.html";
+			json = {"hash":hash};
+			break;
 	}
 	if (cur == "" || cur ==undefined) {
 		var jqxhr = $.post(hname,json, function() {
@@ -151,7 +155,21 @@ return 0;
 					<option></option>
 			  	</select>
            	 </div>      	
+    </div>   
+    <div class="control-group">
+    	 <label class="control-label" for="selectDepartment">Подразделение</label>
+         	<div class="clearfix controls">
+              	<select  placeholder="Подразделение" name="city" id="selectDepartment" onClick="getDict('#selectDepartment');">
+					<option></option>
+			  	</select>
+           	 </div>      	
     </div>    
+    
+    
+    
+    
+    
+     
              <button class="btn btn-large btn-primary offset3" type="submit">Создать</button>
 		</form>
 		<table class="table table-striped">
