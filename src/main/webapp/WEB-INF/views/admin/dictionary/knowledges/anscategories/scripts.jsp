@@ -10,7 +10,7 @@ function getCategoryItem(){
 
 function appendCategory() {
 	//var hname = "http://localhost:8080/uev61/json/recbykey.html";
-	var hname = "${pageContext.request.contextPath}/admin/dictionary/anscategories/add.html";
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/anscategories/add.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
 	var json={'hash' : hash, 'category' : $("input[name='category']").val()};
 	var jqxhr = $.post(hname,json, function() {
@@ -30,7 +30,7 @@ function appendCategory() {
 
 function popCategory() {
 	//var hname = "http://localhost:8080/uev61/json/recbykey.html";
-	var hname = "${pageContext.request.contextPath}/admin/dictionary/anscategories/rm.html";
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/anscategories/rm.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
 	var json={'hash' : hash, 'category' : $("input[name='category']").val()};
 	var jqxhr = $.post(hname,json, function() {

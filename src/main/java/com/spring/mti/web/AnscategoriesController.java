@@ -32,7 +32,7 @@ public class AnscategoriesController extends GeneralController implements BeanFa
 		sdict = (DictionaryService)context.getBean("serviceDictionary");
 	}
 	
-	@RequestMapping(value = "/admin/dictionary/anscategories/index.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/dictionary/knowledges/anscategories/index.html", method = RequestMethod.GET)
 	public final ModelAndView indexAction(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
@@ -40,28 +40,28 @@ public class AnscategoriesController extends GeneralController implements BeanFa
 			view.setViewName("default/index");
 			view.addObject("title", "Админзона / категории вопросов");
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
-			view.addObject("body", viewPrefix.concat("/admin/dictionary/anscategories/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/anscategories/menu.jsp"));
 			//view.addObject("body", viewPrefix.concat("/admin/dictionary/persons/index.jsp"));
 		}
 		return view;
 	}
 	
-	@RequestMapping(value = "/admin/dictionary/anscategories/add.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/dictionary/knowledges/anscategories/add.html", method = RequestMethod.GET)
 	public final ModelAndView appendCategoryAction(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
 			//view.setViewName("admin/dictionary/persons/index");
 			view.setViewName("default/index");
-			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/anscategories/scripts.jsp"));
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/anscategories/scripts.jsp"));
 			view.addObject("title", "Админзона / создание категории");
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
-			view.addObject("body", viewPrefix.concat("/admin/dictionary/anscategories/add.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/anscategories/add.jsp"));
 			//view.addObject("body", viewPrefix.concat("/admin/dictionary/persons/index.jsp"));
 		}
 		return view;
 	}
 	
-	@RequestMapping(value = "/admin/dictionary/anscategories/add.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/dictionary/knowledges/anscategories/add.html", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> appendCategorytJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
@@ -85,23 +85,23 @@ public class AnscategoriesController extends GeneralController implements BeanFa
 		return null;
 	}
 
-	@RequestMapping(value = "/admin/dictionary/anscategories/rm.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/dictionary/knowledges/anscategories/rm.html", method = RequestMethod.GET)
 	public final ModelAndView popCategoryAction(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
 			//view.setViewName("admin/dictionary/persons/index");
 			view.setViewName("default/index");
-			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/anscategories/scripts.jsp"));
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/anscategories/scripts.jsp"));
 			view.addObject("title", "Админзона / удаление категории");
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
-			view.addObject("body", viewPrefix.concat("/admin/dictionary/anscategories/rm.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/anscategories/rm.jsp"));
 			view.addObject("categories", sdict.getAllCategories());
 			//view.addObject("body", viewPrefix.concat("/admin/dictionary/persons/index.jsp"));
 		}
 		return view;
 	}
 	
-	@RequestMapping(value = "/admin/dictionary/anscategories/rm.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/dictionary/knowledges/anscategories/rm.html", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> popCategoryJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
@@ -125,8 +125,7 @@ public class AnscategoriesController extends GeneralController implements BeanFa
 		return null;
 	}
 	
-	
-	@RequestMapping(value = "/admin/dictionary/anscategories/list.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/dictionary/knowledges/anscategories/list.html", method = RequestMethod.GET)
 	public final ModelAndView listCategoryAction(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
@@ -134,7 +133,7 @@ public class AnscategoriesController extends GeneralController implements BeanFa
 			view.setViewName("default/index");
 			view.addObject("title", "Админзона / удаление категории");
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
-			view.addObject("body", viewPrefix.concat("/admin/dictionary/anscategories/list.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/anscategories/list.jsp"));
 			//view.addObject("body", viewPrefix.concat("/admin/dictionary/persons/index.jsp"));
 		}
 		return view;
