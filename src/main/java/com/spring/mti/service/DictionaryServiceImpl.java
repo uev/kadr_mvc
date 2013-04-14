@@ -118,7 +118,12 @@ public class DictionaryServiceImpl implements DictionaryService {
 	public Category getCategoryByName(String cat) {
 		List<String> r = new ArrayList<String>();
 		r.add(cat);
-		return categoryDao.findByNamedQuery("select s from Category s where s.cname=?1",r.toArray()).get(0); 	
+		try {
+			return categoryDao.findByNamedQuery("select s from Category s where s.cname=?1",r.toArray()).get(0);	
+		} catch(IndexOutOfBoundsException e){
+			e.printStackTrace();
+			return null;
+		} 	
 	}
 
 	
@@ -171,4 +176,8 @@ public class DictionaryServiceImpl implements DictionaryService {
 		return departmentDao.findAll(new Department());
 	}
 	
+	@Override
+	public List<Category> getAllCategories(){
+		return categoryDao.findAll(new Category());
+	}
 }

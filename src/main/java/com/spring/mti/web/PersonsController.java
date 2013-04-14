@@ -60,7 +60,7 @@ public class PersonsController extends GeneralController implements BeanFactoryA
 		System.out.println(request.getCharacterEncoding());
 		if (view.getViewName() == null){
 			view.addObject("title", "Админзона / Создание пользователя");
-			request.setCharacterEncoding("utf-8");
+			//request.setCharacterEncoding("utf-8");
 			String person = request.getParameter("person");
 			if (person != null){
 				sdict.createEmploye(person);

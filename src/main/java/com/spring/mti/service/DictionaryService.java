@@ -32,4 +32,5 @@ public interface DictionaryService {
 	List<Employe> getEmployeAll();
 	Employe getEmployeById(long id);
 	List<Department> getAllDepartments();
+	List<Category> getAllCategories();
 }
