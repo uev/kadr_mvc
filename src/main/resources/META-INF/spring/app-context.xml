@@ -66,8 +66,11 @@
    <bean id="regionDao" class="com.spring.mti.dao.address.RegionDaoImpl" />
    <bean id="departmentDao" class="com.spring.mti.dao.DepartmentDaoImpl" />
    <bean id="employeDao" class="com.spring.mti.dao.EmployeDaoImpl" />
+   <bean id="answerDao" class="com.spring.mti.dao.AnswerDaoImpl" />
+   <bean id="queshionDao" class="com.spring.mti.dao.QueshionDaoImpl" />
    <bean id="serviceDictionary" class="com.spring.mti.service.DictionaryServiceImpl" />
    <bean id="serviceLayout" class="com.spring.mti.service.LayoutServiceImpl" />
+   <bean id="serviceKnowledges" class="com.spring.mti.service.KnowledgesServiceImpl" />
    
    <!-- <bean id="authoritiesDao" class="com.spring.mti.dao.AuthoritiesDaoImpl" />  -->
     
