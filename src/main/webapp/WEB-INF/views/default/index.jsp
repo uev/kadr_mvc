@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" 
 	uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 
 <jsp:include page="header.jsp" />
 
@@ -20,9 +21,8 @@
     </div>
     </div>
 </div>
-<script src="resources/bootstrap/js/bootstrap.js"></script>
-<script src="resources/bootstrap/js/bootstrap.min.js"></script>
-
+<script src="<s:url value="/resources/bootstrap" />/js/bootstrap.js"></script>
+<script src="<s:url value="/resources/bootstrap" />/js/bootstrap.min.js"></script>
+<script src="<s:url value="/resources/bootstrap" />/assets/js/bootstrap-dropdown.js"></script>
 </body>
-
 <jsp:include page="footer.jsp" />

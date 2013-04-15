@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" 
            uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="menu.jsp" />
+<jsp:include page="../menu.jsp" />
 <br/>
 	<form 
   		class="form-horizontal span10 offset3">

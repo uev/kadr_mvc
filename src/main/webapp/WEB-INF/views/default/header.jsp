@@ -20,9 +20,10 @@
 	<!--  <link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen"> -->
 	<link href="<s:url value="/resources/bootstrap" /> /css/bootstrap-responsive.css" rel="stylesheet">
 	<!-- JQuery -->
+<script src="<s:url value="/resources/scripts" />/jquery/jquery-1.9.1.min.js"></script>
 <script src="<s:url value="/resources/bootstrap" />/js/bootstrap.min.js"></script>
 <script src="<s:url value="/resources/bootstrap" />/js/bootstrap.js"></script>
-<script src="<s:url value="/resources/scripts" />/jquery/jquery-1.9.1.min.js"></script>
+
 <c:if test="${hscript != null}">
 	<jsp:include page="${hscript}" />
 </c:if>
