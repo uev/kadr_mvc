@@ -24,9 +24,9 @@
          <li class="dropdown">
          	<a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Вопросы <b class="caret"></b></a> 
             	<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-         			<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/anscategories/index.html"></a></li>
+         			<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/add.html">Добавить вопрос</a></li>
             		<li role="presentation" class="divider"></li>
-            		<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/answers/index.html">Вопросы</a></li>
+            		<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/rm.html">Удалить вопрос</a></li>
          		</ul>
          </li>
     </ul>    
