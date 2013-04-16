@@ -27,39 +27,47 @@ function appendCategory() {
 	return 0;
 }
 
-
-function popCategory() {
+function appendQueshion() {
 	//var hname = "http://localhost:8080/uev61/json/recbykey.html";
-	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/anscategories/rm.html";
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/add.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
-	var json={'hash' : hash, 'category' : $("input[name='category']").val()};
+	var json={'hash' : hash, 'queshion' : $("input[name='queshion']").val(), 'content' : $("textarea#content").val(), 'category': $('#selectCategory :selected').val()};
+	var key="";
+	if ($("div.form-inline").length > 0){
+		for (var i=0; i < $("div.form-inline").length; i++){
+			key = 'inAns'.concat(i+1);	
+			//alert($("div#"+ key + " input[name='inputCheckAnsw']").prop('checked'));
+			json[key] = {'answer' : $("div#"+ key + " input[name='answer']").val(),'valid': $("div#"+ key + " input[name='inputCheckAnsw']").prop('checked')};
+		}
+	}
 	var jqxhr = $.post(hname,json, function() {
 	})
 		.success(function(data) {		
 			if (data['error'] == 1) {
-				alert("Не удалось удалить категорию");
+				alert("Вопрос с заданными характеристиками существует или проблеммы на сервере");
 			}
 			if(data['error'] == 0) {
-				alert("Категория успешно удалена");
+				alert("Вопрос успешно добавлен");
 				location.reload();
 			}
-			$("input[name='category']").val('');
-			$("input[name='radiogroup']").prop('checked', false);
+			$("#selectCategory").prop('selectedIndex', -1);
+			$("input[name='queshion']").val('');
+			$("textarea#content").val('');
 		});
 	return 0;
 }
 
-function insertAnswer(){
+function appendAnswerLayout(){
 	var id="inAns".concat($("div.form-inline").length+1);
-	var rmbutton='<button class="btn btn-small btn-primary offset0" type="button" onclick="removeAnswer();" id='+id+'>Исключить</button>  ';
-	var inanswer='<input type="text"  class="span10" placeholder="Вариант ответа" name="queshion" id="inputTextAnsw">  ';
-	var validans = '<input type="checkbox" value="" id="inputCheckAnsw">  ';
+	var rmbutton='<button class="btn btn-small btn-primary offset0" type="button" onclick="removeAnswerLayout();" id='+id+'>Исключить</button>  ';
+	var inanswer='<input type="text"  class="span10" placeholder="Вариант ответа" name="answer" id="inputTextAnsw">  ';
+	var validans = '<input type="checkbox" value="" name="inputCheckAnsw">  ';
 	var payload = '<div class = "form-inline" id='+id+'>'+inanswer + validans + rmbutton + ' </div>' + '<br id=' + id +' />' ;
 	$("#answer").append(payload);
 	return 0;
 }
 
-function removeAnswer(){
+function removeAnswerLayout(){
 	$("br#".concat($(event.target).attr("id"))).remove();
 	$("div#".concat($(event.target).attr("id"))).remove();
 }
