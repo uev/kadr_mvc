@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,13 +23,13 @@ import com.spring.mti.model.Answer;
 import com.spring.mti.model.Queshion;
 import com.spring.mti.service.DictionaryService;
 import com.spring.mti.service.KnowledgesService;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+import com.spring.mti.service.LayoutService;
 
 @Controller
 public class KnowledgesController extends GeneralController implements BeanFactoryAware{
 	private KnowledgesService sknow;
 	private DictionaryService sdict;
+	private LayoutService slayout;
 	static Logger log = Logger.getLogger(LoginController.class.getName());
 
 	@Override
@@ -38,6 +37,7 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 		super.setBeanFactory(context);
 		sknow = (KnowledgesService)context.getBean("serviceKnowledges");
 		sdict = (DictionaryService)context.getBean("serviceDictionary");
+		slayout = (LayoutService)context.getBean("serviceLayout");
 	}
 	
 	@RequestMapping(value = "/admin/dictionary/knowledges/index.html", method = RequestMethod.GET)
@@ -149,11 +149,23 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 		} 
 		return null;
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	@RequestMapping(value = "/admin/dictionary/knowledges/queshions/getinfo.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> getAllQueshionProfileJson(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		String key = request.getParameter("hash");
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+			Map<String, Object> answ = new HashMap<String, Object>();
+			String queshion = request.getParameter("queshion");
+			Queshion q = sknow.getQueshionByName(queshion);
+			try{
+				List<Answer> a = sknow.getAnswersByQueshion(q);
+				return slayout.queshionProfileToMapJson(a);
+			} catch (Exception e) {
+				log.error("Error creating map from queshion");
+				e.printStackTrace();
+			}
+		} 
+		return null;
+	}
 }

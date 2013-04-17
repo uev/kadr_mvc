@@ -18,9 +18,16 @@
         			<tr>
         				<td width="10"><input type="radio" value="${record.name}" name="radiogroup" onClick="getQueshionItem()"></td>
         				<td width="20"><c:out value="${record.id}"></c:out></td>
-        				<td><c:out value="${record.name}"></c:out></td>
+        				<td onClick="getQueshionInfo(event)"><c:out value="${record.name}"></c:out></td>
 					</tr>
+					<div id="${record.id}"></div>
 				</c:forEach>
 	    	</tbody>
-	    </table>
+	</table>
 	</form>
+	
+	
+	<div rel="popover" data-content="It's so simple to create a tooltop for my website!" data-original-title="Twitter Bootstrap Popover" data-placement="top" />
+	  
+	
+	

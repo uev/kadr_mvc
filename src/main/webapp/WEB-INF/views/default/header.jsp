@@ -18,12 +18,39 @@
               rel="stylesheet"
               media="screen" />  
 	<!--  <link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen"> -->
-	<link href="<s:url value="/resources/bootstrap" /> /css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="<s:url value="/resources/bootstrap" />/css/bootstrap-responsive.css" rel="stylesheet">
+	
 	<!-- JQuery -->
 <script src="<s:url value="/resources/scripts" />/jquery/jquery-1.9.1.min.js"></script>
 <script src="<s:url value="/resources/bootstrap" />/js/bootstrap.min.js"></script>
 <script src="<s:url value="/resources/bootstrap" />/js/bootstrap.js"></script>
-
+<!-- 
+<script src="<s:url value="/resources/lightview" />/js/swfobject.js"></script>
+<script src="<s:url value="/resources/lightview" />/js/spinners/spinners.min.js"></script>
+<script src="<s:url value="/resources/lightview" />/js/lightview/lightview.js"></script>
+<link href="<s:url value="/resources/lightview/css/lightview" />/lightview.css" rel="stylesheet">
+ -->
+ <script src="<s:url value="/resources/fancybox" />/js/bootstrap.js"></script>
+ 
+ 
+ <!-- Add fancyBox -->
+ <link href="<s:url value="/resources/fancybox" />/jquery.fancybox.css?v=2.1.4" rel="stylesheet" media="screen">
+ <script  type="text/javascript" src="<s:url value="/resources/fancybox" />/jquery.fancybox.pack.js?v=2.1.4"></script>
+ <script>
+ $(document).ready(function() {
+		$(".various").fancybox({
+			maxWidth	: 1024,
+			maxHeight	: 768,
+			fitToView	: false,
+			width		: '80%',
+			height		: '80%',
+			autoSize	: false,
+			closeClick	: false,
+			openEffect	: 'none',
+			closeEffect	: 'none'
+		});
+	});
+ </script>
 <c:if test="${hscript != null}">
 	<jsp:include page="${hscript}" />
 </c:if>

@@ -95,4 +95,56 @@ function popQueshion() {
 	return 0;
 }
 
+function getQueshionInfo(event) {
+	//var hname = "http://localhost:8080/uev61/json/recbykey.html";
+	
+	//Lightview.show({url: "<h1>Терминал не связи</h1>", type: "html"});
+	/*
+	Lightview.show({
+  url: '<h3>123</h3>',
+  type: 'html',
+  border: { size: 3, color: '#000', opacity: .6, radius:10 },
+  options: {
+    skin: 'mac',
+    params: {
+      controller: false
+    }
+  }
+});
+	*/
+	//$.fancybox('123');
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/getinfo.html";
+	var hash = "dcd95bcb84b09897b2b66d4684c040da";
+	var html="";
+	//alert($(event.target).text());
+	//alert("123");
+	//$("#example").popover("show"); 
+	var json={'hash' : hash, 'queshion' : $(event.target).text()};
+	var jqxhr = $.post(hname,json, function() {
+	})
+		.success(function(data) {		
+			html="<h5>Категория: " + data['category'] + "<br/>Наздание вопроса: " + data['title'] + "<br/>Содержание: " + data['content'] + "</h5><br/>";
+			//alert(data['count_answ']);
+			for (var i=0; i < data['count_answ']; i++){
+				//alert("Вариант "+(i+1)+": "+data['ans'+i][0]);
+				html += "Вариант "+(i+1)+": "+data['ans'+i][0] + "<br/>";
+			}
+			
+			
+			//alert(html);
+			$.fancybox(html);
+			if (data['error'] == 1) {
+				alert("Не удалось удалить вопрос");
+			}
+			if(data['error'] == 0) {
+				alert("Вопрос удалён");
+		//		location.reload();
+			}
+		//	$("input[name='queshion']").val('');
+			//$("input[name='radiogroup']").prop('checked', false);
+		});
+	
+	return 0;
+}
+
 </script>

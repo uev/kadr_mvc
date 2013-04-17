@@ -1,14 +1,17 @@
 package com.spring.mti.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.spring.mti.model.Answer;
 import com.spring.mti.model.Department;
 import com.spring.mti.model.Employe;
 import com.spring.mti.model.address.City;
 import com.spring.mti.model.security.Authorities;
+import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 public class LayoutServiceImpl implements LayoutService {
 
@@ -61,5 +64,21 @@ public class LayoutServiceImpl implements LayoutService {
 			answer.add(map);
 		}
 			return answer;
+	}
+	
+	@Override
+	public Map<String, Object> queshionProfileToMapJson(List<Answer> a){
+		Map<String, Object> map = new HashMap<String, Object>()	;
+		Answer afirst = a.get(0);
+		map.put("category", afirst.getFk_queshion().getFk_catgory().getCname());
+		map.put("title", afirst.getFk_queshion().getName());
+		map.put("content", afirst.getFk_queshion().getContent());
+		map.put("id", afirst.getFk_queshion().getId());
+		map.put("count_answ", a.size());
+		for (int i = 0; i < a.size(); i++){
+			Answer item = a.get(i);
+			map.put("ans".concat(Integer.toString(i)), Arrays.asList(item.getContent(),item.isValid()));
+		}
+			return map;
 	}
 }

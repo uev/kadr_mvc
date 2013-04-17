@@ -24,5 +24,6 @@
 <script src="<s:url value="/resources/bootstrap" />/js/bootstrap.js"></script>
 <script src="<s:url value="/resources/bootstrap" />/js/bootstrap.min.js"></script>
 <script src="<s:url value="/resources/bootstrap" />/assets/js/bootstrap-dropdown.js"></script>
+<!-- <script src="<s:url value="/resources/bootstrap" />/assets/js/bootstrap-popover.js"></script> -->
 </body>
 <jsp:include page="footer.jsp" />
