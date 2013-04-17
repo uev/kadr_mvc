@@ -1,5 +1,7 @@
 package com.spring.mti.service;
 
+import java.util.List;
+
 import com.spring.mti.model.Answer;
 import com.spring.mti.model.Queshion;
 
@@ -12,4 +14,6 @@ public interface KnowledgesService {
 	Answer getAnswerByContent(String name);
 	void deleteAnswer(Answer a);
 	void updateAnswerRelation(Answer a);
+	List<Queshion> getAllQueshions();
+	List<Answer> getAnswersByQueshion(Queshion q);
 }

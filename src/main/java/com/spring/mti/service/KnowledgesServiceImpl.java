@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.spring.mti.dao.AnswerDao;
 import com.spring.mti.dao.QueshionDao;
 import com.spring.mti.model.Answer;
+import com.spring.mti.model.Category;
 import com.spring.mti.model.Queshion;
 
 @Repository
@@ -42,7 +43,16 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 	
 	@Override
 	public void deleteQueshion(Queshion q) {
-		queshionDao.delete(q);
+		try{
+			queshionDao.delete(q);
+		} catch(Exception e){
+			//Removing answers
+			List<Answer> answ = this.getAnswersByQueshion(q);
+			for (Answer item : answ) {
+				this.deleteAnswer(item);
+			}
+			queshionDao.delete(q);
+		}
 	}
 	
 	@Override
@@ -50,6 +60,11 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 		queshionDao.update(q);
 	}
 
+	@Override
+	public List<Queshion> getAllQueshions(){
+		return queshionDao.findAll(new Queshion());
+	}
+	
 	@Override
 	public void createAnswer(String name) {
 		List<String> ls = new ArrayList<String>();
@@ -73,6 +88,19 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 		}
 	}
 	
+	@Override
+	public List<Answer> getAnswersByQueshion(Queshion q) {
+		List<Long> r = new ArrayList<Long>();
+		r.add(q.getId());
+		try{
+			List<Answer> ans = answerDao.findByNamedQuery("select s from Answer s where s.fk_queshion.id=?1",r.toArray()); 
+			ans.get(0);
+			return ans;
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+
 	@Override
 	public void deleteAnswer(Answer a) {
 		answerDao.delete(a);

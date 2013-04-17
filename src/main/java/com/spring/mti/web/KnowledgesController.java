@@ -115,7 +115,45 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 		return null;
 }
 
-
-
-
+	@RequestMapping(value = "/admin/dictionary/knowledges/queshions/rm.html", method = RequestMethod.GET)
+	public final ModelAndView popQueshionAction(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView view = verifyPermission(request.getSession());
+		if (view.getViewName() == null){
+			//view.setViewName("admin/dictionary/persons/index");
+			view.setViewName("default/index");
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/queshions/scripts.jsp"));
+			view.addObject("title", "Админзона / удаление вопроса");
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/queshions/rm.jsp"));
+			view.addObject("queshions", sknow.getAllQueshions());
+		}
+		return view;
+	}
+	
+	@RequestMapping(value = "/admin/dictionary/knowledges/queshions/rm.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> popQueshionJson(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		String key = request.getParameter("hash");
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+			Map<String, Object> answ = new HashMap<String, Object>();
+			String queshion = request.getParameter("queshion");
+			Queshion q = sknow.getQueshionByName(queshion);
+			try{
+				sknow.deleteQueshion(q);
+				answ.put("error", 0);
+			} catch (Exception e) {
+				e.printStackTrace();
+				answ.put("error", 1);
+			}
+			return answ;
+		} 
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
 }

@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" 
            uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
-function getCategoryItem(){
-	$("input[name='category']").val($("input[name='radiogroup']:checked").val());
+function getQueshionItem(){
+	$("input[name='queshion']").val($("input[name='radiogroup']:checked").val());
 	return 0;
 }
 
@@ -57,6 +57,8 @@ function appendQueshion() {
 	return 0;
 }
 
+
+
 function appendAnswerLayout(){
 	var id="inAns".concat($("div.form-inline").length+1);
 	var rmbutton='<button class="btn btn-small btn-primary offset0" type="button" onclick="removeAnswerLayout();" id='+id+'>Исключить</button>  ';
@@ -70,6 +72,27 @@ function appendAnswerLayout(){
 function removeAnswerLayout(){
 	$("br#".concat($(event.target).attr("id"))).remove();
 	$("div#".concat($(event.target).attr("id"))).remove();
+}
+
+function popQueshion() {
+	//var hname = "http://localhost:8080/uev61/json/recbykey.html";
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/rm.html";
+	var hash = "dcd95bcb84b09897b2b66d4684c040da";
+	var json={'hash' : hash, 'queshion' : $("input[name='queshion']").val()};
+	var jqxhr = $.post(hname,json, function() {
+	})
+		.success(function(data) {		
+			if (data['error'] == 1) {
+				alert("Не удалось удалить вопрос");
+			}
+			if(data['error'] == 0) {
+				alert("Вопрос удалён");
+				location.reload();
+			}
+			$("input[name='queshion']").val('');
+			$("input[name='radiogroup']").prop('checked', false);
+		});
+	return 0;
 }
 
 </script>
