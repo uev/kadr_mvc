@@ -123,14 +123,16 @@ function getQueshionInfo(event) {
 	var jqxhr = $.post(hname,json, function() {
 	})
 		.success(function(data) {		
-			html="<h5>Категория: " + data['category'] + "<br/>Наздание вопроса: " + data['title'] + "<br/>Содержание: " + data['content'] + "</h5><br/>";
+			html="<h5>Категория: " + data['category'] + "<br/>Наздание вопроса: " + data['title'] + "<br/>Содержание: " + data['content'] + "</h5>";
 			//alert(data['count_answ']);
 			for (var i=0; i < data['count_answ']; i++){
 				//alert("Вариант "+(i+1)+": "+data['ans'+i][0]);
-				html += "Вариант "+(i+1)+": "+data['ans'+i][0] + "<br/>";
+				if (data['ans'+i][1] == true) {
+					html += "Вариант "+(i+1)+": "+data['ans'+i][0] + " || правальный ответ <br/>";
+				} else {
+					html += "Вариант "+(i+1)+": "+data['ans'+i][0] + "<br/>";	
+				}
 			}
-			
-			
 			//alert(html);
 			$.fancybox(html);
 			if (data['error'] == 1) {
