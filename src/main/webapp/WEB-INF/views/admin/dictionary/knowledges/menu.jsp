@@ -27,6 +27,8 @@
          			<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/add.html">Добавить вопрос</a></li>
             		<li role="presentation" class="divider"></li>
             		<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/rm.html">Удалить вопрос</a></li>
+            		<li role="presentation" class="divider"></li>
+            		<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/edit.html">Редактировать вопрос</a></li>
          		</ul>
          </li>
     </ul>    

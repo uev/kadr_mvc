@@ -42,6 +42,19 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 	}
 	
 	@Override
+	public Queshion getQueshionById(Long id) {
+		List<Long> r = new ArrayList<Long>();
+		r.add(id);
+		try{
+			return queshionDao.findByNamedQuery("select s from Queshion s where s.id=?1",r.toArray()).get(0);
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+	
+	
+	
+	@Override
 	public void deleteQueshion(Queshion q) {
 		try{
 			queshionDao.delete(q);

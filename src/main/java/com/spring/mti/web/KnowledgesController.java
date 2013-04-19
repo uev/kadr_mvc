@@ -168,4 +168,24 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 		} 
 		return null;
 	}
+
+	@RequestMapping(value = "/admin/dictionary/knowledges/queshions/edit.html", method = RequestMethod.GET)
+	public final ModelAndView editQueshionAction(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView view = verifyPermission(request.getSession());
+		if (view.getViewName() == null){
+			//view.setViewName("admin/dictionary/persons/index");
+			view.setViewName("default/index");
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/queshions/scripts.jsp"));
+			view.addObject("title", "Админзона / редактирование вопроса");
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/queshions/edit.jsp"));
+			//view.addObject("queshions", sknow.getAllQueshions());
+			Queshion q = sknow.getQueshionById(Long.parseLong(request.getParameter("id")));
+			List<Answer> a = sknow.getAnswersByQueshion(q);
+			view.addObject("queshion",q);
+			view.addObject("answers",a);
+			view.addObject("categories",sdict.getAllCategories());
+		}
+		return view;
+	}
 }

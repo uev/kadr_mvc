@@ -16,4 +16,5 @@ public interface KnowledgesService {
 	void updateAnswerRelation(Answer a);
 	List<Queshion> getAllQueshions();
 	List<Answer> getAnswersByQueshion(Queshion q);
+	Queshion getQueshionById(Long id);
 }
