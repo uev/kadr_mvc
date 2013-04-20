@@ -31,14 +31,15 @@
     <br/>
 	<br/>
 	<div class="controls controls-row">
-    	<button class="btn btn-small btn-primary " type="button" onclick="appendQueshion();">Создать</button>
+    	<button class="btn btn-small btn-primary " type="button" onclick="updateQueshion(${queshion.getId()});">Обновить</button>
         <button class="btn btn-small btn-primary " type="button" onclick="appendAnswerLayout();">Добавить вариант ответа</button>
     </div>
 	<hr/>
 	<div id="answer" class="span10">
 		<!--  <input type="text"  class="span10" placeholder="Вариант ответа" name="queshion" id="inputAnswer"> -->
+	 	<c:set var="chk" value="1"/> 
 	 	<c:forEach var="record" items="${answers}">
-    		<div class = "form-inline" id="${record.getId()}">
+    		<div class = "form-inline" id="inAns${chk}">
     			<input type="text"  class="span10" placeholder="Вариант ответа" name="answer" id="inputTextAnsw" value="${record.getContent()}">
     			<c:if test="${record.isValid() == true}">
     				<input type="checkbox" value="" name="inputCheckAnsw" checked>
@@ -46,7 +47,8 @@
     			<c:if test="${record.isValid() != true}">
     				<input type="checkbox" value="" name="inputCheckAnsw">
     			</c:if>
-    			<button class="btn btn-small btn-primary offset0" type="button" onclick="removeAnswerLayout();" id="${record.getId()}">Исключить</button>
-    		</div><br id="${record.getId()}" />
+    			<button class="btn btn-small btn-primary offset0" type="button" onclick="removeAnswerLayout(event);" id="inAns${chk}">Исключить</button>
+    		</div><br id="inAns${chk}" />
+    		<c:set var="chk" value="${chk+1}"/>
     	</c:forEach>		
 	</div>

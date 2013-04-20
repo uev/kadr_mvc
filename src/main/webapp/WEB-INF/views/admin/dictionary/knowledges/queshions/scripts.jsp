@@ -57,11 +57,39 @@ function appendQueshion() {
 	return 0;
 }
 
-
+function updateQueshion(id_queshion) {
+	//var hname = "http://localhost:8080/uev61/json/recbykey.html";
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/update.html";
+	var hash = "dcd95bcb84b09897b2b66d4684c040da";
+	var json={'hash' : hash, 'queshion' : $("input[name='queshion']").val(), 'content' : $("textarea#content").val(), 'category': $('#selectCategory :selected').val(), 'queshion_id' : id_queshion};
+	var key="";
+	if ($("div.form-inline").length > 0){
+		for (var i=0; i < $("div.form-inline").length; i++){
+			key = 'inAns'.concat(i+1);	
+			json[key] = {'answer' : $("div#"+ key + " input[name='answer']").val(),'valid': $("div#"+ key + " input[name='inputCheckAnsw']").prop('checked')};
+//			alert($("div#"+ key + " input[name='answer']").val());
+		}
+	}
+	var jqxhr = $.post(hname,json, function() {
+	})
+		.success(function(data) {		
+			if (data['error'] == 1) {
+				alert("Вопрос с заданными характеристиками существует или проблеммы на сервере");
+			}
+			if(data['error'] == 0) {
+				alert("Вопрос успешно добавлен");
+				//location.reload();
+			}
+			$("#selectCategory").prop('selectedIndex', -1);
+			$("input[name='queshion']").val('');
+			$("textarea#content").val('');
+		});
+	return 0;
+}
 
 function appendAnswerLayout(){
 	var id="inAns".concat($("div.form-inline").length+1);
-	var rmbutton='<button class="btn btn-small btn-primary offset0" type="button" onclick="removeAnswerLayout();" id='+id+'>Исключить</button>  ';
+	var rmbutton='<button class="btn btn-small btn-primary offset0" type="button" onclick="removeAnswerLayout(event);" id='+id+'>Исключить</button>  ';
 	var inanswer='<input type="text"  class="span10" placeholder="Вариант ответа" name="answer" id="inputTextAnsw">  ';
 	var validans = '<input type="checkbox" value="" name="inputCheckAnsw">  ';
 	var payload = '<div class = "form-inline" id='+id+'>'+inanswer + validans + rmbutton + ' </div>' + '<br id=' + id +' />' ;
@@ -69,9 +97,10 @@ function appendAnswerLayout(){
 	return 0;
 }
 
-function removeAnswerLayout(){
+function removeAnswerLayout(event){
 	$("br#".concat($(event.target).attr("id"))).remove();
 	$("div#".concat($(event.target).attr("id"))).remove();
+	return 0;
 }
 
 function popQueshion() {
@@ -96,29 +125,9 @@ function popQueshion() {
 }
 
 function getQueshionInfo(event) {
-	//var hname = "http://localhost:8080/uev61/json/recbykey.html";
-	
-	//Lightview.show({url: "<h1>Терминал не связи</h1>", type: "html"});
-	/*
-	Lightview.show({
-  url: '<h3>123</h3>',
-  type: 'html',
-  border: { size: 3, color: '#000', opacity: .6, radius:10 },
-  options: {
-    skin: 'mac',
-    params: {
-      controller: false
-    }
-  }
-});
-	*/
-	//$.fancybox('123');
 	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/getinfo.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
-	var html="";
-	//alert($(event.target).text());
-	//alert("123");
-	//$("#example").popover("show"); 
+	var html=""; 
 	var json={'hash' : hash, 'queshion' : $(event.target).text()};
 	var jqxhr = $.post(hname,json, function() {
 	})
@@ -135,18 +144,7 @@ function getQueshionInfo(event) {
 			}
 			//alert(html);
 			$.fancybox(html);
-			if (data['error'] == 1) {
-				alert("Не удалось удалить вопрос");
-			}
-			if(data['error'] == 0) {
-				alert("Вопрос удалён");
-		//		location.reload();
-			}
-		//	$("input[name='queshion']").val('');
-			//$("input[name='radiogroup']").prop('checked', false);
 		});
-	
 	return 0;
 }
-
 </script>

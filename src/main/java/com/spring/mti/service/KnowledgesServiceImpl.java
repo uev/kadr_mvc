@@ -1,6 +1,7 @@
 package com.spring.mti.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,6 +120,14 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 		answerDao.delete(a);
 	}
 	
+	@Override
+	public void deleteAnswersByQueshionId(Long id) {
+		List<Answer> ans = answerDao.findByNamedQuery("select s from Answer s where s.fk_queshion.id=?1",Arrays.asList(id).toArray());
+		for (Answer answer : ans) {
+			answerDao.delete(answer);
+		}
+	}
+
 	@Override
 	public void updateAnswerRelation(Answer a){
 		answerDao.update(a);

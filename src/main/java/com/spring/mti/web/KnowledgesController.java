@@ -188,4 +188,53 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 		}
 		return view;
 	}
+	
+	@RequestMapping(value = "/admin/dictionary/knowledges/queshions/update.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> updateQueshionJson(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		String key = request.getParameter("hash");
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+			Map<String, Object> answ = new HashMap<String, Object>();
+			System.out.println("Entering to queshion");
+			String queshion = request.getParameter("queshion");
+			String category = request.getParameter("category");
+			String content = request.getParameter("content");
+			String queshion_id = request.getParameter("queshion_id");
+			String bs = "inAns";
+			List<Object> lo = new ArrayList<Object>();
+			lo.addAll(Arrays.asList(queshion, category, content));
+			if (-1 == lo.indexOf(null)){
+				try {
+					System.out.println("Update Queshion");
+					//sknow.createQueshion(queshion);
+					//Queshion q = sknow.getQueshionByName(queshion);
+					Queshion q = sknow.getQueshionById(Long.parseLong(queshion_id));
+					if (q != null){
+						q.setFk_catgory(sdict.getCategoryByName(category));
+						q.setName(queshion);
+						q.setContent(content);
+						sknow.updateQueshionRelation(q);
+					}
+					Integer chk= new Integer(1);
+					sknow.deleteAnswersByQueshionId(Long.parseLong(queshion_id));
+					while (request.getParameter(bs.concat(chk.toString().concat("[answer]"))) != null){
+						System.out.println(bs.concat(chk.toString().concat("[answer]")));
+						String preffix = bs.concat(chk.toString());
+						sknow.createAnswer(request.getParameter(preffix.concat("[answer]")));
+						Answer a = sknow.getAnswerByContent(request.getParameter(preffix.concat("[answer]")));
+						a.setFk_queshion(q);
+						a.setValid(Boolean.parseBoolean( request.getParameter(preffix.concat("[valid]"))   ));
+						sknow.updateAnswerRelation(a);
+						chk+=1;
+					}
+					answ.put("error", 0);
+				} catch(Exception e){
+					answ.put("error",1);
+					e.printStackTrace();
+				}
+			}
+			return answ;
+		} 
+		return null;
+}	
 }
