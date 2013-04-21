@@ -20,19 +20,19 @@ public class RelTestQueshion {
 	@JoinColumn(name="fk_test")
 	private TestKnowledge fk_test;
 	@OneToOne(cascade=CascadeType.REFRESH,fetch=FetchType.EAGER)
-	@JoinColumn(name="fk_answer")
-	private Answer fk_answer;
+	@JoinColumn(name="fk_queshion")
+	private Queshion fk_queshion;
 	public TestKnowledge getFk_test() {
 		return fk_test;
 	}
 	public void setFk_test(TestKnowledge fk_test) {
 		this.fk_test = fk_test;
 	}
-	public Answer getFk_answer() {
-		return fk_answer;
+	public Queshion getFk_queshion() {
+		return fk_queshion;
 	}
-	public void setFk_answer(Answer fk_answer) {
-		this.fk_answer = fk_answer;
+	public void setFk_queshion(Queshion fk_queshion) {
+		this.fk_queshion = fk_queshion;
 	}
 	public long getId() {
 		return id;
