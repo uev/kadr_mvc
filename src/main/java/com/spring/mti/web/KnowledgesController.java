@@ -217,6 +217,21 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 					}
 					Integer chk= new Integer(1);
 					sknow.deleteAnswersByQueshionId(Long.parseLong(queshion_id));
+					for (int i=0; i < Integer.parseInt(request.getParameter("acount")); i++){
+						//String hkey = request.getParameter(bs.concat(chk.toString().concat("[answer]")));
+						while (request.getParameter(bs.concat(chk.toString().concat("[answer]"))) == null){
+							chk+=1;
+						}
+						System.out.println(bs.concat(chk.toString().concat("[answer]")));
+						String preffix = bs.concat(chk.toString());
+						sknow.createAnswer(request.getParameter(preffix.concat("[answer]")));
+						Answer a = sknow.getAnswerByContent(request.getParameter(preffix.concat("[answer]")));
+						a.setFk_queshion(q);
+						a.setValid(Boolean.parseBoolean( request.getParameter(preffix.concat("[valid]"))   ));
+						sknow.updateAnswerRelation(a);
+						chk+=1;	
+					}
+					/*
 					while (request.getParameter(bs.concat(chk.toString().concat("[answer]"))) != null){
 						System.out.println(bs.concat(chk.toString().concat("[answer]")));
 						String preffix = bs.concat(chk.toString());
@@ -227,6 +242,8 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 						sknow.updateAnswerRelation(a);
 						chk+=1;
 					}
+					*/
+					System.out.println("Answer...");
 					answ.put("error", 0);
 				} catch(Exception e){
 					answ.put("error",1);

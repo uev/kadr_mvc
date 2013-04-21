@@ -17,7 +17,7 @@ function appendCategory() {
 	})
 		.success(function(data) {		
 			if (data['error'] == 1) {
-				alert("Не удалост создать категорию");
+				alert("Не удалось создать категорию");
 			}
 			if(data['error'] == 0) {
 				alert("Категория успешно создана");
@@ -61,13 +61,18 @@ function updateQueshion(id_queshion) {
 	//var hname = "http://localhost:8080/uev61/json/recbykey.html";
 	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/update.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
-	var json={'hash' : hash, 'queshion' : $("input[name='queshion']").val(), 'content' : $("textarea#content").val(), 'category': $('#selectCategory :selected').val(), 'queshion_id' : id_queshion};
+	var acount = $("div.form-inline").length; 
+	var json={'hash' : hash, 'queshion' : $("input[name='queshion']").val(), 'content' : $("textarea#content").val(), 'category': $('#selectCategory :selected').val(), 'queshion_id' : id_queshion, 'acount' : acount};
 	var key="";
-	if ($("div.form-inline").length > 0){
-		for (var i=0; i < $("div.form-inline").length; i++){
-			key = 'inAns'.concat(i+1);	
+	var rm=1;
+	if (acount > 0){
+		for (var i=0; i <= acount; i++){
+			key = 'inAns'.concat(i+rm);
+			while ( $("div#"+ key + " input[name='answer']").val() == "undefined" ){
+				rm+=1;
+				key = 'inAns'.concat(i+rm);
+			} 
 			json[key] = {'answer' : $("div#"+ key + " input[name='answer']").val(),'valid': $("div#"+ key + " input[name='inputCheckAnsw']").prop('checked')};
-//			alert($("div#"+ key + " input[name='answer']").val());
 		}
 	}
 	var jqxhr = $.post(hname,json, function() {
@@ -77,8 +82,8 @@ function updateQueshion(id_queshion) {
 				alert("Вопрос с заданными характеристиками существует или проблеммы на сервере");
 			}
 			if(data['error'] == 0) {
-				alert("Вопрос успешно добавлен");
-				//location.reload();
+				alert("Вопрос успешно обновлён");
+				window.location.replace("${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/rm.html");
 			}
 			$("#selectCategory").prop('selectedIndex', -1);
 			$("input[name='queshion']").val('');
@@ -99,7 +104,7 @@ function appendAnswerLayout(){
 
 function removeAnswerLayout(event){
 	$("br#".concat($(event.target).attr("id"))).remove();
-	$("div#".concat($(event.target).attr("id"))).remove();
+	$("div.form-inline#".concat($(event.target).attr("id"))).remove();
 	return 0;
 }
 
