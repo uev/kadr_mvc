@@ -31,6 +31,16 @@
             		<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/edit.html">Редактировать вопрос</a></li>
          		</ul>
          </li>
+         
+         <span class="divider">  /  </span>
+         
+         <li class="dropdown">
+         	<a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Тесты <b class="caret"></b></a> 
+            	<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+         			<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/manage.html">Управление тестами</a></li>
+            		<li role="presentation" class="divider"></li>
+         		</ul>
+         </li>
     </ul>    
         <!-- 
     	<li class="dropdown">

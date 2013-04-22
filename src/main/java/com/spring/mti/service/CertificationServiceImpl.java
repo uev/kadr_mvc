@@ -37,7 +37,12 @@ public class CertificationServiceImpl implements CertificationService {
 			return null;
 		}
 	}
-
+	
+	@Override
+	public TestKnowledge getTestById(Long id) {
+		return testDao.getByid(new TestKnowledge(), id);
+	}
+	
 	@Override
 	public void deleteTest(TestKnowledge t) {
 		testDao.delete(t);
@@ -66,5 +71,17 @@ public class CertificationServiceImpl implements CertificationService {
 	@Override
 	public void popQueshionFromTest(RelTestQueshion t) {
 		test_queshionDao.delete(t);
+	}
+	
+	@Override
+	public List<TestKnowledge> getAllTests() {
+		try{
+			List<TestKnowledge> t =testDao.findAll(new TestKnowledge());
+			t.size();
+			return t;
+		} catch(IndexOutOfBoundsException e) {
+			System.out.println(e);
+			return null;
+		}
 	}
 }
