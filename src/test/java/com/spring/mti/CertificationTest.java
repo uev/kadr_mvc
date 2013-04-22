@@ -23,17 +23,22 @@ public class CertificationTest extends AbstractTest {
 		ksrv = (KnowledgesService)context.getBean("serviceKnowledges");
 	}
 	
+	/*
 	@Test
 	public void testCreateTest(){
 		certsrv.createtTest("Тест номер один");
 		TestKnowledge t = certsrv.getTestByName("Тест номер один");
 		assertTrue("Тест номер один".equals(t.getName()));
 	 }
+	 */
 	
 	@Test
 	public void testPushQueshionToTest(){
+		certsrv.createtTest("Тест номер один");
 		TestKnowledge t = certsrv.getTestByName("Тест номер один");
-		 ksrv.createQueshion("Контрольный вопрос");
+		assertTrue("Тест номер один".equals(t.getName()));
+		//TestKnowledge t = certsrv.getTestByName("Тест номер один");
+		ksrv.createQueshion("Контрольный вопрос");
 		Queshion q = ksrv.getQueshionByName("Контрольный вопрос");
 		certsrv.pushQueshionToTest(t, q);
 		RelTestQueshion r = certsrv.getQueshionFromTest(t, q);
@@ -49,12 +54,16 @@ public class CertificationTest extends AbstractTest {
 		assertTrue(null == certsrv.getQueshionFromTest(t, q));
 		ksrv.deleteQueshion(q);
 		assertTrue(null ==  ksrv.getQueshionByName("Контрольный вопрос"));
+		certsrv.deleteTest(t);
+		assertTrue( null ==  certsrv.getTestByName("Тест номер один"));
 	 }
 
+	/*
 	@Test
 	public void testRmTest(){
 		TestKnowledge t = certsrv.getTestByName("Тест номер один");
 		certsrv.deleteTest(t);
 		assertTrue( null ==  certsrv.getTestByName("Тест номер один"));
 	 }
+	 */
 }
