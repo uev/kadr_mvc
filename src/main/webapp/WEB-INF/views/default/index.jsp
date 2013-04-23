@@ -7,14 +7,17 @@
 <jsp:include page="header.jsp" />
 
 <body>
-<center><h1>${title}</h1></center>
-    
+<c:if test="${title != null}">
+	<center><h1>${title}</h1></center>
+</c:if>
 <div class="container-fluid">
 	<div class="row-fluid" >
-    	<div class="span2">
-    		<jsp:include page="${menu}" />
-    	</div>
-    <div class="span10" style="margin: 5 auto;">
+    	<c:if test="${menu != null}">
+    		<div class="span2">
+    			<jsp:include page="${menu}" />
+    		</div>
+    	</c:if>
+    	<div class="span10" style="margin: 5 auto;">
     	
     		<jsp:include page="${body}" />
     	

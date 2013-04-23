@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.spring.mti.dao.QueshionDao;
 import com.spring.mti.dao.RelTestQueshionDao;
 import com.spring.mti.dao.TestKnowledgeDao;
 import com.spring.mti.model.Queshion;
@@ -17,6 +18,7 @@ import com.spring.mti.model.TestKnowledge;
 public class CertificationServiceImpl implements CertificationService {
 	@Autowired private TestKnowledgeDao testDao;
 	@Autowired private RelTestQueshionDao test_queshionDao;
+	@Autowired private QueshionDao queshionDao;
 	
 	
 	@Override
@@ -79,6 +81,18 @@ public class CertificationServiceImpl implements CertificationService {
 			List<TestKnowledge> t =testDao.findAll(new TestKnowledge());
 			t.size();
 			return t;
+		} catch(IndexOutOfBoundsException e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+	
+	@Override
+	public List<Queshion> getListQueshionsFromTest(Long id) {
+		try{
+			List<Queshion> q = queshionDao.findByNamedQuery("select q from RelTestQueshion s, Queshion q where s.fk_test.id=?1 and s.fk_queshion.id=q.id",Arrays.asList(id).toArray());
+			q.size();
+			return q;
 		} catch(IndexOutOfBoundsException e) {
 			System.out.println(e);
 			return null;

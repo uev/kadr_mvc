@@ -15,4 +15,5 @@ public interface CertificationService {
 	void popQueshionFromTest(RelTestQueshion t);
 	List<TestKnowledge> getAllTests();
 	TestKnowledge getTestById(Long id);
+	List<Queshion> getListQueshionsFromTest(Long id);
 }

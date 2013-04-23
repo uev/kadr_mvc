@@ -48,6 +48,35 @@ function popTest(event) {
 	return 0;
 }
 
+/*
+function AnswerToTest(event) {
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/append_answer.html";
+	var hash = "dcd95bcb84b09897b2b66d4684c040da";
+	var json={'hash' : hash, 'test' : $(event.target).attr("id")};
+	var jqxhr = $.post(hname,json, function() {
+	})
+		.success(function(data) {		
+			if (data['error'] == 1) {
+				alert("Не удалось удалить тест");
+			}
+			if(data['error'] == 0) {
+				alert("Тест удалён");
+				location.reload();
+			}
+			$("input[name='test']").val('');
+			location.reload();
+		});
+	return 0;
+}
+*/
+
+
+
+
+
+
+
+
 function editTest(event) {
 	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/getinfo.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";

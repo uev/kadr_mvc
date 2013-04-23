@@ -19,16 +19,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.mti.model.TestKnowledge;
 import com.spring.mti.service.CertificationService;
+import com.spring.mti.service.DictionaryService;
+import com.spring.mti.service.KnowledgesService;
+import com.spring.mti.service.LayoutService;
 
 @Controller
 public class CertificationController extends GeneralController implements BeanFactoryAware{
 	private CertificationService scert;
+	private KnowledgesService sknow;
+	private DictionaryService sdict;
+	private LayoutService slayout;
 	static Logger log = Logger.getLogger(LoginController.class.getName());
 
 	@Override
 	public void setBeanFactory(BeanFactory context) throws BeansException {
 		super.setBeanFactory(context);
 		scert = (CertificationService)context.getBean("serviceCertification");
+		sknow = (KnowledgesService)context.getBean("serviceKnowledges");
+		sdict = (DictionaryService)context.getBean("serviceDictionary");
+		slayout = (LayoutService)context.getBean("serviceLayout");
 	}
 	
 	@RequestMapping(value = "/admin/dictionary/knowledges/tests/manage.html", method = RequestMethod.GET)
@@ -104,6 +113,24 @@ public class CertificationController extends GeneralController implements BeanFa
 			//view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
 			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/tests/edit.jsp"));
 			//view.addObject("tests", scert.getAllTests());
+			view.addObject("categories", sdict.getAllCategories());
+		}
+		return view;
+	}
+	
+	@RequestMapping(value = "/admin/dictionary/knowledges/tests/append_queshion.html", method = RequestMethod.GET)
+	public final ModelAndView appendToTestAnswerAction(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView view = verifyPermission(request.getSession());
+		if (view.getViewName() == null){
+			view.setViewName("default/index");
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/tests/scripts.jsp"));
+			view.addObject("title", "Админзона / добавить вопросы");
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/tests/appendquesh.jsp"));
+			String testid = request.getParameter("id");
+			view.addObject("testname", scert.getTestById(Long.parseLong(testid)).getName());
+			//view.addObject("tests", scert.getAllTests());
+			view.addObject("queshions", sknow.getAllQueshions());
 		}
 		return view;
 	}

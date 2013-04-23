@@ -3,16 +3,8 @@
 <%@ taglib prefix="c" 
            uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="../menu.jsp" />
+	 
 	<form class="form-inline">
-		<label>Заголовок вопроса&nbsp&nbsp&nbsp&nbsp</label>
-		<input type="text" placeholder="Название вопроса" name="queshion" id="inputQueshion" class="span10" value="${queshion.getName()}"/>
-		<br/>
-		<br/>
-		<label>Содержание вопроса</label>
-		<textarea rows="5" placeholder="Содержание вопроса" class="span10" id="content">${queshion.getContent()}</textarea>
-		<br/>
-		<br/>
 		<div class="clearfix controls">
 			<label>Категория вопроса&nbsp&nbsp&nbsp&nbsp</label>
             	<select class="span10"  placeholder="Категория" name="country" id="selectCategory">
@@ -21,13 +13,18 @@
     		    		<c:if test="${record.id == queshion.getFk_catgory().getId()}">
     		    			<option selected><c:out value="${record.cname}"></c:out></option>
     		    		</c:if>
-    		    		<c:if test="${record.id != queshion.getFk_catgory().getId()}">
-    		    			<option><c:out value="${record.cname}"></c:out></option>
-    		    		</c:if>	
     				</c:forEach>
 			  	</select>
            	 </div>      
 	</form>
+	
+	 
+    
+    
+    
+    
+    
+    <!-- 
     <br/>
 	<br/>
 	<div class="controls controls-row">
@@ -36,7 +33,7 @@
     </div>
 	<hr/>
 	<div id="answer" class="span10">
-		<!--  <input type="text"  class="span10" placeholder="Вариант ответа" name="queshion" id="inputAnswer"> -->
+		
 	 	<c:set var="chk" value="1"/> 
 	 	<c:forEach var="record" items="${answers}">
     		<div class = "form-inline" id="inAns${chk}">
@@ -52,3 +49,4 @@
     		<c:set var="chk" value="${chk+1}"/>
     	</c:forEach>		
 	</div>
+	 -->
