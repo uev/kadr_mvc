@@ -34,8 +34,15 @@
  
  
  <!-- Add fancyBox -->
- <link href="<s:url value="/resources/fancybox" />/jquery.fancybox.css?v=2.1.4" rel="stylesheet" media="screen">
+  <script  type="text/javascript" src="<s:url value="/resources/fancybox" />/jquery.mousewheel-3.0.6.pack.js"></script>
+ <link href="<s:url value="/resources/fancybox" />/jquery.fancybox.css?v=2.1.4" rel="stylesheet" media="screen">  
  <script  type="text/javascript" src="<s:url value="/resources/fancybox" />/jquery.fancybox.pack.js?v=2.1.4"></script>
+ <!-- Helpers fancyBox  -->
+ <link href="<s:url value="/resources/fancybox/helpers" />/jquery.fancybox-buttons.css?v=1.0.5" rel="stylesheet" media="screen">
+ <script  type="text/javascript" src="<s:url value="/resources/fancybox/helpers" />/jquery.fancybox-buttons.js?v=1.0.5"></script>
+ <script  type="text/javascript" src="<s:url value="/resources/fancybox/helpers" />/jquery.fancybox-media.js?v=1.0.5"></script>
+ <link href="<s:url value="/resources/fancybox/helpers" />/jquery.fancybox-thumbs.css?v=1.0.7" rel="stylesheet" media="screen">
+ <script  type="text/javascript" src="<s:url value="/resources/fancybox/helpers" />/jquery.fancybox-thumbs.js?v=1.0.7"></script>
  <script>
  $(document).ready(function() {
 		$(".various").fancybox({
