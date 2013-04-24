@@ -5,7 +5,7 @@
 
 <jsp:include page="../menu.jsp" />
 	<form 
-  		class="form-horizontal span6">
+  		class="form-inline">
   				К тесту с названием 	"${testname}"
          		<button class="btn btn-small btn-primary offset0" type="button" onclick="appendQueshionToTest(event);">Добавить</button>
 	<br>
@@ -16,10 +16,10 @@
 	    		<c:set var="chk" value="1"/>
 	    		<c:forEach var="record" items='${queshions}'>
         			<tr id="q${chk}" class="queshion">
-        				<td><input type="checkbox" value="" name="inputCheckQueshion"></td>
-        				<td class="id_queshion"><c:out value="${record.id}"></c:out></td>
-        				<td><c:out value="${record.name}"></c:out></td>
-        				<td><c:out value="${record.getFk_catgory().getCname()}"></c:out></td>
+        				<td width="1"><input type="checkbox" value="" name="inputCheckQueshion"></td>
+        				<td width="5" class="id_queshion"><c:out value="${record.id}"></c:out></td>
+        				<td width="50" onClick="getQueshionInfo(event)"><c:out value="${record.name}"></c:out></td>
+        				<td width="50"><c:out value="${record.getFk_catgory().getCname()}"></c:out></td>
 					</tr>
 					<c:set var="chk" value="${chk+1}"/>
 				</c:forEach>
