@@ -1,5 +1,4 @@
 package com.spring.mti.model;
-import com.spring.mti.model.address.City;
 import com.sun.istack.internal.NotNull;
 
 import javax.persistence.CascadeType;
@@ -12,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Queshion implements Comparable<Queshion> {
+public class Queshion{
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -52,7 +51,7 @@ public class Queshion implements Comparable<Queshion> {
             return true;
         if (obj.getClass() == this.getClass()){
         	Queshion q = (Queshion) obj;
-        	if (q.id == this.id && q.content == this.content && q.name == this.name && this.fk_catgory == q.fk_catgory) 
+        	if (q.id == this.id && this.content.equals(q.content) && this.name.equals(q.name) && this.fk_catgory.getId() == q.fk_catgory.getId()) 
         		return true;
         }
         return false;
@@ -63,13 +62,5 @@ public class Queshion implements Comparable<Queshion> {
 		// TODO Auto-generated method stub
 		Long l = (Long)this.id; 
 		return l.intValue()*112;
-	}
-
-	@Override
-	public int compareTo(Queshion o) {
-		// TODO Auto-generated method stub
-		Long id = this.id;
-		Long oid = o.id;
-		return id.intValue() - oid.intValue(); 
 	}
 }
