@@ -140,11 +140,7 @@ public class CertificationController extends GeneralController implements BeanFa
 			view.addObject("testname", scert.getTestById(id).getName());
 			//diff
 			List<Queshion> queshions = sknow.getAllQueshions();
-			List<Queshion> t_queshions = scert.getListQueshionsFromTest(id);
-			System.out.println(queshions.size());
-			System.out.println(t_queshions.size());
-			queshions.removeAll(t_queshions);
-			System.out.println(queshions.size());
+			queshions.removeAll(scert.getListQueshionsFromTest(id));
 			view.addObject("queshions", queshions);
 		}
 		return view;
