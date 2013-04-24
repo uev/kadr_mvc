@@ -159,6 +159,7 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 			String queshion = request.getParameter("queshion");
 			Queshion q = sknow.getQueshionByName(queshion);
 			try{
+				System.out.println(queshion);
 				List<Answer> a = sknow.getAnswersByQueshion(q);
 				return slayout.queshionProfileToMapJson(a);
 			} catch (Exception e) {

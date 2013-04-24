@@ -38,6 +38,7 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 		try{
 			return queshionDao.findByNamedQuery("select s from Queshion s where s.name=?1",r.toArray()).get(0);
 		} catch (IndexOutOfBoundsException e) {
+			e.printStackTrace();
 			return null;
 		}
 	}

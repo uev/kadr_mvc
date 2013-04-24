@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.mti.model.Answer;
 import com.spring.mti.model.Queshion;
 import com.spring.mti.model.TestKnowledge;
 import com.spring.mti.service.CertificationService;
@@ -171,5 +172,68 @@ public class CertificationController extends GeneralController implements BeanFa
 			}
 		}	
 		return null;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@RequestMapping(headers = {"Accept=application/json"}, value = "/admin/dictionary/knowledges/tests/pop_queshion.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> popQueshionsFromTest(@RequestBody String json)  throws Exception {
+		JSONObject json1 = (JSONObject) JSONSerializer.toJSON(URLDecoder.decode(json.substring(0, json.length()-1)));
+		Map<String, Object> answ = new HashMap<String, Object>();
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(json1.getString("hash"))){
+			String testname = json1.getString("testname");
+			TestKnowledge test = scert.getTestByName(testname);
+			JSONArray jarray = json1.getJSONArray("queshions");
+			if (test != null){
+				try {
+					for (int i=0; i < jarray.size(); i++) {
+						scert.popQueshionFromTest(scert.getQueshionFromTest(test, sknow.getQueshionById(Long.parseLong((String)jarray.get(i)))));
+					}
+					answ.put("error", 0);
+					} catch(Exception e){
+						answ.put("error", 1);
+						log.error("Error removing from test.");
+						e.printStackTrace();
+				}		
+				return answ;
+			}
+		}	
+		return null;
+	}
+
+	@RequestMapping(value = "/admin/dictionary/knowledges/tests/getinfo.html", method = RequestMethod.POST)
+	public @ResponseBody List<Queshion> getAllQueshionsFromTestJson(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		String key = request.getParameter("hash");
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+			try{
+				String testname = request.getParameter("test");
+				TestKnowledge t = scert.getTestByName(testname);
+				List<Queshion> lstq = scert.getListQueshionsFromTest(t.getId());	
+				return lstq;
+			} catch (Exception e) {
+				log.error("Error create list queshions");
+				e.printStackTrace();
+			}
+		} 
+		return null;
+	}
+	
+	@RequestMapping(value = "/admin/dictionary/knowledges/tests/pop_queshion.html", method = RequestMethod.GET)
+	public final ModelAndView popFromTestQueshionAction(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView view = verifyPermission(request.getSession());
+		if (view.getViewName() == null){
+			view.setViewName("default/index");
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/tests/scripts.jsp"));
+			view.addObject("title", "Админзона / Исключить вопросы");
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/tests/rmansw.jsp"));
+			String testid = request.getParameter("id");
+			Long id = Long.parseLong(testid);
+			view.addObject("testname", scert.getTestById(id).getName());
+			//diff
+			List<Queshion> queshions = scert.getListQueshionsFromTest(id);
+			view.addObject("queshions", queshions);
+		}
+		return view;
 	}
 }

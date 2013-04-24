@@ -17,9 +17,9 @@
 	    		<c:forEach var="record" items='${tests}'>
         			<tr>
         				<td width="20"><c:out value="${record.id}"></c:out></td>
-        				<td width="50"onClick="getQueshionInfo(event)"><c:out value="${record.name}"></c:out></td>
-        				<td width="20"><a href="${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/edit.html" data-fancybox-type="iframe" id="${record.id}" class="various">Редактирование</a>
-        				<br/><a href="#" id="${record.id}" onClick="popTest(event)">Удаление теста</a>
+        				<td width="50"onClick="getTestInfo(event)"><c:out value="${record.name}"></c:out></td>
+        				<td width="20"><a href="#" id="${record.id}" onClick="popTest(event)">Удаление теста</a>
+        				<br/><a href="${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/pop_queshion.html?id=${record.id}" id="${record.id}">Удаление вопросов</a>
         				<br/><a href="${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/append_queshion.html?id=${record.id}" id="${record.id}" onClick="AnswerToTest(event)">Добавление вопросов</a>
         				</td>
 					</tr>

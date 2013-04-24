@@ -77,6 +77,30 @@ function appendQueshionToTest(event) {
 	return 0;
 }
 
+function popQueshionFromTest(event) {
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/pop_queshion.html";
+	var hash = "dcd95bcb84b09897b2b66d4684c040da";
+	var json={'hash' : hash, 'testname' : "${testname}" , 'queshions' : []};
+	for (var i=1; i <= $("tr.queshion").length; i++){
+		if ( $("tr#q" + i + " input[name='inputCheckQueshion']").prop('checked') === true ) {
+			json.queshions.push( $("tr#q" + i + " td.id_queshion").text());
+		}
+	}
+	var jqxhr = $.post(hname,JSON.stringify(json), function() {
+	})
+		.success(function(data) {		
+			if (data['error'] == 1) {
+				alert("Ошибка исключения вопросов из теста. Обратитесь к системному администратору");
+			}
+			if(data['error'] == 0) {
+				alert("Вопросы успешноисключены");
+				window.location.replace("${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/manage.html");	
+			}		
+		});
+	return 0;
+}
+
+
 
 function editTest(event) {
 	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/getinfo.html";
@@ -109,6 +133,27 @@ function editTest(event) {
 	
 	
 	*/
+}
+
+function getTestInfo(event){
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/getinfo.html";
+	var hash = "dcd95bcb84b09897b2b66d4684c040da";
+	var html=""; 
+	var json={'hash' : hash, 'test' : $(event.target).text()};
+	var jqxhr = $.post(hname,json, function() {
+	})
+		.success(function(data) {		
+			html="<h5>Вопросы:<br/>";
+			//alert(data['count_answ']);
+			if (data.length > 0){
+				for (var i=0; i < data.length; i++){
+					html+= i+1+". "+data[i].name +"<br/>";
+				}
+				html+="</h5>";	
+				$.fancybox(html);
+			}
+		});
+	return 0;
 }
 </script>
 <jsp:include page="../queshions/scripts.jsp" />
