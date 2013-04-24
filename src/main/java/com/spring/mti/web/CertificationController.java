@@ -1,22 +1,30 @@
 package com.spring.mti.web;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.net.URLDecoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.mti.model.Queshion;
 import com.spring.mti.model.TestKnowledge;
 import com.spring.mti.service.CertificationService;
 import com.spring.mti.service.DictionaryService;
@@ -119,7 +127,7 @@ public class CertificationController extends GeneralController implements BeanFa
 	}
 	
 	@RequestMapping(value = "/admin/dictionary/knowledges/tests/append_queshion.html", method = RequestMethod.GET)
-	public final ModelAndView appendToTestAnswerAction(HttpServletRequest request, HttpServletResponse response){
+	public final ModelAndView appendToTestQueshionAction(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
 			view.setViewName("default/index");
@@ -128,10 +136,44 @@ public class CertificationController extends GeneralController implements BeanFa
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
 			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/tests/appendquesh.jsp"));
 			String testid = request.getParameter("id");
-			view.addObject("testname", scert.getTestById(Long.parseLong(testid)).getName());
-			//view.addObject("tests", scert.getAllTests());
-			view.addObject("queshions", sknow.getAllQueshions());
+			Long id = Long.parseLong(testid);
+			view.addObject("testname", scert.getTestById(id).getName());
+			//diff
+			List<Queshion> queshions = sknow.getAllQueshions();
+			List<Queshion> t_queshions = scert.getListQueshionsFromTest(id);
+			System.out.println(queshions.size());
+			System.out.println(t_queshions.size());
+			queshions.removeAll(t_queshions);
+			System.out.println(queshions.size());
+			view.addObject("queshions", queshions);
 		}
 		return view;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@RequestMapping(headers = {"Accept=application/json"}, value = "/admin/dictionary/knowledges/tests/append_queshion.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> sync(@RequestBody String json)  throws Exception {
+		JSONObject json1 = (JSONObject) JSONSerializer.toJSON(URLDecoder.decode(json.substring(0, json.length()-1)));
+		Map<String, Object> answ = new HashMap<String, Object>();
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(json1.getString("hash"))){
+			String testname = json1.getString("testname");
+			TestKnowledge test = scert.getTestByName(testname);
+			JSONArray jarray = json1.getJSONArray("queshions");
+			if (test != null){
+				try {
+					log.info("Try appending queshion test");
+					for (int i=0; i < jarray.size(); i++) {
+						scert.pushQueshionToTest(test, sknow.getQueshionById(Long.parseLong((String)jarray.get(i))));
+					}
+					answ.put("error", 0);
+					} catch(Exception e){
+						answ.put("error", 1);
+						log.error("Error appending to test.");
+						e.printStackTrace();
+				}		
+				return answ;
+			}
+		}	
+		return null;
 	}
 }

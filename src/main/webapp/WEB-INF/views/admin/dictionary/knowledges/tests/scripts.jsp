@@ -48,33 +48,34 @@ function popTest(event) {
 	return 0;
 }
 
-/*
-function AnswerToTest(event) {
-	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/append_answer.html";
+
+function appendQueshionToTest(event) {
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/append_queshion.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
-	var json={'hash' : hash, 'test' : $(event.target).attr("id")};
-	var jqxhr = $.post(hname,json, function() {
+	var json={'hash' : hash, 'testname' : "${testname}" , 'queshions' : []};
+	//alert( $("tr#q1 input[name='inputCheckQueshion']").prop('checked') );
+	//alert($(event.target).attr("id"));
+	for (var i=1; i <= $("tr.queshion").length; i++){
+		if ( $("tr#q" + i + " input[name='inputCheckQueshion']").prop('checked') === true ) {
+			json.queshions.push( $("tr#q" + i + " td.id_queshion").text());
+		}
+	}
+	var jqxhr = $.post(hname,JSON.stringify(json), function() {
 	})
 		.success(function(data) {		
+			//alert(data['error']);
 			if (data['error'] == 1) {
-				alert("Не удалось удалить тест");
+				alert("Ошибка прикрепления вопросов к тесту. Обратитесь к системному администратору");
 			}
 			if(data['error'] == 0) {
-				alert("Тест удалён");
-				location.reload();
+				alert("Вопросы успешно добавлены к тесту");
+				window.location.replace("${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/manage.html");
+				//location.reload();
 			}
-			$("input[name='test']").val('');
-			location.reload();
+			//location.reload();
 		});
 	return 0;
 }
-*/
-
-
-
-
-
-
 
 
 function editTest(event) {

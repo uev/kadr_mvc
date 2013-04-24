@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Queshion {
+public class Queshion implements Comparable<Queshion> {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -42,5 +42,34 @@ public class Queshion {
 	}
 	public long getId() {
 		return id;
+	}
+	
+	@Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj == this)
+            return true;
+        if (obj.getClass() == this.getClass()){
+        	Queshion q = (Queshion) obj;
+        	if (q.id == this.id && q.content == this.content && q.name == this.name && this.fk_catgory == q.fk_catgory) 
+        		return true;
+        }
+        return false;
+    }
+	
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		Long l = (Long)this.id; 
+		return l.intValue()*112;
+	}
+
+	@Override
+	public int compareTo(Queshion o) {
+		// TODO Auto-generated method stub
+		Long id = this.id;
+		Long oid = o.id;
+		return id.intValue() - oid.intValue(); 
 	}
 }

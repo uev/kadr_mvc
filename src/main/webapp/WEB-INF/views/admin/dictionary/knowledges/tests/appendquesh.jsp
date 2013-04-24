@@ -7,19 +7,21 @@
 	<form 
   		class="form-horizontal span6">
   				К тесту с названием 	"${testname}"
-         		<button class="btn btn-small btn-primary offset0" type="button" onclick="popQueshionFromTest();">Добавить</button>
+         		<button class="btn btn-small btn-primary offset0" type="button" onclick="appendQueshionToTest(event);">Добавить</button>
 	<br>
 	<br>
 	<table class="table table-striped">
     		<tbody>
 	    		<tr><td></td><td>id</td><td>Название вопроса</td><td>Категория</td></tr>
+	    		<c:set var="chk" value="1"/>
 	    		<c:forEach var="record" items='${queshions}'>
-        			<tr>
+        			<tr id="q${chk}" class="queshion">
         				<td><input type="checkbox" value="" name="inputCheckQueshion"></td>
-        				<td><c:out value="${record.id}"></c:out></td>
+        				<td class="id_queshion"><c:out value="${record.id}"></c:out></td>
         				<td><c:out value="${record.name}"></c:out></td>
         				<td><c:out value="${record.getFk_catgory().getCname()}"></c:out></td>
 					</tr>
+					<c:set var="chk" value="${chk+1}"/>
 				</c:forEach>
 	    	</tbody>
 	    </table>
