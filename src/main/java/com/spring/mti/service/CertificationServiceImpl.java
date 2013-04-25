@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.spring.mti.dao.CertificationDao;
+import com.spring.mti.dao.CertificationStateDao;
 import com.spring.mti.dao.QueshionDao;
 import com.spring.mti.dao.RelTestQueshionDao;
 import com.spring.mti.dao.TestKnowledgeDao;
@@ -19,7 +21,8 @@ public class CertificationServiceImpl implements CertificationService {
 	@Autowired private TestKnowledgeDao testDao;
 	@Autowired private RelTestQueshionDao test_queshionDao;
 	@Autowired private QueshionDao queshionDao;
-	
+	@Autowired private CertificationDao certificationDao;
+	@Autowired private CertificationStateDao certificationStateDao;
 	
 	@Override
 	public void createtTest(String name) {

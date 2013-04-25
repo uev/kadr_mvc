@@ -70,6 +70,8 @@
    <bean id="queshionDao" class="com.spring.mti.dao.QueshionDaoImpl" />
    <bean id="testKnowledgeDao" class="com.spring.mti.dao.TestKnowledgeDaoImpl" />
    <bean id="relTestQueshionDao" class="com.spring.mti.dao.RelTestQueshionDaoImpl" />
+   <bean id="certificationDao" class="com.spring.mti.dao.CertificationDaoImpl" />
+   <bean id="certificationStateDao" class="com.spring.mti.dao.CertificationStateDaoImpl" />
    <bean id="serviceCertification" class="com.spring.mti.service.CertificationServiceImpl" />
    <bean id="serviceDictionary" class="com.spring.mti.service.DictionaryServiceImpl" />
    <bean id="serviceLayout" class="com.spring.mti.service.LayoutServiceImpl" />
