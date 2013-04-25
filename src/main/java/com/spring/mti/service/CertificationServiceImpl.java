@@ -5,14 +5,16 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.spring.mti.dao.CertificationDao;
 import com.spring.mti.dao.CertificationStateDao;
 import com.spring.mti.dao.QueshionDao;
+import com.spring.mti.dao.RelCertificationEmployeDao;
 import com.spring.mti.dao.RelTestQueshionDao;
 import com.spring.mti.dao.TestKnowledgeDao;
+import com.spring.mti.model.Certification;
+import com.spring.mti.model.Employe;
 import com.spring.mti.model.Queshion;
+import com.spring.mti.model.RelCertificationEmploye;
 import com.spring.mti.model.RelTestQueshion;
 import com.spring.mti.model.TestKnowledge;
 
@@ -23,6 +25,7 @@ public class CertificationServiceImpl implements CertificationService {
 	@Autowired private QueshionDao queshionDao;
 	@Autowired private CertificationDao certificationDao;
 	@Autowired private CertificationStateDao certificationStateDao;
+	@Autowired private RelCertificationEmployeDao certification_employe;
 	
 	@Override
 	public void createtTest(String name) {
@@ -99,6 +102,45 @@ public class CertificationServiceImpl implements CertificationService {
 		} catch(IndexOutOfBoundsException e) {
 			System.out.println(e);
 			return null;
+		}
+	}
+	
+	@Override
+	public void createCertification(String name) {
+		List<Certification> res = certificationDao.findByNamedQuery("select s from Certification s where s.name=?1",Arrays.asList(name).toArray());
+		if ( res != null && res.size()<1) {
+			Certification t = new Certification();
+			t.setName(name);
+			certificationDao.create(t);
+		}
+	}
+	
+	@Override
+	public Certification getCertificationByName(String name) {
+		try{
+			return certificationDao.findByNamedQuery("select s from Certification s where s.name=?1",Arrays.asList(name).toArray()).get(0);
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+	
+	@Override
+	public Certification getCertificationById(Long id) {
+		return certificationDao.getByid(new Certification(), id);
+	}
+	
+	@Override
+	public void deleteCertification(Certification t) {
+		certificationDao.delete(t);
+	}
+	
+	@Override
+	public void pushEmployeToCertification(Employe e, Certification c) {
+		if (null == this.getEmployeInCertification(e, c)){
+			RelCertificationEmploye r = new RelCertificationEmploye();
+			r.setFk_certification(c);
+			r.setFk_employe(e);
+			certification_employe.create(r);
 		}
 	}
 }

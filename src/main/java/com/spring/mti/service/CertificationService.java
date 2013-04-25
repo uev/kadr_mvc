@@ -2,6 +2,8 @@ package com.spring.mti.service;
 
 import java.util.List;
 
+import com.spring.mti.model.Certification;
+import com.spring.mti.model.Employe;
 import com.spring.mti.model.Queshion;
 import com.spring.mti.model.RelTestQueshion;
 import com.spring.mti.model.TestKnowledge;
@@ -16,4 +18,9 @@ public interface CertificationService {
 	List<TestKnowledge> getAllTests();
 	TestKnowledge getTestById(Long id);
 	List<Queshion> getListQueshionsFromTest(Long id);
+	Certification getCertificationByName(String name);
+	Certification getCertificationById(Long id);
+	void deleteCertification(Certification t);
+	void createCertification(String name);
+	void pushEmployeToCertification(Employe e, Certification c);
 }
