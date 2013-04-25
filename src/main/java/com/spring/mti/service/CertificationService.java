@@ -5,6 +5,7 @@ import java.util.List;
 import com.spring.mti.model.Certification;
 import com.spring.mti.model.Employe;
 import com.spring.mti.model.Queshion;
+import com.spring.mti.model.RelCertificationEmploye;
 import com.spring.mti.model.RelTestQueshion;
 import com.spring.mti.model.TestKnowledge;
 
@@ -23,4 +24,5 @@ public interface CertificationService {
 	void deleteCertification(Certification t);
 	void createCertification(String name);
 	void pushEmployeToCertification(Employe e, Certification c);
+	RelCertificationEmploye getEmployeInCertification(Employe e, Certification c);
 }

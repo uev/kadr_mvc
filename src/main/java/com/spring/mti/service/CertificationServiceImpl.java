@@ -134,6 +134,18 @@ public class CertificationServiceImpl implements CertificationService {
 		certificationDao.delete(t);
 	}
 	
+	
+	@Override
+	public RelCertificationEmploye getEmployeInCertification(Employe e, Certification c) {
+		List<Long> param = Arrays.asList(e.getId(),c.getId());
+		try {
+			return certification_employe.findByNamedQuery("select s from RelCertificationEmploye s where s.fk_certification.id=?2 and s.fk_employe.id=?1",param.toArray()).get(0);
+		} catch(IndexOutOfBoundsException err) {
+			return null;
+		}
+	}
+	
+	
 	@Override
 	public void pushEmployeToCertification(Employe e, Certification c) {
 		if (null == this.getEmployeInCertification(e, c)){
