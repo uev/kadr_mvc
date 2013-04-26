@@ -25,4 +25,6 @@ public interface CertificationService {
 	void createCertification(String name);
 	void pushEmployeToCertification(Employe e, Certification c);
 	RelCertificationEmploye getEmployeInCertification(Employe e, Certification c);
+	void setTestCertification(Certification c, TestKnowledge t);
+	void popEmployeFromCertification(RelCertificationEmploye r);
 }

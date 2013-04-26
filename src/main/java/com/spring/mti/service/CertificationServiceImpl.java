@@ -155,4 +155,20 @@ public class CertificationServiceImpl implements CertificationService {
 			certification_employe.create(r);
 		}
 	}
+	
+	@Override
+	public void popEmployeFromCertification(RelCertificationEmploye r) {
+		certification_employe.delete(r);
+	}
+	
+	@Override
+	public void setTestCertification(Certification c, TestKnowledge t) {
+		try{
+			t.getId();
+			c.setFk_test(t);
+			certificationDao.update(c);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 }
