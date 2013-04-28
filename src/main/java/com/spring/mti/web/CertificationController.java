@@ -25,8 +25,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.mti.model.Answer;
+import com.spring.mti.model.Category;
+import com.spring.mti.model.Department;
+import com.spring.mti.model.Employe;
 import com.spring.mti.model.Queshion;
 import com.spring.mti.model.TestKnowledge;
+import com.spring.mti.model.address.City;
 import com.spring.mti.service.CertificationService;
 import com.spring.mti.service.DictionaryService;
 import com.spring.mti.service.KnowledgesService;
@@ -235,5 +239,87 @@ public class CertificationController extends GeneralController implements BeanFa
 			view.addObject("queshions", queshions);
 		}
 		return view;
+	}
+
+	@RequestMapping(value = "/admin/certification/index.html", method = RequestMethod.GET)
+	public final ModelAndView indexAction(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView view = verifyPermission(request.getSession());
+		if (view.getViewName() == null){
+			view.setViewName("admin/certification/index");
+			view.addObject("title", "Админзона / аттестация");
+		}
+		return view;
+	}
+	
+	@RequestMapping(value = "/admin/certification/manage.html", method = RequestMethod.GET)
+	public final ModelAndView manageCertificationAction(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView view = verifyPermission(request.getSession());
+		if (view.getViewName() == null){
+			view.setViewName("default/index");
+			System.out.println("123");
+			view.addObject("hscript", viewPrefix.concat("/admin/certification/scripts.jsp"));
+			view.addObject("title", "Админзона / управление аттестациями");
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/certification/manage.jsp"));
+			view.addObject("cert", scert.getAllCertifications());
+		}
+		return view;
+	}
+	
+	@RequestMapping(value = "/admin/certification/add.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> appendCertificationJson(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		String key = request.getParameter("hash");
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+			String cert = request.getParameter("cert");
+			Map<String, Object> answ = new HashMap<String, Object>();
+			if (cert != null){
+				try {
+					scert.createCertification(cert);
+					answ.put("error", 0);
+					} catch(Exception e){
+						answ.put("error", 1);
+						log.error("Error appending test. Input value:");
+						log.info(cert);
+						e.printStackTrace();
+				}		
+				return answ;
+			}
+		}	
+		return null;
+	}
+	
+	@RequestMapping(value = "/admin/certification/edit.html", method = RequestMethod.GET)
+	public final ModelAndView editCertificationAction(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView view = verifyPermission(request.getSession());
+		if (view.getViewName() == null){
+			view.setViewName("default/index");
+			view.addObject("hscript", viewPrefix.concat("/admin/certification/scripts.jsp"));
+			view.addObject("title", "Админзона / параметры аттестации");
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/certification/edit.jsp"));
+			view.addObject("tests", scert.getAllTests());
+			view.addObject("departments", sdict.getAllDepartments());
+		}
+		return view;
+	}
+	
+	@RequestMapping(value = "/admin/certification/getemployers.html", method = RequestMethod.POST)
+	public @ResponseBody List<Employe> getEmployersByDepartment(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		String key = request.getParameter("hash");
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+			Map<String, Object> answ = new HashMap<String, Object>();
+			String department = request.getParameter("department");
+			Department d = sdict.getDepartmentByName(department);
+			try {
+				List<Employe> em = sdict.getEmployersByDepartment(d);
+				return em;
+			} catch (Exception e) {
+				log.error("Error creating list employers");
+				e.printStackTrace();
+			}
+		} 
+		return null;
 	}
 }

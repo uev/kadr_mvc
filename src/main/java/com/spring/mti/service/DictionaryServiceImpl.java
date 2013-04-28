@@ -1,6 +1,7 @@
 package com.spring.mti.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,6 +156,18 @@ public class DictionaryServiceImpl implements DictionaryService {
 	public Employe getEmployeById(long id) {
 		return employeDao.getByid(new Employe(), id); 	
 	}
+	
+	@Override
+	public List<Employe> getEmployersByDepartment(Department d) {
+		try {
+			List <Employe> lem = employeDao.findByNamedQuery("select s from Employe s where s.fk_department.id=?1", Arrays.asList(d.getId()).toArray());
+			return lem;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 
 	@Override
 	public void deleteEmploye(Employe e) {

@@ -130,6 +130,18 @@ public class CertificationServiceImpl implements CertificationService {
 	}
 	
 	@Override
+	public List<Certification> getAllCertifications() {
+		try{
+			List<Certification> c = certificationDao.findAll(new Certification());
+			c.size();
+			return c;
+		} catch(IndexOutOfBoundsException e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+	
+	@Override
 	public void deleteCertification(Certification t) {
 		certificationDao.delete(t);
 	}

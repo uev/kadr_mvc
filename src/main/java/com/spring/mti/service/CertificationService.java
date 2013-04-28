@@ -27,4 +27,5 @@ public interface CertificationService {
 	RelCertificationEmploye getEmployeInCertification(Employe e, Certification c);
 	void setTestCertification(Certification c, TestKnowledge t);
 	void popEmployeFromCertification(RelCertificationEmploye r);
+	List<Certification> getAllCertifications();
 }
