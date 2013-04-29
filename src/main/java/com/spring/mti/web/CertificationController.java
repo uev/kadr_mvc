@@ -26,9 +26,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.mti.model.Answer;
 import com.spring.mti.model.Category;
+import com.spring.mti.model.Certification;
 import com.spring.mti.model.Department;
 import com.spring.mti.model.Employe;
 import com.spring.mti.model.Queshion;
+import com.spring.mti.model.RelCertificationEmploye;
 import com.spring.mti.model.TestKnowledge;
 import com.spring.mti.model.address.City;
 import com.spring.mti.service.CertificationService;
@@ -300,6 +302,13 @@ public class CertificationController extends GeneralController implements BeanFa
 			view.addObject("body", viewPrefix.concat("/admin/certification/edit.jsp"));
 			view.addObject("tests", scert.getAllTests());
 			view.addObject("departments", sdict.getAllDepartments());
+			String cert_id = request.getParameter("id");
+			if (null != cert_id) {
+				Certification c = scert.getCertificationById(Long.parseLong(cert_id));
+				List<Employe> r = scert.getListEmployeByCertification(c);
+				view.addObject("cert_title", c.getName());
+				view.addObject("cert_employers", r);
+			}
 		}
 		return view;
 	}

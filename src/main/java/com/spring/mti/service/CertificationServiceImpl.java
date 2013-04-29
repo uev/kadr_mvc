@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.spring.mti.dao.CertificationDao;
 import com.spring.mti.dao.CertificationStateDao;
+import com.spring.mti.dao.EmployeDao;
 import com.spring.mti.dao.QueshionDao;
 import com.spring.mti.dao.RelCertificationEmployeDao;
 import com.spring.mti.dao.RelTestQueshionDao;
@@ -26,6 +27,7 @@ public class CertificationServiceImpl implements CertificationService {
 	@Autowired private CertificationDao certificationDao;
 	@Autowired private CertificationStateDao certificationStateDao;
 	@Autowired private RelCertificationEmployeDao certification_employe;
+	@Autowired private EmployeDao employeDao;
 	
 	@Override
 	public void createtTest(String name) {
@@ -157,6 +159,16 @@ public class CertificationServiceImpl implements CertificationService {
 		}
 	}
 	
+	@Override
+	public List<Employe> getListEmployeByCertification(Certification c) {
+		List<Long> param = Arrays.asList(c.getId());
+		try {
+			return employeDao.findByNamedQuery("select s.fk_employe from RelCertificationEmploye s where s.fk_certification.id=?1",param.toArray());
+		} catch(Exception err) {
+			err.printStackTrace();
+			return null;
+		}
+	}
 	
 	@Override
 	public void pushEmployeToCertification(Employe e, Certification c) {
