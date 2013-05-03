@@ -306,7 +306,16 @@ public class CertificationController extends GeneralController implements BeanFa
 			if (null != cert_id) {
 				Certification c = scert.getCertificationById(Long.parseLong(cert_id));
 				List<Employe> r = scert.getListEmployeByCertification(c);
-				view.addObject("cert_title", c.getName());
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("id", String.valueOf(c.getId()));
+				map.put("name", c.getName());
+				TestKnowledge t = c.getFk_test(); 
+				if (null != t){
+					view.addObject("current_test", t.getName());
+				} else {
+					view.addObject("current_test", "");
+				}
+				view.addObject("cert_title", map);
 				view.addObject("cert_employers", r);
 			}
 		}
@@ -329,6 +338,32 @@ public class CertificationController extends GeneralController implements BeanFa
 				e.printStackTrace();
 			}
 		} 
+		return null;
+	}
+	
+	@RequestMapping(value = "/admin/certification/set_test.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> setTestCertificationJson(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		String key = request.getParameter("hash");
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+			String certification = request.getParameter("certigication");
+			String testname = request.getParameter("testname");
+			Map<String, Object> answ = new HashMap<String, Object>();
+			if (testname != null){
+				try {
+					TestKnowledge t = scert.getTestByName(testname);
+					Certification c = scert.getCertificationByName(certification);
+					scert.setTestCertification(c, t);
+					answ.put("error", 0);
+					} catch(Exception e){
+						answ.put("error", 1);
+						log.error("Error setting test certification");
+						log.info(testname);
+						e.printStackTrace();
+				}		
+				return answ;
+			}
+		}	
 		return null;
 	}
 }

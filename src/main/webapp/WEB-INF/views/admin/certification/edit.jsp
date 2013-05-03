@@ -8,15 +8,22 @@
   		class="form-inline">
          	<div class="clearfix control-group">
               <legend>Тесты</legend>
-              <select  placeholder="Категория" name="category" id="selectTest" class="span11">
+              <select  placeholder="Тест" name="test" id="selectTest" class="span11">
 				<option></option>
 				<c:forEach var="i" items="${tests}">
-					<option>${i.getName()}</option>
+					<c:choose>
+						<c:when test="${null != current_test}">
+							<option selected>${i.getName()}</option>
+						</c:when>
+						<c:when test="${null == current_test}">
+							<option>${i.getName()}</option>
+						</c:when>
+					</c:choose>
 				</c:forEach>
 			   </select>
-			   <button class="btn btn-small btn-primary" type="button" onClick="setTest();">Сохранить</button>
+			   <button class="btn btn-small btn-primary" type="button" onClick="setTest(event);">Сохранить</button>
             </div>
-            <legend id ="${cert_title}">Добавить к аттестации "${cert_title}"</legend>
+            <legend id ="certtitle">${cert_title['name']}</legend>
             <div class="clearfix control-group">
               <label class="control-label" for="selectDepartment">Департамент</label>
               <select  placeholder="Департамент" name="department" id="selectDepartment" onClick="getEmployers();">

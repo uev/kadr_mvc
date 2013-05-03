@@ -38,9 +38,26 @@ function appendCert() {
 		 }));
 	})});
 	return 0;
-}
+	}
 	
-	
+	function setTest(event) {
+		var hname = "${pageContext.request.contextPath}/admin/certification/set_test.html";
+		var hash = "dcd95bcb84b09897b2b66d4684c040da";
+		var json={'hash' : hash, 'certification' : $("legend#certtitle").text(), 'testname' : $("#selectTest :selected").val()};
+		//alert($("legend#certtitle").text());
+		var jqxhr = $.post(hname,JSON.stringify(json), function() {
+		})
+			.success(function(data) {		
+				if (data['error'] == 1) {
+					alert("Ошибка закрепления теста за аттестацией");
+				}
+				if(data['error'] == 0) {
+					alert("Тест закреплён за аттестацией");
+					//window.location.replace("${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/manage.html");	
+				}		
+			});
+		return 0;
+	}	
 	
 	
 	
