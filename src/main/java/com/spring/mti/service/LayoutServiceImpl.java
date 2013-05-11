@@ -36,8 +36,12 @@ public class LayoutServiceImpl implements LayoutService {
 	public List<Object> employeToMapJson(List<Employe> e){
 		List<Object> answer = new ArrayList<Object>();
 		for (Employe item : e){
-			Map<String, Object> map = decorateMapEmploye(item);
-			answer.add(map);
+			try {
+				Map<String, Object> map = decorateMapEmploye(item);
+				answer.add(map);
+			} catch (Exception exept){
+				exept.printStackTrace();
+			}
 		}
 			return answer;
 	}
