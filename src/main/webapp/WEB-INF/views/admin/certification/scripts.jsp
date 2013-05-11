@@ -26,15 +26,15 @@ function appendCert() {
 
 	function getEmployers(){
 	//var hname = "http://localhost:8080/uev61/json/";
-	var hname = "${pageContext.request.contextPath}/admin/certification/getemployers.html";
-	var hash = "dcd95bcb84b09897b2b66d4684c040da";
-	json = {"hash":hash, "department": $('#selectDepartment :selected').val()};
-	var jqxhr = $.post(hname,json, function() {
-	}).done(function(data) { 
-		$.each(data, function (index, value) {
+		var hname = "${pageContext.request.contextPath}/admin/certification/getemployers.html";
+		var hash = "dcd95bcb84b09897b2b66d4684c040da";
+		json = {"hash":hash, "department": $('#selectDepartment :selected').val()};
+		var jqxhr = $.post(hname,json, function() {
+		}).done(function(data) { 
+			$.each(data, function (index, value) {
 		 		$('#selectEmploye').append($('<option>', { 
-		        		value: value.id,
-		        		text : value.fio 
+		       		value: value.id,
+		       		text : value.fio 
 		 }));
 	})});
 	return 0;
@@ -43,9 +43,8 @@ function appendCert() {
 	function setTest(event) {
 		var hname = "${pageContext.request.contextPath}/admin/certification/set_test.html";
 		var hash = "dcd95bcb84b09897b2b66d4684c040da";
-		var json={'hash' : hash, 'certification' : $("legend#certtitle").text(), 'testname' : $("#selectTest :selected").val()};
-		//alert($("legend#certtitle").text());
-		var jqxhr = $.post(hname,JSON.stringify(json), function() {
+		var json={'hash' : hash, 'certification' : $("form.form-inline fieldset#certtitle legend").text(), 'testname' : $("#selectTest :selected").val()};
+		var jqxhr = $.post(hname, json, function() {
 		})
 			.success(function(data) {		
 				if (data['error'] == 1) {
@@ -59,6 +58,45 @@ function appendCert() {
 		return 0;
 	}	
 	
+	function appendPersonCertification(event){
+		var hname = "${pageContext.request.contextPath}/admin/certification/append_person.html";
+		var hash = "dcd95bcb84b09897b2b66d4684c040da";
+		var json={'hash' : hash, 'certification' : $("form.form-inline fieldset#certtitle legend").text(), 'employe' : $("#selectEmploye :selected").val()};
+		var jqxhr = $.post(hname,json, function() {
+		})
+			.success(function(data) {		
+				if (data['error'] == 1) {
+					alert("Не удаётся добавить специалиста к аттестации. Обратитесь к разработчикам");
+				}
+				if(data['error'] == 0) {
+					alert("Специалист добавлен к аттестации");
+					window.location.replace("${pageContext.request.contextPath}/admin/certification/manage.html");
+					//location.reload();
+				}
+				//location.reload();
+			});
+		
+		return 0;
+	}
+	
+	function popPersonFromCertification(event){
+		var hname = "${pageContext.request.contextPath}/admin/certification/pop_person.html";
+		var hash = "dcd95bcb84b09897b2b66d4684c040da";
+		var json={'hash' : hash, 'certification' : $("form.form-inline fieldset#certtitle legend").text(), 'employe' : $(event.target).attr("id")};
+		var jqxhr = $.post(hname,json, function() {
+		})
+			.success(function(data) {		
+				if (data['error'] == 1) {
+					alert("Не удалить исключить сотрудника из аттестации. Обратитесь к администратору");
+				}
+				if(data['error'] == 0) {
+					alert("Сотрудник исключен из аттестации");
+					location.reload();
+				}
+				location.reload();
+			});
+		return 0;
+	}
 	
 	
 	
@@ -66,15 +104,6 @@ function appendCert() {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-
 function popTest(event) {
 	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/rm.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";

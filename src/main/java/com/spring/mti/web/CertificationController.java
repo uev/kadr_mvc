@@ -316,7 +316,7 @@ public class CertificationController extends GeneralController implements BeanFa
 					view.addObject("current_test", "");
 				}
 				view.addObject("cert_title", map);
-				view.addObject("cert_employers", r);
+				view.addObject("cert_employers", slayout.employeToMapJson(r));
 			}
 		}
 		return view;
@@ -346,19 +346,81 @@ public class CertificationController extends GeneralController implements BeanFa
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
 		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
-			String certification = request.getParameter("certigication");
+			String certification = request.getParameter("certification");
 			String testname = request.getParameter("testname");
 			Map<String, Object> answ = new HashMap<String, Object>();
 			if (testname != null){
 				try {
 					TestKnowledge t = scert.getTestByName(testname);
 					Certification c = scert.getCertificationByName(certification);
+					System.out.println(c.getName());
 					scert.setTestCertification(c, t);
 					answ.put("error", 0);
 					} catch(Exception e){
 						answ.put("error", 1);
 						log.error("Error setting test certification");
 						log.info(testname);
+						log.info(certification);
+						e.printStackTrace();
+				}		
+				return answ;
+			}
+		}	
+		return null;
+	}
+	
+	@RequestMapping(value = "/admin/certification/append_person.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> appendPersonTpCertification(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		System.out.println("Entering post...");
+		String key = request.getParameter("hash");
+		System.out.println(key);
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+			String employe = request.getParameter("employe");
+			String certification = request.getParameter("certification");
+			Map<String, Object> answ = new HashMap<String, Object>();
+			if (employe != null){
+				try {
+					log.info("Try appending person to  certification");
+					Employe e = sdict.getEmployeById(Long.parseLong(employe));
+					if (e != null) {
+						Certification c = scert.getCertificationByName(certification);
+						RelCertificationEmploye r = scert.getEmployeInCertification(e, c);
+						if (r == null) {
+							scert.pushEmployeToCertification(e, c);
+							answ.put("error", 0);
+						}
+					}
+				} catch(Exception e){
+					answ.put("error", 1);
+					log.error("Error appending test. Input value:");
+					log.info(employe);
+					e.printStackTrace();
+				}		
+				return answ;
+			}
+		}	
+		return null;
+	}
+	
+	@RequestMapping(value = "/admin/certification/pop_person.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> popEmployeFromCertJson(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		String key = request.getParameter("hash");
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+			String employe = request.getParameter("employe");
+			Map<String, Object> answ = new HashMap<String, Object>();
+			if (employe != null){
+				try {
+					log.info("Try removing employe from certification");
+					Employe e = sdict.getEmployeById(Long.parseLong(employe));
+					Certification c = scert.getCertificationByName(request.getParameter("certification"));
+					scert.popEmployeFromCertification(scert.getEmployeInCertification(e, c));
+					answ.put("error", 0);
+					} catch(Exception e){
+						answ.put("error", 1);
+						log.error("Error removing certification from employe. Input value:");
+						log.info(employe);
 						e.printStackTrace();
 				}		
 				return answ;
