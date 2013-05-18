@@ -21,8 +21,8 @@ public class RelCertificationEmploye {
 	private Employe fk_employe;
 	@OneToOne(cascade=CascadeType.REFRESH,fetch=FetchType.EAGER)
 	@JoinColumn(name="fk_certification")
-	
 	private Certification fk_certification;
+	private boolean complete = false;
 	
 	public long getId() {
 		return id;
@@ -41,5 +41,13 @@ public class RelCertificationEmploye {
 	
 	public void setFk_certification(Certification fk_certification) {
 		this.fk_certification = fk_certification;
+	}
+
+	public boolean isComplete() {
+		return complete;
+	}
+
+	public void setComplete(boolean complete) {
+		this.complete = complete;
 	}
 }

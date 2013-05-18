@@ -428,4 +428,8 @@ public class CertificationController extends GeneralController implements BeanFa
 		}	
 		return null;
 	}
+	
+	/*
+	 * Элементы UI участника аттестации
+	 */
 }

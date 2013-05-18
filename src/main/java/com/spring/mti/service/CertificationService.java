@@ -29,4 +29,5 @@ public interface CertificationService {
 	void popEmployeFromCertification(RelCertificationEmploye r);
 	List<Certification> getAllCertifications();
 	List<Employe> getListEmployeByCertification(Certification c);
+	List<RelCertificationEmploye> getListCertificationByEmploye(Employe e);
 }

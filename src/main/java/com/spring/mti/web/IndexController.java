@@ -1,5 +1,6 @@
 package com.spring.mti.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,15 +16,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.spring.mti.model.Certification;
+import com.spring.mti.model.Employe;
+import com.spring.mti.model.RelCertificationEmploye;
 import com.spring.mti.service.AuthorityService;
+import com.spring.mti.service.CertificationService;
 import com.spring.mti.service.CustomUserDetailsService;
 import com.spring.mti.service.PersonService;
+import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 
 @Controller
 public class IndexController extends GeneralController implements BeanFactoryAware {
 	private PersonService personService;
 	private CustomUserDetailsService authStorage;
+	private CertificationService scert;
 	static Logger log = Logger.getLogger(LoginController.class.getName());
 	/*
 	@Override
@@ -55,16 +63,27 @@ public class IndexController extends GeneralController implements BeanFactoryAwa
 		ModelAndView view = new ModelAndView("index");
 		if (session.getAttribute("loginSuccess") != null) {
 			log.debug("attr loginSuccess not null");
-			if (authStorage.isUserRoleSet((String)session.getAttribute("login"))){
+			String login = (String)session.getAttribute("login");
+			if (authStorage.isUserRoleSet(login)){
 				//Личный кабинет аттестуемого
 				log.debug("Set view candidate/index");
 				view.setViewName("candidate/index");
+				//Получение соответствия Логин <=> Пользователь
+				view.addObject("nameOfPerson", authStorage.getUserByLoginName(login).getFk_employe().getFio());
+				List<RelCertificationEmploye> r = scert.getListCertificationByEmploye(authStorage.getUserByLoginName(login).getFk_employe());
+				if (r.size() > -1){
+					ArrayList<Certification> clst = new ArrayList<Certification>();
+					for (RelCertificationEmploye item : r) {
+						clst.add(item.getFk_certification());
+					}
+				view.addObject("cert", clst);
+				}
 			}
 			if (authStorage.isAdminRoleSet((String)session.getAttribute("login"))){
 				//админка
 				log.debug("Set view admin/index");
-				view.setViewName("candidate/index");
-				view.setViewName("admin/index");	
+				//view.setViewName("candidate/index");
+				view.setViewName("admin/index");
 			}
 		} else {
 			log.debug("Set view login");
@@ -78,5 +97,6 @@ public class IndexController extends GeneralController implements BeanFactoryAwa
 		// TODO Auto-generated method stub
 		personService = (PersonService)context.getBean("servicePerson");
 		authStorage = (CustomUserDetailsService)context.getBean("userDetailsService");
+		scert = (CertificationService)context.getBean("serviceCertification");
 	}
 }

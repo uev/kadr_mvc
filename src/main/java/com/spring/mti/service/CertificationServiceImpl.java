@@ -195,4 +195,15 @@ public class CertificationServiceImpl implements CertificationService {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public List<RelCertificationEmploye> getListCertificationByEmploye(Employe e) {
+		List<Long> param = Arrays.asList(e.getId());
+		try {
+			return certification_employe.findByNamedQuery("select s from RelCertificationEmploye s where s.fk_employe.id=?1",param.toArray());
+		} catch(Exception err) {
+			err.printStackTrace();
+			return null;
+		}
+	}
 }
