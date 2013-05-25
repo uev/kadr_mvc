@@ -1,6 +1,5 @@
 package com.spring.mti.web;
 
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +7,7 @@ import java.net.URLDecoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -23,16 +23,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 
-import com.spring.mti.model.Answer;
-import com.spring.mti.model.Category;
 import com.spring.mti.model.Certification;
 import com.spring.mti.model.Department;
 import com.spring.mti.model.Employe;
 import com.spring.mti.model.Queshion;
 import com.spring.mti.model.RelCertificationEmploye;
 import com.spring.mti.model.TestKnowledge;
-import com.spring.mti.model.address.City;
 import com.spring.mti.service.CertificationService;
 import com.spring.mti.service.DictionaryService;
 import com.spring.mti.service.KnowledgesService;
@@ -44,6 +43,7 @@ public class CertificationController extends GeneralController implements BeanFa
 	private KnowledgesService sknow;
 	private DictionaryService sdict;
 	private LayoutService slayout;
+	private PasswordEncoder pencoder;
 	static Logger log = Logger.getLogger(LoginController.class.getName());
 
 	@Override
@@ -53,6 +53,7 @@ public class CertificationController extends GeneralController implements BeanFa
 		sknow = (KnowledgesService)context.getBean("serviceKnowledges");
 		sdict = (DictionaryService)context.getBean("serviceDictionary");
 		slayout = (LayoutService)context.getBean("serviceLayout");
+		pencoder = (Md5PasswordEncoder)context.getBean("passwordEncoder");
 	}
 	
 	@RequestMapping(value = "/admin/dictionary/knowledges/tests/manage.html", method = RequestMethod.GET)
@@ -429,7 +430,27 @@ public class CertificationController extends GeneralController implements BeanFa
 		return null;
 	}
 	
-	/*
-	 * Элементы UI участника аттестации
-	 */
+	
+	@RequestMapping(value = "/candidate/certification/proxy.html", method = RequestMethod.GET)
+	public final ModelAndView certificationProxy(HttpServletRequest request, HttpServletResponse response){
+		String cid = request.getParameter("id");
+		if (null != cid){
+			HttpSession session = request.getSession();
+			String login = (String)session.getAttribute("login");
+			try {
+				Certification cert = scert.getCertificationById(Long.parseLong(cid));
+				Employe em = authStorage.getUserByLoginName(login).getFk_employe();
+				List<Employe> r = scert.getListEmployeByCertification(cert);
+				if (r.contains(em) == true){
+					String secret = "User " + em.getFio() + " begining certification: " + cert.getName();  
+					log.info(secret);
+					session.setAttribute("userHash", pencoder.encodePassword(secret,null));
+					//redirect
+				}
+			} catch(Exception ex){
+				ex.printStackTrace();
+			}
+		}
+		return null;
+	}
 }

@@ -51,4 +51,25 @@ public class Employe {
 	public void setFk_department(Department fk_department) {
 		this.fk_department = fk_department;
 	}
+	
+	@Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj == this)
+            return true;
+        if (obj.getClass() == this.getClass()){
+        	Employe e = (Employe) obj;
+        	if (e.id == this.id && this.fio.equals(e.fio) && this.fk_city.getId() == e.fk_city.getId() && this.fk_department.getId() == e.fk_department.getId()) 
+        		return true;
+        }
+        return false;
+    }
+	
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		Long l = (Long)this.id; 
+		return l.intValue()*112;
+	}
 }
