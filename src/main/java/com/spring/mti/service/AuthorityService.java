@@ -12,7 +12,7 @@ public interface AuthorityService {
 	public List<String> getAllPermissionsByUserId(long user_id);
 	public void createRole(Role role);
 	public void deleteRole(Role role);
-	public List<Object[]> getAllRoles();
+	public List<Role> getAllRoles();
 	void setPermissions(Users user, Role role);
 	public Role getRoleByName(String role);
 	List<Authorities> getAllPermissions();

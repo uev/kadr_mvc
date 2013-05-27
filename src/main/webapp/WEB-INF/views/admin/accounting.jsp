@@ -86,7 +86,7 @@
               <select  placeholder="Роль" name="role" id="selectRole">
 				<option></option>
 				<c:forEach var="i" items="${roles}">
-					<option>${i[1]}</option>
+					<option>${i.rname}</option>
 				</c:forEach>
 			</select>
             </div>

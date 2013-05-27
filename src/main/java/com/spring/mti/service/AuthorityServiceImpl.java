@@ -60,8 +60,8 @@ public class AuthorityServiceImpl implements AuthorityService {
 	}
 	
 	@Override
-	public List<Object[]> getAllRoles() {
-		return rolesDao.findAll_toArray(new Role());
+	public List<Role> getAllRoles() {
+		return rolesDao.findAll(new Role());
 	}
 	
 	@Override

@@ -83,10 +83,8 @@ public class AuthUsersTest extends AbstractTest {
 	
 	@Test
 	public void testGetAllRoles(){
-	    List<Object[]> m = sauth.getAllRoles();
-	    for (Object[] res : m) {
-	    	System.out.println(res[0] + " / " + res[1]);
-	    }
+	    List<Role> m = sauth.getAllRoles();
+	    assertTrue(m.size()>0);
 	}
 
 	@Test
