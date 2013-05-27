@@ -1,5 +1,6 @@
 package com.spring.mti.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
+import com.spring.mti.model.Answer;
 import com.spring.mti.model.Certification;
 import com.spring.mti.model.Department;
 import com.spring.mti.model.Employe;
@@ -445,12 +447,48 @@ public class CertificationController extends GeneralController implements BeanFa
 					String secret = "User " + em.getFio() + " begining certification: " + cert.getName();  
 					log.info(secret);
 					session.setAttribute("userHash", pencoder.encodePassword(secret,null));
-					//redirect
+					session.setAttribute("employe", em);
+					session.setAttribute("certification", cert);
+					return new ModelAndView("redirect:/candidate/certification/process.html");
 				}
 			} catch(Exception ex){
 				ex.printStackTrace();
 			}
 		}
+		return null;
+	}
+	
+	/*
+	 * Тестирование
+	 */
+	@RequestMapping(value = "/candidate/certification/process.html", method = RequestMethod.GET)
+	public final ModelAndView procedureCertification(HttpServletRequest request, HttpServletResponse response){
+		HttpSession session = request.getSession();
+		ModelAndView view = new ModelAndView();
+		try{
+			Certification c = (Certification)session.getAttribute("certification");
+			Employe em = (Employe)session.getAttribute("employe");
+			String etalon_hash = (String)session.getAttribute("userHash");
+			String secret = "User " + em.getFio() + " begining certification: " + c.getName();
+			if (!etalon_hash.equals(pencoder.encodePassword(secret,null))){
+				log.error("Secrets not equals! Escape...");
+				throw new Exception();
+			}
+			view.setViewName("candidate/process");
+			/*
+			 * Передача вопросника
+			 */
+			List<Queshion> lq = scert.getListQueshionsFromTest(c.getFk_test().getId());
+			Map<String, List<Answer>> lo = new HashMap<String, List<Answer>>();
+			for (Queshion q : lq) {
+				lo.put(q.getContent(), sknow.getAnswersByQueshion(q));
+			}
+			view.addObject("answers", lo);
+			return view;
+		} catch (Exception e) {
+			e.printStackTrace();
+			view.setViewName("redirect:/");
+		}		
 		return null;
 	}
 }
