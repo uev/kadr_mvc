@@ -13,6 +13,7 @@ import com.spring.mti.dao.RelCertificationEmployeDao;
 import com.spring.mti.dao.RelTestQueshionDao;
 import com.spring.mti.dao.TestKnowledgeDao;
 import com.spring.mti.model.Certification;
+import com.spring.mti.model.CertificationState;
 import com.spring.mti.model.Employe;
 import com.spring.mti.model.Queshion;
 import com.spring.mti.model.RelCertificationEmploye;
@@ -160,6 +161,13 @@ public class CertificationServiceImpl implements CertificationService {
 	}
 	
 	@Override
+	public void commitCertification(Employe em, Certification c){
+		RelCertificationEmploye r = this.getEmployeInCertification(em, c);
+		r.setComplete(true);
+		certification_employe.update(r);
+	}
+
+	@Override
 	public List<Employe> getListEmployeByCertification(Certification c) {
 		List<Long> param = Arrays.asList(c.getId());
 		try {
@@ -204,6 +212,14 @@ public class CertificationServiceImpl implements CertificationService {
 		} catch(Exception err) {
 			err.printStackTrace();
 			return null;
+		}
+	}
+	
+	@Override
+	public void commitAnswer(CertificationState c) {
+		List<CertificationState> res = certificationStateDao.findByNamedQuery("select s from CertificationState s where s.id=?1",Arrays.asList(c.getId()).toArray());
+		if ( res != null && res.size()<1) {
+			certificationStateDao.create(c);
 		}
 	}
 }

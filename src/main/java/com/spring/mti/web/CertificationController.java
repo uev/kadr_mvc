@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.io.StringReader;
 import java.net.URLDecoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -26,9 +32,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import com.spring.mti.model.Answer;
 import com.spring.mti.model.Certification;
+import com.spring.mti.model.CertificationState;
 import com.spring.mti.model.Department;
 import com.spring.mti.model.Employe;
 import com.spring.mti.model.Queshion;
@@ -38,6 +48,7 @@ import com.spring.mti.service.CertificationService;
 import com.spring.mti.service.DictionaryService;
 import com.spring.mti.service.KnowledgesService;
 import com.spring.mti.service.LayoutService;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 @Controller
 public class CertificationController extends GeneralController implements BeanFactoryAware{
@@ -475,6 +486,7 @@ public class CertificationController extends GeneralController implements BeanFa
 				throw new Exception();
 			}
 			view.setViewName("candidate/process");
+			view.addObject("hscript", viewPrefix.concat("/candidate/script.jsp"));
 			/*
 			 * Передача вопросника
 			 */
@@ -484,11 +496,51 @@ public class CertificationController extends GeneralController implements BeanFa
 				lo.put(q.getContent(), sknow.getAnswersByQueshion(q));
 			}
 			view.addObject("answers", lo);
+			session.setAttribute("certname", c.getId());
+			session.setAttribute("employe", em.getId());
 			return view;
 		} catch (Exception e) {
 			e.printStackTrace();
 			view.setViewName("redirect:/");
 		}		
 		return null;
+	}
+	
+	/*
+	 * Разбор ответов пользователя
+	 */
+	
+	
+	@RequestMapping(value = "/candidate/validatetest.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> validateAnswersXml(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		HttpSession session = request.getSession();
+		Map<String, Object> answ = new HashMap<String, Object>();
+		try {
+			Certification c = scert.getCertificationById(Long.parseLong(session.getAttribute("certname").toString()));
+			Employe em = sdict.getEmployeById(Long.parseLong(session.getAttribute("employe").toString()));
+			XPath xPath = XPathFactory.newInstance().newXPath();
+			NodeList qNodes = (NodeList) xPath.evaluate("//root/answer/@q", new InputSource(
+					new StringReader(request.getParameter("xml"))), XPathConstants.NODESET);
+			NodeList aNodes = (NodeList) xPath.evaluate("//root/answer/@a", new InputSource(
+					new StringReader(request.getParameter("xml"))), XPathConstants.NODESET);
+			NodeList cNodes = (NodeList) xPath.evaluate("//root/answer/@c", new InputSource(
+					new StringReader(request.getParameter("xml"))), XPathConstants.NODESET);
+			for (int i=0; i < qNodes.getLength(); i++) {
+				CertificationState stage = new CertificationState();
+				stage.setFk_queshion(sknow.getQueshionById(Long.parseLong(qNodes.item(i).getNodeValue())));
+				stage.setFk_answer(sknow.getAnswerById(Long.parseLong(aNodes.item(i).getNodeValue())));
+				stage.setValid(Boolean.parseBoolean(cNodes.item(i).getNodeValue()));
+				stage.setFk_certification(c);
+				stage.setFk_employe(em);
+				scert.commitAnswer(stage);
+				scert.commitCertification(em, c);
+				answ.put("error", 0);
+			}
+		} catch (Exception e){
+			answ.put("error", 1);
+			e.printStackTrace();
+		}
+		return answ;
 	}
 }

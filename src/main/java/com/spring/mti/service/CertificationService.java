@@ -3,6 +3,7 @@ package com.spring.mti.service;
 import java.util.List;
 
 import com.spring.mti.model.Certification;
+import com.spring.mti.model.CertificationState;
 import com.spring.mti.model.Employe;
 import com.spring.mti.model.Queshion;
 import com.spring.mti.model.RelCertificationEmploye;
@@ -30,4 +31,6 @@ public interface CertificationService {
 	List<Certification> getAllCertifications();
 	List<Employe> getListEmployeByCertification(Certification c);
 	List<RelCertificationEmploye> getListCertificationByEmploye(Employe e);
+	void commitAnswer(CertificationState c);
+	void commitCertification(Employe em, Certification c);
 }

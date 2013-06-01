@@ -74,7 +74,9 @@ public class IndexController extends GeneralController implements BeanFactoryAwa
 				if (r.size() > -1){
 					ArrayList<Certification> clst = new ArrayList<Certification>();
 					for (RelCertificationEmploye item : r) {
-						clst.add(item.getFk_certification());
+						if (!item.isComplete()){
+							clst.add(item.getFk_certification());
+						}
 					}
 				view.addObject("cert", clst);
 				}

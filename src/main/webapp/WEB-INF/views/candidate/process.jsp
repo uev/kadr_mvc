@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<%@page import="org.springframework.jca.cci.core.RecordCreator"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" 
@@ -8,16 +9,22 @@
 
 <body>
 <div align="right">Пользоватль: ${nameOfPerson} [<a href="${pageContext.request.contextPath}/logout.html">Выход</a>]</div> 
-<center><h1>Личный кабинет</h1></center>
+
 <br/>
-<c:forEach var="record" items="${answers}">
-${record.key}
-<hr>
-	<c:forEach var="ans" items="${record.value}">
-		${ans.content}<br/>
+<table class="table">
+	<TBODY>
+	<c:forEach var="record" items="${answers}">
+		<tr class="item well well-large" id="${record.value.get(0).fk_queshion.id}"><td/><td>${record.key}</td></tr>
+		<c:forEach var="ans" items="${record.value}">
+			<tr class="item" id="${ans.id}"><td><input type="checkbox" value="" name="inputCheckAnsw"></td><td>${ans.content}</td></tr>
+		</c:forEach>
+	<br/>
 	</c:forEach>
-<hr/>
-</c:forEach>
+	</TBODY>
+</table>
+<center>
+	<button class="btn btn-small btn-primary offset0" type="button" onclick="pushAnswers(event);">Ответить</button>
+</center>
 <!-- 
 <table class="table table-striped">
 	<tbody>
