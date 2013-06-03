@@ -1,5 +1,7 @@
 package com.spring.mti.model;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,6 +25,7 @@ public class RelCertificationEmploye {
 	@JoinColumn(name="fk_certification")
 	private Certification fk_certification;
 	private boolean complete = false;
+	private Date datecomplete = null;
 	
 	public long getId() {
 		return id;
@@ -49,5 +52,13 @@ public class RelCertificationEmploye {
 
 	public void setComplete(boolean complete) {
 		this.complete = complete;
+	}
+
+	public Date getDatecomplete() {
+		return datecomplete;
+	}
+
+	public void setDatecomplete(Date datecomplete) {
+		this.datecomplete = datecomplete;
 	}
 }

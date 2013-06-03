@@ -1,6 +1,8 @@
 package com.spring.mti.service;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,6 +166,8 @@ public class CertificationServiceImpl implements CertificationService {
 	public void commitCertification(Employe em, Certification c){
 		RelCertificationEmploye r = this.getEmployeInCertification(em, c);
 		r.setComplete(true);
+		Date d = new Date();
+		r.setDatecomplete(d);
 		certification_employe.update(r);
 	}
 
