@@ -262,7 +262,19 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+            <plugin>
+        	<groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+<!--                <version>1.0-beta-1</version> -->
+                <configuration>
+                    <url>http://54.218.0.32:8080/manager/text</url>
+                    <server>http://54.218.0.32</server>
+                    <path>/app</path>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
         </plugins>
+         <finalName>app</finalName>
     </build>
     <repositories>
     	<repository>
