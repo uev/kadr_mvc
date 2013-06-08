@@ -282,6 +282,23 @@ public class CertificationController extends GeneralController implements BeanFa
 		return view;
 	}
 	
+	@RequestMapping(value = "/admin/certification/res.html", method = RequestMethod.GET)
+	public final ModelAndView viewCertificationResAction(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView view = verifyPermission(request.getSession());
+		if (view.getViewName() == null){
+			view.setViewName("default/index");
+			view.addObject("hscript", viewPrefix.concat("/admin/certification/scripts.jsp"));
+			view.addObject("title", "Админзона / результаты аттестаций");
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/certification/res.jsp"));
+			List<RelCertificationEmploye> r = scert.findCompletedCertifications();
+			System.out.println(r.size());
+			view.addObject("cert", r);
+		}
+		return view;
+	}
+	
+	
 	@RequestMapping(value = "/admin/certification/add.html", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> appendCertificationJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
@@ -542,5 +559,23 @@ public class CertificationController extends GeneralController implements BeanFa
 			e.printStackTrace();
 		}
 		return answ;
+	}
+	
+	@RequestMapping(value = "/admin/certification/view.html", method = RequestMethod.GET)
+	public final ModelAndView view11CertificationResAction(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView view = verifyPermission(request.getSession());
+		if (view.getViewName() == null){
+			view.setViewName("default/index");
+			view.addObject("hscript", viewPrefix.concat("/admin/certification/scripts.jsp"));
+			view.addObject("title", "Админзона / результаты аттестаций");
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/certification/view.jsp"));
+			RelCertificationEmploye r = scert.getRelationshCertificationEmploye(
+					Long.parseLong(
+							(String)request.getParameter("id")));
+			List <CertificationState> lcertstate = scert.getCertificationCompletedSession(r);
+			view.addObject("cert", slayout.decorateAnswersOnQueshions(lcertstate));
+		}
+		return view;
 	}
 }

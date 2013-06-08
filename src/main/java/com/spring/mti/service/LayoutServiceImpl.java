@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.spring.mti.model.Answer;
+import com.spring.mti.model.CertificationState;
 import com.spring.mti.model.Department;
 import com.spring.mti.model.Employe;
 import com.spring.mti.model.address.City;
@@ -84,5 +85,27 @@ public class LayoutServiceImpl implements LayoutService {
 			map.put("ans".concat(Integer.toString(i)), Arrays.asList(item.getContent(),item.isValid()));
 		}
 			return map;
+	}
+	
+	@Override
+	public List<Object> decorateAnswersOnQueshions(List<CertificationState> c){
+		List<Object> answers = new ArrayList<Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		for (CertificationState item : c){
+			try {
+				Answer a = item.getFk_answer();
+				map.put("answer", a.getContent());
+				map.put("queshion", a.getFk_queshion().getContent());
+				if (item.isValid() == a.isValid()) {
+					map.put("valid", "Верно");
+				} else {
+					map.put("valid", "Не верно");
+				}
+				answers.add(map);
+			} catch (Exception exept){
+				exept.printStackTrace();
+			}
+		}
+			return answers;
 	}
 }

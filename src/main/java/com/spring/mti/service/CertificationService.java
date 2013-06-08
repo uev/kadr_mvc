@@ -33,4 +33,8 @@ public interface CertificationService {
 	List<RelCertificationEmploye> getListCertificationByEmploye(Employe e);
 	void commitAnswer(CertificationState c);
 	void commitCertification(Employe em, Certification c);
+	List<RelCertificationEmploye> findCompletedCertifications();
+	RelCertificationEmploye getRelationshCertificationEmploye(long id);
+	List<CertificationState> getCertificationCompletedSession(
+			RelCertificationEmploye r);
 }

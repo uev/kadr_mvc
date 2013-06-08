@@ -7,5 +7,5 @@
     
 	<ul class="breadcrumb">
         <li><a href="${pageContext.request.contextPath}/admin/certification/manage.html">Создание аттестации</a><span class="divider">/</span></li>
-        <li><a href="${pageContext.request.contextPath}/admin/certification/view.html">Результаты аттестации</a><span class="divider">/</span></li>
+        <li><a href="${pageContext.request.contextPath}/admin/certification/res.html">Результаты аттестации</a><span class="divider">/</span></li>
     </ul>

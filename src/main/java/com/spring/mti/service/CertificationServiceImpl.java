@@ -21,6 +21,8 @@ import com.spring.mti.model.Queshion;
 import com.spring.mti.model.RelCertificationEmploye;
 import com.spring.mti.model.RelTestQueshion;
 import com.spring.mti.model.TestKnowledge;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 @Repository
 public class CertificationServiceImpl implements CertificationService {
@@ -220,10 +222,48 @@ public class CertificationServiceImpl implements CertificationService {
 	}
 	
 	@Override
+	public RelCertificationEmploye getRelationshCertificationEmploye(long id) {
+		List<Long> param = Arrays.asList(id);
+		try {
+			return certification_employe.findByNamedQuery("select s from RelCertificationEmploye s where id=?1",param.toArray()).get(0);
+		} catch (Exception err){
+			err.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Override
+	public List<CertificationState> getCertificationCompletedSession(RelCertificationEmploye r) {
+		List<Long> param = Arrays.asList(r.getFk_employe().getId(), r.getFk_certification().getId());
+		try {
+			return certificationStateDao.findByNamedQuery(
+					"select s from CertificationState s where s.fk_employe.id=?1 and s.fk_certification.id=?2",
+					param.toArray());
+		} catch (Exception err){
+			err.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
 	public void commitAnswer(CertificationState c) {
 		List<CertificationState> res = certificationStateDao.findByNamedQuery("select s from CertificationState s where s.id=?1",Arrays.asList(c.getId()).toArray());
 		if ( res != null && res.size()<1) {
 			certificationStateDao.create(c);
 		}
 	}
+	
+	@Override
+	public List<RelCertificationEmploye> findCompletedCertifications() {
+		List<RelCertificationEmploye> r = certification_employe.findByNamedQuery("select s from RelCertificationEmploye s where s.complete=?1", Arrays.asList(true).toArray());
+		try {
+			r.get(0);
+			return r;
+		} catch (Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
 }

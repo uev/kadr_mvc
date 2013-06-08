@@ -32,5 +32,4 @@ function pushAnswers(event){
 		});
 return 0;
 }
-
 </script>
