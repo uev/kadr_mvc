@@ -6,10 +6,12 @@
 <jsp:include page="menu.jsp" />
 	<table class="table table-striped">
     		<tbody>
-	    		<tr><td>id</td><td>Вопрос</td><td>Ответ</td><td>Результат</td></tr>
+	    		<tr><td>Вопрос</td><td>Ответ</td><td>Результат</td></tr>
 	    		<c:forEach var="record" items='${cert}'>
         			<tr>
+        				<td width="20" onClick="getQueshionInfo(event)"><c:out value="${record['queshion']}"></c:out></td>
         				<td width="20"><c:out value="${record['answer']}"></c:out></td>
+        				<td width="20"><c:out value="${record['valid']}"></c:out></td>
 					</tr>
 				</c:forEach>
 	    	</tbody>

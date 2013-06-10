@@ -137,7 +137,7 @@ function getQueshionInfo(event) {
 	var jqxhr = $.post(hname,json, function() {
 	})
 		.success(function(data) {		
-			html="<h5>Категория: " + data['category'] + "<br/>Наздание вопроса: " + data['title'] + "<br/>Содержание: " + data['content'] + "</h5>";
+			html="<h5>Категория: " + data['category'] + "<br/>Название вопроса: " + data['title'] + "<br/>Содержание: " + data['content'] + "</h5>";
 			//alert(data['count_answ']);
 			for (var i=0; i < data['count_answ']; i++){
 				//alert("Вариант "+(i+1)+": "+data['ans'+i][0]);

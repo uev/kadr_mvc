@@ -566,7 +566,7 @@ public class CertificationController extends GeneralController implements BeanFa
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
 			view.setViewName("default/index");
-			view.addObject("hscript", viewPrefix.concat("/admin/certification/scripts.jsp"));
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/queshions/scripts.jsp"));
 			view.addObject("title", "Админзона / результаты аттестаций");
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
 			view.addObject("body", viewPrefix.concat("/admin/certification/view.jsp"));

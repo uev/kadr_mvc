@@ -90,18 +90,21 @@ public class LayoutServiceImpl implements LayoutService {
 	@Override
 	public List<Object> decorateAnswersOnQueshions(List<CertificationState> c){
 		List<Object> answers = new ArrayList<Object>();
-		Map<String, Object> map = new HashMap<String, Object>();
 		for (CertificationState item : c){
+			Map<String, Object> map = new HashMap<String, Object>();
 			try {
 				Answer a = item.getFk_answer();
-				map.put("answer", a.getContent());
 				map.put("queshion", a.getFk_queshion().getContent());
-				if (item.isValid() == a.isValid()) {
-					map.put("valid", "Верно");
-				} else {
-					map.put("valid", "Не верно");
+				map.put("answer", a.getContent());
+				boolean valid = item.isValid();
+				if (valid == true){
+					if(valid == a.isValid()){
+						map.put("valid", "Верно");
+					} else {
+						map.put("valid", "Не верно");
+					}
+					answers.add(map);
 				}
-				answers.add(map);
 			} catch (Exception exept){
 				exept.printStackTrace();
 			}
