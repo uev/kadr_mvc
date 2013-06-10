@@ -267,8 +267,8 @@
                 <artifactId>tomcat-maven-plugin</artifactId>
 <!--                <version>1.0-beta-1</version> -->
                 <configuration>
-                    <url>http://54.218.0.32:8080/manager/text</url>
-                    <server>http://54.218.0.32</server>
+                    <url>http://kadrmvc.dlinkddns.com:8080/manager/text</url>
+                    <server>kadrmvc.dlinkddns.com</server>
                     <path>/app</path>
                     <skipTests>true</skipTests>
                 </configuration>
