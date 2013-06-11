@@ -31,6 +31,10 @@ public class Authorities {
 	@Transient
 	private static String admin_arole="ROLE_ADMIN";
 	
+	public long getId() {
+		return id;
+	}	
+	
 	public String getAuthority() {
 	    return authority;
 	}

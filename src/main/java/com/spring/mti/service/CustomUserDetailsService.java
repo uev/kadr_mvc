@@ -17,4 +17,5 @@ public interface CustomUserDetailsService{
 	HashMap<String, List> getAllUsersPermissions();
 	void appendCategory(Category c);
 	List<Users> getAllUsers();
+	Users getUserByLoginId(long id);
 }

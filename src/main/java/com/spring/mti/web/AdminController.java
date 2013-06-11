@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -145,8 +146,7 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 	
 	
 	/*
-	 * Удаление  логина. Разрушение связи Пользователь <=> Логин 
-	 */
+	 * Удаление  логина. Разрушение связи Пользователь <=> Логин  
 	@RequestMapping(value = "/admin/unbindlogin.html", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView unbindloginAction(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
@@ -173,6 +173,66 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 		}
 		return view;	
 	}
+	*/
+	
+	@RequestMapping(value = "/admin/unbindlogin.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> popDepartmentJson(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		System.out.println("Entering removing...");
+		String key = request.getParameter("hash");
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+			String loginid = request.getParameter("id");
+			Map<String, Object> answ = new HashMap<String, Object>();
+			System.out.println("Comparing loginid woth null");
+			System.out.println(loginid);
+			if (loginid != null){
+				Users rmuser = authStorage.getUserByLoginId(Long.parseLong(loginid));
+				System.out.println("login not null. Trying unbind");
+				try {
+					log.debug("Try unbindeng ".concat(rmuser.getUsername()));
+					authStorage.deleteUser(rmuser);
+					answ.put("error", 0);
+					} catch(Exception e){
+						answ.put("error", 1);
+						log.error("Error unbinding login ".concat(rmuser.getUsername()));
+						e.printStackTrace();
+				}		
+				return answ;
+			}
+		}	
+		return null;
+	}
+	
+	/* issue 18
+	@RequestMapping(value = "/admin/unbidsasdandlogin.html", method = RequestMethod.POST)
+	public ModelAndView unbindloginAction(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		ModelAndView view = verifyPermission(request.getSession());
+		log.info("Enter to unbindlogin");
+		String key = request.getParameter("hash");
+		if (view.getViewName() == null){
+			log.debug("Set view admin/accounting");
+			view.setViewName("admin/accounting");
+			view.addObject("rmusers", 1);
+			view.addObject("title", "Админзона / удаление логина");
+			view.addObject("form_unbind", request.getRequestURL());
+			String username = request.getParameter("login");
+			if  (username != null) { 
+				try {
+					log.debug(username);
+					authStorage.deleteUser(authStorage.getUserByLoginName(username));
+					view.addObject("error", 0);
+				} catch (Exception e){
+					log.error("Error removing login");
+					view.addObject("error", 1);
+					e.printStackTrace();
+				}
+			}
+		}
+		return view;	
+	}
+	*/
+	
 	
 	/*
 	 *  Привязка пользователя к логину (представление) 

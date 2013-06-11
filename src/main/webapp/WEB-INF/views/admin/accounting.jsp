@@ -31,6 +31,25 @@
 			});
     	return 0;
     }
+    
+    function popAccount(event) {
+    	var hname = "${pageContext.request.contextPath}/admin/unbindlogin.html";
+    	var hash = "dcd95bcb84b09897b2b66d4684c040da";
+    	var json={'hash' : hash, 'id' : $(event.target).attr("id")};
+    	var jqxhr = $.post(hname,json, function() {
+    	})
+    		.success(function(data) {		
+    			if (data['error'] == 1) {
+    				alert("Не удалось удалить аккаунт");
+    			}
+    			if(data['error'] == 0) {
+    				alert("Аккаунт удалён");
+    				location.reload();
+    			}
+    			location.reload();
+    		});
+    	return 0;
+    }
     </script>
 </head>
 <body>
@@ -46,14 +65,13 @@
     <ul class="breadcrumb">
     <!--  <li><a href="admin.html?accounting&listacc">Просмотр пользователей</a> <span class="divider">/</span></li> -->
     <li><a href="bindlogin.html">Привязка пользователя к аккаунту</a> <span class="divider">/</span></li>
-    <li><a href="unbindlogin.html">Удаление аккаунта</a> <span class="divider">/</span></li>
     </ul>
 
     <!-- List users  -->
     <c:if test="${json != null}">
     	<table class="table table-striped">
     		<tbody>
-    			<tr><td></td><td>Логин</td><td>ФИО</td><td>Подразделение</td><td>Роль</td><td>Страна</td><td>Регион</td><td>Населённый пункт</td></tr>
+    			<tr><td></td><td>Логин</td><td>ФИО</td><td>Подразделение</td><td>Роль</td><td>Страна</td><td>Регион</td><td>Населённый пункт</td><td>Доступные операции</td></tr>
     			<c:forEach var="record" items="${json}">
     		    	<tr>
     						<td></td>
@@ -64,6 +82,7 @@
         					<td><c:out value="${record.country}"></c:out></td>
         					<td><c:out value="${record.region}"></c:out></td>
         					<td><c:out value="${record.city}"></c:out></td>
+        					<td><a href="#" id="${record.id}" onClick="popAccount(event)">Удаление аккаунта</a></td>
     		   		</tr>      
     			</c:forEach>
 	    	</tbody>

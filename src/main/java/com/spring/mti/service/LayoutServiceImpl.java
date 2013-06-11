@@ -29,7 +29,6 @@ public class LayoutServiceImpl implements LayoutService {
 			map.put("department", "Не указан"); 
 		}	
 		map.put("fio", item.getFio());
-		map.put("id", item.getId());
 		return map;
 	}
 	
@@ -39,6 +38,7 @@ public class LayoutServiceImpl implements LayoutService {
 		for (Employe item : e){
 			try {
 				Map<String, Object> map = decorateMapEmploye(item);
+				map.put("id",item.getId());
 				answer.add(map);
 			} catch (Exception exept){
 				exept.printStackTrace();
@@ -62,10 +62,10 @@ public class LayoutServiceImpl implements LayoutService {
 				map.put("country", non);
 				map.put("department", non);
 				map.put("fio", non);
-				map.put("id", non);
 			}	
 			map.put("role", item.getFk_role().getRname());
 			map.put("username", item.getFk_user().getUsername());
+			map.put("id",item.getFk_user().getId());
 			answer.add(map);
 		}
 			return answer;

@@ -72,8 +72,13 @@ public class UserDetailsServiceImpl implements UserDetailsService, CustomUserDet
 		} else {
 			return new Users();
 		}
-	}	
+	}
 	
+	@Override
+	public Users getUserByLoginId(long id) { 
+		return dao.getByid(new Users(), id);
+	}	
+
 	@Override
 	public void setSalt(Users user){
 		user.setPassword(passwordEncoder.encodePassword(user.getPassword(), saltSource.getSalt(new UsersDetailImpl(user))));
