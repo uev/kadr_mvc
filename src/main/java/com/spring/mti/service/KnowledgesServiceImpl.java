@@ -21,6 +21,12 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 	
 	@Override
 	public void createQueshion(String name) {
+		if (this.getQueshionByName(name) == null) {
+			Queshion q = new Queshion();
+			q.setName(name);
+			queshionDao.create(q);
+		}
+		/*
 		List<String> ls = new ArrayList<String>();
 		ls.add(name);
 		List<Queshion>res = queshionDao.findByNamedQuery("select s from Queshion s where s.name=?1",ls.toArray());
@@ -29,6 +35,7 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 			q.setName(name);
 			queshionDao.create(q);
 		}
+		*/
 	}
 	
 	@Override
@@ -82,6 +89,12 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 	
 	@Override
 	public void createAnswer(String name) {
+		if (this.getAnswerByContent(name) == null) {
+			Answer a = new Answer();
+			a.setContent(name);
+			answerDao.create(a);
+		}	
+		/*
 		List<String> ls = new ArrayList<String>();
 		ls.add(name);
 		List<Answer>res = answerDao.findByNamedQuery("select s from Answer s where s.content=?1",ls.toArray());
@@ -89,7 +102,7 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 			Answer q = new Answer();
 			q.setContent(name);
 			answerDao.create(q);
-		}
+		}*/
 	}
 	
 	@Override
