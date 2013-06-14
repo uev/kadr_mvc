@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" 
            uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="../menu.jsp" />
+<jsp:include page="menu.jsp" />
 	    <table class="table table-striped">
     		<tbody>
     			<tr><td></td><td>ФИО</td><td>Подразделение</td><td>Страна</td><td>Регион</td><td>Населённый пункт</td><td>Доступные операции</td></tr>
