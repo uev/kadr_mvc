@@ -55,4 +55,23 @@ function getFioItem(){
 	$("input[name='person']").val($("input[name='radiogroup']:checked").val());
 	return 0;
 }
+
+function popEmploye(event) {
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/persons/rm.html";
+	var hash = "dcd95bcb84b09897b2b66d4684c040da";
+	var json={'hash' : hash, 'id' : $(event.target).attr("id")};
+	var jqxhr = $.post(hname,json, function() {
+	})
+		.success(function(data) {		
+			if (data['error'] == 1) {
+				alert("Не удалось удалить запись");
+			}
+			if(data['error'] == 0) {
+				alert("Запись удалёна");
+				location.reload();
+			}
+			location.reload();
+		});
+	return 0;
+}
 </script>

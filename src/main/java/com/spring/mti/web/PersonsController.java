@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.mti.model.Department;
 import com.spring.mti.model.Employe;
+import com.spring.mti.model.Queshion;
 import com.spring.mti.model.address.City;
 import com.spring.mti.service.AddressService;
 import com.spring.mti.service.DictionaryService;
@@ -122,5 +123,40 @@ public class PersonsController extends GeneralController implements BeanFactoryA
 			}
 		}
 		return map;	
-	}	
+	}
+	
+	@RequestMapping(value = "/admin/dictionary/persons/rm.html", method = RequestMethod.GET)
+	public final ModelAndView popPersonAction(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView view = verifyPermission(request.getSession());
+		if (view.getViewName() == null){
+			//view.setViewName("admin/dictionary/persons/index");
+			view.setViewName("default/index");
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/persons/scripts.jsp"));
+			view.addObject("title", "Админзона / удаление удаление пользователя");
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/persons/rm.jsp"));
+			view.addObject("employers", slayout.employeToMapJson(sdict.getEmployeAll()));
+		}
+		return view;
+	}
+	
+	@RequestMapping(value = "/admin/dictionary/persons/rm.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> popQueshionJson(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		String key = request.getParameter("hash");
+		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+			Map<String, Object> answ = new HashMap<String, Object>();
+			String id = request.getParameter("id");
+			try{
+				Employe q = sdict.getEmployeById(Long.parseLong(id));
+				sdict.deleteEmploye(q);
+				answ.put("error", 0);
+			} catch (Exception e) {
+				e.printStackTrace();
+				answ.put("error", 1);
+			}
+			return answ;
+		} 
+		return null;
+	}
 }

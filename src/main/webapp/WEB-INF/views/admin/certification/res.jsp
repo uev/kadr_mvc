@@ -7,6 +7,7 @@
 	<table class="table table-striped">
     		<tbody>
 	    		<tr><td>id</td><td>Дата</td><td>Заголовок аттестации</td><td>Аттестуемый</td><td>Доступная операция</td></tr>
+	    		<c:if test="${cert} != null}">
 	    		<c:forEach var="record" items='${cert}'>
         			<tr>
         				<td width="20"><c:out value="${record.id}"></c:out></td>
@@ -18,5 +19,6 @@
 					</tr>
 					<div id="${record.id}"></div>
 				</c:forEach>
+				</c:if>
 	    	</tbody>
 	</table>

@@ -292,7 +292,6 @@ public class CertificationController extends GeneralController implements BeanFa
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
 			view.addObject("body", viewPrefix.concat("/admin/certification/res.jsp"));
 			List<RelCertificationEmploye> r = scert.findCompletedCertifications();
-			System.out.println(r.size());
 			view.addObject("cert", r);
 		}
 		return view;
