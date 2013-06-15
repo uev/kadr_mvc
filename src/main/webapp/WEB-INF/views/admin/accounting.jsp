@@ -53,9 +53,10 @@
     </script>
 </head>
 <body>
-<center><h1>${title}</h1></center>
-<div class="container-fluid">
 
+<div class="container">
+<div class ="hatsite"><br/></div>
+<center><h1>${title}</h1></center>
 	<div class="row-fluid" >
     	<div class="span2">
     		<jsp:include page="menu.jsp" />

@@ -7,10 +7,11 @@
 <jsp:include page="header.jsp" />
 
 <body>
+<div class="container">
+<div class="hatsite"><br/></div>
 <c:if test="${title != null}">
 	<center><h1>${title}</h1></center>
 </c:if>
-<div class="container-fluid">
 	<div class="row-fluid" >
     	<c:if test="${menu != null}">
     		<div class="span2">

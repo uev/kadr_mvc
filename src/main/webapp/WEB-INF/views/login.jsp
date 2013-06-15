@@ -6,8 +6,11 @@
 </head>
 <body>
 	<div class="container" align = "center">
+    
+    <div class="hatsite"><br/></div>
     <div class="content">
       <div class="row">
+        <br/><hr/>
         <div class="login-form">
           <h2>Вход в систему</h2>
           <form action="login.html" method="post">
@@ -18,7 +21,7 @@
               <div class="clearfix">
                 <input type="password" placeholder="Пароль" name="password">
               </div>
-              <button class="btn btn-large btn-primary" type="submit">Войти</button>
+              <input class="btn btn-primary btn-custom-login" type="submit" value="       Войти       ">
             </fieldset>
           </form>
         </div>
