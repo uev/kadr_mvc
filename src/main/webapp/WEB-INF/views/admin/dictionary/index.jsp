@@ -7,9 +7,9 @@
 <jsp:include page="/WEB-INF/views/default/header.jsp" />
 </head>
 <body>
-
+<jsp:include page="/WEB-INF/views/default/navbar.jsp" />
 <div class="container">
-<div class ="hatsite"><br/></div>
+<div class ="hatsite"></div>
 <center><h1>${title}</h1></center>
 	<div class="row-fluid" >
     	<div class="span2">

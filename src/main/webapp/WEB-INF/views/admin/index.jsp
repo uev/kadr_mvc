@@ -6,7 +6,7 @@
 
 <body>
 
-
+<jsp:include page="/WEB-INF/views/default/navbar.jsp" />
 <div class="container">
 	<div class ="hatsite"><br/></div>
 	<center><h1>Админзона</h1></center>

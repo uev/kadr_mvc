@@ -9,7 +9,7 @@
         <li><a href="${pageContext.request.contextPath}/report_patterns.html">Управление шаблонами</a></li>
         <li><a href="${pageContext.request.contextPath}/admin/dictionary/index.html">Справочники</a></li>
         <li><a href="${pageContext.request.contextPath}/admin/certification/index.html">Аттестация</a></li>
-        <li><a href="${pageContext.request.contextPath}/logout.html">Выход</a></li>
+        <!-- <li><a href="${pageContext.request.contextPath}/logout.html">Выход</a></li>  -->
         <!--<li><a href="<c:url value="logout.html"/>">Выход</a></li>  -->
     </ul>
 </div>

@@ -5,13 +5,14 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 
 <jsp:include page="header.jsp" />
-
 <body>
+<jsp:include page="/WEB-INF/views/default/navbar.jsp" />
 <div class="container">
-<div class="hatsite"><br/></div>
-<c:if test="${title != null}">
-	<center><h1>${title}</h1></center>
-</c:if>
+<div class="hatsite">
+</div>
+	<c:if test="${title != null}">
+		<center><h2>${title}</h2></center>
+	</c:if>
 	<div class="row-fluid" >
     	<c:if test="${menu != null}">
     		<div class="span2">

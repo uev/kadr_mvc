@@ -25,16 +25,15 @@
     -moz-border-radius-bottomright: 6px;
     -moz-border-radius-topleft: 6px;
     -moz-border-radius-topright: 6px;
-    background-repeat: repeat;
+    background-repeat: no-repeat;
     background-attachment: scroll;
     background-color: transparent;
     background-image: url("logo.jpg");
     background-position: center center;
-    
     line-height: 30px;
     margin-bottom: 20px;
     padding-bottom: 30px;
     padding-left: 30px;
     padding-right: 30px;
-    padding-top: 60px;
+    padding-top: 80px;
 }
