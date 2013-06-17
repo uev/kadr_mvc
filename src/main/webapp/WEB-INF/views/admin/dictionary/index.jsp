@@ -21,7 +21,8 @@
     	</div>
     </div>
 </div>
-<script src="resources/bootstrap/js/bootstrap.js"></script>
-<script src="resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="<s:url value="/resources/bootstrap" />/js/bootstrap.js"></script>
+<script src="<s:url value="/resources/bootstrap" />/js/bootstrap.min.js"></script>
+<script src="<s:url value="/resources/bootstrap" />/assets/js/bootstrap-dropdown.js"></script>
 </body>
-<jsp:include page="/WEB-INF/views/default/header.jsp" />
+<jsp:include page="/WEB-INF/views/default/footer.jsp" />

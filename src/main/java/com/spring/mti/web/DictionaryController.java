@@ -52,8 +52,10 @@ public class DictionaryController extends GeneralController implements BeanFacto
 	public final ModelAndView mainViewDictionary(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
-			view.setViewName("admin/dictionary/index");
+			view.setViewName("default/index");
 			view.addObject("title", "Админзона / cправочники");
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/menu.jsp"));
 		}
 		return view;
 	}

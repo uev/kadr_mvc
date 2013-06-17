@@ -110,7 +110,7 @@
 				</c:forEach>
 			</select>
             </div>
-              <button class="btn btn-large btn-primary" type="button" onClick="bindlogin()">Создать</button>
+            <input class="btn btn-primary btn-custom-login" onClick="bindlogin()" type="button" value="       Создать       " /><br/><br/>
 		  <table class="table table-striped">
     		<tbody>
 	    		<tr><td></td><td>id</td><td>ФИО</td><td>Подразделение</td><td>Страна</td><td>Регион</td><td>Населённый пункт</td></tr>
