@@ -81,7 +81,7 @@ public class IndexController extends GeneralController implements BeanFactoryAwa
 				view.addObject("cert", clst);
 				}
 			}
-			if (authStorage.isAdminRoleSet((String)session.getAttribute("login"))){
+			if (authStorage.isAdminRoleSet(login)){
 				//админка
 				log.debug("Set view admin/index");
 				//view.setViewName("candidate/index");

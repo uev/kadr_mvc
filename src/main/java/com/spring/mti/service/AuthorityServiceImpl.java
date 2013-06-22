@@ -76,4 +76,10 @@ public class AuthorityServiceImpl implements AuthorityService {
 	public Role getRoleByContent(String role) {
 		return rolesDao.findByNamedQuery("select s from Role s where s.content=?1",Arrays.asList(role).toArray()).get(0); 	
 	}
+	
+	@Override
+	public Authorities getPermissionByUserName(String name) {
+		return authDao.findByNamedQuery("select s from Authorities s,Users t where t.username=?1 and s.fk_user.id=t.id", 
+				Arrays.asList(name).toArray()).get(0);
+	}
 }

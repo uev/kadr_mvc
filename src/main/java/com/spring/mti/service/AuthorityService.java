@@ -17,4 +17,5 @@ public interface AuthorityService {
 	public Role getRoleByName(String role);
 	List<Authorities> getAllPermissions();
 	Role getRoleByContent(String role);
+	Authorities getPermissionByUserName(String name);
 }

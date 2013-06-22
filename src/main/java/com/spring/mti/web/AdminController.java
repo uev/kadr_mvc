@@ -138,12 +138,12 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 			view.setViewName("admin/accounting");
 			//view.addObject("json", authStorage.getAllUsersPermissions());
 			List<Authorities> la = sauth.getAllPermissions();
+			la.remove(sauth.getPermissionByUserName((String)s.getAttribute("login")));
 			view.addObject("json", slayout.authorityToMapJson(la));
 			view.addObject("title", "Админзона / управление логинами");
 		}
 		return view;	
 	}
-	
 	
 	/*
 	 * Удаление  логина. Разрушение связи Пользователь <=> Логин  

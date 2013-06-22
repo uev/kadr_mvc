@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+import com.spring.mti.model.Queshion;
+
 @Entity
 public class Authorities {
 	
@@ -94,5 +96,26 @@ public class Authorities {
 
 	public void setFk_role(Role fk_role) {
 		this.fk_role = fk_role;
+	}
+	
+	@Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj == this)
+            return true;
+        if (obj.getClass() == this.getClass()){
+        	Authorities a = (Authorities) obj;
+        	if (a.id == this.id && this.fk_user.getId() == a.fk_user.getId() && this.fk_role.getId() == a.fk_role.getId()) 
+        		return true;
+        }
+        return false;
+    }
+	
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		Long l = (Long)this.id; 
+		return l.intValue()*112;
 	}
 }
