@@ -90,6 +90,7 @@ public class PersonsController extends GeneralController implements BeanFactoryA
 			view.addObject("title", "Админзона / закрепление пользователей за департаментами");
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
 			view.addObject("body", viewPrefix.concat("/admin/dictionary/persons/bind_dep.jsp"));
+			view.addObject("departmentList", sdict.getAllDepartments());
 			view.addObject("employeList", slayout.employeToMapJson(sdict.getEmployeAll()));
 		}
 		return view;

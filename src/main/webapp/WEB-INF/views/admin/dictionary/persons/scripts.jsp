@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" 
            uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
+/*
 function getDict(arg){
 	//var hname = "http://localhost:8080/uev61/json/";
 	var hname = "json/";
@@ -28,6 +29,7 @@ function getDict(arg){
 	}
 	return 0;
 }
+*/
 
 function bindDep() {
 	//var hname = "http://localhost:8080/uev61/json/recbykey.html";

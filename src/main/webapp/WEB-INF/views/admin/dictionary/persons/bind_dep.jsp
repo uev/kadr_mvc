@@ -16,8 +16,11 @@
          		<div class="control-group">
          			<label class="control-label" for="selectDepartment">Подразделение</label>
          			<div class="clearfix controls">
-         				<select  placeholder="Подразделение" name="city" id="selectDepartment" onClick="getDict('#selectDepartment');">
+         				<select  placeholder="Подразделение" name="city" id="selectDepartment">
 							<option></option>
+							<c:forEach var="i" items="${departmentList}">
+								<option>${i.name}</option>
+						</c:forEach>
 			  			</select>
            	 		</div>
            	 		           	 		      	
