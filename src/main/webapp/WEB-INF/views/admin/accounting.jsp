@@ -6,32 +6,6 @@
 
 <jsp:include page="../default/header.jsp" />
     <script>
-    function bindlogin(){
-    	var hash = "dcd95bcb84b09897b2b66d4684c040da";
-    	var url = "${pageContext.request.contextPath}/admin/json/bindlogin.html";
-    	var json={'hash' : hash, 'login' : $("input[name='login']").val(),
-    			'password' : $("input[name='password']").val(),
-    			'role' : $("#selectRole :selected").val(),
-    			'idemp' : $("input[name='radiogroup']:checked").val()
-    			};
-    	var jqxhr = $.post(url,json, function() {
-		})
-			.done(function(data) { 
-				if (data['error'] == 1) {
-					alert("Логин уже связан с одним из пользователей или на сервере проблемы");
-				}
-				if(data['error'] == 0) {
-					alert("Логин успешно привязан к пользователю");
-				}
-				//cleaning components
-				$("input[name='radiogroup']").prop('checked', false);
-				$("#selectRole").prop('selectedIndex', -1);
-				$("input[name='password']").val('');
-				$("input[name='login']").val('');
-			});
-    	return 0;
-    }
-    
     function popAccount(event) {
     	var hname = "${pageContext.request.contextPath}/admin/unbindlogin.html";
     	var hash = "dcd95bcb84b09897b2b66d4684c040da";
@@ -91,45 +65,7 @@
 	</c:if>
 	<center>
 	
-	<!-- Binding login  -->
-	<c:if test="${roles != null}">
-    	 
-    	 <form>
-            <fieldset>
-              <div class="clearfix">
-                <input type="text" placeholder="Логин" name="login">
-              </div>
-              <div class="clearfix">
-                <input type="password" placeholder="Пароль" name="password">
-              </div>
-             <div class="clearfix">
-              <select  placeholder="Роль" name="role" id="selectRole">
-				<option></option>
-				<c:forEach var="i" items="${roles}">
-					<option>${i.rname}</option>
-				</c:forEach>
-			</select>
-            </div>
-            <input class="btn btn-primary btn-custom-login" onClick="bindlogin()" type="button" value="       Создать       " /><br/><br/>
-		  <table class="table table-striped">
-    		<tbody>
-	    		<tr><td></td><td>id</td><td>ФИО</td><td>Подразделение</td><td>Страна</td><td>Регион</td><td>Населённый пункт</td></tr>
-	    		<c:forEach var="record" items='${allemp}'>
-        			<tr>
-        				<td><input type="radio" value=${record.id} name="radiogroup"></td>
-        				<td><c:out value="${record.id}"></c:out></td>
-        				<td><c:out value="${record.fio}"></c:out></td>
-        				<td><c:out value="${record.department}"></c:out></td>
-        				<td><c:out value="${record.country}"></c:out></td>
-        				<td><c:out value="${record.region}"></c:out></td>
-        				<td><c:out value="${record.city}"></c:out></td>
-					</tr>
-				</c:forEach>
-	    	</tbody>
-	    </table>
-	    </fieldset>
-          </form>
-	</c:if>
+
     <!-- Unbinding login  -->
     
     <c:if test="${rmusers != null}">

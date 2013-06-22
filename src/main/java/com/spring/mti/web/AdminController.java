@@ -243,11 +243,13 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 		ModelAndView view = verifyPermission(request.getSession());
 		log.info("Enter to bindlogin");
 		if (view.getViewName() == null){	
-			view.setViewName("admin/accounting");
+			view.setViewName("default/index");
+			view.addObject("hscript", viewPrefix.concat("/default/script.jsp"));
 			String login = request.getParameter("login");
 			String role = request.getParameter("role");
 			view.addObject("title", "Админзона / добавление логина");
-			view.addObject("form_bind", request.getRequestURL());
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/bindlogin.jsp"));
 			view.addObject("form_bind", request.getRequestURL());
 			List<Object> sss= slayout.employeToMapJson(sdict.getEmployeAll());
 			view.addObject("allemp", sss);
