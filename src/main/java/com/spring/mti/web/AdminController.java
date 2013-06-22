@@ -308,7 +308,7 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 						log.info("Bind login");
 						authStorage.setSalt(user);
 						authStorage.createUser(user);
-						sauth.setPermissions(user, sauth.getRoleByName(role));
+						sauth.setPermissions(user, sauth.getRoleByContent(role));
 						answ.put("error", 0);
 					}
 					catch(Exception e) {

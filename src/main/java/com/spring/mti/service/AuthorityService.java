@@ -16,4 +16,5 @@ public interface AuthorityService {
 	void setPermissions(Users user, Role role);
 	public Role getRoleByName(String role);
 	List<Authorities> getAllPermissions();
+	Role getRoleByContent(String role);
 }

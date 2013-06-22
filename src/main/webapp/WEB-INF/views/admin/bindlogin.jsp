@@ -17,7 +17,7 @@
               		<select  placeholder="Роль" name="role" id="selectRole">
 						<option></option>
 						<c:forEach var="i" items="${roles}">
-							<option>${i.rname}</option>
+							<option>${i.content}</option>
 						</c:forEach>
 					</select><span class="divider" style="padding-right:5px;"> </span>
 			 		<input class="btn btn-primary btn-custom-login" onClick="bindlogin()" type="button" value="       Создать       " /><span class="divider" style="padding-right:5px;"> </span>

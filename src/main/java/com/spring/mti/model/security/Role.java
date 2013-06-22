@@ -16,6 +16,7 @@ public class Role {
 	@SuppressWarnings("restriction")
 	@NotNull
 	private String rname;
+	private String content;
 
 	public long getId() {
 		return id;
@@ -27,5 +28,9 @@ public class Role {
 
 	public void setRname(String rname) {
 		this.rname = rname;
-	}	
+	}
+
+	public String getContent() {
+		return content;
+	}
 }

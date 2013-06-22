@@ -63,7 +63,7 @@ public class LayoutServiceImpl implements LayoutService {
 				map.put("department", non);
 				map.put("fio", non);
 			}	
-			map.put("role", item.getFk_role().getRname());
+			map.put("role", item.getFk_role().getContent());
 			map.put("username", item.getFk_user().getUsername());
 			map.put("id",item.getFk_user().getId());
 			answer.add(map);

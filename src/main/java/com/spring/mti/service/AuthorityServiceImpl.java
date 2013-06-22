@@ -1,6 +1,7 @@
 package com.spring.mti.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,5 +70,10 @@ public class AuthorityServiceImpl implements AuthorityService {
 		List<String> r = new ArrayList<String>();
 		r.add(role);
 		return rolesDao.findByNamedQuery("select s from Role s where s.rname=?1",r.toArray()).get(0); 	
+	}
+	
+	@Override
+	public Role getRoleByContent(String role) {
+		return rolesDao.findByNamedQuery("select s from Role s where s.content=?1",Arrays.asList(role).toArray()).get(0); 	
 	}
 }
