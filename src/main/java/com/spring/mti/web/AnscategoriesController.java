@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.mti.service.DictionaryService;
+import com.spring.mti.service.KnowledgesService;
 
 /*
  * Class for categories snswers
@@ -24,12 +25,14 @@ import com.spring.mti.service.DictionaryService;
 @Controller
 public class AnscategoriesController extends GeneralController implements BeanFactoryAware{
 	private DictionaryService sdict;
+	private KnowledgesService sksrv;
 	static Logger log = Logger.getLogger(LoginController.class.getName());
 
 	@Override
 	public void setBeanFactory(BeanFactory context) throws BeansException {
 		super.setBeanFactory(context);
 		sdict = (DictionaryService)context.getBean("serviceDictionary");
+		sksrv = (KnowledgesService)context.getBean("serviceKnowledges");
 	}
 	
 	@RequestMapping(value = "/admin/dictionary/knowledges/anscategories/index.html", method = RequestMethod.GET)
@@ -131,9 +134,11 @@ public class AnscategoriesController extends GeneralController implements BeanFa
 		if (view.getViewName() == null){
 			//view.setViewName("admin/dictionary/persons/index");
 			view.setViewName("default/index");
-			view.addObject("title", "Админзона / удаление категории");
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/queshions/scripts.jsp"));
+			view.addObject("title", "Админзона / просмотр содержимого категории");
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
 			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/anscategories/list.jsp"));
+			view.addObject("queshions", sksrv.getQueshionsFromCategory(Long.parseLong(request.getParameter("id"))));
 			//view.addObject("body", viewPrefix.concat("/admin/dictionary/persons/index.jsp"));
 		}
 		return view;

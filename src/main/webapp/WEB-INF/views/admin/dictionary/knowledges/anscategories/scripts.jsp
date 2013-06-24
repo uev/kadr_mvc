@@ -28,11 +28,12 @@ function appendCategory() {
 }
 
 
-function popCategory() {
+function popCategory(event) {
 	//var hname = "http://localhost:8080/uev61/json/recbykey.html";
 	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/anscategories/rm.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
-	var json={'hash' : hash, 'category' : $("input[name='category']").val()};
+	//var json={'hash' : hash, 'category' : $("input[name='category']").val()};
+	var json={'hash' : hash, 'category' : $(event.target).attr("id")};
 	var jqxhr = $.post(hname,json, function() {
 	})
 		.success(function(data) {		

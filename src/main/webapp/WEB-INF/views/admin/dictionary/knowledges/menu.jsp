@@ -13,9 +13,7 @@
          		<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
             		<li role="presentation"><a  role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/anscategories/add.html">Создание категории</a></li>
     				<li role="presentation" class="divider"></li>
-    				<li role="presentation"><a  role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/anscategories/rm.html">Удаление категории</a></li>
-    				<li role="presentation" class="divider"></li>
-    				<li role="presentation"><a  role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/anscategories/list.html">Просмотр содержимого категорий</a></li>
+    				<li role="presentation"><a  role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/anscategories/rm.html">Управление категориями</a></li>
          		</ul>
          <li>
          
@@ -26,9 +24,7 @@
             	<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
          			<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/add.html">Добавить вопрос</a></li>
             		<li role="presentation" class="divider"></li>
-            		<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/rm.html">Удалить вопрос</a></li>
-            		<li role="presentation" class="divider"></li>
-            		<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/edit.html">Редактировать вопрос</a></li>
+            		<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/rm.html">Управление вопросами</a></li>
          		</ul>
          </li>
          

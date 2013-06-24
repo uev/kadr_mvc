@@ -157,4 +157,9 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 	public void updateAnswerRelation(Answer a){
 		answerDao.update(a);
 	}
+	
+	@Override
+	public List<Queshion> getQueshionsFromCategory(long id){
+		return queshionDao.findByNamedQuery("select s from Queshion s where s.fk_catgory.id=?1", Arrays.asList(id).toArray());
+	}
 }

@@ -19,4 +19,5 @@ public interface KnowledgesService {
 	Queshion getQueshionById(Long id);
 	void deleteAnswersByQueshionId(Long id);
 	Answer getAnswerById(Long id);
+	List<Queshion> getQueshionsFromCategory(long id);
 }
