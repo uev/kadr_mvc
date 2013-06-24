@@ -22,11 +22,12 @@ function appendDep() {
 	return 0;
 }
 
-function popDep() {
+function popDep(event) {
 	//var hname = "http://localhost:8080/uev61/json/recbykey.html";
 	var hname = "${pageContext.request.contextPath}/admin/dictionary/departments/rm.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
-	var json={'hash' : hash, 'department' : $("input[name='department']").val()};
+	//var json={'hash' : hash, 'department' : $("input[name='department']").val()};
+	var json={'hash' : hash, 'department' : $(event.target).attr("id")};
 	var jqxhr = $.post(hname,json, function() {
 	})
 		.success(function(data) {		
