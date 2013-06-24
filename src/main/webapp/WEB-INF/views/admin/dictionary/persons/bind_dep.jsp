@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" 
            uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="menu.jsp" />
+<jsp:include page="../menu.jsp" />
 <br/>
-	<form class="form-horizontal span9 offset3">
+	<form class="form-horizontal span10 offset3">
          		<div class="control-group">
          			<label class="control-label" for="inputPerson">Имя пользователя</label>
     	 			<div class="clearfix  controls">
@@ -25,7 +25,9 @@
            	 		</div>
            	 		           	 		      	
            	 	</div>
-    <button class="btn btn-small btn-primary control-group span2 offset3" type="button" onclick="bindDep();">Закрепить</button>
+    
+    <input class="btn btn-primary btn-custom-login offset4" type="button" value="  Закрепить  " onclick="bindDep();" />
+   
     <br/>
     </form>
         <table class="table table-striped">

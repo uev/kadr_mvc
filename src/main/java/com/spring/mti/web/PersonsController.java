@@ -75,7 +75,11 @@ public class PersonsController extends GeneralController implements BeanFactoryA
 				last.setFk_city(c);
 				sdict.updateEmployeRelation(last);
 			}
-			view.setViewName("admin/dictionary/persons/add");
+			//view.setViewName("admin/dictionary/persons/add");
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/persons/scripts.jsp"));
+			view.setViewName("default/index");
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/persons/add.jsp"));
 		}
 		return view;
 	}

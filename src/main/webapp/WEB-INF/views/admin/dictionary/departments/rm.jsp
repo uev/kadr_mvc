@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" 
            uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="menu.jsp" />
+<jsp:include page="../menu.jsp" />
 	<form 
   		class="form-horizontal span6">
          		<input type="text" placeholder="Название подразделения" name="department" id="inputDepartment">
