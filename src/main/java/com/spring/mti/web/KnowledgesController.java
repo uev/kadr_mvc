@@ -136,8 +136,7 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 		String key = request.getParameter("hash");
 		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
 			Map<String, Object> answ = new HashMap<String, Object>();
-			String queshion = request.getParameter("queshion");
-			Queshion q = sknow.getQueshionByName(queshion);
+			Queshion q = sknow.getQueshionById(Long.parseLong(request.getParameter("queshion")));
 			try{
 				sknow.deleteQueshion(q);
 				answ.put("error", 0);
