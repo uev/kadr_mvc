@@ -6,9 +6,10 @@
 <jsp:include page="menu.jsp" />
 	<form 
   		class="form-inline">
-         		<input type="text" placeholder="Заголовок аттестации" name="cert" id="inputCert"  class="span11">
-         		&nbsp&nbsp&nbsp&nbsp
-         		<button class="btn btn-small btn-primary offset0" type="button" onclick="appendCert();">Добавить</button>
+         		<input type="text" placeholder="Заголовок аттестации" name="cert" id="inputCert"  class="span10">
+         		
+         		<input class="btn btn-primary btn-custom-login offset0" type="button" value="	Добавить		" onclick="appendCert();" />
+         		
 	<br>
 	<br>
 	<table class="table table-striped">

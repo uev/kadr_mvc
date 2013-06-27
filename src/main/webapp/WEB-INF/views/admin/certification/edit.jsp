@@ -11,7 +11,7 @@
               	<legend>Тесты</legend>
               </fieldset>
               <br/>
-              <select  placeholder="Тест" name="test" id="selectTest" class="span11">
+              <select  placeholder="Тест" name="test" id="selectTest" class="span10">
 				<option></option>
 				<c:forEach var="i" items="${tests}">
 					<c:choose>
@@ -24,11 +24,11 @@
 					</c:choose>
 				</c:forEach>
 			   </select>
-			   <button class="btn btn-small btn-primary" type="button" onClick="setTest(event);">Сохранить</button>
+			   <input class="btn btn-primary btn-custom-login offset0" type="button" value="       Сохранить       " onClick="setTest(event);" />
             </div>
             <fieldset id ="certtitle">
             	<legend>${cert_title['name']}</legend>
-            </fieldset>
+            </fieldset><br/>
             <div class="clearfix control-group">
               <label class="control-label" for="selectDepartment">Департамент</label>
               <select  placeholder="Департамент" name="department" id="selectDepartment" onClick="getEmployers();">
@@ -38,11 +38,12 @@
 				</c:forEach>
 			   </select>
 			   
-			  <label class="control-label" for="selectEmploye">&nbsp&nbsp&nbsp&nbspСлужащий</label>
-              <select  placeholder="Служащий" name="employe" id="selectEmploye">
+			  <label class="control-label" for="selectEmploye">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspСлужащий</label>
+              <select  placeholder="Служащий" name="employe" id="selectEmploye" class="span5">
 				<option></option>
-			   </select>&nbsp&nbsp
-			   <button class="btn btn-small btn-primary" type="button" onClick="appendPersonCertification(event);">Добавить</button>
+			   </select>
+			   <input class="btn btn-primary btn-custom-login offset0" type="button" value="         Добавить         " onClick="appendPersonCertification(event);" />
+			   
             </div>
 	</form>
 	<hr/>
