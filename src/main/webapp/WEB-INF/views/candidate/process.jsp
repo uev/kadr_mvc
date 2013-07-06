@@ -8,7 +8,21 @@
 <jsp:include page="../default/header.jsp" />
 
 <body>
-<div align="right">Пользоватль: ${nameOfPerson} [<a href="${pageContext.request.contextPath}/logout.html">Выход</a>]</div> 
+ 	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				  	<a
+						class="brand pull-left" href="#">Вы вошли как: ${nameOfPerson}</a>
+				<div class="btn-group pull-right">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr visible="0">    
+<div class="container">
+<div class="hatsite">
+</div>
 
 <br/>
 <table class="table">
@@ -23,7 +37,7 @@
 	</TBODY>
 </table>
 <center>
-	<button class="btn btn-small btn-primary offset0" type="button" onclick="pushAnswers(event);">Ответить</button>
+	<button class="btn btn-primary btn-custom-login offset0" type="button" onclick="pushAnswers(event);">Ответить</button>
 </center>
 <!-- 
 <table class="table table-striped">

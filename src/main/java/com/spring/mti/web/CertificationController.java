@@ -520,6 +520,7 @@ public class CertificationController extends GeneralController implements BeanFa
 				lo.put(q.getContent(), sknow.getAnswersByQueshion(q));
 			}
 			view.addObject("answers", lo);
+			view.addObject("nameOfPerson", em.getFio());
 			session.setAttribute("certname", c.getId());
 			session.setAttribute("employe", em.getId());
 			return view;

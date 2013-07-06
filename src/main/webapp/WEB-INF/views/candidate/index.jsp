@@ -6,8 +6,23 @@
 
 <jsp:include page="../default/header.jsp" />
 
-<body>
-<div align="right">Пользоватль: ${nameOfPerson} [<a href="${pageContext.request.contextPath}/logout.html">Выход</a>]</div> 
+<body> 
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				  	<a
+						class="brand pull-left" href="#">Вы вошли как: ${nameOfPerson}</a>
+				<div class="btn-group pull-right">
+					<a class="btn" data-toggle="modal" href="${pageContext.request.contextPath}/logout.html" >Выход</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr visible="0">    
+<div class="container">
+<div class="hatsite">
+</div>
+
 <center><h1>Личный кабинет</h1></center>
 <br/>
 <table class="table table-striped">
