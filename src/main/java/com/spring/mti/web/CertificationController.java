@@ -88,7 +88,7 @@ public class CertificationController extends GeneralController implements BeanFa
 			HttpServletResponse response)  throws Exception {
 		System.out.println("Entering post...");
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String test = request.getParameter("test");
 			Map<String, Object> answ = new HashMap<String, Object>();
 			if (test != null){
@@ -112,7 +112,7 @@ public class CertificationController extends GeneralController implements BeanFa
 	public @ResponseBody Map<String, Object> popTestJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String test = request.getParameter("test");
 			Map<String, Object> answ = new HashMap<String, Object>();
 			if (test != null){
@@ -172,7 +172,7 @@ public class CertificationController extends GeneralController implements BeanFa
 	public @ResponseBody Map<String, Object> sync(@RequestBody String json)  throws Exception {
 		JSONObject json1 = (JSONObject) JSONSerializer.toJSON(URLDecoder.decode(json.substring(0, json.length()-1)));
 		Map<String, Object> answ = new HashMap<String, Object>();
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(json1.getString("hash"))){
+		if (skey.equals(json1.getString("hash"))){
 			String testname = json1.getString("testname");
 			TestKnowledge test = scert.getTestByName(testname);
 			JSONArray jarray = json1.getJSONArray("queshions");
@@ -199,7 +199,7 @@ public class CertificationController extends GeneralController implements BeanFa
 	public @ResponseBody Map<String, Object> popQueshionsFromTest(@RequestBody String json)  throws Exception {
 		JSONObject json1 = (JSONObject) JSONSerializer.toJSON(URLDecoder.decode(json.substring(0, json.length()-1)));
 		Map<String, Object> answ = new HashMap<String, Object>();
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(json1.getString("hash"))){
+		if (skey.equals(json1.getString("hash"))){
 			String testname = json1.getString("testname");
 			TestKnowledge test = scert.getTestByName(testname);
 			JSONArray jarray = json1.getJSONArray("queshions");
@@ -224,7 +224,7 @@ public class CertificationController extends GeneralController implements BeanFa
 	public @ResponseBody List<Queshion> getAllQueshionsFromTestJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			try{
 				String testname = request.getParameter("test");
 				TestKnowledge t = scert.getTestByName(testname);
@@ -302,7 +302,7 @@ public class CertificationController extends GeneralController implements BeanFa
 	public @ResponseBody Map<String, Object> appendCertificationJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String cert = request.getParameter("cert");
 			Map<String, Object> answ = new HashMap<String, Object>();
 			if (cert != null){
@@ -356,7 +356,7 @@ public class CertificationController extends GeneralController implements BeanFa
 	public @ResponseBody List<Employe> getEmployersByDepartment(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			Map<String, Object> answ = new HashMap<String, Object>();
 			String department = request.getParameter("department");
 			Department d = sdict.getDepartmentByName(department);
@@ -375,7 +375,7 @@ public class CertificationController extends GeneralController implements BeanFa
 	public @ResponseBody Map<String, Object> setTestCertificationJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String certification = request.getParameter("certification");
 			String testname = request.getParameter("testname");
 			Map<String, Object> answ = new HashMap<String, Object>();
@@ -405,7 +405,7 @@ public class CertificationController extends GeneralController implements BeanFa
 		System.out.println("Entering post...");
 		String key = request.getParameter("hash");
 		System.out.println(key);
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String employe = request.getParameter("employe");
 			String certification = request.getParameter("certification");
 			Map<String, Object> answ = new HashMap<String, Object>();
@@ -437,7 +437,7 @@ public class CertificationController extends GeneralController implements BeanFa
 	public @ResponseBody Map<String, Object> popEmployeFromCertJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String employe = request.getParameter("employe");
 			Map<String, Object> answ = new HashMap<String, Object>();
 			if (employe != null){

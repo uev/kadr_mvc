@@ -106,7 +106,7 @@ public class PersonsController extends GeneralController implements BeanFactoryA
 		String key = request.getParameter("hash");
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("error", 1);
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String fio = request.getParameter("fio");
 			List<Employe> e = sdict.getEmployeByName(fio);
 			if (e != null){
@@ -149,7 +149,7 @@ public class PersonsController extends GeneralController implements BeanFactoryA
 	public @ResponseBody Map<String, Object> popQueshionJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			Map<String, Object> answ = new HashMap<String, Object>();
 			String id = request.getParameter("id");
 			try{

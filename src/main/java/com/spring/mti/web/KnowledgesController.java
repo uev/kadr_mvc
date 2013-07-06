@@ -74,7 +74,7 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 	public @ResponseBody Map<String, Object> appendQueshionJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			Map<String, Object> answ = new HashMap<String, Object>();
 			System.out.println("Entering to queshion");
 			String queshion = request.getParameter("queshion");
@@ -134,7 +134,7 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 	public @ResponseBody Map<String, Object> popQueshionJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			Map<String, Object> answ = new HashMap<String, Object>();
 			Queshion q = sknow.getQueshionById(Long.parseLong(request.getParameter("queshion")));
 			try{
@@ -153,7 +153,7 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 	public @ResponseBody Map<String, Object> getAllQueshionProfileJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			Map<String, Object> answ = new HashMap<String, Object>();
 			String queshion = request.getParameter("queshion");
 			Queshion q = sknow.getQueshionByName(queshion);
@@ -193,7 +193,7 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 	public @ResponseBody Map<String, Object> updateQueshionJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			Map<String, Object> answ = new HashMap<String, Object>();
 			System.out.println("Entering to queshion");
 			String queshion = request.getParameter("queshion");

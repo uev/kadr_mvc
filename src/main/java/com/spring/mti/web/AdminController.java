@@ -180,7 +180,7 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 			HttpServletResponse response)  throws Exception {
 		System.out.println("Entering removing...");
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String loginid = request.getParameter("id");
 			Map<String, Object> answ = new HashMap<String, Object>();
 			System.out.println("Comparing loginid woth null");
@@ -289,7 +289,7 @@ public class AdminController extends GeneralController implements BeanFactoryAwa
 	public @ResponseBody Map<String, Object> bindloginJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String login = request.getParameter("login");
 			String passwd = request.getParameter("password");
 			String role = request.getParameter("role");

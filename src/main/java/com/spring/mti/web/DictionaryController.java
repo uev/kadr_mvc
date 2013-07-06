@@ -66,7 +66,7 @@ public class DictionaryController extends GeneralController implements BeanFacto
 	@RequestMapping(value = "/admin/dictionary/persons/json/getcountry.html", method = RequestMethod.POST)
 	public  @ResponseBody List<Country> getCountries(HttpServletRequest request, HttpServletResponse response){
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			return saddr.getCountries();
 		}
 		return null;
@@ -75,7 +75,7 @@ public class DictionaryController extends GeneralController implements BeanFacto
 	@RequestMapping(value = "/admin/dictionary/persons/json/getregion.html", method = RequestMethod.POST)
 	public  @ResponseBody List<Region> getRegions(HttpServletRequest request, HttpServletResponse response){
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String id = request.getParameter("id");
 			if (id != null){
 				return saddr.getRegions(Integer.parseInt(id));
@@ -87,7 +87,7 @@ public class DictionaryController extends GeneralController implements BeanFacto
 	@RequestMapping(value = "/admin/dictionary/persons/json/getcity.html", method = RequestMethod.POST)
 	public  @ResponseBody List<City> getCities(HttpServletRequest request, HttpServletResponse response){
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String id = request.getParameter("id");
 			System.out.println(id);
 			if (id != null){
@@ -102,7 +102,7 @@ public class DictionaryController extends GeneralController implements BeanFacto
 	@RequestMapping(value = "/admin/dictionary/persons/json/recbykey.html", method = RequestMethod.POST)
 	public  @ResponseBody List<Object> getRecordsByKeyPerson(HttpServletRequest request, HttpServletResponse response){
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String name = request.getParameter("key");
 			if (name != null){
 				List<Employe> e = sdict.getEmployeByName(name);

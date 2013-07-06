@@ -65,7 +65,7 @@ public class DepartmentsController extends GeneralController implements BeanFact
 			HttpServletResponse response)  throws Exception {
 		System.out.println("Entering post...");
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String department = request.getParameter("department");
 			Map<String, Object> answ = new HashMap<String, Object>();
 			if (department != null){
@@ -105,7 +105,7 @@ public class DepartmentsController extends GeneralController implements BeanFact
 			HttpServletResponse response)  throws Exception {
 		System.out.println("Entering removing...");
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String department = request.getParameter("department");
 			Map<String, Object> answ = new HashMap<String, Object>();
 			if (department != null){
@@ -129,7 +129,7 @@ public class DepartmentsController extends GeneralController implements BeanFact
 	public @ResponseBody List<Department> listDepartmentJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			return sdict.getAllDepartments();
 		}
 		return null;	

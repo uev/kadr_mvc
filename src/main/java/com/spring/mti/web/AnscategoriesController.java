@@ -73,7 +73,7 @@ public class AnscategoriesController extends GeneralController implements BeanFa
 	public @ResponseBody Map<String, Object> appendCategorytJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String category = request.getParameter("category");
 			Map<String, Object> answ = new HashMap<String, Object>();
 			if (category != null){
@@ -113,7 +113,7 @@ public class AnscategoriesController extends GeneralController implements BeanFa
 	public @ResponseBody Map<String, Object> popCategoryJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
-		if ("dcd95bcb84b09897b2b66d4684c040da".equals(key)){
+		if (skey.equals(key)){
 			String category = request.getParameter("category");
 			Map<String, Object> answ = new HashMap<String, Object>();
 			if (category != null){

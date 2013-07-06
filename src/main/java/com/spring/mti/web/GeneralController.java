@@ -15,6 +15,7 @@ public class GeneralController implements BeanFactoryAware {
 	protected String viewPrefix = "/WEB-INF/views/";
 	protected int sizePage = 30;
 	protected int pageStep = 3;
+	protected String skey = "dcd95bcb84b09897b2b66d4684c040da";
 
 	public ModelAndView verifyPermission(HttpSession session) {
 		ModelAndView view = new ModelAndView();
