@@ -4,12 +4,17 @@
            uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="../menu.jsp" />
+	<div class="pagination">
+    	<ul>
+        	<li><a href="#">Начало</a></li>
+                <c:forEach var="item" items='${paginnav}'>
+                        <li><a href="${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/append_queshion.html?id=${pageContext.request.getParameter('id')}&page=${item}">${item}</a></li>
+                </c:forEach>
+             <li><a href="#">Конец</a></li>
+          </ul>
+     </div>
 	<form 
   		class="form-inline">
-  				К тесту с названием 	"${testname}"
-         		<button class="btn btn-small btn-primary offset0" type="button" onclick="appendQueshionToTest(event);">Добавить</button>
-	<br>
-	<br>
 	<table class="table table-striped">
     		<tbody>
 	    		<tr><td></td><td>id</td><td>Название вопроса</td><td>Категория</td></tr>
@@ -25,4 +30,5 @@
 				</c:forEach>
 	    	</tbody>
 	    </table>
+	    <input class="btn btn-primary btn-custom-login offset0" type="button" value="       Добавить       " onclick="appendQueshionToTest(event);" /> 
 	</form>

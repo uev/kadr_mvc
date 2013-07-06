@@ -151,16 +151,24 @@ public class CertificationController extends GeneralController implements BeanFa
 	public final ModelAndView appendToTestQueshionAction(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
-			view.setViewName("default/index");
-			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/tests/scripts.jsp"));
-			view.addObject("title", "Админзона / добавить вопросы");
-			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
-			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/tests/appendquesh.jsp"));
+			Integer page=1; 
+			try{
+				page= Integer.parseInt(request.getParameter("page"));
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
 			String testid = request.getParameter("id");
 			Long id = Long.parseLong(testid);
+			view.setViewName("default/index");
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/tests/scripts.jsp"));
+			view.addObject("title", "Админзона / добавить вопросы".concat(" к тесту '".concat(scert.getTestById(id).getName()))+"'");
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/tests/appendquesh.jsp"));
 			view.addObject("testname", scert.getTestById(id).getName());
 			//diff
 			List<Queshion> queshions = sknow.getAllQueshions();
+			view.addObject("paginnav", slayout.generateNaviPagination(queshions.size(), pageStep, sizePage, page));
+			queshions = sknow.getPageQueshionsAll(page, sizePage);
 			queshions.removeAll(scert.getListQueshionsFromTest(id));
 			view.addObject("queshions", queshions);
 		}

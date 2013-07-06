@@ -167,4 +167,9 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 	public List<Queshion> getPageQueshionsFromCategory(int page, int size, Long category){
 		return queshionDao.getPage(page, size, "select s from Queshion s where s.fk_catgory.id=".concat(category.toString()));
 	}
+	
+	@Override
+	public List<Queshion> getPageQueshionsAll(int page, int size){
+		return queshionDao.getPage(page, size, "select s from Queshion s ");
+	}
 }

@@ -145,7 +145,6 @@ public class AnscategoriesController extends GeneralController implements BeanFa
 				e.printStackTrace();
 			}
 			Long id = Long.parseLong(request.getParameter("id"));
-			System.out.println(id);
 			List<Queshion> lq = sksrv.getQueshionsFromCategory(id);
 			//view.setViewName("admin/dictionary/persons/index");
 			view.setViewName("default/index");

@@ -31,6 +31,7 @@ function appendCert() {
 		json = {"hash":hash, "department": $('#selectDepartment :selected').val()};
 		var jqxhr = $.post(hname,json, function() {
 		}).done(function(data) { 
+			$('#selectEmploye').empty();
 			$.each(data, function (index, value) {
 		 		$('#selectEmploye').append($('<option>', { 
 		       		value: value.id,

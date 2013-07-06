@@ -22,4 +22,5 @@ public interface KnowledgesService {
 	List<Queshion> getQueshionsFromCategory(long id);
 	List<Queshion> getPageQueshionsFromCategory(int page, int size,
 			Long category);
+	List<Queshion> getPageQueshionsAll(int page, int size);
 }
