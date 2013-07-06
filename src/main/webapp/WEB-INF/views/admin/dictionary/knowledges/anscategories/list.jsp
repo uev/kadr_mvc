@@ -4,6 +4,18 @@
            uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="../menu.jsp" />
+	    <div class="pagination">
+                <ul>
+                <li><a href="#">Начало</a></li>
+                <c:forEach var="item" items='${paginnav}'>
+                        <li><a href="${pageContext.request.contextPath}/admin/dictionary/knowledges/anscategories/list.html?id=${queshions.get(1).fk_catgory.id}&page=${item}">${item}</a></li>
+                </c:forEach>
+                <li><a href="#">Конец</a></li>
+                </ul>
+        </div>
+	 
+	 
+	 
 	<table class="table table-striped">
     		<tbody>
 	    		<tr><td>id</td><td>Заголовок вопроса</td><td>Доступная операция</td></tr>

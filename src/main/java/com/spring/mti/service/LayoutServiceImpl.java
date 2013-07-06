@@ -12,7 +12,6 @@ import com.spring.mti.model.Department;
 import com.spring.mti.model.Employe;
 import com.spring.mti.model.address.City;
 import com.spring.mti.model.security.Authorities;
-import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 public class LayoutServiceImpl implements LayoutService {
 
@@ -110,5 +109,32 @@ public class LayoutServiceImpl implements LayoutService {
 			}
 		}
 			return answers;
+	}
+	
+	@Override
+	/*
+	 * count - всего записей в базе
+	 * step - левый\правый отступ в записях от current
+	 * size - число записей на странице
+	 * current - запрашиваемая страница 
+	 */
+	public List<Integer> generateNaviPagination(int count, int step, int size, int current){
+		List<Integer> lst = new ArrayList<Integer>();
+		Integer rstep = current+step; 
+		Integer spage = count/size; 
+		if (rstep > spage){
+			rstep = spage; 
+		}
+		Integer lstep = current - step;
+		for (int i = lstep; i <= rstep; i++) {
+			if (i > 0){
+				lst.add(i);
+			}
+		}
+		System.out.println(count);
+		System.out.println(current);
+		System.out.println(lstep);
+		System.out.println(rstep);
+		return lst;
 	}
 }

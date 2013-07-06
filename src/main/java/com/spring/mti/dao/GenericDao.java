@@ -13,4 +13,6 @@ public interface GenericDao<T, PK extends Serializable> {
 	List<Object[]> listToArray(List<T> t);
 	void update(T t);
 	T getByid(T t, long id);
+//	void bedoreInitBean();
+	List<T> getPage(int page, int size, String string);
 }

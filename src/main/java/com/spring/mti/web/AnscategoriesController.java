@@ -1,6 +1,7 @@
 package com.spring.mti.web;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.mti.model.Queshion;
 import com.spring.mti.service.DictionaryService;
 import com.spring.mti.service.KnowledgesService;
+import com.spring.mti.service.LayoutService;
 
 /*
  * Class for categories snswers
@@ -26,6 +29,7 @@ import com.spring.mti.service.KnowledgesService;
 public class AnscategoriesController extends GeneralController implements BeanFactoryAware{
 	private DictionaryService sdict;
 	private KnowledgesService sksrv;
+	private LayoutService slayout;
 	static Logger log = Logger.getLogger(LoginController.class.getName());
 
 	@Override
@@ -33,6 +37,7 @@ public class AnscategoriesController extends GeneralController implements BeanFa
 		super.setBeanFactory(context);
 		sdict = (DictionaryService)context.getBean("serviceDictionary");
 		sksrv = (KnowledgesService)context.getBean("serviceKnowledges");
+		slayout = (LayoutService)context.getBean("serviceLayout");
 	}
 	
 	@RequestMapping(value = "/admin/dictionary/knowledges/anscategories/index.html", method = RequestMethod.GET)
@@ -128,17 +133,29 @@ public class AnscategoriesController extends GeneralController implements BeanFa
 		return null;
 	}
 	
+
 	@RequestMapping(value = "/admin/dictionary/knowledges/anscategories/list.html", method = RequestMethod.GET)
 	public final ModelAndView listCategoryAction(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
+			Integer page=1; 
+			try{
+				page= Integer.parseInt(request.getParameter("page"));
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+			Long id = Long.parseLong(request.getParameter("id"));
+			System.out.println(id);
+			List<Queshion> lq = sksrv.getQueshionsFromCategory(id);
 			//view.setViewName("admin/dictionary/persons/index");
 			view.setViewName("default/index");
 			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/queshions/scripts.jsp"));
 			view.addObject("title", "Админзона / просмотр содержимого категории");
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
 			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/anscategories/list.jsp"));
-			view.addObject("queshions", sksrv.getQueshionsFromCategory(Long.parseLong(request.getParameter("id"))));
+			//view.addObject("queshions", sksrv.getQueshionsFromCategory(Long.parseLong(request.getParameter("id"))));
+			view.addObject("paginnav", slayout.generateNaviPagination(lq.size(), pageStep, sizePage, page));
+			view.addObject("queshions", sksrv.getPageQueshionsFromCategory(page, sizePage,id));
 			//view.addObject("body", viewPrefix.concat("/admin/dictionary/persons/index.jsp"));
 		}
 		return view;

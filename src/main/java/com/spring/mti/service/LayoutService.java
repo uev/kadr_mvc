@@ -14,4 +14,6 @@ public interface LayoutService {
 	List<Object> authorityToMapJson(List<Authorities> e);
 	Map<String, Object> queshionProfileToMapJson(List<Answer> a);
 	List<Object> decorateAnswersOnQueshions(List<CertificationState> c);
+	List<Integer> generateNaviPagination(int count, int step, int size,
+			int current);
 }

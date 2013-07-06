@@ -37,3 +37,7 @@
     padding-right: 30px;
     padding-top: 80px;
 }
+
+.pagination {
+	text-align:center;
+}

@@ -162,4 +162,9 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 	public List<Queshion> getQueshionsFromCategory(long id){
 		return queshionDao.findByNamedQuery("select s from Queshion s where s.fk_catgory.id=?1", Arrays.asList(id).toArray());
 	}
+	
+	@Override
+	public List<Queshion> getPageQueshionsFromCategory(int page, int size, Long category){
+		return queshionDao.getPage(page, size, "select s from Queshion s where s.fk_catgory.id=".concat(category.toString()));
+	}
 }
