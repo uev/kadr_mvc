@@ -23,8 +23,6 @@
 <div class="container">
 <div class="hatsite">
 </div>
-
-<br/>
 <c:set var="chk" value="0"/>
 <table class="table">
 	<TBODY>
@@ -34,7 +32,6 @@
 		<c:forEach var="ans" items="${record.value}">
 			<tr class="item" id="${ans.id}"><td><input type="checkbox" value="" name="inputCheckAnsw"></td><td>${ans.content}</td></tr>
 		</c:forEach>
-	<br/>
 	</c:forEach>
 	</TBODY>
 </table>

@@ -93,7 +93,7 @@ public class LayoutServiceImpl implements LayoutService {
 			Map<String, Object> map = new HashMap<String, Object>();
 			try {
 				Answer a = item.getFk_answer();
-				map.put("queshion", a.getFk_queshion().getContent());
+				map.put("queshion", a.getFk_queshion().getName());
 				map.put("answer", a.getContent());
 				boolean valid = item.isValid();
 				if (valid == true){
