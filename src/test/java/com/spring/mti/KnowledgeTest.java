@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import com.spring.mti.model.Answer;
 import com.spring.mti.model.Category;
-import com.spring.mti.model.Queshion;
+import com.spring.mti.model.Question;
 import com.spring.mti.service.DictionaryService;
 import com.spring.mti.service.KnowledgesService;
 
@@ -31,19 +31,19 @@ public class KnowledgeTest extends AbstractTest{
 	 }
 	
 	@Test
-	public void testCreateQueshion(){
-		ksrv.createQueshion("О слонах");
-		Queshion q = ksrv.getQueshionByName("О слонах");
+	public void testCreateQuestion(){
+		ksrv.createQuestion("О слонах");
+		Question q = ksrv.getQuestionByName("О слонах");
 		assertTrue("О слонах".equals(q.getName()));
 	 }
 	
 	@Test
-	public void testAppendQueshionToCategory(){
-		Queshion q = ksrv.getQueshionByName("О слонах");
+	public void testAppendQuestionToCategory(){
+		Question q = ksrv.getQuestionByName("О слонах");
 		Category d = dsrv.getCategoryByName("Тестовая");
 		q.setFk_catgory(d);
-		ksrv.updateQueshionRelation(q);
-		Queshion q1 = ksrv.getQueshionByName("О слонах");
+		ksrv.updateQuestionRelation(q);
+		Question q1 = ksrv.getQuestionByName("О слонах");
 		Category d1 = q1.getFk_catgory();
 		assertTrue("Тестовая".equals(d1.getCname()));
 	 }
@@ -56,13 +56,13 @@ public class KnowledgeTest extends AbstractTest{
 	 }
 	
 	@Test
-	public void testBindingAnswetToQueshion(){
-		Queshion q = ksrv.getQueshionByName("О слонах");
+	public void testBindingAnswetToQuestion(){
+		Question q = ksrv.getQuestionByName("О слонах");
 		Answer a = ksrv.getAnswerByContent("Ответ");
-		a.setFk_queshion(q);
+		a.setFk_Question(q);
 		ksrv.updateAnswerRelation(a);
 		Answer a1 = ksrv.getAnswerByContent("Ответ");
-		Queshion q1 = a1.getFk_queshion();
+		Question q1 = a1.getFk_Question();
 		assertTrue("О слонах".equals(q1.getName()));
 	 }
 	
@@ -74,10 +74,10 @@ public class KnowledgeTest extends AbstractTest{
 	 }
 	
 	@Test
-	public void testRmQueshion(){
-		Queshion q = ksrv.getQueshionByName("О слонах");
-		ksrv.deleteQueshion(q);
-		assertTrue(null ==  ksrv.getQueshionByName("О слонах"));
+	public void testRmQuestion(){
+		Question q = ksrv.getQuestionByName("О слонах");
+		ksrv.deleteQuestion(q);
+		assertTrue(null ==  ksrv.getQuestionByName("О слонах"));
 	 }
 
 	@Test

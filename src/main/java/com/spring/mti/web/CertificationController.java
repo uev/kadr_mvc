@@ -41,7 +41,7 @@ import com.spring.mti.model.Certification;
 import com.spring.mti.model.CertificationState;
 import com.spring.mti.model.Department;
 import com.spring.mti.model.Employe;
-import com.spring.mti.model.Queshion;
+import com.spring.mti.model.Question;
 import com.spring.mti.model.RelCertificationEmploye;
 import com.spring.mti.model.TestKnowledge;
 import com.spring.mti.service.CertificationService;
@@ -147,8 +147,8 @@ public class CertificationController extends GeneralController implements BeanFa
 		return view;
 	}
 	
-	@RequestMapping(value = "/admin/dictionary/knowledges/tests/append_queshion.html", method = RequestMethod.GET)
-	public final ModelAndView appendToTestQueshionAction(HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping(value = "/admin/dictionary/knowledges/tests/append_Question.html", method = RequestMethod.GET)
+	public final ModelAndView appendToTestQuestionAction(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
 			Integer page=1; 
@@ -166,29 +166,29 @@ public class CertificationController extends GeneralController implements BeanFa
 			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/tests/appendquesh.jsp"));
 			view.addObject("testname", scert.getTestById(id).getName());
 			//diff
-			List<Queshion> queshions = sknow.getAllQueshions();
-			view.addObject("paginnav", slayout.generateNaviPagination(queshions.size(), pageStep, sizePage, page));
-			queshions = sknow.getPageQueshionsAll(page, sizePage);
-			queshions.removeAll(scert.getListQueshionsFromTest(id));
-			view.addObject("queshions", queshions);
+			List<Question> questions = sknow.getAllQuestions();
+			view.addObject("paginnav", slayout.generateNaviPagination(questions.size(), pageStep, sizePage, page));
+			questions = sknow.getPageQuestionsAll(page, sizePage);
+			questions.removeAll(scert.getListQuestionsFromTest(id));
+			view.addObject("Questions", questions);
 		}
 		return view;
 	}
 	
 	@SuppressWarnings("deprecation")
-	@RequestMapping(headers = {"Accept=application/json"}, value = "/admin/dictionary/knowledges/tests/append_queshion.html", method = RequestMethod.POST)
+	@RequestMapping(headers = {"Accept=application/json"}, value = "/admin/dictionary/knowledges/tests/append_Question.html", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> sync(@RequestBody String json)  throws Exception {
 		JSONObject json1 = (JSONObject) JSONSerializer.toJSON(URLDecoder.decode(json.substring(0, json.length()-1)));
 		Map<String, Object> answ = new HashMap<String, Object>();
 		if (skey.equals(json1.getString("hash"))){
 			String testname = json1.getString("testname");
 			TestKnowledge test = scert.getTestByName(testname);
-			JSONArray jarray = json1.getJSONArray("queshions");
+			JSONArray jarray = json1.getJSONArray("Questions");
 			if (test != null){
 				try {
-					log.info("Try appending queshion test");
+					log.info("Try appending Question test");
 					for (int i=0; i < jarray.size(); i++) {
-						scert.pushQueshionToTest(test, sknow.getQueshionById(Long.parseLong((String)jarray.get(i))));
+						scert.pushQuestionToTest(test, sknow.getQuestionById(Long.parseLong((String)jarray.get(i))));
 					}
 					answ.put("error", 0);
 					} catch(Exception e){
@@ -203,18 +203,18 @@ public class CertificationController extends GeneralController implements BeanFa
 	}
 	
 	@SuppressWarnings("deprecation")
-	@RequestMapping(headers = {"Accept=application/json"}, value = "/admin/dictionary/knowledges/tests/pop_queshion.html", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> popQueshionsFromTest(@RequestBody String json)  throws Exception {
+	@RequestMapping(headers = {"Accept=application/json"}, value = "/admin/dictionary/knowledges/tests/pop_Question.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> popQuestionsFromTest(@RequestBody String json)  throws Exception {
 		JSONObject json1 = (JSONObject) JSONSerializer.toJSON(URLDecoder.decode(json.substring(0, json.length()-1)));
 		Map<String, Object> answ = new HashMap<String, Object>();
 		if (skey.equals(json1.getString("hash"))){
 			String testname = json1.getString("testname");
 			TestKnowledge test = scert.getTestByName(testname);
-			JSONArray jarray = json1.getJSONArray("queshions");
+			JSONArray jarray = json1.getJSONArray("Questions");
 			if (test != null){
 				try {
 					for (int i=0; i < jarray.size(); i++) {
-						scert.popQueshionFromTest(scert.getQueshionFromTest(test, sknow.getQueshionById(Long.parseLong((String)jarray.get(i)))));
+						scert.popQuestionFromTest(scert.getQuestionFromTest(test, sknow.getQuestionById(Long.parseLong((String)jarray.get(i)))));
 					}
 					answ.put("error", 0);
 					} catch(Exception e){
@@ -229,25 +229,25 @@ public class CertificationController extends GeneralController implements BeanFa
 	}
 
 	@RequestMapping(value = "/admin/dictionary/knowledges/tests/getinfo.html", method = RequestMethod.POST)
-	public @ResponseBody List<Queshion> getAllQueshionsFromTestJson(HttpServletRequest request,
+	public @ResponseBody List<Question> getAllQuestionsFromTestJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
 		if (skey.equals(key)){
 			try{
 				String testname = request.getParameter("test");
 				TestKnowledge t = scert.getTestByName(testname);
-				List<Queshion> lstq = scert.getListQueshionsFromTest(t.getId());	
+				List<Question> lstq = scert.getListQuestionsFromTest(t.getId());	
 				return lstq;
 			} catch (Exception e) {
-				log.error("Error create list queshions");
+				log.error("Error create list Questions");
 				e.printStackTrace();
 			}
 		} 
 		return null;
 	}
 	
-	@RequestMapping(value = "/admin/dictionary/knowledges/tests/pop_queshion.html", method = RequestMethod.GET)
-	public final ModelAndView popFromTestQueshionAction(HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping(value = "/admin/dictionary/knowledges/tests/pop_Question.html", method = RequestMethod.GET)
+	public final ModelAndView popFromTestQuestionAction(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
 			view.setViewName("default/index");
@@ -259,8 +259,8 @@ public class CertificationController extends GeneralController implements BeanFa
 			Long id = Long.parseLong(testid);
 			view.addObject("testname", scert.getTestById(id).getName());
 			//diff
-			List<Queshion> queshions = scert.getListQueshionsFromTest(id);
-			view.addObject("queshions", queshions);
+			List<Question> questions = scert.getListQuestionsFromTest(id);
+			view.addObject("Questions", questions);
 		}
 		return view;
 	}
@@ -514,10 +514,10 @@ public class CertificationController extends GeneralController implements BeanFa
 			/*
 			 * Передача вопросника
 			 */
-			List<Queshion> lq = scert.getListQueshionsFromTest(c.getFk_test().getId());
+			List<Question> lq = scert.getListQuestionsFromTest(c.getFk_test().getId());
 			Map<String, List<Answer>> lo = new HashMap<String, List<Answer>>();
-			for (Queshion q : lq) {
-				lo.put(q.getContent(), sknow.getAnswersByQueshion(q));
+			for (Question q : lq) {
+				lo.put(q.getContent(), sknow.getAnswersByQuestion(q));
 			}
 			view.addObject("answers", lo);
 			view.addObject("nameOfPerson", em.getFio());
@@ -553,7 +553,7 @@ public class CertificationController extends GeneralController implements BeanFa
 					new StringReader(request.getParameter("xml"))), XPathConstants.NODESET);
 			for (int i=0; i < qNodes.getLength(); i++) {
 				CertificationState stage = new CertificationState();
-				stage.setFk_queshion(sknow.getQueshionById(Long.parseLong(qNodes.item(i).getNodeValue())));
+				stage.setFk_Question(sknow.getQuestionById(Long.parseLong(qNodes.item(i).getNodeValue())));
 				stage.setFk_answer(sknow.getAnswerById(Long.parseLong(aNodes.item(i).getNodeValue())));
 				stage.setValid(Boolean.parseBoolean(cNodes.item(i).getNodeValue()));
 				stage.setFk_certification(c);
@@ -574,7 +574,7 @@ public class CertificationController extends GeneralController implements BeanFa
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
 			view.setViewName("default/index");
-			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/queshions/scripts.jsp"));
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/Questions/scripts.jsp"));
 			view.addObject("title", "Админзона / результаты аттестаций");
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
 			view.addObject("body", viewPrefix.concat("/admin/certification/view.jsp"));
@@ -582,7 +582,7 @@ public class CertificationController extends GeneralController implements BeanFa
 					Long.parseLong(
 							(String)request.getParameter("id")));
 			List <CertificationState> lcertstate = scert.getCertificationCompletedSession(r);
-			view.addObject("cert", slayout.decorateAnswersOnQueshions(lcertstate));
+			view.addObject("cert", slayout.decorateAnswersOnQuestions(lcertstate));
 		}
 		return view;
 	}

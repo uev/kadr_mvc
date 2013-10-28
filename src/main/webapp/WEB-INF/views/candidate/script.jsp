@@ -6,16 +6,16 @@ function pushAnswers(event){
 	var hname = "${pageContext.request.contextPath}/candidate/validatetest.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
 	var xml = '<?xml version="1.0" encoding="UTF-8"?><root><hash>'+hash+'</hash>';
-	var queshion="";
+	var Question="";
 	var answer="";
 	var check="";
 	$("tr.item").each(function() {
 		if ($(this).attr("class").search("well") > -1){
-			queshion=$(this).attr('id');
+			Question=$(this).attr('id');
 		} else {
 			check=$(this).find("input[name=inputCheckAnsw]").prop('checked');
 			answer=$(this).attr('id');
-			xml += '<answer q="'+queshion+'" c="'+ check + '" a="' + answer + '" />"';
+			xml += '<answer q="'+Question+'" c="'+ check + '" a="' + answer + '" />"';
 		}	
 	});  
 	xml+='</root>';

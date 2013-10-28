@@ -10,16 +10,16 @@ import org.springframework.stereotype.Repository;
 import com.spring.mti.dao.CertificationDao;
 import com.spring.mti.dao.CertificationStateDao;
 import com.spring.mti.dao.EmployeDao;
-import com.spring.mti.dao.QueshionDao;
+import com.spring.mti.dao.QuestionDao;
 import com.spring.mti.dao.RelCertificationEmployeDao;
-import com.spring.mti.dao.RelTestQueshionDao;
+import com.spring.mti.dao.RelTestQuestionDao;
 import com.spring.mti.dao.TestKnowledgeDao;
 import com.spring.mti.model.Certification;
 import com.spring.mti.model.CertificationState;
 import com.spring.mti.model.Employe;
-import com.spring.mti.model.Queshion;
+import com.spring.mti.model.Question;
 import com.spring.mti.model.RelCertificationEmploye;
-import com.spring.mti.model.RelTestQueshion;
+import com.spring.mti.model.RelTestQuestion;
 import com.spring.mti.model.TestKnowledge;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
@@ -27,8 +27,8 @@ import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 @Repository
 public class CertificationServiceImpl implements CertificationService {
 	@Autowired private TestKnowledgeDao testDao;
-	@Autowired private RelTestQueshionDao test_queshionDao;
-	@Autowired private QueshionDao queshionDao;
+	@Autowired private RelTestQuestionDao test_QuestionDao;
+	@Autowired private QuestionDao questionDao;
 	@Autowired private CertificationDao certificationDao;
 	@Autowired private CertificationStateDao certificationStateDao;
 	@Autowired private RelCertificationEmployeDao certification_employe;
@@ -64,28 +64,28 @@ public class CertificationServiceImpl implements CertificationService {
 	}
 	
 	@Override
-	public void pushQueshionToTest(TestKnowledge t, Queshion q) {
-		if (null == this.getQueshionFromTest(t, q)){
-			RelTestQueshion r = new RelTestQueshion();
-			r.setFk_queshion(q);
+	public void pushQuestionToTest(TestKnowledge t, Question q) {
+		if (null == this.getQuestionFromTest(t, q)){
+			RelTestQuestion r = new RelTestQuestion();
+			r.setFk_Question(q);
 			r.setFk_test(t);
-			test_queshionDao.create(r);
+			test_QuestionDao.create(r);
 		}
 	}
 	
 	@Override
-	public RelTestQueshion getQueshionFromTest(TestKnowledge t, Queshion q) {
+	public RelTestQuestion getQuestionFromTest(TestKnowledge t, Question q) {
 		List<Long> param = Arrays.asList(t.getId(),q.getId());
 		try {
-			return test_queshionDao.findByNamedQuery("select s from RelTestQueshion s where s.fk_test.id=?1 and s.fk_queshion.id=?2",param.toArray()).get(0);
+			return test_QuestionDao.findByNamedQuery("select s from RelTestQuestion s where s.fk_test.id=?1 and s.fk_Question.id=?2",param.toArray()).get(0);
 		} catch(IndexOutOfBoundsException e) {
 			return null;
 		}
 	}
 	
 	@Override
-	public void popQueshionFromTest(RelTestQueshion t) {
-		test_queshionDao.delete(t);
+	public void popQuestionFromTest(RelTestQuestion t) {
+		test_QuestionDao.delete(t);
 	}
 	
 	@Override
@@ -101,9 +101,9 @@ public class CertificationServiceImpl implements CertificationService {
 	}
 	
 	@Override
-	public List<Queshion> getListQueshionsFromTest(Long id) {
+	public List<Question> getListQuestionsFromTest(Long id) {
 		try{
-			List<Queshion> q = queshionDao.findByNamedQuery("select q from RelTestQueshion s, Queshion q where s.fk_test.id=?1 and s.fk_queshion.id=q.id",Arrays.asList(id).toArray());
+			List<Question> q = questionDao.findByNamedQuery("select q from RelTestQuestion s, Question q where s.fk_test.id=?1 and s.fk_Question.id=q.id",Arrays.asList(id).toArray());
 			q.size();
 			return q;
 		} catch(IndexOutOfBoundsException e) {

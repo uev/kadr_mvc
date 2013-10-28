@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.mti.model.Department;
 import com.spring.mti.model.Employe;
-import com.spring.mti.model.Queshion;
+import com.spring.mti.model.Question;
 import com.spring.mti.model.address.City;
 import com.spring.mti.service.AddressService;
 import com.spring.mti.service.DictionaryService;
@@ -146,7 +146,7 @@ public class PersonsController extends GeneralController implements BeanFactoryA
 	}
 	
 	@RequestMapping(value = "/admin/dictionary/persons/rm.html", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> popQueshionJson(HttpServletRequest request,
+	public @ResponseBody Map<String, Object> popQuestionJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
 		if (skey.equals(key)){

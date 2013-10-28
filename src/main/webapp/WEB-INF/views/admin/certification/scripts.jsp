@@ -126,15 +126,15 @@ function popTest(event) {
 }
 
 
-function appendQueshionToTest(event) {
-	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/append_queshion.html";
+function appendQuestionToTest(event) {
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/append_Question.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
-	var json={'hash' : hash, 'testname' : "${testname}" , 'queshions' : []};
-	//alert( $("tr#q1 input[name='inputCheckQueshion']").prop('checked') );
+	var json={'hash' : hash, 'testname' : "${testname}" , 'Questions' : []};
+	//alert( $("tr#q1 input[name='inputCheckQuestion']").prop('checked') );
 	//alert($(event.target).attr("id"));
-	for (var i=1; i <= $("tr.queshion").length; i++){
-		if ( $("tr#q" + i + " input[name='inputCheckQueshion']").prop('checked') === true ) {
-			json.queshions.push( $("tr#q" + i + " td.id_queshion").text());
+	for (var i=1; i <= $("tr.Question").length; i++){
+		if ( $("tr#q" + i + " input[name='inputCheckQuestion']").prop('checked') === true ) {
+			json.Questions.push( $("tr#q" + i + " td.id_Question").text());
 		}
 	}
 	var jqxhr = $.post(hname,JSON.stringify(json), function() {
@@ -154,13 +154,13 @@ function appendQueshionToTest(event) {
 	return 0;
 }
 
-function popQueshionFromTest(event) {
-	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/pop_queshion.html";
+function popQuestionFromTest(event) {
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/pop_Question.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
-	var json={'hash' : hash, 'testname' : "${testname}" , 'queshions' : []};
-	for (var i=1; i <= $("tr.queshion").length; i++){
-		if ( $("tr#q" + i + " input[name='inputCheckQueshion']").prop('checked') === true ) {
-			json.queshions.push( $("tr#q" + i + " td.id_queshion").text());
+	var json={'hash' : hash, 'testname' : "${testname}" , 'Questions' : []};
+	for (var i=1; i <= $("tr.Question").length; i++){
+		if ( $("tr#q" + i + " input[name='inputCheckQuestion']").prop('checked') === true ) {
+			json.Questions.push( $("tr#q" + i + " td.id_Question").text());
 		}
 	}
 	var jqxhr = $.post(hname,JSON.stringify(json), function() {
@@ -180,10 +180,10 @@ function popQueshionFromTest(event) {
 
 
 function editTest(event) {
-	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/getinfo.html";
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/Questions/getinfo.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
 	var html=""; 
-	var json={'hash' : hash, 'queshion' : $(event.target).text()};
+	var json={'hash' : hash, 'Question' : $(event.target).text()};
 	//$.fancybox({ href : '${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/edit.html'});
 	//$.fancybox({source : "ya.ru"});	
 	return 0;

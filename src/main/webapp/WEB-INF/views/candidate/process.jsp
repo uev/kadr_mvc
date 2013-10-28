@@ -28,7 +28,7 @@
 	<TBODY>
 	<c:forEach var="record" items="${answers}">
 		<c:set var="chk" value="${chk+1}"/>
-		<tr class="item well well-large" id="${record.value.get(0).fk_queshion.id}"><td/><td>${chk}. ${record.key}</td></tr>
+		<tr class="item well well-large" id="${record.value.get(0).fk_Question.id}"><td/><td>${chk}. ${record.key}</td></tr>
 		<c:forEach var="ans" items="${record.value}">
 			<tr class="item" id="${ans.id}"><td><input type="checkbox" value="" name="inputCheckAnsw"></td><td>${ans.content}</td></tr>
 		</c:forEach>

@@ -8,9 +8,9 @@ import org.junit.Test;
 
 import com.spring.mti.model.Certification;
 import com.spring.mti.model.Employe;
-import com.spring.mti.model.Queshion;
+import com.spring.mti.model.Question;
 import com.spring.mti.model.RelCertificationEmploye;
-import com.spring.mti.model.RelTestQueshion;
+import com.spring.mti.model.RelTestQuestion;
 import com.spring.mti.model.TestKnowledge;
 import com.spring.mti.service.CertificationService;
 import com.spring.mti.service.DictionaryService;
@@ -39,27 +39,27 @@ public class CertificationTest extends AbstractTest {
 	 */
 	
 	@Test
-	public void testPushQueshionToTest(){
+	public void testPushQuestionToTest(){
 		certsrv.createtTest("Тест номер один");
 		TestKnowledge t = certsrv.getTestByName("Тест номер один");
 		assertTrue("Тест номер один".equals(t.getName()));
 		//TestKnowledge t = certsrv.getTestByName("Тест номер один");
-		ksrv.createQueshion("Контрольный вопрос");
-		Queshion q = ksrv.getQueshionByName("Контрольный вопрос");
-		certsrv.pushQueshionToTest(t, q);
-		RelTestQueshion r = certsrv.getQueshionFromTest(t, q);
+		ksrv.createQuestion("Контрольный вопрос");
+		Question q = ksrv.getQuestionByName("Контрольный вопрос");
+		certsrv.pushQuestionToTest(t, q);
+		RelTestQuestion r = certsrv.getQuestionFromTest(t, q);
 		assertTrue(null != r);
 	 }
 	
 	@Test
-	public void testPopQueshionToTest(){
+	public void testPopQuestionToTest(){
 		TestKnowledge t = certsrv.getTestByName("Тест номер один");
-		Queshion q = ksrv.getQueshionByName("Контрольный вопрос");
-		RelTestQueshion r = certsrv.getQueshionFromTest(t, q);
-		certsrv.popQueshionFromTest(r);
-		assertTrue(null == certsrv.getQueshionFromTest(t, q));
-		ksrv.deleteQueshion(q);
-		assertTrue(null ==  ksrv.getQueshionByName("Контрольный вопрос"));
+		Question q = ksrv.getQuestionByName("Контрольный вопрос");
+		RelTestQuestion r = certsrv.getQuestionFromTest(t, q);
+		certsrv.popQuestionFromTest(r);
+		assertTrue(null == certsrv.getQuestionFromTest(t, q));
+		ksrv.deleteQuestion(q);
+		assertTrue(null ==  ksrv.getQuestionByName("Контрольный вопрос"));
 		certsrv.deleteTest(t);
 		assertTrue( null ==  certsrv.getTestByName("Тест номер один"));
 	 }

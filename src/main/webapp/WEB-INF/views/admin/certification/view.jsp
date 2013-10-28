@@ -9,7 +9,7 @@
 	    		<tr><td>Вопрос</td><td>Ответ</td><td>Результат</td></tr>
 	    		<c:forEach var="record" items='${cert}'>
         			<tr>
-        				<td width="20" onClick="getQueshionInfo(event)"><c:out value="${record['queshion']}"></c:out></td>
+        				<td width="20" onClick="getQuestionInfo(event)"><c:out value="${record['Question']}"></c:out></td>
         				<td width="20"><c:out value="${record['answer']}"></c:out></td>
         				<td width="20"><c:out value="${record['valid']}"></c:out></td>
 					</tr>

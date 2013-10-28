@@ -7,12 +7,12 @@
 	<table class="table table-striped">
     		<tbody>
 	    		<tr><td>id</td><td>Заголовок вопроса</td><td>Доступная операция</td></tr>
-	    		<c:forEach var="record" items='${queshions}'>
+	    		<c:forEach var="record" items='${Questions}'>
         			<tr>
         				<td width="20"><c:out value="${record.id}"></c:out></td>
-        				<td width="50"onClick="getQueshionInfo(event)"><c:out value="${record.name}"></c:out></td>
-        				<td width="20"><a href="${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/edit.html?id=${record.id}">Редактирование</a> / 
-        				<a href="#" id="${record.id}" onClick="popQueshion(event);">Удаление</a>
+        				<td width="50"onClick="getQuestionInfo(event)"><c:out value="${record.name}"></c:out></td>
+        				<td width="20"><a href="${pageContext.request.contextPath}/admin/dictionary/knowledges/Questions/edit.html?id=${record.id}">Редактирование</a> / 
+        				<a href="#" id="${record.id}" onClick="popQuestion(event);">Удаление</a>
         				</td>
 					</tr>
 					<div id="${record.id}"></div>

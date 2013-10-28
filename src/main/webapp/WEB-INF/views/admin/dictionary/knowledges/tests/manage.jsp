@@ -19,8 +19,8 @@
         				<td width="20"><c:out value="${record.id}"></c:out></td>
         				<td width="50"onClick="getTestInfo(event)"><c:out value="${record.name}"></c:out></td>
         				<td width="20"><a href="#" id="${record.id}" onClick="popTest(event)">Удаление теста</a> /
-        				<a href="${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/pop_queshion.html?id=${record.id}" id="${record.id}">Удаление вопросов</a>
-        				/ <a href="${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/append_queshion.html?id=${record.id}" id="${record.id}" onClick="AnswerToTest(event)">Добавление вопросов</a>
+        				<a href="${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/pop_Question.html?id=${record.id}" id="${record.id}">Удаление вопросов</a>
+        				/ <a href="${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/append_Question.html?id=${record.id}" id="${record.id}" onClick="AnswerToTest(event)">Добавление вопросов</a>
         				</td>
 					</tr>
 					<div id="${record.id}"></div>

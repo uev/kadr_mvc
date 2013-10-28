@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
-import com.spring.mti.model.Queshion;
+import com.spring.mti.model.Question;
 
 @Entity
 public class Authorities {

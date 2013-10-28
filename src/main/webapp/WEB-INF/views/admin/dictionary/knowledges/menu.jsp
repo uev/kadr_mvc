@@ -22,9 +22,9 @@
          <li class="dropdown">
          	<a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Вопросы <b class="caret"></b></a> 
             	<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-         			<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/add.html">Добавить вопрос</a></li>
+         			<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/Questions/add.html">Добавить вопрос</a></li>
             		<li role="presentation" class="divider"></li>
-            		<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/rm.html">Управление вопросами</a></li>
+            		<li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/admin/dictionary/knowledges/Questions/rm.html">Управление вопросами</a></li>
          		</ul>
          </li>
          

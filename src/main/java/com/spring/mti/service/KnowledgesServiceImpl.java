@@ -8,42 +8,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.mti.dao.AnswerDao;
-import com.spring.mti.dao.QueshionDao;
+import com.spring.mti.dao.QuestionDao;
 import com.spring.mti.model.Answer;
 import com.spring.mti.model.Category;
-import com.spring.mti.model.Queshion;
+import com.spring.mti.model.Question;
 
 @Repository
 public class KnowledgesServiceImpl implements KnowledgesService {
-	@Autowired private QueshionDao queshionDao;
+	@Autowired private QuestionDao questionDao;
 	@Autowired private AnswerDao answerDao;
 	
 	
 	@Override
-	public void createQueshion(String name) {
-		if (this.getQueshionByName(name) == null) {
-			Queshion q = new Queshion();
+	public void createQuestion(String name) {
+		if (this.getQuestionByName(name) == null) {
+			Question q = new Question();
 			q.setName(name);
-			queshionDao.create(q);
+			questionDao.create(q);
 		}
 		/*
 		List<String> ls = new ArrayList<String>();
 		ls.add(name);
-		List<Queshion>res = queshionDao.findByNamedQuery("select s from Queshion s where s.name=?1",ls.toArray());
+		List<Question>res = questionDao.findByNamedQuery("select s from Question s where s.name=?1",ls.toArray());
 		if ( res != null && res.size()<1) {
-			Queshion q = new Queshion();
+			Question q = new Question();
 			q.setName(name);
-			queshionDao.create(q);
+			questionDao.create(q);
 		}
 		*/
 	}
 	
 	@Override
-	public Queshion getQueshionByName(String name) {
+	public Question getQuestionByName(String name) {
 		List<String> r = new ArrayList<String>();
 		r.add(name);
 		try{
-			return queshionDao.findByNamedQuery("select s from Queshion s where s.name=?1",r.toArray()).get(0);
+			return questionDao.findByNamedQuery("select s from Question s where s.name=?1",r.toArray()).get(0);
 		} catch (IndexOutOfBoundsException e) {
 			e.printStackTrace();
 			return null;
@@ -51,11 +51,11 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 	}
 	
 	@Override
-	public Queshion getQueshionById(Long id) {
+	public Question getQuestionById(Long id) {
 		List<Long> r = new ArrayList<Long>();
 		r.add(id);
 		try{
-			return queshionDao.findByNamedQuery("select s from Queshion s where s.id=?1",r.toArray()).get(0);
+			return questionDao.findByNamedQuery("select s from Question s where s.id=?1",r.toArray()).get(0);
 		} catch (IndexOutOfBoundsException e) {
 			return null;
 		}
@@ -64,27 +64,27 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 	
 	
 	@Override
-	public void deleteQueshion(Queshion q) {
+	public void deleteQuestion(Question q) {
 		try{
-			queshionDao.delete(q);
+			questionDao.delete(q);
 		} catch(Exception e){
 			//Removing answers
-			List<Answer> answ = this.getAnswersByQueshion(q);
+			List<Answer> answ = this.getAnswersByQuestion(q);
 			for (Answer item : answ) {
 				this.deleteAnswer(item);
 			}
-			queshionDao.delete(q);
+			questionDao.delete(q);
 		}
 	}
 	
 	@Override
-	public void updateQueshionRelation(Queshion q){
-		queshionDao.update(q);
+	public void updateQuestionRelation(Question q){
+		questionDao.update(q);
 	}
 
 	@Override
-	public List<Queshion> getAllQueshions(){
-		return queshionDao.findAll(new Queshion());
+	public List<Question> getAllQuestions(){
+		return questionDao.findAll(new Question());
 	}
 	
 	@Override
@@ -128,11 +128,11 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 	}
 	
 	@Override
-	public List<Answer> getAnswersByQueshion(Queshion q) {
+	public List<Answer> getAnswersByQuestion(Question q) {
 		List<Long> r = new ArrayList<Long>();
 		r.add(q.getId());
 		try{
-			List<Answer> ans = answerDao.findByNamedQuery("select s from Answer s where s.fk_queshion.id=?1",r.toArray()); 
+			List<Answer> ans = answerDao.findByNamedQuery("select s from Answer s where s.fk_Question.id=?1",r.toArray()); 
 			ans.get(0);
 			return ans;
 		} catch (IndexOutOfBoundsException e) {
@@ -146,8 +146,8 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 	}
 	
 	@Override
-	public void deleteAnswersByQueshionId(Long id) {
-		List<Answer> ans = answerDao.findByNamedQuery("select s from Answer s where s.fk_queshion.id=?1",Arrays.asList(id).toArray());
+	public void deleteAnswersByQuestionId(Long id) {
+		List<Answer> ans = answerDao.findByNamedQuery("select s from Answer s where s.fk_Question.id=?1",Arrays.asList(id).toArray());
 		for (Answer answer : ans) {
 			answerDao.delete(answer);
 		}
@@ -159,17 +159,17 @@ public class KnowledgesServiceImpl implements KnowledgesService {
 	}
 	
 	@Override
-	public List<Queshion> getQueshionsFromCategory(long id){
-		return queshionDao.findByNamedQuery("select s from Queshion s where s.fk_catgory.id=?1", Arrays.asList(id).toArray());
+	public List<Question> getQuestionsFromCategory(long id){
+		return questionDao.findByNamedQuery("select s from Question s where s.fk_catgory.id=?1", Arrays.asList(id).toArray());
 	}
 	
 	@Override
-	public List<Queshion> getPageQueshionsFromCategory(int page, int size, Long category){
-		return queshionDao.getPage(page, size, "select s from Queshion s where s.fk_catgory.id=".concat(category.toString()));
+	public List<Question> getPageQuestionsFromCategory(int page, int size, Long category){
+		return questionDao.getPage(page, size, "select s from Question s where s.fk_catgory.id=".concat(category.toString()));
 	}
 	
 	@Override
-	public List<Queshion> getPageQueshionsAll(int page, int size){
-		return queshionDao.getPage(page, size, "select s from Queshion s ");
+	public List<Question> getPageQuestionsAll(int page, int size){
+		return questionDao.getPage(page, size, "select s from Question s ");
 	}
 }

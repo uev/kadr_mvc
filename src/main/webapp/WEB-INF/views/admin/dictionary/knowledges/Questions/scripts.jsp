@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" 
            uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
-function getQueshionItem(){
-	$("input[name='queshion']").val($("input[name='radiogroup']:checked").val());
+function getQuestionItem(){
+	$("input[name='Question']").val($("input[name='radiogroup']:checked").val());
 	return 0;
 }
 
@@ -27,11 +27,11 @@ function appendCategory() {
 	return 0;
 }
 
-function appendQueshion() {
+function appendQuestion() {
 	//var hname = "http://localhost:8080/uev61/json/recbykey.html";
-	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/add.html";
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/Questions/add.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
-	var json={'hash' : hash, 'queshion' : $("input[name='queshion']").val(), 'content' : $("textarea#content").val(), 'category': $('#selectCategory :selected').val()};
+	var json={'hash' : hash, 'Question' : $("input[name='Question']").val(), 'content' : $("textarea#content").val(), 'category': $('#selectCategory :selected').val()};
 	var key="";
 	if ($("div.form-inline").length > 0){
 		for (var i=0; i < $("div.form-inline").length; i++){
@@ -51,18 +51,18 @@ function appendQueshion() {
 				location.reload();
 			}
 			$("#selectCategory").prop('selectedIndex', -1);
-			$("input[name='queshion']").val('');
+			$("input[name='Question']").val('');
 			$("textarea#content").val('');
 		});
 	return 0;
 }
 
-function updateQueshion(id_queshion) {
+function updateQuestion(id_Question) {
 	//var hname = "http://localhost:8080/uev61/json/recbykey.html";
-	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/update.html";
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/Questions/update.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
 	var acount = $("div.form-inline").length; 
-	var json={'hash' : hash, 'queshion' : $("input[name='queshion']").val(), 'content' : $("textarea#content").val(), 'category': $('#selectCategory :selected').val(), 'queshion_id' : id_queshion, 'acount' : acount};
+	var json={'hash' : hash, 'Question' : $("input[name='Question']").val(), 'content' : $("textarea#content").val(), 'category': $('#selectCategory :selected').val(), 'Question_id' : id_Question, 'acount' : acount};
 	var key="";
 	var rm=1;
 	if (acount > 0){
@@ -86,7 +86,7 @@ function updateQueshion(id_queshion) {
 				window.location.replace("${pageContext.request.contextPath}/admin/dictionary/knowledges/index.html");
 			}
 			$("#selectCategory").prop('selectedIndex', -1);
-			$("input[name='queshion']").val('');
+			$("input[name='Question']").val('');
 			$("textarea#content").val('');
 		});
 	return 0;
@@ -108,12 +108,12 @@ function removeAnswerLayout(event){
 	return 0;
 }
 
-function popQueshion(event) {
+function popQuestion(event) {
 	//var hname = "http://localhost:8080/uev61/json/recbykey.html";
-	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/rm.html";
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/Questions/rm.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
-	//var json={'hash' : hash, 'queshion' : $("input[name='queshion']").val()};
-	var json={'hash' : hash, 'queshion' : $(event.target).attr('id')};
+	//var json={'hash' : hash, 'Question' : $("input[name='Question']").val()};
+	var json={'hash' : hash, 'Question' : $(event.target).attr('id')};
 	var jqxhr = $.post(hname,json, function() {
 	})
 		.success(function(data) {		
@@ -124,17 +124,17 @@ function popQueshion(event) {
 				alert("Вопрос удалён");
 				location.reload();
 			}
-			//$("input[name='queshion']").val('');
+			//$("input[name='Question']").val('');
 			//$("input[name='radiogroup']").prop('checked', false);
 		});
 	return 0;
 }
 
-function getQueshionInfo(event) {
-	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/queshions/getinfo.html";
+function getQuestionInfo(event) {
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/Questions/getinfo.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
 	var html=""; 
-	var json={'hash' : hash, 'queshion' : $(event.target).text()};
+	var json={'hash' : hash, 'Question' : $(event.target).text()};
 	var jqxhr = $.post(hname,json, function() {
 	})
 		.success(function(data) {		

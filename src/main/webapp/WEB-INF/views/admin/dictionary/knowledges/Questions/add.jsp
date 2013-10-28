@@ -6,7 +6,7 @@
 <jsp:include page="../menu.jsp" />
 	<form class="form-inline">
 		<label>Заголовок вопроса&nbsp&nbsp&nbsp&nbsp</label>
-		<input type="text" placeholder="Название вопроса" name="queshion" id="inputQueshion" class="span10"/>
+		<input type="text" placeholder="Название вопроса" name="Question" id="inputQuestion" class="span10"/>
 		<br/>
 		<br/>
 		<label>Содержание вопроса</label>
@@ -26,10 +26,10 @@
     <br/>
 	<br/>
 	<div class="controls controls-row">
-    	<button class="btn btn-small btn-primary " type="button" onclick="appendQueshion();">Создать</button>
+    	<button class="btn btn-small btn-primary " type="button" onclick="appendQuestion();">Создать</button>
         <button class="btn btn-small btn-primary " type="button" onclick="appendAnswerLayout();">Добавить вариант ответа</button>
     </div>
 	<hr/>
 	<div id="answer" class="span10">
-		<!--  <input type="text"  class="span10" placeholder="Вариант ответа" name="queshion" id="inputAnswer"> -->
+		<!--  <input type="text"  class="span10" placeholder="Вариант ответа" name="Question" id="inputAnswer"> -->
 	</div>

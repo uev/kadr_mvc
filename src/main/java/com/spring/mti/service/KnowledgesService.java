@@ -3,24 +3,24 @@ package com.spring.mti.service;
 import java.util.List;
 
 import com.spring.mti.model.Answer;
-import com.spring.mti.model.Queshion;
+import com.spring.mti.model.Question;
 
 public interface KnowledgesService {
-	Queshion getQueshionByName(String name);
-	void updateQueshionRelation(Queshion q);
-	void deleteQueshion(Queshion q);
-	void createQueshion(String name);
+	Question getQuestionByName(String name);
+	void updateQuestionRelation(Question q);
+	void deleteQuestion(Question q);
+	void createQuestion(String name);
 	void createAnswer(String name);
 	Answer getAnswerByContent(String name);
 	void deleteAnswer(Answer a);
 	void updateAnswerRelation(Answer a);
-	List<Queshion> getAllQueshions();
-	List<Answer> getAnswersByQueshion(Queshion q);
-	Queshion getQueshionById(Long id);
-	void deleteAnswersByQueshionId(Long id);
+	List<Question> getAllQuestions();
+	List<Answer> getAnswersByQuestion(Question q);
+	Question getQuestionById(Long id);
+	void deleteAnswersByQuestionId(Long id);
 	Answer getAnswerById(Long id);
-	List<Queshion> getQueshionsFromCategory(long id);
-	List<Queshion> getPageQueshionsFromCategory(int page, int size,
+	List<Question> getQuestionsFromCategory(long id);
+	List<Question> getPageQuestionsFromCategory(int page, int size,
 			Long category);
-	List<Queshion> getPageQueshionsAll(int page, int size);
+	List<Question> getPageQuestionsAll(int page, int size);
 }

@@ -55,9 +55,9 @@
    <bean id="employeDao" class="com.spring.mti.dao.EmployeDaoImpl" />
    <bean id="categoryDao" class="com.spring.mti.dao.CategoryDaoImpl" />
    <bean id="answerDao" class="com.spring.mti.dao.AnswerDaoImpl" />
-   <bean id="queshionDao" class="com.spring.mti.dao.QueshionDaoImpl" />
+   <bean id="QuestionDao" class="com.spring.mti.dao.QuestionDaoImpl" />
    <bean id="testKnowledgeDao" class="com.spring.mti.dao.TestKnowledgeDaoImpl" />
-   <bean id="relTestQueshionDao" class="com.spring.mti.dao.RelTestQueshionDaoImpl" />
+   <bean id="relTestQuestionDao" class="com.spring.mti.dao.RelTestQuestionDaoImpl" />
    <bean id="certificationDao" class="com.spring.mti.dao.CertificationDaoImpl" />
    <bean id="certificationStateDao" class="com.spring.mti.dao.CertificationStateDaoImpl" />
    <bean id="relCertificationEmployeDao" class="com.spring.mti.dao.RelCertificationEmployeDaoImpl" />

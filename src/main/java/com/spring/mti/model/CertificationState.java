@@ -30,8 +30,8 @@ public class CertificationState {
 	@JoinColumn(name="fk_answer")
 	private Answer fk_answer;
 	@OneToOne(cascade=CascadeType.REFRESH,fetch=FetchType.EAGER)
-	@JoinColumn(name="fk_queshion")
-	private Queshion fk_queshion;
+	@JoinColumn(name="fk_Question")
+	private Question fk_Question;
 	private String alt_answer;
 	private boolean valid;
 	
@@ -56,11 +56,11 @@ public class CertificationState {
 	public void setFk_answer(Answer fk_answer) {
 		this.fk_answer = fk_answer;
 	}
-	public Queshion getFk_queshion() {
-		return fk_queshion;
+	public Question getFk_Question() {
+		return fk_Question;
 	}
-	public void setFk_queshion(Queshion fk_queshion) {
-		this.fk_queshion = fk_queshion;
+	public void setFk_Question(Question fk_Question) {
+		this.fk_Question = fk_Question;
 	}
 	public String getAlt_answer() {
 		return alt_answer;

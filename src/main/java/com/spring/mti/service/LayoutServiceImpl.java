@@ -71,13 +71,13 @@ public class LayoutServiceImpl implements LayoutService {
 	}
 	
 	@Override
-	public Map<String, Object> queshionProfileToMapJson(List<Answer> a){
+	public Map<String, Object> QuestionProfileToMapJson(List<Answer> a){
 		Map<String, Object> map = new HashMap<String, Object>()	;
 		Answer afirst = a.get(0);
-		map.put("category", afirst.getFk_queshion().getFk_catgory().getCname());
-		map.put("title", afirst.getFk_queshion().getName());
-		map.put("content", afirst.getFk_queshion().getContent());
-		map.put("id", afirst.getFk_queshion().getId());
+		map.put("category", afirst.getFk_Question().getFk_catgory().getCname());
+		map.put("title", afirst.getFk_Question().getName());
+		map.put("content", afirst.getFk_Question().getContent());
+		map.put("id", afirst.getFk_Question().getId());
 		map.put("count_answ", a.size());
 		for (int i = 0; i < a.size(); i++){
 			Answer item = a.get(i);
@@ -87,13 +87,13 @@ public class LayoutServiceImpl implements LayoutService {
 	}
 	
 	@Override
-	public List<Object> decorateAnswersOnQueshions(List<CertificationState> c){
+	public List<Object> decorateAnswersOnQuestions(List<CertificationState> c){
 		List<Object> answers = new ArrayList<Object>();
 		for (CertificationState item : c){
 			Map<String, Object> map = new HashMap<String, Object>();
 			try {
 				Answer a = item.getFk_answer();
-				map.put("queshion", a.getFk_queshion().getName());
+				map.put("Question", a.getFk_Question().getName());
 				map.put("answer", a.getContent());
 				boolean valid = item.isValid();
 				if (valid == true){

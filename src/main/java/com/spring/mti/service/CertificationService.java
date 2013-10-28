@@ -5,21 +5,21 @@ import java.util.List;
 import com.spring.mti.model.Certification;
 import com.spring.mti.model.CertificationState;
 import com.spring.mti.model.Employe;
-import com.spring.mti.model.Queshion;
+import com.spring.mti.model.Question;
 import com.spring.mti.model.RelCertificationEmploye;
-import com.spring.mti.model.RelTestQueshion;
+import com.spring.mti.model.RelTestQuestion;
 import com.spring.mti.model.TestKnowledge;
 
 public interface CertificationService {
 	void createtTest(String name);
 	TestKnowledge getTestByName(String name);
 	void deleteTest(TestKnowledge t);
-	RelTestQueshion getQueshionFromTest(TestKnowledge t, Queshion q);
-	void pushQueshionToTest(TestKnowledge t, Queshion q);
-	void popQueshionFromTest(RelTestQueshion t);
+	RelTestQuestion getQuestionFromTest(TestKnowledge t, Question q);
+	void pushQuestionToTest(TestKnowledge t, Question q);
+	void popQuestionFromTest(RelTestQuestion t);
 	List<TestKnowledge> getAllTests();
 	TestKnowledge getTestById(Long id);
-	List<Queshion> getListQueshionsFromTest(Long id);
+	List<Question> getListQuestionsFromTest(Long id);
 	Certification getCertificationByName(String name);
 	Certification getCertificationById(Long id);
 	void deleteCertification(Certification t);

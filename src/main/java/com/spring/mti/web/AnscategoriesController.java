@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.mti.model.Queshion;
+import com.spring.mti.model.Question;
 import com.spring.mti.service.DictionaryService;
 import com.spring.mti.service.KnowledgesService;
 import com.spring.mti.service.LayoutService;
@@ -145,16 +145,16 @@ public class AnscategoriesController extends GeneralController implements BeanFa
 				e.printStackTrace();
 			}
 			Long id = Long.parseLong(request.getParameter("id"));
-			List<Queshion> lq = sksrv.getQueshionsFromCategory(id);
+			List<Question> lq = sksrv.getQuestionsFromCategory(id);
 			//view.setViewName("admin/dictionary/persons/index");
 			view.setViewName("default/index");
-			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/queshions/scripts.jsp"));
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/Questions/scripts.jsp"));
 			view.addObject("title", "Админзона / просмотр содержимого категории");
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
 			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/anscategories/list.jsp"));
-			//view.addObject("queshions", sksrv.getQueshionsFromCategory(Long.parseLong(request.getParameter("id"))));
+			//view.addObject("Questions", sksrv.getQuestionsFromCategory(Long.parseLong(request.getParameter("id"))));
 			view.addObject("paginnav", slayout.generateNaviPagination(lq.size(), pageStep, sizePage, page));
-			view.addObject("queshions", sksrv.getPageQueshionsFromCategory(page, sizePage,id));
+			view.addObject("Questions", sksrv.getPageQuestionsFromCategory(page, sizePage,id));
 			//view.addObject("body", viewPrefix.concat("/admin/dictionary/persons/index.jsp"));
 		}
 		return view;

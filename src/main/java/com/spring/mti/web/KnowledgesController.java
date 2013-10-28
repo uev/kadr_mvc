@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.mti.model.Answer;
-import com.spring.mti.model.Queshion;
+import com.spring.mti.model.Question;
 import com.spring.mti.service.DictionaryService;
 import com.spring.mti.service.KnowledgesService;
 import com.spring.mti.service.LayoutService;
@@ -54,52 +54,52 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 		return view;
 	}
 	
-	@RequestMapping(value = "/admin/dictionary/knowledges/queshions/add.html", method = RequestMethod.GET)
-	public final ModelAndView appendQueshionAction(HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping(value = "/admin/dictionary/knowledges/Questions/add.html", method = RequestMethod.GET)
+	public final ModelAndView appendQuestionAction(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
 			//view.setViewName("admin/dictionary/persons/index");
 			view.setViewName("default/index");
-			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/queshions/scripts.jsp"));
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/Questions/scripts.jsp"));
 			view.addObject("title", "Админзона / добавление вопроса в базу");
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
-			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/queshions/add.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/Questions/add.jsp"));
 			view.addObject("categories", sdict.getAllCategories());
 		}
 		return view;
 	}
 	
 	
-	@RequestMapping(value = "/admin/dictionary/knowledges/queshions/add.html", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> appendQueshionJson(HttpServletRequest request,
+	@RequestMapping(value = "/admin/dictionary/knowledges/Questions/add.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> appendQuestionJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
 		if (skey.equals(key)){
 			Map<String, Object> answ = new HashMap<String, Object>();
-			System.out.println("Entering to queshion");
-			String queshion = request.getParameter("queshion");
+			System.out.println("Entering to Question");
+			String Question = request.getParameter("Question");
 			String category = request.getParameter("category");
 			String content = request.getParameter("content");
 			String bs = "inAns";
 			List<Object> lo = new ArrayList<Object>();
-			lo.addAll(Arrays.asList(queshion, category, content));
+			lo.addAll(Arrays.asList(Question, category, content));
 			if (-1 == lo.indexOf(null)){
 				try {
-					System.out.println("Create queshion");
-					sknow.createQueshion(queshion);
-					Queshion q = sknow.getQueshionByName(queshion);
+					System.out.println("Create Question");
+					sknow.createQuestion(Question);
+					Question q = sknow.getQuestionByName(Question);
 					if (q != null){
 						q.setFk_catgory(sdict.getCategoryByName(category));
-						q.setName(queshion);
+						q.setName(Question);
 						q.setContent(content);
-						sknow.updateQueshionRelation(q);
+						sknow.updateQuestionRelation(q);
 					}
 					Integer chk= new Integer(1);
 					while (request.getParameter(bs.concat(chk.toString().concat("[answer]"))) != null){
 						String preffix = bs.concat(chk.toString());
 						sknow.createAnswer(request.getParameter(preffix.concat("[answer]")));
 						Answer a = sknow.getAnswerByContent(request.getParameter(preffix.concat("[answer]")));
-						a.setFk_queshion(q);
+						a.setFk_Question(q);
 						a.setValid(Boolean.parseBoolean( request.getParameter(preffix.concat("[valid]"))   ));
 						sknow.updateAnswerRelation(a);
 						chk+=1;
@@ -115,30 +115,30 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 		return null;
 }
 
-	@RequestMapping(value = "/admin/dictionary/knowledges/queshions/rm.html", method = RequestMethod.GET)
-	public final ModelAndView popQueshionAction(HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping(value = "/admin/dictionary/knowledges/Questions/rm.html", method = RequestMethod.GET)
+	public final ModelAndView popQuestionAction(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
 			//view.setViewName("admin/dictionary/persons/index");
 			view.setViewName("default/index");
-			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/queshions/scripts.jsp"));
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/Questions/scripts.jsp"));
 			view.addObject("title", "Админзона / удаление вопроса");
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
-			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/queshions/rm.jsp"));
-			view.addObject("queshions", sknow.getAllQueshions());
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/Questions/rm.jsp"));
+			view.addObject("Questions", sknow.getAllQuestions());
 		}
 		return view;
 	}
 	
-	@RequestMapping(value = "/admin/dictionary/knowledges/queshions/rm.html", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> popQueshionJson(HttpServletRequest request,
+	@RequestMapping(value = "/admin/dictionary/knowledges/Questions/rm.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> popQuestionJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
 		if (skey.equals(key)){
 			Map<String, Object> answ = new HashMap<String, Object>();
-			Queshion q = sknow.getQueshionById(Long.parseLong(request.getParameter("queshion")));
+			Question q = sknow.getQuestionById(Long.parseLong(request.getParameter("Question")));
 			try{
-				sknow.deleteQueshion(q);
+				sknow.deleteQuestion(q);
 				answ.put("error", 0);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -149,74 +149,74 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 		return null;
 	}
 
-	@RequestMapping(value = "/admin/dictionary/knowledges/queshions/getinfo.html", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> getAllQueshionProfileJson(HttpServletRequest request,
+	@RequestMapping(value = "/admin/dictionary/knowledges/Questions/getinfo.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> getAllQuestionProfileJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
 		if (skey.equals(key)){
 			Map<String, Object> answ = new HashMap<String, Object>();
-			String queshion = request.getParameter("queshion");
-			Queshion q = sknow.getQueshionByName(queshion);
+			String Question = request.getParameter("Question");
+			Question q = sknow.getQuestionByName(Question);
 			try{
-				System.out.println(queshion);
-				List<Answer> a = sknow.getAnswersByQueshion(q);
-				return slayout.queshionProfileToMapJson(a);
+				System.out.println(Question);
+				List<Answer> a = sknow.getAnswersByQuestion(q);
+				return slayout.QuestionProfileToMapJson(a);
 			} catch (Exception e) {
-				log.error("Error creating map from queshion");
+				log.error("Error creating map from Question");
 				e.printStackTrace();
 			}
 		} 
 		return null;
 	}
 
-	@RequestMapping(value = "/admin/dictionary/knowledges/queshions/edit.html", method = RequestMethod.GET)
-	public final ModelAndView editQueshionAction(HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping(value = "/admin/dictionary/knowledges/Questions/edit.html", method = RequestMethod.GET)
+	public final ModelAndView editQuestionAction(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
 		if (view.getViewName() == null){
 			//view.setViewName("admin/dictionary/persons/index");
 			view.setViewName("default/index");
-			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/queshions/scripts.jsp"));
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/Questions/scripts.jsp"));
 			view.addObject("title", "Админзона / редактирование вопроса");
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
-			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/queshions/edit.jsp"));
-			//view.addObject("queshions", sknow.getAllQueshions());
-			Queshion q = sknow.getQueshionById(Long.parseLong(request.getParameter("id")));
-			List<Answer> a = sknow.getAnswersByQueshion(q);
-			view.addObject("queshion",q);
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/Questions/edit.jsp"));
+			//view.addObject("Questions", sknow.getAllQuestions());
+			Question q = sknow.getQuestionById(Long.parseLong(request.getParameter("id")));
+			List<Answer> a = sknow.getAnswersByQuestion(q);
+			view.addObject("Question",q);
 			view.addObject("answers",a);
 			view.addObject("categories",sdict.getAllCategories());
 		}
 		return view;
 	}
 	
-	@RequestMapping(value = "/admin/dictionary/knowledges/queshions/update.html", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> updateQueshionJson(HttpServletRequest request,
+	@RequestMapping(value = "/admin/dictionary/knowledges/Questions/update.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> updateQuestionJson(HttpServletRequest request,
 			HttpServletResponse response)  throws Exception {
 		String key = request.getParameter("hash");
 		if (skey.equals(key)){
 			Map<String, Object> answ = new HashMap<String, Object>();
-			System.out.println("Entering to queshion");
-			String queshion = request.getParameter("queshion");
+			System.out.println("Entering to Question");
+			String Question = request.getParameter("Question");
 			String category = request.getParameter("category");
 			String content = request.getParameter("content");
-			String queshion_id = request.getParameter("queshion_id");
+			String Question_id = request.getParameter("Question_id");
 			String bs = "inAns";
 			List<Object> lo = new ArrayList<Object>();
-			lo.addAll(Arrays.asList(queshion, category, content));
+			lo.addAll(Arrays.asList(Question, category, content));
 			if (-1 == lo.indexOf(null)){
 				try {
-					System.out.println("Update Queshion");
-					//sknow.createQueshion(queshion);
-					//Queshion q = sknow.getQueshionByName(queshion);
-					Queshion q = sknow.getQueshionById(Long.parseLong(queshion_id));
+					System.out.println("Update Question");
+					//sknow.createQuestion(Question);
+					//Question q = sknow.getQuestionByName(Question);
+					Question q = sknow.getQuestionById(Long.parseLong(Question_id));
 					if (q != null){
 						q.setFk_catgory(sdict.getCategoryByName(category));
-						q.setName(queshion);
+						q.setName(Question);
 						q.setContent(content);
-						sknow.updateQueshionRelation(q);
+						sknow.updateQuestionRelation(q);
 					}
 					Integer chk= new Integer(1);
-					sknow.deleteAnswersByQueshionId(Long.parseLong(queshion_id));
+					sknow.deleteAnswersByQuestionId(Long.parseLong(Question_id));
 					for (int i=0; i < Integer.parseInt(request.getParameter("acount")); i++){
 						//String hkey = request.getParameter(bs.concat(chk.toString().concat("[answer]")));
 						while (request.getParameter(bs.concat(chk.toString().concat("[answer]"))) == null){
@@ -226,7 +226,7 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 						String preffix = bs.concat(chk.toString());
 						sknow.createAnswer(request.getParameter(preffix.concat("[answer]")));
 						Answer a = sknow.getAnswerByContent(request.getParameter(preffix.concat("[answer]")));
-						a.setFk_queshion(q);
+						a.setFk_Question(q);
 						a.setValid(Boolean.parseBoolean( request.getParameter(preffix.concat("[valid]"))   ));
 						sknow.updateAnswerRelation(a);
 						chk+=1;	
@@ -237,7 +237,7 @@ public class KnowledgesController extends GeneralController implements BeanFacto
 						String preffix = bs.concat(chk.toString());
 						sknow.createAnswer(request.getParameter(preffix.concat("[answer]")));
 						Answer a = sknow.getAnswerByContent(request.getParameter(preffix.concat("[answer]")));
-						a.setFk_queshion(q);
+						a.setFk_Question(q);
 						a.setValid(Boolean.parseBoolean( request.getParameter(preffix.concat("[valid]"))   ));
 						sknow.updateAnswerRelation(a);
 						chk+=1;
