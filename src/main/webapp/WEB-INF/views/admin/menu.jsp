@@ -6,7 +6,6 @@
 	<ul class="nav nav-list">
     	<li class="nav-header">Меню</li>
         <li><a href="${pageContext.request.contextPath}/admin/accounting.html">Управление логинами</a></li>
-        <li><a href="${pageContext.request.contextPath}/report_patterns.html">Управление шаблонами</a></li>
         <li><a href="${pageContext.request.contextPath}/admin/dictionary/index.html">Справочники</a></li>
         <li><a href="${pageContext.request.contextPath}/admin/certification/index.html">Аттестация</a></li>
         <!-- <li><a href="${pageContext.request.contextPath}/logout.html">Выход</a></li>  -->

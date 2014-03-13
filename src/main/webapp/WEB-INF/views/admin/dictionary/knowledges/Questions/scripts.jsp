@@ -94,7 +94,7 @@ function updateQuestion(id_Question) {
 
 function appendAnswerLayout(){
 	var id="inAns".concat($("div.form-inline").length+1);
-	var rmbutton='<button class="btn btn-small btn-primary offset0" type="button" onclick="removeAnswerLayout(event);" id='+id+'>Исключить</button>  ';
+	var rmbutton='<button class="btn btn-primary btn-custom-login" type="button" onclick="removeAnswerLayout(event);" id='+id+'>Исключить</button>  ';
 	var inanswer='<input type="text"  class="span10" placeholder="Вариант ответа" name="answer" id="inputTextAnsw">  ';
 	var validans = '<input type="checkbox" value="" name="inputCheckAnsw">  ';
 	var payload = '<div class = "form-inline" id='+id+'>'+inanswer + validans + rmbutton + ' </div>' + '<br id=' + id +' />' ;

@@ -7,7 +7,7 @@
 	<form 
   		class="form-inline">
   				Тест: 	"${testname}"
-         		<button class="btn btn-small btn-primary offset0" type="button" onclick="popQuestionFromTest(event);">Удалить</button>
+         		<button class="btn btn-primary btn-custom-login" type="button" onclick="popQuestionFromTest(event);">Удалить</button>
 	<br>
 	<br>
 	<table class="table table-striped">

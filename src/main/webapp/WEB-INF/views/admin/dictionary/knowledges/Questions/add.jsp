@@ -26,8 +26,8 @@
     <br/>
 	<br/>
 	<div class="controls controls-row">
-    	<button class="btn btn-small btn-primary " type="button" onclick="appendQuestion();">Создать</button>
-        <button class="btn btn-small btn-primary " type="button" onclick="appendAnswerLayout();">Добавить вариант ответа</button>
+    	<button class="btn btn-primary btn-custom-login" type="button" onclick="appendQuestion();">Создать</button>
+        <button class="btn btn-primary btn-custom-login" type="button" onclick="appendAnswerLayout();">Добавить вариант ответа</button>
     </div>
 	<hr/>
 	<div id="answer" class="span10">

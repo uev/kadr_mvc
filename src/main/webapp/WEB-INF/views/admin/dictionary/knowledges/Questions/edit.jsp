@@ -31,8 +31,8 @@
     <br/>
 	<br/>
 	<div class="controls controls-row">
-    	<button class="btn btn-small btn-primary " type="button" onclick="updateQuestion(${Question.getId()});">Обновить</button>
-        <button class="btn btn-small btn-primary " type="button" onclick="appendAnswerLayout();">Добавить вариант ответа</button>
+    	<button class="btn btn-primary btn-custom-login" type="button" onclick="updateQuestion(${Question.getId()});">Обновить</button>
+        <button class="btn btn-primary btn-custom-login" type="button" onclick="appendAnswerLayout();">Добавить вариант ответа</button>
     </div>
 	<hr/>
 	<div id="answer" class="span10">
@@ -47,7 +47,7 @@
     			<c:if test="${record.isValid() != true}">
     				<input type="checkbox" value="" name="inputCheckAnsw">
     			</c:if>
-    			<button class="btn btn-small btn-primary offset0" type="button" onclick="removeAnswerLayout(event);" id="inAns${chk}">Исключить</button>
+    			<button class="btn btn-primary  btn-custom-login offset0" type="button" onclick="removeAnswerLayout(event);" id="inAns${chk}">Исключить</button>
     		</div><br id="inAns${chk}" />
     		<c:set var="chk" value="${chk+1}"/>
     	</c:forEach>		
