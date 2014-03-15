@@ -259,7 +259,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.2.1</version>
                 <configuration>
-                    <mainClass>org.test.int1.Main</mainClass>
+                    <mainClass>com.spring.mti.cli.DemoCertification</mainClass>
                 </configuration>
             </plugin>
             <plugin>
