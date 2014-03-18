@@ -1,33 +1,26 @@
 package com.spring.mti.web;
-
-import java.util.Enumeration;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.joda.time.DateTime;
+import org.joda.time.Minutes;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import com.spring.mti.model.address.Region;
-import com.spring.mti.service.CustomUserDetailsService;
 
 @Controller
 public class LoginController extends GeneralController {
 	//private CustomUserDetailsService authStorage;
 	//private AuthenticationManager am;
 	static Logger log = Logger.getLogger(LoginController.class.getName());
+	private static int limiAuth = 3;
+	private static int blockTime = 1;
 
 	/*
 	@Override
@@ -64,14 +57,29 @@ public class LoginController extends GeneralController {
 	}
 	*/
 	
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/login.html", method = RequestMethod.POST)
 	public ModelAndView loginAction(HttpServletRequest request, HttpServletResponse response){
 		HttpSession session = request.getSession();
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		Authentication arequest = new UsernamePasswordAuthenticationToken(login, password);
+		Object prev = session.getAttribute("blockOnTime");
+		ModelAndView view = new ModelAndView("redirect:/");
 		try {
-			
+			if (prev instanceof DateTime) {
+				DateTime currentdate = new DateTime().now();
+				Minutes s = Minutes.minutesBetween((DateTime)prev, currentdate);
+				System.out.println(s.getMinutes());
+				if (s.getMinutes() > blockTime) {
+					session.setAttribute("loginFail", null);
+					session.setAttribute("blockOnTime", null);
+					session.setAttribute("loginIncorrect", null);
+				}  else {
+					session.setAttribute("loginIncorrect", "Не правильный логин или пароль. Доступ блокирован на 2 минуты");
+					throw  new Exception();
+				}
+			}
 			log.debug("Try auth login ".concat(login));
 			am.authenticate(arequest);
 			log.debug("Set session attribute");
@@ -81,10 +89,23 @@ public class LoginController extends GeneralController {
         	e.printStackTrace();
         	if (e instanceof BadCredentialsException){
         		log.error("Error auth!!!");
+        		Integer lfail = (Integer)session.getAttribute("loginFail");
+        		session.setAttribute("loginIncorrect", "Не правильный логин или пароль");
+        		if (lfail != null){
+        			lfail+=1;
+        			session.setAttribute("loginFail", lfail);
+        		} else {
+        			session.setAttribute("loginFail", 1);
+        		}
+        		System.out.println(lfail);
+        		if (lfail instanceof Integer && lfail > limiAuth) {
+        			session.setAttribute("blockOnTime", new DateTime().now());
+        			System.out.println("Set time");
+        		}
         	} 
         }
 		log.debug("Redirect...");
-		return new ModelAndView("redirect:/");
+		return view;
 	}
 
 	@RequestMapping(value = "/logout.html", method = RequestMethod.GET)

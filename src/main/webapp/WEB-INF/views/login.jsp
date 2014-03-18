@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="default/header.jsp" />
 </head>
@@ -22,6 +23,9 @@
                 <input type="password" placeholder="Пароль" name="password">
               </div>
               <input class="btn btn-primary btn-custom-login" type="submit" value="       Войти       ">
+              <c:if test="${sessionScope.loginIncorrect != null}">
+              	    <br/><br/><div class="alert alert-error">${sessionScope.loginIncorrect}</div>
+              </c:if>
             </fieldset>
           </form>
         </div>
