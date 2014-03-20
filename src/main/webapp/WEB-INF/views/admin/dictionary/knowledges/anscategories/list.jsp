@@ -6,11 +6,11 @@
 <jsp:include page="../menu.jsp" />
 	    <div class="pagination">
                 <ul>
-                <li><a href="#">Начало</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/dictionary/knowledges/anscategories/list.html?id=${Questions.get(1).fk_catgory.id}&page=1">Начало</a></li>
                 <c:forEach var="item" items='${paginnav}'>
                         <li><a href="${pageContext.request.contextPath}/admin/dictionary/knowledges/anscategories/list.html?id=${Questions.get(1).fk_catgory.id}&page=${item}">${item}</a></li>
                 </c:forEach>
-                <li><a href="#">Конец</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/dictionary/knowledges/anscategories/list.html?id=${Questions.get(1).fk_catgory.id}&page=${lastPage}">Конец</a></li>
                 </ul>
         </div>
 	 

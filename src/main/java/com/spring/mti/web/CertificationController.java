@@ -167,7 +167,9 @@ public class CertificationController extends GeneralController implements BeanFa
 			view.addObject("testname", scert.getTestById(id).getName());
 			//diff
 			List<Question> questions = sknow.getAllQuestions();
-			view.addObject("paginnav", slayout.generateNaviPagination(questions.size(), pageStep, sizePage, page));
+			Integer sizeQuestion = questions.size();
+			view.addObject("lastPage", sizeQuestion/sizePage);
+			view.addObject("paginnav", slayout.generateNaviPagination(sizeQuestion, pageStep, sizePage, page));
 			questions = sknow.getPageQuestionsAll(page, sizePage);
 			questions.removeAll(scert.getListQuestionsFromTest(id));
 			view.addObject("Questions", questions);

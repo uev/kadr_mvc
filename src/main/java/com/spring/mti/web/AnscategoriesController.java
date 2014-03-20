@@ -146,14 +146,16 @@ public class AnscategoriesController extends GeneralController implements BeanFa
 			}
 			Long id = Long.parseLong(request.getParameter("id"));
 			List<Question> lq = sksrv.getQuestionsFromCategory(id);
+			Integer sizeQuestion = lq.size();
 			//view.setViewName("admin/dictionary/persons/index");
+			view.addObject("lastPage", sizeQuestion/sizePage);
 			view.setViewName("default/index");
 			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/knowledges/Questions/scripts.jsp"));
 			view.addObject("title", "Админзона / просмотр содержимого категории");
 			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
 			view.addObject("body", viewPrefix.concat("/admin/dictionary/knowledges/anscategories/list.jsp"));
 			//view.addObject("Questions", sksrv.getQuestionsFromCategory(Long.parseLong(request.getParameter("id"))));
-			view.addObject("paginnav", slayout.generateNaviPagination(lq.size(), pageStep, sizePage, page));
+			view.addObject("paginnav", slayout.generateNaviPagination(sizeQuestion, pageStep, sizePage, page));
 			view.addObject("Questions", sksrv.getPageQuestionsFromCategory(page, sizePage,id));
 			//view.addObject("body", viewPrefix.concat("/admin/dictionary/persons/index.jsp"));
 		}
