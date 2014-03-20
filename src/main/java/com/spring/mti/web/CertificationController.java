@@ -49,6 +49,7 @@ import com.spring.mti.service.DictionaryService;
 import com.spring.mti.service.KnowledgesService;
 import com.spring.mti.service.LayoutService;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.sun.xml.messaging.saaj.packaging.mime.util.QEncoderStream;
 
 @Controller
 public class CertificationController extends GeneralController implements BeanFactoryAware{
@@ -116,9 +117,15 @@ public class CertificationController extends GeneralController implements BeanFa
 			String test = request.getParameter("test");
 			Map<String, Object> answ = new HashMap<String, Object>();
 			if (test != null){
+				Long testid = Long.parseLong(test);
+				TestKnowledge t = scert.getTestById(testid);
+				List<Question> qtlist = scert.getListQuestionsFromTest(testid);
+				for (Question question : qtlist) {
+					scert.popQuestionFromTest(scert.getQuestionFromTest(t, question));
+				}
 				try {
 					log.info("Try removing new test");
-					scert.deleteTest(scert.getTestById(Long.parseLong(test)));
+					scert.deleteTest(t);
 					answ.put("error", 0);
 					} catch(Exception e){
 						answ.put("error", 1);
