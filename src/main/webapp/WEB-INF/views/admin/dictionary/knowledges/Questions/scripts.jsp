@@ -83,7 +83,7 @@ function updateQuestion(id_Question) {
 			}
 			if(data['error'] == 0) {
 				alert("Вопрос успешно обновлён");
-				window.location.replace("${pageContext.request.contextPath}/admin/dictionary/knowledges/index.html");
+				window.location.replace("${pageContext.request.contextPath}/admin/dictionary/knowledges/Questions/rm.html");
 			}
 			$("#selectCategory").prop('selectedIndex', -1);
 			$("input[name='Question']").val('');
