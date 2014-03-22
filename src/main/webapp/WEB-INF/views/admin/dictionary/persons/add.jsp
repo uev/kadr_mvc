@@ -38,8 +38,7 @@
 			  						</select>
            	 					</div>      	
     					</div>
-    					
-             			<input class="btn btn-primary btn-custom-login offset4" type="submit" value="       Создать       ">
+             			<button class="btn btn-primary btn-custom-login offset4" type="button" onclick="preProcessingRegionForms(event);">Создать</button>
 					</form>
 					<table class="table table-striped">
     					<tbody>

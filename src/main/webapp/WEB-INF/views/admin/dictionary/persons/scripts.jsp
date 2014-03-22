@@ -52,6 +52,18 @@ function bindDep() {
 	return 0;
 }
 
+function preProcessingRegionForms(){
+	//$("button").click(function(){
+		//alert('Submit founded');
+		if(!$('#selectCountry').val() || !$('#selectRegion').val() || !$('#selectCity').val()){
+		      alert('Регион не найден');
+		      return 0;
+		} else {
+			   window.location.replace("${pageContext.request.contextPath}/admin/bindlogin.html");
+		} 
+		//});
+return 0;
+}
 
 function getFioItem(){
 	$("input[name='person']").val($("input[name='radiogroup']:checked").val());
