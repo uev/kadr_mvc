@@ -58,12 +58,25 @@ public class PersonsController extends GeneralController implements BeanFactoryA
 	@RequestMapping(value = "/admin/dictionary/persons/add.html", method = RequestMethod.GET)
 	public final ModelAndView addEmploye(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
 		ModelAndView view = verifyPermission(request.getSession());
-		System.out.println(request.getCharacterEncoding());
 		if (view.getViewName() == null){
 			view.addObject("title", "Админзона / Создание пользователя");
-			//request.setCharacterEncoding("utf-8");
+			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/persons/scripts.jsp"));
+			view.setViewName("default/index");
+			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
+			view.addObject("body", viewPrefix.concat("/admin/dictionary/persons/add.jsp"));
+		}
+		return view;
+	}
+	
+	@RequestMapping(value = "/admin/dictionary/persons/add.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Integer> addEmployeJson(HttpServletRequest request, HttpServletResponse response){
+		String key = request.getParameter("hash");
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("error", 1);
+		if (skey.equals(key)){
 			String person = request.getParameter("person");
-			if (person != null){
+			String city = request.getParameter("city");
+			if (!person.isEmpty() && !city.isEmpty()){
 				sdict.createEmploye(person);
 				List<Employe> e = sdict.getEmployeByName(person);
 				Employe last = e.get(e.size()-1);
@@ -74,16 +87,12 @@ public class PersonsController extends GeneralController implements BeanFactoryA
 				}
 				last.setFk_city(c);
 				sdict.updateEmployeRelation(last);
+				map.put("error", 0);
 			}
-			//view.setViewName("admin/dictionary/persons/add");
-			view.addObject("hscript", viewPrefix.concat("/admin/dictionary/persons/scripts.jsp"));
-			view.setViewName("default/index");
-			view.addObject("menu", viewPrefix.concat("/admin/menu.jsp"));
-			view.addObject("body", viewPrefix.concat("/admin/dictionary/persons/add.jsp"));
 		}
-		return view;
+		return map;	
 	}
-	
+
 	@RequestMapping(value = "/admin/dictionary/persons/bind_dep.html", method = RequestMethod.GET)
 	public final ModelAndView bindDepartmentAction(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());

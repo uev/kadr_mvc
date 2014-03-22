@@ -53,15 +53,30 @@ function bindDep() {
 }
 
 function preProcessingRegionForms(){
-	//$("button").click(function(){
-		//alert('Submit founded');
-		if(!$('#selectCountry').val() || !$('#selectRegion').val() || !$('#selectCity').val()){
+	var hash = "dcd95bcb84b09897b2b66d4684c040da";
+	var hname = "${pageContext.request.contextPath}/admin/dictionary/persons/add.html";
+	var json={'hash' : hash, 'person': $("input[name='person']").val(), 'city' : $('#selectCity').val()};
+	var jqxhr = $.post(hname,json, function() {
+	})
+		.success(function(data) {		
+			if (data['error'] == 1) {
+				alert("Одно из полей не заполнено!");
+				return 0;
+			}
+			if(data['error'] == 0) {
+				alert("Пользователь добавлен");
+				window.location.replace("${pageContext.request.contextPath}/admin/dictionary/persons/bind_dep.html");
+			}
+			//
+		});
+/*	    
+	    if(!$('#selectCountry').val() || !$('#selectRegion').val() || !$('#selectCity').val()){
 		      alert('Регион не найден');
 		      return 0;
 		} else {
 			   window.location.replace("${pageContext.request.contextPath}/admin/bindlogin.html");
 		} 
-		//});
+*/
 return 0;
 }
 
