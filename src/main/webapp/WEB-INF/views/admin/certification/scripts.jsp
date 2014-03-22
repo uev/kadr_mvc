@@ -94,7 +94,7 @@ function appendCert() {
 					alert("Сотрудник исключен из аттестации");
 					location.reload();
 				}
-				location.reload();
+//				location.reload();
 			});
 		return 0;
 	}

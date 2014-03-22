@@ -52,4 +52,26 @@ public class Certification {
 	public long getId() {
 		return id;
 	}
+	
+	@Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj == this)
+            return true;
+        if (obj.getClass() == this.getClass()){
+        	Certification c = (Certification) obj;
+        	if (c.id == this.id && this.name.equals(c.name) && this.fk_test.getId() == c.getFk_test().getId()) 
+        		return true;
+        }
+        return false;
+    }
+	
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		Long l = (Long)this.id; 
+		return l.intValue()*1121;
+	}
+	
 }

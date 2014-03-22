@@ -462,6 +462,13 @@ public class CertificationController extends GeneralController implements BeanFa
 					log.info("Try removing employe from certification");
 					Employe e = sdict.getEmployeById(Long.parseLong(employe));
 					Certification c = scert.getCertificationByName(request.getParameter("certification"));
+					List <RelCertificationEmploye> arcsert = scert.findCompletedCertifications();
+					for (RelCertificationEmploye relCertificationEmploye : arcsert) {
+						if (relCertificationEmploye.getFk_employe().equals(e) 
+								&& relCertificationEmploye.getFk_certification().equals(c)) {
+							throw new Exception();
+						}
+					}
 					scert.popEmployeFromCertification(scert.getEmployeInCertification(e, c));
 					answ.put("error", 0);
 					} catch(Exception e){
