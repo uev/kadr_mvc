@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.mti.model.Certification;
 import com.spring.mti.model.Employe;
 import com.spring.mti.model.RelCertificationEmploye;
+import com.spring.mti.service.AddressService;
 import com.spring.mti.service.AuthorityService;
 import com.spring.mti.service.CertificationService;
 import com.spring.mti.service.CustomUserDetailsService;
@@ -32,6 +33,7 @@ public class IndexController extends GeneralController implements BeanFactoryAwa
 	private PersonService personService;
 	private CustomUserDetailsService authStorage;
 	private CertificationService scert;
+	private AddressService saddr;
 	static Logger log = Logger.getLogger(LoginController.class.getName());
 	/*
 	@Override
@@ -100,5 +102,7 @@ public class IndexController extends GeneralController implements BeanFactoryAwa
 		personService = (PersonService)context.getBean("servicePerson");
 		authStorage = (CustomUserDetailsService)context.getBean("userDetailsService");
 		scert = (CertificationService)context.getBean("serviceCertification");
+		saddr = (AddressService)context.getBean("serviceAddress");
+		saddr.getCountries();
 	}
 }

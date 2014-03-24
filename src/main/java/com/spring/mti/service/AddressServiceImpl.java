@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import com.spring.mti.dao.address.CityDao;
@@ -21,6 +22,7 @@ public class AddressServiceImpl implements AddressService {
 	@Autowired private CountryDao countryDao;
 	
 	@Override
+	@Cacheable(value = { "country" })
 	public List<Country> getCountries() {
 		//return countryDao.findAll_toArray(new Country());
 		return countryDao.findAll(new Country());
