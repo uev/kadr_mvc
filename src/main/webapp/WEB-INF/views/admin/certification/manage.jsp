@@ -8,7 +8,7 @@
   		class="form-inline">
          		<input type="text" placeholder="Заголовок аттестации" name="cert" id="inputCert"  class="span10">
          		
-         		<input class="btn btn-primary btn-custom-login offset0" type="button" value="	Добавить		" onclick="appendCert();" />
+         		<input class="btn btn-primary btn-custom-login offset0" type="button" value="         Добавить          " onclick="appendCert();" />
          		
 	<br>
 	<br>
@@ -19,7 +19,7 @@
         			<tr>
         				<td width="20"><c:out value="${record.id}"></c:out></td>
         				<td width="50"onClick="getTestInfo(event)"><c:out value="${record.name}"></c:out></td>
-        				<td width="20"><a href="${pageContext.request.contextPath}/admin/dictionary/knowledges/tests/pop_Question.html?id=${record.id}" id="${record.id}">Удаление аттестации</a>
+        				<td width="20"><a href="#" id="${record.id}" onClick="popCert(event)">Удаление аттестации</a>
         				<br/><a href="${pageContext.request.contextPath}/admin/certification/edit.html?id=${record.id}" id="${record.id}">Редактирование аттестации</a>
         				</td>
 					</tr>

@@ -22,6 +22,26 @@ function appendCert() {
 		});
 	return 0;
 }
+
+function popCert(event) {
+	var hname = "${pageContext.request.contextPath}/admin/certification/rm.html";
+	var hash = "dcd95bcb84b09897b2b66d4684c040da";
+	var json={'hash' : hash, 'id' : $(event.target).attr("id")};
+	var jqxhr = $.post(hname,json, function() {
+	})
+		.success(function(data) {		
+			if (data['error'] == 1) {
+				alert("Не удалось удалить аттестацию. Обратитесь к администратору.");
+			}
+			if(data['error'] == 0) {
+				alert("Запись удалена");
+			}
+			location.reload();
+		});
+	return 0;
+}
+
+
 //==
 
 	function getEmployers(){

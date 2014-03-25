@@ -139,6 +139,32 @@ public class CertificationController extends GeneralController implements BeanFa
 		return null;
 	}
 	
+	
+	@RequestMapping(value = "/admin/certification/rm.html", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> popCertificationJson(HttpServletRequest request,
+			HttpServletResponse response)  throws Exception {
+		String key = request.getParameter("hash");
+		Map<String, Object> answ = new HashMap<String, Object>();
+		if (skey.equals(key)){
+			Certification c = scert.getCertificationById(Long.parseLong(request.getParameter("id")));
+			try {
+				List <RelCertificationEmploye> lrce =  scert.findCompletedCertifications();
+				for (RelCertificationEmploye relCertificationEmploye : lrce) {
+					if (relCertificationEmploye.getFk_certification().equals(c)) 
+						throw new Exception();
+				}
+				scert.deleteCertification(c);
+				answ.put("error", 0);
+			} catch (Exception e) {
+				answ.put("error", 1);
+				log.error("Error removing certification.");
+				e.printStackTrace();
+			}
+			return answ;
+		}
+		return null;
+	}
+	
 	@RequestMapping(value = "/admin/dictionary/knowledges/tests/edit.html", method = RequestMethod.GET)
 	public final ModelAndView testEditAction(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = verifyPermission(request.getSession());
