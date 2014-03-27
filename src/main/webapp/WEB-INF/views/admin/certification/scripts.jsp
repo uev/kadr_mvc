@@ -53,10 +53,13 @@ function popCert(event) {
 		}).done(function(data) { 
 			$('#selectEmploye').empty();
 			$.each(data, function (index, value) {
-		 		$('#selectEmploye').append($('<option>', { 
-		       		value: value.id,
-		       		text : value.fio 
-		 }));
+				if ($('#' + value.id).val() == undefined){
+					$('#selectEmploye').append($('<option>', { 
+		       			value: value.id,
+		       			text : value.fio
+		       	
+		 			}));
+				}
 	})});
 	return 0;
 	}
