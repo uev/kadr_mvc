@@ -87,10 +87,15 @@ public class LoginController extends GeneralController {
 			session.setAttribute("login", login);
         } catch(Exception e){
         	e.printStackTrace();
-        	if (e instanceof BadCredentialsException){
+        	if (e instanceof BadCredentialsException || e instanceof NullPointerException){
         		log.error("Error auth!!!");
         		Integer lfail = (Integer)session.getAttribute("loginFail");
-        		session.setAttribute("loginIncorrect", "Не правильный логин или пароль");
+        		if ( e instanceof BadCredentialsException) {
+        			session.setAttribute("loginIncorrect", "Не правильный логин или пароль");
+        		} else {
+        			session.setAttribute("loginIncorrect", "Логин не найден");
+        		}
+        		
         		if (lfail != null){
         			lfail+=1;
         			session.setAttribute("loginFail", lfail);
