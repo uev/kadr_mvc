@@ -66,8 +66,10 @@ function updateQuestion(id_Question) {
 	//var hname = "http://localhost:8080/uev61/json/recbykey.html";
 	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/Questions/update.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
+	var failAppend = 0;
 	var acount = $("div.form-inline").length; 
 	var json={'hash' : hash, 'Question' : $("input[name='Question']").val(), 'content' : $("textarea#content").val(), 'category': $('#selectCategory :selected').val(), 'Question_id' : id_Question, 'acount' : acount};
+	if (json['Question'] == "" || json['content'] == "" || json['category'] == "") failAppend=1;
 	var key="";
 	var rm=1;
 	if (acount > 0){
@@ -78,7 +80,13 @@ function updateQuestion(id_Question) {
 				key = 'inAns'.concat(i+rm);
 			} 
 			json[key] = {'answer' : $("div#"+ key + " input[name='answer']").val(),'valid': $("div#"+ key + " input[name='inputCheckAnsw']").prop('checked')};
+			if ($("div#"+ key + " input[name='answer']").val() == '') failAppend=1;
 		}
+	}
+	if ($("div.form-inline").length == 0) failAppend=1;
+	if (failAppend) {
+		alert("Одно из полей не заполнено!");
+		return 1;
 	}
 	var jqxhr = $.post(hname,json, function() {
 	})
