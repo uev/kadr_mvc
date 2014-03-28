@@ -104,6 +104,20 @@ function popEmploye(event) {
 	return 0;
 }
 
+function facadeDict(arg){
+	switch (arg) {
+	case "#selectCountry":
+		$('#selectRegion').find('option').remove().end();
+		$('#selectCity').find('option').remove().end();
+		getDict("#selectRegion");
+		break;
+	case "#selectRegion":
+		$('#selectCity').find('option').remove().end();
+		getDict("#selectCity");
+		break;
+	}
+}
+
 //Загрузка адресного словаря
 function getDict(arg){
 	//var hname = "http://localhost:8080/uev61/json/";
@@ -144,7 +158,7 @@ function getDict(arg){
 		    		$(arg).append($('<option>', { 
 		        		value: value.id,
 		        		text : value.name 
-		 }));
+	         }));
 	})});
 	}
 	return 0;
@@ -204,4 +218,9 @@ function d(record){
 	}
 return 0;
 }
+
+$( document ).ready(function() {
+    if (window.location.pathname.indexOf('/admin/dictionary/persons/add.html') > -1)
+    	getDict("#selectCountry");
+});
 </script>

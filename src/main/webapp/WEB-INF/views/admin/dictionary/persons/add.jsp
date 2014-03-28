@@ -17,7 +17,7 @@
     					<div class="control-group">
     	 					<label class="control-label" for="selectCountry">Страна</label>
          						<div class="clearfix controls">
-              						<select  placeholder="Страна" name="country" id="selectCountry" onClick="getDict('#selectCountry');">
+              						<select  placeholder="Страна" name="country" id="selectCountry" onClick="facadeDict('#selectCountry');">
 										<option></option>
 			  						</select>
            	 					</div>      	
@@ -25,7 +25,7 @@
     					<div class="control-group">
     	 					<label class="control-label" for="selectRegion">Регион</label>
          					<div class="clearfix controls">
-              					<select  placeholder="Регион" name="region" id="selectRegion" onClick="getDict('#selectRegion');">
+              					<select  placeholder="Регион" name="region" id="selectRegion" onClick="facadeDict('#selectRegion');">
 									<option></option>
 			  					</select>
            	 				</div>      	
@@ -33,7 +33,7 @@
     					<div class="control-group">
     	 					<label class="control-label" for="selectCity">Населённый пункт</label>
          						<div class="clearfix controls">
-              						<select  placeholder="Город" name="city" id="selectCity" onClick="getDict('#selectCity');">
+              						<select  placeholder="Город" name="city" id="selectCity" onClick="facadeDict('#selectCity');">
 										<option></option>
 			  						</select>
            	 					</div>      	
