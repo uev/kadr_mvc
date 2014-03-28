@@ -32,13 +32,21 @@ function appendQuestion() {
 	var hname = "${pageContext.request.contextPath}/admin/dictionary/knowledges/Questions/add.html";
 	var hash = "dcd95bcb84b09897b2b66d4684c040da";
 	var json={'hash' : hash, 'Question' : $("input[name='Question']").val(), 'content' : $("textarea#content").val(), 'category': $('#selectCategory :selected').val()};
+	var failAppend = 0;
 	var key="";
+	if (json['Question'] == "" || json['content'] == "" || json['category'] == "") failAppend=1;
 	if ($("div.form-inline").length > 0){
 		for (var i=0; i < $("div.form-inline").length; i++){
 			key = 'inAns'.concat(i+1);	
 			//alert($("div#"+ key + " input[name='inputCheckAnsw']").prop('checked'));
 			json[key] = {'answer' : $("div#"+ key + " input[name='answer']").val(),'valid': $("div#"+ key + " input[name='inputCheckAnsw']").prop('checked')};
+			if ($("div#"+ key + " input[name='answer']").val() == '') failAppend=1;
 		}
+	}
+	if ($("div.form-inline").length == 0) failAppend=1;
+	if (failAppend) {
+		alert("Одно из полей не заполнено!");
+		return 1;
 	}
 	var jqxhr = $.post(hname,json, function() {
 	})
@@ -48,11 +56,8 @@ function appendQuestion() {
 			}
 			if(data['error'] == 0) {
 				alert("Вопрос успешно добавлен");
-				location.reload();
+				window.location.replace("${pageContext.request.contextPath}/admin/dictionary/knowledges/Questions/rm.html");
 			}
-			$("#selectCategory").prop('selectedIndex', -1);
-			$("input[name='Question']").val('');
-			$("textarea#content").val('');
 		});
 	return 0;
 }
