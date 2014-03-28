@@ -99,6 +99,7 @@ function appendAnswerLayout(){
 	var validans = '<input type="checkbox" value="" name="inputCheckAnsw">  ';
 	var payload = '<div class = "form-inline" id='+id+'>'+inanswer + validans + rmbutton + ' </div>' + '<br id=' + id +' />' ;
 	$("#answer").append(payload);
+	$("html,body").animate({"scrollTop":$("body").height()},1); // scroll 
 	return 0;
 }
 
