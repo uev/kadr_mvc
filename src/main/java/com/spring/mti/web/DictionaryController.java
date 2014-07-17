@@ -10,7 +10,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -63,7 +62,7 @@ public class DictionaryController extends GeneralController implements BeanFacto
 	
 		
 	//@RequestMapping(value = "/json/getcountry.html", method = RequestMethod.POST)
-	@RequestMapping(value = "/admin/dictionary/persons/json/getcountry.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/dictionary/persons/json/getcountry.html", method = RequestMethod.POST, headers="Accept=application/json")
 	public  @ResponseBody List<Country> getCountries(HttpServletRequest request, HttpServletResponse response){
 		String key = request.getParameter("hash");
 		if (skey.equals(key)){

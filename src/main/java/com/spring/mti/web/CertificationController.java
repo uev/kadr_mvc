@@ -1,6 +1,5 @@
 package com.spring.mti.web;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +9,6 @@ import java.net.URLDecoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
@@ -31,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -48,8 +44,6 @@ import com.spring.mti.service.CertificationService;
 import com.spring.mti.service.DictionaryService;
 import com.spring.mti.service.KnowledgesService;
 import com.spring.mti.service.LayoutService;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import com.sun.xml.messaging.saaj.packaging.mime.util.QEncoderStream;
 
 @Controller
 public class CertificationController extends GeneralController implements BeanFactoryAware{
@@ -57,7 +51,7 @@ public class CertificationController extends GeneralController implements BeanFa
 	private KnowledgesService sknow;
 	private DictionaryService sdict;
 	private LayoutService slayout;
-	private PasswordEncoder pencoder;
+	private Md5PasswordEncoder pencoder;
 	static Logger log = Logger.getLogger(LoginController.class.getName());
 
 	@Override

@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.dao.SaltSource;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,7 +21,7 @@ import com.spring.mti.model.security.UsersDetailImpl;
 import com.spring.mti.web.LoginController;
 
 public class UserDetailsServiceImpl implements UserDetailsService, CustomUserDetailsService {
-	@Autowired private PasswordEncoder passwordEncoder;
+	@Autowired private Md5PasswordEncoder passwordEncoder;
 	@Autowired private SaltSource saltSource;
 	@Autowired private AuthoritiesDao authDao;
 	//@Autowired
