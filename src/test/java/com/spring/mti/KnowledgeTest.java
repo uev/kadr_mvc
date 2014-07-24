@@ -12,15 +12,9 @@ import com.spring.mti.service.DictionaryService;
 import com.spring.mti.service.KnowledgesService;
 
 public class KnowledgeTest extends AbstractTest{
-	private DictionaryService dsrv;
-	private KnowledgesService ksrv;
-	
-
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		dsrv = (DictionaryService)context.getBean("serviceDictionary");
-		ksrv = (KnowledgesService)context.getBean("serviceKnowledges");
 	}
 	
 	@Test

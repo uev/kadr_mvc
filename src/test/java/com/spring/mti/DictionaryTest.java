@@ -26,14 +26,9 @@ import com.spring.mti.service.DictionaryService;
 import com.sun.org.apache.bcel.internal.generic.SIPUSH;
 
 public class DictionaryTest extends AbstractTest {
-	private static AddressService asrv;
-	private static DictionaryService dsrv;
-
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		asrv = (AddressService)context.getBean("serviceAddress");
-		dsrv = (DictionaryService)context.getBean("serviceDictionary");
 	}
 	
 	@Test

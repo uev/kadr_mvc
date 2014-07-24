@@ -17,16 +17,9 @@ import com.spring.mti.service.DictionaryService;
 import com.spring.mti.service.KnowledgesService;
 
 public class CertificationTest extends AbstractTest {
-	private CertificationService certsrv;
-	private KnowledgesService ksrv;
-	private DictionaryService dsrv;
-
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		certsrv = (CertificationService)context.getBean("serviceCertification");
-		ksrv = (KnowledgesService)context.getBean("serviceKnowledges");
-		dsrv = (DictionaryService)context.getBean("serviceDictionary");
 	}
 	
 	/*

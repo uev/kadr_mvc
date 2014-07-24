@@ -22,15 +22,10 @@ import com.spring.mti.service.AuthorityService;
 import com.spring.mti.service.CustomUserDetailsService;
 
 public class AuthUsersTest extends AbstractTest {
-	private static CustomUserDetailsService dao;
-    private static AuthorityService sauth;
-
 
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		dao = (CustomUserDetailsService)context.getBean("userDetailsService");
-		sauth = (AuthorityService)context.getBean("serviceRole");
 	}
 
 	@Test
